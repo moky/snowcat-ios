@@ -6,19 +6,40 @@
 //  Copyright (c) 2015 Moky. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCButton.h"
 #import "SCSegmentedButton.h"
 
+//typedef NS_ENUM(NSUInteger, UISegmentedButtonAutoLayoutDirection) {
+//	UISegmentedButtonAutoLayoutNone,
+//	UISegmentedButtonAutoLayoutDirectionVertical,
+//	UISegmentedButtonAutoLayoutDirectionHorizontal,
+//};
+UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromString(NSString * string)
+{
+	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"Horizontal")
+			return UISegmentedButtonAutoLayoutDirectionHorizontal;
+		SC_SWITCH_CASE(string, @"Vertical")
+			return UISegmentedButtonAutoLayoutDirectionVertical;
+		SC_SWITCH_DEFAULT
+	SC_SWITCH_END
+	
+	return [string integerValue];
+}
+
 @implementation UISegmentedButton
 
 @synthesize selectedSegmentIndex = _selectedSegmentIndex;
+@synthesize direction = _direction;
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		_selectedSegmentIndex = UISegmentedButtonNoSegment;
+		_direction = UISegmentedButtonAutoLayoutNone;
 	}
 	return self;
 }
@@ -28,6 +49,7 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		_selectedSegmentIndex = UISegmentedButtonNoSegment;
+		_direction = UISegmentedButtonAutoLayoutNone;
 	}
 	return self;
 }
@@ -86,6 +108,51 @@
 	}
 }
 
+- (void) _layoutButtons
+{
+	if (_direction == UISegmentedButtonAutoLayoutNone) {
+		return;
+	}
+	NSUInteger count = [self.subviews count];
+	NSAssert(count > 0, @"buttons not found");
+	
+	CGRect bounds = CGRectMake(0.0f, 0.0f, self.bounds.size.width, self.bounds.size.height);
+	if (_direction == UISegmentedButtonAutoLayoutDirectionHorizontal) {
+		bounds.size.width /= count;
+	} else {
+		bounds.size.height /= count;
+	}
+	CGPoint center = CGPointMake(bounds.size.width * 0.5f, bounds.size.height * 0.5f);
+	
+	NSEnumerator * enumerator = [self.subviews objectEnumerator];
+	UIButton * btn;
+	while (btn = [enumerator nextObject]) {
+		btn.bounds = bounds;
+		btn.center = center;
+		if (_direction == UISegmentedButtonAutoLayoutDirectionHorizontal) {
+			center.x += bounds.size.width;
+		} else {
+			center.y += bounds.size.height;
+		}
+	}
+}
+
+- (void) layoutSubviews
+{
+	[super layoutSubviews];
+	[self _layoutButtons];
+}
+
+- (void) setDirection:(UISegmentedButtonAutoLayoutDirection)direction
+{
+	//if (_direction != direction) {
+		_direction = direction;
+		if (_direction != UISegmentedButtonAutoLayoutNone) {
+			[self setNeedsLayout];
+		}
+	//}
+}
+
 - (void) didAddSubview:(UIView *)subview
 {
 	[super didAddSubview:subview];
@@ -93,6 +160,10 @@
 	NSAssert([subview isKindOfClass:[UIButton class]], @"must be a button: %@", subview);
 	UIButton * button = (UIButton *)subview;
 	[button addTarget:self action:@selector(_onClickSegment:) forControlEvents:UIControlEventTouchUpInside];
+	
+	if (_direction != UISegmentedButtonAutoLayoutNone) {
+		[self setNeedsLayout];
+	}
 }
 
 - (void) willRemoveSubview:(UIView *)subview
@@ -292,6 +363,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	id selectedSegmentIndex = [dict objectForKey:@"selectedSegmentIndex"];
 	if (selectedSegmentIndex) {
 		segmentedButton.selectedSegmentIndex = [selectedSegmentIndex integerValue];
+	}
+	
+	// direction
+	NSString * direction = [dict objectForKey:@"direction"];
+	if (direction) {
+		segmentedButton.direction = UISegmentedButtonAutoLayoutDirectionFromString(direction);
 	}
 	
 	return YES;

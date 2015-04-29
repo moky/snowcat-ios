@@ -12,6 +12,14 @@ enum {
 	UISegmentedButtonNoSegment = -1   // segment index for no selected segment
 };
 
+typedef NS_ENUM(NSUInteger, UISegmentedButtonAutoLayoutDirection) {
+	UISegmentedButtonAutoLayoutNone,
+	UISegmentedButtonAutoLayoutDirectionVertical,
+	UISegmentedButtonAutoLayoutDirectionHorizontal,
+};
+
+UIKIT_EXTERN UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromString(NSString * string);
+
 //
 //  Description:
 //      A group of buttons as segmented control
@@ -33,6 +41,8 @@ enum {
 
 - (void) setEnabled:(BOOL)enabled forSegmentAtIndex:(NSUInteger)segment; // default is YES
 - (BOOL) isEnabledForSegmentAtIndex:(NSUInteger)segment;
+
+@property(nonatomic, readwrite) UISegmentedButtonAutoLayoutDirection direction; // default is None
 
 @end
 
