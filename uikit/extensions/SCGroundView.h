@@ -6,19 +6,8 @@
 //  Copyright (c) 2015 Moky. All rights reserved.
 //
 
-#import "SCView.h"
-
-//
-//  Description:
-//      An imprison view that restricted in a rect (ground)
-//
-@interface UIGroundView : UIView
-
-@property(nonatomic, readwrite) CGRect ground; // default is CGRectZero, then use superview.bounds as ground
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCGroundView+UIKit.h"
 
 @interface SCGroundView : UIGroundView<SCUIKit>
 

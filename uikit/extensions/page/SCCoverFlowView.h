@@ -6,13 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCDockScrollView.h"
-
-@interface UICoverFlowView : UIDockScrollView
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCCoverFlowView+UIKit.h"
 
 @interface SCCoverFlowView : UICoverFlowView<SCUIKit>
 

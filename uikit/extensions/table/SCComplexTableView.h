@@ -6,13 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCTableView.h"
-
-@interface UIComplexTableView : UITableView
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCComplexTableView+UIKit.h"
 
 @interface SCComplexTableView : UIComplexTableView<SCUIKit>
 

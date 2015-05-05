@@ -424,6 +424,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			event = @"onRefresh";
 			break;
 			
+		case UIScrollRefreshControlStateTerminated:
+			event = @"onEnd";
+			break;
+			
 		default:
 			event = @"onError";
 			break;

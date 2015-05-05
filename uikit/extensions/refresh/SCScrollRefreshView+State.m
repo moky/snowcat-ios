@@ -40,6 +40,10 @@
 			self.loading = YES;
 			break;
 			
+		case UIScrollRefreshControlStateTerminated:
+			self.textLabel.text = self.terminatedText;
+			break;
+			
 		default:
 			NSAssert(false, @"error");
 			break;
@@ -76,6 +80,10 @@
 		case UIScrollRefreshControlStateRefreshing:
 			self.textLabel.text = nil;
 			self.loading = NO;
+			break;
+			
+		case UIScrollRefreshControlStateTerminated:
+			self.textLabel.text = nil;
 			break;
 			
 		default:
@@ -202,6 +210,10 @@
 			
 		case UIScrollRefreshControlStateRefreshing:
 			event = @"onRefresh";
+			break;
+			
+		case UIScrollRefreshControlStateTerminated:
+			event = @"onEnd";
 			break;
 			
 		default:

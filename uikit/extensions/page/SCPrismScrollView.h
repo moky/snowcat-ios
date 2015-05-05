@@ -6,13 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCPageScrollView.h"
-
-@interface UIPrismScrollView : UIPageScrollView
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCPrismScrollView+UIKit.h"
 
 @interface SCPrismScrollView : UIPrismScrollView<SCUIKit>
 

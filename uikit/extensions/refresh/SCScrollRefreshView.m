@@ -19,6 +19,7 @@
 @synthesize refreshingText = _refreshingText;
 @synthesize updatedText = _updatedText;
 @synthesize updatedTimeFormat = _updatedTimeFormat;
+@synthesize terminatedText = _terminatedText;
 
 @synthesize updatedTime = _updatedTime;
 @synthesize loading = _loading;
@@ -36,6 +37,7 @@
 	self.refreshingText = nil;
 	self.updatedText = nil;
 	self.updatedTimeFormat = nil;
+	self.terminatedText = nil;
 	
 	self.updatedTime = nil;
 	
@@ -56,6 +58,7 @@
 	self.refreshingText    = SCLocalizedString(@"Refreshing...", nil);
 	self.updatedText       = SCLocalizedString(@"Last updated", nil);
 	self.updatedTimeFormat = nil; // use default format
+	self.terminatedText    = SCLocalizedString(@"No more data", nil);
 	
 	self.updatedTime = nil;
 	_loading = NO;
@@ -392,6 +395,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSString * updatedText = [dict objectForKey:@"updatedText"];
 	if (updatedText) {
 		scrollRefreshView.updatedText = SCLocalizedString(updatedText, nil);
+	}
+	
+	// terminatedText
+	NSString * terminatedText = [dict objectForKey:@"terminatedText"];
+	if (terminatedText) {
+		scrollRefreshView.terminatedText = SCLocalizedString(terminatedText, nil);
 	}
 	
 	// updatedTime

@@ -15,6 +15,7 @@
 @property(nonatomic, retain) NSString * refreshingText;    // 'Refreshing...'
 @property(nonatomic, retain) NSString * updatedText;       // 'Last updated'
 @property(nonatomic, retain) NSString * updatedTimeFormat; // 'HH:mm:ss'
+@property(nonatomic, retain) NSString * terminatedText;    // 'No more data'
 
 @property(nonatomic, retain) NSDate * updatedTime;              // last updated time
 @property(nonatomic, readwrite, getter=isLoading) BOOL loading; // animating

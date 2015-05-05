@@ -23,8 +23,8 @@
 
 - (void) onClick:(id)sender
 {
-	[super onClick:sender];
 	self.selected = !self.selected;
+	[super onClick:sender];
 }
 
 @end

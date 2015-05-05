@@ -6,16 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCTableViewCell.h"
-
-@interface UISwipeTableViewCell : UITableViewCell
-
-@property(nonatomic, readwrite) CGFloat indentationLeft; // default is 0.0, means no indent
-@property(nonatomic, readwrite) CGFloat indentationRight; // default is 0.0, means no indent
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCSwipeTableViewCell+UIKit.h"
 
 @interface SCSwipeTableViewCell : UISwipeTableViewCell<SCUIKit>
 

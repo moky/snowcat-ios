@@ -6,12 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCView+Gesture.h"
-#import "SCGroundView.h"
-
-@interface UIDragView : UIGroundView<UIViewDragGestureDelegate>
-
-@end
+#import "SCUIKit.h"
+#import "SCDragView+UIKit.h"
 
 @interface SCDragView : UIDragView<SCUIKit>
 

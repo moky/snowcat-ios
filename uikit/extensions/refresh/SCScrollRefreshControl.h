@@ -8,6 +8,7 @@
 
 #import "SCView.h"
 #import "SCScrollRefreshControlState.h"
+#import "SCScrollRefreshControlStateMachine.h"
 
 typedef NS_ENUM(NSUInteger, UIScrollRefreshControlDirection) {
     UIScrollRefreshControlDirectionTop,

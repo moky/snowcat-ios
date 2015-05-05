@@ -6,17 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCPageScrollView.h"
-
-@interface UIDockScrollView : UIPageScrollView
-
-@property(nonatomic, readwrite) BOOL reflectionEnabled; // default is YES
-
-@property(nonatomic, readwrite) CGFloat scale; // default is 0.2
-
-- (void) performEffectOnScrollView:(UIScrollView *)scrollView;
-
-@end
+#import "SCUIKit.h"
+#import "SCDockScrollView+UIKit.h"
 
 @interface SCDockScrollView : UIDockScrollView<SCUIKit>
 

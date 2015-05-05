@@ -6,15 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCTableView.h"
-
-@interface UIGridTableView : UITableView
-
-@property(nonatomic, readwrite) CGFloat columnWidth; // will return the cell's width if unset
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCGridTableView+UIKit.h"
 
 @interface SCGridTableView : UIGridTableView<SCUIKit>
 

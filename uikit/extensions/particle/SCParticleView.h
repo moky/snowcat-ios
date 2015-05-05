@@ -6,18 +6,8 @@
 //  Copyright (c) 2014 Moky. All rights reserved.
 //
 
-#import "SCView.h"
-
-@class CAEmitterLayer;
-
-@interface UIParticleView : UIView
-
-@property(nonatomic, readonly) CAEmitterLayer * emitter;
-@property(nonatomic, readwrite) CGPoint emitterPosition;
-
-@end
-
-#pragma mark -
+#import "SCUIKit.h"
+#import "SCParticleView+UIKit.h"
 
 @interface SCParticleView : UIParticleView<SCUIKit>
 

@@ -9,24 +9,10 @@
 #import "scMacros.h"
 #import "SCClient.h"
 #import "SCNib.h"
+#import "SCTableView.h"
 #import "SCComplexTableViewDataSource.h"
 #import "SCComplexTableViewDelegate.h"
 #import "SCComplexTableView.h"
-
-@implementation UIComplexTableView
-
-- (void) setFrame:(CGRect)frame
-{
-	[super setFrame:frame];
-	
-	if (frame.size.width > 0) {
-		[self reloadData];
-	}
-}
-
-@end
-
-#pragma mark -
 
 @interface SCComplexTableView ()
 
