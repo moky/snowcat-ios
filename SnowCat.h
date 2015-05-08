@@ -200,6 +200,8 @@
 #import "SCDragView.h"
 #import "SCBlurView.h"
 #import "SCRemoteController.h"
+#import "SCWaterfallView+UIKit.h"
+#import "SCWaterfallView.h"
 //
 //  uikit/extensions/particle
 //

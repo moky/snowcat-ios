@@ -16,16 +16,22 @@ typedef struct {
 	SCBaseType * items;
 	
 	// functions
-	SCBaseTypeAssign  assign;
-	SCBaseTypeCompare compare;
+	SCBaseTypeAssignFunction  fnAssign;
+	SCBaseTypeCompareFunction fnCompare;
+	// blocks
+	SCBaseTypeAssignBlock  bkAssign;
+	SCBaseTypeCompareBlock bkCompare;
 } SCBaseArray;
 
 
 SCBaseArray * SCBaseArrayCreate(NSUInteger itemSize, NSUInteger capacity);
 void SCBaseArrayDestroy(SCBaseArray * array);
 
+SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, NSUInteger index);
+
 void SCBaseArrayAdd(SCBaseArray * array, const SCBaseType * item);
 void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger index);
 void SCBaseArrayRemove(SCBaseArray * array, NSUInteger index);
 
 void SCBaseArraySort(SCBaseArray * array);
+void SCBaseArraySortInsert(SCBaseArray * array, const SCBaseType * item);

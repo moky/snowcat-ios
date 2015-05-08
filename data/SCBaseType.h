@@ -10,8 +10,11 @@
 
 typedef unsigned char SCBaseType;
 
-typedef void (*SCBaseTypeAssign)(void * ptr, const void * val);
-typedef int (*SCBaseTypeCompare)(const void * ptr1, const void * ptr2);
+typedef void (*SCBaseTypeAssignFunction)(void * ptr, const void * val);
+typedef int (*SCBaseTypeCompareFunction)(const void * ptr1, const void * ptr2);
+
+typedef void (^SCBaseTypeAssignBlock)(void * ptr, const void * val);
+typedef int (^SCBaseTypeCompareBlock)(const void * ptr1, const void * ptr2);
 
 
 // int
