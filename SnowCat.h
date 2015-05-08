@@ -30,6 +30,12 @@
 #import "SCDataLoader.h"
 
 //
+//  data
+//
+#import "SCBaseType.h"
+#import "SCBaseArray.h"
+
+//
 //  mof
 //
 #import "SCMemoryObjectFile.h"
