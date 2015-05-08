@@ -89,8 +89,24 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 
 - (void) setSpace:(CGFloat)space
 {
-	_spaceHorizontal = space;
-	_spaceVertical = space;
+	self.spaceHorizontal = space;
+	self.spaceVertical = space;
+}
+
+- (void) setSpaceHorizontal:(CGFloat)spaceHorizontal
+{
+	if (_spaceHorizontal != spaceHorizontal) {
+		_spaceHorizontal = spaceHorizontal;
+		[self setNeedsLayout];
+	}
+}
+
+- (void) setSpaceVertical:(CGFloat)spaceVertical
+{
+	if (_spaceVertical != spaceVertical) {
+		_spaceVertical = spaceVertical;
+		[self setNeedsLayout];
+	}
 }
 
 - (void) setDirection:(UIWaterfallViewDirection)direction

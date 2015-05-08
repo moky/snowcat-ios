@@ -81,6 +81,24 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		waterfallView.direction = UIWaterfallViewDirectionFromString(direction);
 	}
 	
+	// space
+	id space = [dict objectForKey:@"space"];
+	if (space) {
+		waterfallView.space = [space floatValue];
+	}
+	
+	// spaceHorizontal
+	id spaceHorizontal = [dict objectForKey:@"spaceHorizontal"];
+	if (spaceHorizontal) {
+		waterfallView.spaceHorizontal = [spaceHorizontal floatValue];
+	}
+	
+	// spaceVertical
+	id spaceVertical = [dict objectForKey:@"spaceVertical"];
+	if (spaceVertical) {
+		waterfallView.spaceVertical = [spaceVertical floatValue];
+	}
+	
 	return YES;
 }
 
