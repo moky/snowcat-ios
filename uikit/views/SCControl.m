@@ -149,4 +149,29 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	return YES;
 }
 
++ (void) performControlEvent:(UIControlEvents)controlEvent on:(UIControl *)control
+{
+	NSSet * targets;
+	NSObject * target;
+	NSArray * actions;
+	NSString * action;
+	SEL selector;
+	NSEnumerator * targetEnumerator;
+	NSEnumerator * actionEnumerator;
+	
+	// get all targets
+	targets = [control allTargets];
+	targetEnumerator = [targets objectEnumerator];
+	while (target = [targetEnumerator nextObject]) {
+		// get all actions for target
+		actions = [control actionsForTarget:target forControlEvent:controlEvent];
+		actionEnumerator = [actions objectEnumerator];
+		while (action = [actionEnumerator nextObject]) {
+			// perform selector
+			selector = NSSelectorFromString(action);
+			[target performSelector:selector withObject:control];
+		}
+	}
+}
+
 @end

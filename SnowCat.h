@@ -30,7 +30,7 @@
 #import "SCDataLoader.h"
 
 //
-//  data
+//  mof
 //
 #import "SCMemoryObjectFile.h"
 

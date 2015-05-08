@@ -22,4 +22,6 @@
 
 - (id) node; // get the node by key name 'Node' or 'SFNode'(sprite forest node)
 
+- (NSString *) version; // get version string
+
 @end

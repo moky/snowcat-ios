@@ -7,6 +7,7 @@
 //
 
 #import "scMacros.h"
+#import "SCControl.h"
 #import "SCSegmentedButton+UIKit.h"
 
 //typedef NS_ENUM(NSUInteger, UISegmentedButtonAutoLayoutDirection) {
@@ -81,7 +82,7 @@ UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromStr
 		
 		if (selectedSegmentIndex != UISegmentedButtonNoSegment) {
 			// send out message 'onChange:'
-			[self _performControlEvent:UIControlEventValueChanged];
+			[SCControl performControlEvent:UIControlEventValueChanged on:self];
 		}
 	}
 }
@@ -178,31 +179,6 @@ UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromStr
 	NSInteger index = button.tag;
 	NSAssert(index >= 0 && index < self.numberOfSegments, @"error segment: %d", (int)index);
 	self.selectedSegmentIndex = index;
-}
-
-- (void) _performControlEvent:(UIControlEvents)controlEvent
-{
-	NSSet * targets;
-	NSObject * target;
-	NSArray * actions;
-	NSEnumerator * targetEnumerator;
-	NSEnumerator * actionEnumerator;
-	NSString * action;
-	SEL selector;
-	
-	// get all targets
-	targets = [self allTargets];
-	targetEnumerator = [targets objectEnumerator];
-	while (target = [targetEnumerator nextObject]) {
-		// get all actions for target
-		actions = [self actionsForTarget:target forControlEvent:controlEvent];
-		actionEnumerator = [actions objectEnumerator];
-		while (action = [actionEnumerator nextObject]) {
-			// perform selector
-			selector = NSSelectorFromString(action);
-			[target performSelector:selector withObject:self];
-		}
-	}
 }
 
 - (void) insertSegmentWithButton:(UIButton *)button atIndex:(NSUInteger)segment animated:(BOOL)animated

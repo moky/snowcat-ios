@@ -164,6 +164,15 @@
 	return node;
 }
 
+- (NSString *) version
+{
+	NSString * version = [[self node] objectForKey:@"version"];
+	if (!version) {
+		version = [_root objectForKey:@"version"];
+	}
+	return version;
+}
+
 #pragma mark -
 
 - (NSDictionary *) _dictionaryFromString:(NSString *)string

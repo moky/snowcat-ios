@@ -101,36 +101,43 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 		UIScrollView * scrollView;
 		while (scrollView = [enumerator nextObject]) {
 			if ([scrollView isKindOfClass:[UIScrollView class]]) {
-				[self _insetScrollView:scrollView];
+				[self _resetScrollView:scrollView];
 			}
 		}
 	}
 }
 
-- (void) _insetScrollView:(UIScrollView *)scrollView
+- (void) _resetScrollView:(UIScrollView *)scrollView
 {
 	UIEdgeInsets contentInset = scrollView.contentInset;
+	UIViewAutoresizing mask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	switch (_controlPosition) {
 		case UISegmentedScrollViewControlPositionTop:
 			contentInset.top = _controlView.frame.origin.y + _controlView.frame.size.height;
+			mask |= UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 			break;
 			
 		case UISegmentedScrollViewControlPositionBottom:
 			contentInset.bottom = _controlView.frame.size.height;
+			mask |= UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 			break;
 			
 		case UISegmentedScrollViewControlPositionLeft:
 			contentInset.left = _controlView.frame.origin.x + _controlView.frame.size.width;
+			mask |= UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 			break;
 			
 		case UISegmentedScrollViewControlPositionRight:
 			contentInset.right = _controlView.frame.size.width;
+			mask |= UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 			break;
 			
 		default:
 			break;
 	}
+	
 	scrollView.contentInset = contentInset;
+	scrollView.autoresizingMask = mask;
 }
 
 - (void) _positionControlView
@@ -233,7 +240,7 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 		
 		// resize and content inset
 		scrollView.frame = self.bounds;
-		[self _insetScrollView:scrollView];
+		[self _resetScrollView:scrollView];
 		
 		// set delegate for scrolling
 		NSAssert(scrollView.delegate == nil, @"delegate's already been set");

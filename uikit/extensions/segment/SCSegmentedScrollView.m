@@ -171,8 +171,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		while (item = [enumerator nextObject]) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary");
 			scrollView = [SCScrollView create:item autorelease:NO];
-			// initialize default properties
-			scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 			[segmentedScrollView addSubview:scrollView];
 			SC_UIKIT_SET_ATTRIBUTES(scrollView, SCScrollView, item);
 			[scrollView release];
