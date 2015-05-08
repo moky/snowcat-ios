@@ -23,7 +23,7 @@
 	[super dealloc];
 }
 
-- (void) _initializeSCGroundView
+- (void) _initializeSCWaterfallView
 {
 	_scTag = 0;
 	self.nodeFile = nil;
@@ -33,7 +33,7 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		[self _initializeSCGroundView];
+		[self _initializeSCWaterfallView];
 	}
 	return self;
 }
@@ -43,7 +43,7 @@
 {
 	self = [super initWithFrame:frame];
 	if (self) {
-		[self _initializeSCGroundView];
+		[self _initializeSCWaterfallView];
 	}
 	return self;
 }
