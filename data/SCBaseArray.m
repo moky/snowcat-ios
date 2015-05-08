@@ -14,6 +14,7 @@ SCBaseArray * SCBaseArrayCreate(NSUInteger itemSize, NSUInteger capacity)
 	SCBaseArray * array = (SCBaseArray *)malloc(sizeof(SCBaseArray));
 	memset(array, 0, sizeof(SCBaseArray));
 	array->maxCount = capacity;
+	array->itemSize = itemSize;
 	array->items = (SCBaseType *)calloc(capacity, itemSize);
 	return array;
 }
@@ -41,9 +42,9 @@ void SCBaseArrayAdd(SCBaseArray * array, const SCBaseType * item)
 	if (array->count >= array->maxCount) {
 		SCBaseArrayExpand(array);
 	}
-	SCBaseType * ptr = array->items + array->itemSize * array->count;
+	SCBaseType * ptr = array->items + array->count * array->itemSize;
 	
-	// append item
+	// append item to tail
 	if (array->fnAssign) {
 		array->fnAssign(ptr, item);
 	} else if (array->bkAssign) {
@@ -71,7 +72,7 @@ void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger 
 	NSUInteger len = (array->count - index) * array->itemSize;
 	memmove(dest, src, len);
 	
-	// insert item
+	// insert item at index
 	if (array->fnAssign) {
 		array->fnAssign(src, item);
 	} else if (array->bkAssign) {
@@ -132,6 +133,6 @@ void SCBaseArraySortInsert(SCBaseArray * array, const SCBaseType * item)
 		return;
 	}
 	
-	// insert
+	// the item at index is smaller(or equals), insert after it
 	SCBaseArrayInsert(array, item, index + 1);
 }

@@ -349,7 +349,7 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	NSUInteger count = [subviews count];
 	
 	// 1. create a pool for joining points
-	//    each subview offers two new joining point,
+	//    each subview may offers two new joining point,
 	//    create a pool to save all available joining point(s)
 	SCBaseArray * pointPool = SCBaseArrayCreate(sizeof(CGPoint), count * 2);
 	pointPool->bkAssign = SCWaterfallViewJoiningPointAssignBlock();
@@ -358,6 +358,7 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	CGPoint * point = (CGPoint *)SCBaseArrayItemAt(pointPool, 0);
 	SCBaseTypeCompareBlock compare = NULL;
 	SCWaterfallViewInitFirstJoiningPoint(point, compare);
+	NSAssert(compare != NULL, @"error");
 	pointPool->bkCompare = compare;
 	pointPool->count = 1;
 	
