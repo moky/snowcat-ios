@@ -9,10 +9,10 @@
 #import "SCBaseType.h"
 
 typedef struct {
-	NSUInteger count;
-	NSUInteger maxCount;
+	unsigned long count;
+	unsigned long maxCount;
 	
-	NSUInteger itemSize;
+	unsigned long itemSize;
 	SCBaseType * items;
 	
 	// functions
@@ -24,14 +24,14 @@ typedef struct {
 } SCBaseArray;
 
 
-SCBaseArray * SCBaseArrayCreate(NSUInteger itemSize, NSUInteger capacity);
+SCBaseArray * SCBaseArrayCreate(unsigned long itemSize, unsigned long capacity);
 void SCBaseArrayDestroy(SCBaseArray * array);
 
-SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, NSUInteger index);
+SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, unsigned long index);
 
 void SCBaseArrayAdd(SCBaseArray * array, const SCBaseType * item);
-void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger index);
-void SCBaseArrayRemove(SCBaseArray * array, NSUInteger index);
+void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, unsigned long index);
+void SCBaseArrayRemove(SCBaseArray * array, unsigned long index);
 
 void SCBaseArraySort(SCBaseArray * array);
 void SCBaseArraySortInsert(SCBaseArray * array, const SCBaseType * item);

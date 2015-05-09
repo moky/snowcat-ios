@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Moky. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 typedef unsigned char SCBaseType;
 
 typedef void (*SCBaseTypeAssignFunction)(void * ptr, const void * val);

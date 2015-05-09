@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Moky. All rights reserved.
 //
 
+#include <stdlib.h>
+#include <string.h>
+
 #import "SCLog.h"
 #import "SCBaseArray.h"
 
-SCBaseArray * SCBaseArrayCreate(NSUInteger itemSize, NSUInteger capacity)
+SCBaseArray * SCBaseArrayCreate(unsigned long itemSize, unsigned long capacity)
 {
 	SCBaseArray * array = (SCBaseArray *)malloc(sizeof(SCBaseArray));
 	memset(array, 0, sizeof(SCBaseArray));
@@ -32,7 +35,7 @@ void SCBaseArrayDestroy(SCBaseArray * array)
 	free(array);
 }
 
-SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, NSUInteger index)
+SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, unsigned long index)
 {
 	return index < array->count ? array->items + index * array->itemSize : NULL;
 }
@@ -50,13 +53,13 @@ void SCBaseArrayAdd(SCBaseArray * array, const SCBaseType * item)
 	} else if (array->bkAssign) {
 		array->bkAssign(ptr, item);
 	} else {
-		SCLog(@"ERROR: no assign method");
+		//SCLog(@"ERROR: no assign method");
 		return;
 	}
 	array->count += 1;
 }
 
-void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger index)
+void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, unsigned long index)
 {
 	if (index >= array->count) {
 		SCBaseArrayAdd(array, item);
@@ -69,7 +72,7 @@ void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger 
 	// move the rest data backwords from index
 	SCBaseType * src = array->items + index * array->itemSize;
 	SCBaseType * dest = src + array->itemSize;
-	NSUInteger len = (array->count - index) * array->itemSize;
+	unsigned long len = (array->count - index) * array->itemSize;
 	memmove(dest, src, len);
 	
 	// insert item at index
@@ -78,23 +81,23 @@ void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, NSUInteger 
 	} else if (array->bkAssign) {
 		array->bkAssign(src, item);
 	} else {
-		SCLog(@"ERROR: no assign method");
+		//SCLog(@"ERROR: no assign method");
 		return;
 	}
 	array->count += 1;
 }
 
-void SCBaseArrayRemove(SCBaseArray * array, NSUInteger index)
+void SCBaseArrayRemove(SCBaseArray * array, unsigned long index)
 {
 	if (index >= array->count) {
-		SCLog(@"index out of range: %u > %u", (unsigned int)index, (unsigned int)array->count);
+		//SCLog(@"index out of range: %u > %u", (unsigned int)index, (unsigned int)array->count);
 		return;
 	}
 	
 	// move the rest data forwards to index
 	SCBaseType * dest = array->items + index * array->itemSize;
 	SCBaseType * src = dest + array->itemSize;
-	NSUInteger len = (array->count - index - 1) * array->itemSize;
+	unsigned long len = (array->count - index - 1) * array->itemSize;
 	memmove(dest, src, len);
 	
 	array->count -= 1;
@@ -107,29 +110,31 @@ void SCBaseArraySort(SCBaseArray * array)
 		qsort(array->items, 0, array->count - 1, array->fnCompare);
 	} else if (array->bkCompare) {
 		qsort_b(array->items, 0, array->count - 1, array->bkCompare);
+	} else {
+		//SCLog(@"ERROR: no compare method");
 	}
 }
 
 void SCBaseArraySortInsert(SCBaseArray * array, const SCBaseType * item)
 {
 	// seek
-	NSInteger index = array->count - 1;
+	long index = array->count - 1;
 	SCBaseType * ptr = array->items + index * array->itemSize;
 	
 	if (array->fnCompare) {
 		for (; index >= 0; --index, ptr -= array->itemSize) {
-			if (array->fnCompare(ptr, item) <= NSOrderedSame) {
+			if (array->fnCompare(ptr, item) <= 0) {
 				break; // got it
 			}
 		}
 	} else if (array->bkCompare) {
 		for (; index >= 0; --index, ptr -= array->itemSize) {
-			if (array->bkCompare(ptr, item) <= NSOrderedSame) {
+			if (array->bkCompare(ptr, item) <= 0) {
 				break; // got it
 			}
 		}
 	} else {
-		SCLog(@"ERROR: no compare method");
+		//SCLog(@"ERROR: no compare method");
 		return;
 	}
 	

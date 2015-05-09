@@ -21,11 +21,11 @@ int SCIntCompare(const void * ptr1, const void * ptr2)
 	int * p1 = (int *)ptr1;
 	int * p2 = (int *)ptr2;
 	if (*p1 > *p2) {
-		return NSOrderedDescending;
+		return 1;
 	} else if (*p1 < *p2) {
-		return NSOrderedAscending;
+		return -1;
 	} else {
-		return NSOrderedSame;
+		return 0;
 	}
 }
 
@@ -42,10 +42,10 @@ int SCFloatCompare(const void * ptr1, const void * ptr2)
 	float * p1 = (float *)ptr1;
 	float * p2 = (float *)ptr2;
 	if (*p1 > *p2) {
-		return NSOrderedDescending;
+		return 1;
 	} else if (*p1 < *p2) {
-		return NSOrderedAscending;
+		return -1;
 	} else {
-		return NSOrderedSame;
+		return 0;
 	}
 }

@@ -48,6 +48,248 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	return [string integerValue];
 }
 
+NS_INLINE void add_first_joining_point(SCBaseArray * pointPool,
+									   UIWaterfallViewDirection direction,
+									   CGFloat spaceHorizontal, CGFloat spaceVertical,
+									   CGRect bounds)
+{
+	SCBaseTypeCompareBlock compare = NULL;
+	CGPoint point = CGPointZero;
+	switch (direction) {
+		/* {left, top} */
+		case UIWaterfallViewDirectionTopLeft:
+			compare = SCWaterfallViewJoiningPointCompareBlockTopLeft();
+			point.x = spaceHorizontal;
+			point.y = spaceVertical;
+			break;
+		case UIWaterfallViewDirectionLeftTop:
+			compare = SCWaterfallViewJoiningPointCompareBlockLeftTop();
+			point.x = spaceHorizontal;
+			point.y = spaceVertical;
+			break;
+			
+		/* {right, top} */
+		case UIWaterfallViewDirectionTopRight:
+			compare = SCWaterfallViewJoiningPointCompareBlockTopRight();
+			point.x = bounds.size.width - spaceHorizontal;
+			point.y = spaceVertical;
+			break;
+		case UIWaterfallViewDirectionRightTop:
+			compare = SCWaterfallViewJoiningPointCompareBlockRightTop();
+			point.x = bounds.size.width - spaceHorizontal;
+			point.y = spaceVertical;
+			break;
+		
+		/* {left, bottom} */
+		case UIWaterfallViewDirectionBottomLeft:
+			compare = SCWaterfallViewJoiningPointCompareBlockBottomLeft();
+			point.x = spaceHorizontal;
+			point.y = bounds.size.height - spaceVertical;
+			break;
+		case UIWaterfallViewDirectionLeftBottom:
+			compare = SCWaterfallViewJoiningPointCompareBlockLeftBottom();
+			point.x = spaceHorizontal;
+			point.y = bounds.size.height - spaceVertical;
+			break;
+			
+		/* {right, bottom} */
+		case UIWaterfallViewDirectionBottomRight:
+			compare = SCWaterfallViewJoiningPointCompareBlockBottomRight();
+			point.x = bounds.size.width - spaceHorizontal;
+			point.y = bounds.size.height - spaceVertical;
+			break;
+		case UIWaterfallViewDirectionRightBottom:
+			compare = SCWaterfallViewJoiningPointCompareBlockRightBottom();
+			point.x = bounds.size.width - spaceHorizontal;
+			point.y = bounds.size.height - spaceVertical;
+			break;
+			
+		default:
+			break; // error
+	}
+	pointPool->bkCompare = compare;
+	SCBaseArrayAdd(pointPool, (SCBaseType *)&point);
+}
+
+NS_INLINE BOOL place_on_joining_point(CGRect *frame, CGPoint point,
+									  UIWaterfallViewDirection direction,
+									  CGFloat spaceHorizontal, CGFloat spaceVertical,
+									  CGRect bounds)
+{
+	switch (direction) {
+		/* top first */
+		case UIWaterfallViewDirectionTopLeft:
+			frame->origin.x = point.x;
+			frame->origin.y = point.y;
+			if (frame->origin.x + frame->size.width + spaceHorizontal > bounds.size.width) {
+				return NO;
+			}
+			break;
+		case UIWaterfallViewDirectionTopRight:
+			frame->origin.x = point.x - frame->size.width;
+			frame->origin.y = point.y;
+			if (frame->origin.x - spaceHorizontal < 0.0f) {
+				return NO;
+			}
+			break;
+			
+		/* bottom first */
+		case UIWaterfallViewDirectionBottomLeft:
+			frame->origin.x = point.x;
+			frame->origin.y = point.y - frame->size.height;
+			if (frame->origin.x + frame->size.width + spaceHorizontal > bounds.size.width) {
+				return NO;
+			}
+			break;
+		case UIWaterfallViewDirectionBottomRight:
+			frame->origin.x = point.x - frame->size.width;
+			frame->origin.y = point.y - frame->size.height;
+			if (frame->origin.x - spaceHorizontal < 0.0f) {
+				return NO;
+			}
+			break;
+			
+		/* left first */
+		case UIWaterfallViewDirectionLeftTop:
+			frame->origin.x = point.x;
+			frame->origin.y = point.y;
+			if (frame->origin.y + frame->size.height + spaceVertical > bounds.size.height) {
+				return NO;
+			}
+			break;
+		case UIWaterfallViewDirectionLeftBottom:
+			frame->origin.x = point.x;
+			frame->origin.y = point.y - frame->size.height;
+			if (frame->origin.y - spaceVertical < 0.0f) {
+				return NO;
+			}
+			break;
+			
+		/* right first */
+		case UIWaterfallViewDirectionRightTop:
+			frame->origin.x = point.x - frame->size.width;
+			frame->origin.y = point.y;
+			if (frame->origin.y + frame->size.height + spaceVertical > bounds.size.height) {
+				return NO;
+			}
+			break;
+		case UIWaterfallViewDirectionRightBottom:
+			frame->origin.x = point.x - frame->size.width;
+			frame->origin.y = point.y - frame->size.height;
+			if (frame->origin.y - spaceVertical < 0.0f) {
+				return NO;
+			}
+			
+		default:
+			return NO; // error
+			break;
+	}
+	return YES;
+}
+
+NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
+									  UIWaterfallViewDirection direction,
+									  CGFloat spaceHorizontal, CGFloat spaceVertical,
+									  CGRect bounds)
+{
+	CGPoint point = CGPointZero;
+	SCBaseType * bt = (SCBaseType *)&point;
+	switch (direction) {
+		/* top first */
+		case UIWaterfallViewDirectionTopLeft:
+			point.x = frame.origin.x + frame.size.width + spaceHorizontal;
+			point.y = frame.origin.y;
+			if (point.x < bounds.size.width) {
+				SCBaseArraySortInsert(pointPool, bt); /* right */
+			}
+			point.x = frame.origin.x;
+			point.y = frame.origin.y + frame.size.height + spaceVertical;
+			SCBaseArraySortInsert(pointPool, bt); /* bottom */
+			break;
+		case UIWaterfallViewDirectionTopRight:
+			point.x = frame.origin.x - spaceHorizontal;
+			point.y = frame.origin.y;
+			if (point.x > 0.0f) {
+				SCBaseArraySortInsert(pointPool, bt); /* left */
+			}
+			point.x = frame.origin.x + frame.size.width;
+			point.y = frame.origin.y + frame.size.height + spaceVertical;
+			SCBaseArraySortInsert(pointPool, bt); /* bottom */
+			break;
+			
+		/* bottom first */
+		case UIWaterfallViewDirectionBottomLeft:
+			point.x = frame.origin.x + frame.size.width + spaceHorizontal;
+			point.y = frame.origin.y + frame.size.height;
+			if (point.x < bounds.size.width) {
+				SCBaseArraySortInsert(pointPool, bt); /* right */
+			}
+			point.x = frame.origin.x;
+			point.y = frame.origin.y - spaceVertical;
+			SCBaseArraySortInsert(pointPool, bt); /* top */
+			break;
+		case UIWaterfallViewDirectionBottomRight:
+			point.x = frame.origin.x - spaceHorizontal;
+			point.y = frame.origin.y + frame.size.height;
+			if (point.x > 0.0f) {
+				SCBaseArraySortInsert(pointPool, bt); /* left */
+			}
+			point.x = frame.origin.x + frame.size.width;
+			point.y = frame.origin.y - spaceVertical;
+			SCBaseArraySortInsert(pointPool, bt); /* top */
+			break;
+			
+		/* left first */
+		case UIWaterfallViewDirectionLeftTop:
+			point.x = frame.origin.x;
+			point.y = frame.origin.y + frame.size.height + spaceVertical;
+			if (point.y < bounds.size.height) {
+				SCBaseArraySortInsert(pointPool, bt); /* bottom */
+			}
+			point.x = frame.origin.x + frame.size.width + spaceHorizontal;
+			point.y = frame.origin.y;
+			SCBaseArraySortInsert(pointPool, bt); /* right */
+			break;
+		case UIWaterfallViewDirectionLeftBottom:
+			point.x = frame.origin.x;
+			point.y = frame.origin.y - spaceVertical;
+			if (point.y > 0.0f) {
+				SCBaseArraySortInsert(pointPool, bt); /* top */
+			}
+			point.x = frame.origin.x + frame.size.width + spaceHorizontal;
+			point.y = frame.origin.y + frame.size.height;
+			SCBaseArraySortInsert(pointPool, bt); /* right */
+			break;
+			
+		/* right first */
+		case UIWaterfallViewDirectionRightTop:
+			point.x = frame.origin.x + frame.size.width;
+			point.y = frame.origin.y + frame.size.height + spaceVertical;
+			if (point.y < bounds.size.height) {
+				SCBaseArraySortInsert(pointPool, bt); /* bottom */
+			}
+			point.x = frame.origin.x - spaceHorizontal;
+			point.y = frame.origin.y;
+			SCBaseArraySortInsert(pointPool, bt); /* left */
+			break;
+		case UIWaterfallViewDirectionRightBottom:
+			point.x = frame.origin.x + frame.size.width;
+			point.y = frame.origin.y - spaceVertical;
+			if (point.y > 0.0f) {
+				SCBaseArraySortInsert(pointPool, bt); /* top */
+			}
+			point.x = frame.origin.x - spaceHorizontal;
+			point.y = frame.origin.y + frame.size.height;
+			SCBaseArraySortInsert(pointPool, bt); /* left */
+			break;
+			
+		default:
+			break; // error
+	}
+}
+
+#pragma mark -
+
 @implementation UIWaterfallView
 
 @synthesize direction = _direction;
@@ -139,209 +381,6 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	return [self layoutSubviewsInView:view towards:direction spaceHorizontal:0.0f spaceVertical:0.0f];
 }
 
-#pragma mark -
-
-#define SCWaterfallViewInitFirstJoiningPoint(point, compare)                   \
-		switch (direction) {                                                   \
-			/* {left, top} */                                                  \
-			case UIWaterfallViewDirectionTopLeft:                              \
-				compare = SCWaterfallViewJoiningPointCompareBlockTopLeft();    \
-				point->x = spaceHorizontal;                                    \
-				point->y = spaceVertical;                                      \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftTop:                              \
-				compare = SCWaterfallViewJoiningPointCompareBlockLeftTop();    \
-				point->x = spaceHorizontal;                                    \
-				point->y = spaceVertical;                                      \
-				break;                                                         \
-			/* {right, top} */                                                 \
-			case UIWaterfallViewDirectionTopRight:                             \
-				compare = SCWaterfallViewJoiningPointCompareBlockTopRight();   \
-				point->x = bounds.size.width - spaceHorizontal;                \
-				point->y = spaceVertical;                                      \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightTop:                             \
-				compare = SCWaterfallViewJoiningPointCompareBlockRightTop();   \
-				point->x = bounds.size.width - spaceHorizontal;                \
-				point->y = spaceVertical;                                      \
-				break;                                                         \
-			/* {left, bottom} */                                               \
-			case UIWaterfallViewDirectionBottomLeft:                           \
-				compare = SCWaterfallViewJoiningPointCompareBlockBottomLeft(); \
-				point->x = spaceHorizontal;                                    \
-				point->y = bounds.size.height - spaceVertical;                 \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftBottom:                           \
-				compare = SCWaterfallViewJoiningPointCompareBlockLeftBottom(); \
-				point->x = spaceHorizontal;                                    \
-				point->y = bounds.size.height - spaceVertical;                 \
-				break;                                                         \
-			/* {right, bottom} */                                              \
-			case UIWaterfallViewDirectionBottomRight:                          \
-				compare = SCWaterfallViewJoiningPointCompareBlockBottomRight();\
-				point->x = bounds.size.width - spaceHorizontal;                \
-				point->y = bounds.size.height - spaceVertical;                 \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightBottom:                          \
-				compare = SCWaterfallViewJoiningPointCompareBlockRightBottom();\
-				point->x = bounds.size.width - spaceHorizontal;                \
-				point->y = bounds.size.height - spaceVertical;                 \
-				break;                                                         \
-			default:                                                           \
-				break;                                                         \
-		}                                                                      \
-		                        /* EOF 'SCWaterfallViewInitFirstJoiningPoint' */
-
-#define SCWaterfallViewPlaceOnJoiningPoint(frame)                              \
-		switch (direction) {                                                   \
-			case UIWaterfallViewDirectionTopLeft:                              \
-				frame.origin.x = point->x;                                     \
-				frame.origin.y = point->y;                                     \
-				if (frame.origin.x + frame.size.width + spaceHorizontal > bounds.size.width) { \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionTopRight:                             \
-				frame.origin.x = point->x - frame.size.width;                  \
-				frame.origin.y = point->y;                                     \
-				if (frame.origin.x - spaceHorizontal < 0.0f) {                 \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionBottomLeft:                           \
-				frame.origin.x = point->x;                                     \
-				frame.origin.y = point->y - frame.size.height;                 \
-				if (frame.origin.x + frame.size.width + spaceHorizontal > bounds.size.width) { \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionBottomRight:                          \
-				frame.origin.x = point->x - frame.size.width;                  \
-				frame.origin.y = point->y - frame.size.height;                 \
-				if (frame.origin.x - spaceHorizontal < 0.0f) {                 \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftTop:                              \
-				frame.origin.x = point->x;                                     \
-				frame.origin.y = point->y;                                     \
-				if (frame.origin.y + frame.size.height + spaceVertical > bounds.size.height) { \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftBottom:                           \
-				frame.origin.x = point->x;                                     \
-				frame.origin.y = point->y - frame.size.height;                 \
-				if (frame.origin.y - spaceVertical < 0.0f) {                   \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightTop:                             \
-				frame.origin.x = point->x - frame.size.width;                  \
-				frame.origin.y = point->y;                                     \
-				if (frame.origin.y + frame.size.height + spaceVertical > bounds.size.height) { \
-					continue;                                                  \
-				}                                                              \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightBottom:                          \
-				frame.origin.x = point->x - frame.size.width;                  \
-				frame.origin.y = point->y - frame.size.height;                 \
-				if (frame.origin.y - spaceVertical < 0.0f) {                   \
-					continue;                                                  \
-				}                                                              \
-			default:                                                           \
-				break;                                                         \
-		}                                                                      \
-		                          /* EOF 'SCWaterfallViewPlaceOnJoiningPoint' */
-
-#define SCWaterfallViewAddTwoJoiningPoints(frame)                              \
-		switch (direction) {                                                   \
-			case UIWaterfallViewDirectionTopLeft:                              \
-				pt.x = frame.origin.x + frame.size.width + spaceHorizontal;    \
-				pt.y = frame.origin.y;                                         \
-				if (pt.x < bounds.size.width) {                                \
-					SCBaseArraySortInsert(pointPool, bt); /* right */          \
-				}                                                              \
-				pt.x = frame.origin.x;                                         \
-				pt.y = frame.origin.y + frame.size.height + spaceVertical;     \
-				SCBaseArraySortInsert(pointPool, bt); /* bottom */             \
-				break;                                                         \
-			case UIWaterfallViewDirectionTopRight:                             \
-				pt.x = frame.origin.x - spaceHorizontal;                       \
-				pt.y = frame.origin.y;                                         \
-				if (pt.x > 0.0f) {                                             \
-					SCBaseArraySortInsert(pointPool, bt); /* left */           \
-				}                                                              \
-				pt.x = frame.origin.x + frame.size.width;                      \
-				pt.y = frame.origin.y + frame.size.height + spaceVertical;     \
-				SCBaseArraySortInsert(pointPool, bt); /* bottom */             \
-				break;                                                         \
-			case UIWaterfallViewDirectionBottomLeft:                           \
-				pt.x = frame.origin.x + frame.size.width + spaceHorizontal;    \
-				pt.y = frame.origin.y + frame.size.height;                     \
-				if (pt.x < bounds.size.width) {                                \
-					SCBaseArraySortInsert(pointPool, bt); /* right */          \
-				}                                                              \
-				pt.x = frame.origin.x;                                         \
-				pt.y = frame.origin.y - spaceVertical;                         \
-				SCBaseArraySortInsert(pointPool, bt); /* top */                \
-				break;                                                         \
-			case UIWaterfallViewDirectionBottomRight:                          \
-				pt.x = frame.origin.x - spaceHorizontal;                       \
-				pt.y = frame.origin.y + frame.size.height;                     \
-				if (pt.x > 0.0f) {                                             \
-					SCBaseArraySortInsert(pointPool, bt); /* left */           \
-				}                                                              \
-				pt.x = frame.origin.x + frame.size.width;                      \
-				pt.y = frame.origin.y - spaceVertical;                         \
-				SCBaseArraySortInsert(pointPool, bt); /* top */                \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftTop:                              \
-				pt.x = frame.origin.x;                                         \
-				pt.y = frame.origin.y + frame.size.height + spaceVertical;     \
-				if (pt.y < bounds.size.height) {                               \
-					SCBaseArraySortInsert(pointPool, bt); /* bottom */         \
-				}                                                              \
-				pt.x = frame.origin.x + frame.size.width + spaceHorizontal;    \
-				pt.y = frame.origin.y;                                         \
-				SCBaseArraySortInsert(pointPool, bt); /* right */              \
-				break;                                                         \
-			case UIWaterfallViewDirectionLeftBottom:                           \
-				pt.x = frame.origin.x;                                         \
-				pt.y = frame.origin.y - spaceVertical;                         \
-				if (pt.y > 0.0f) {                                             \
-					SCBaseArraySortInsert(pointPool, bt); /* top */            \
-				}                                                              \
-				pt.x = frame.origin.x + frame.size.width + spaceHorizontal;    \
-				pt.y = frame.origin.y + frame.size.height;                     \
-				SCBaseArraySortInsert(pointPool, bt); /* right */              \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightTop:                             \
-				pt.x = frame.origin.x + frame.size.width;                      \
-				pt.y = frame.origin.y + frame.size.height + spaceVertical;     \
-				if (pt.y < bounds.size.height) {                               \
-					SCBaseArraySortInsert(pointPool, bt); /* bottom */         \
-				}                                                              \
-				pt.x = frame.origin.x - spaceHorizontal;                       \
-				pt.y = frame.origin.y;                                         \
-				SCBaseArraySortInsert(pointPool, bt); /* left */               \
-				break;                                                         \
-			case UIWaterfallViewDirectionRightBottom:                          \
-				pt.x = frame.origin.x + frame.size.width;                      \
-				pt.y = frame.origin.y - spaceVertical;                         \
-				if (pt.y > 0.0f) {                                             \
-					SCBaseArraySortInsert(pointPool, bt); /* top */            \
-				}                                                              \
-				pt.x = frame.origin.x - spaceHorizontal;                       \
-				pt.y = frame.origin.y + frame.size.height;                     \
-				SCBaseArraySortInsert(pointPool, bt); /* left */               \
-				break;                                                         \
-			default:                                                           \
-				break;                                                         \
-		}                                                                      \
-		                          /* EOF 'SCWaterfallViewAddTwoJoiningPoints' */
-
-
 + (CGSize) layoutSubviewsInView:(UIView *)view towards:(UIWaterfallViewDirection)direction spaceHorizontal:(CGFloat)spaceHorizontal spaceVertical:(CGFloat)spaceVertical
 {
 	CGRect bounds = view.bounds;
@@ -353,14 +392,8 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	//    create a pool to save all available joining point(s)
 	SCBaseArray * pointPool = SCBaseArrayCreate(sizeof(CGPoint), count * 2);
 	pointPool->bkAssign = SCWaterfallViewJoiningPointAssignBlock();
-	
-	// set compare function & first joining point
-	CGPoint * point = (CGPoint *)SCBaseArrayItemAt(pointPool, 0);
-	SCBaseTypeCompareBlock compare = NULL;
-	SCWaterfallViewInitFirstJoiningPoint(point, compare);
-	NSAssert(compare != NULL, @"error");
-	pointPool->bkCompare = compare;
-	pointPool->count = 1;
+	add_first_joining_point(pointPool, direction, spaceHorizontal, spaceVertical, bounds);
+	NSAssert(pointPool->bkCompare, @"init failed");
 	
 	NSEnumerator * enumerator = [subviews objectEnumerator];
 	UIView * child;
@@ -373,8 +406,7 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 	BOOL conflicts;
 	NSInteger i;
 	
-	CGPoint pt = CGPointZero;
-	SCBaseType * bt = (SCBaseType *)&pt;
+	CGPoint * point;
 	
 	// 2. layout each subview
 	for (index = 0; child = [enumerator nextObject]; ++index) {
@@ -386,7 +418,9 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 		for (offset = 0; offset < pointPool->count; ++offset, ++point) {
 			// 2.1.1. place it on the joing point
 			//        if the frame outside the bounds, continue
-			SCWaterfallViewPlaceOnJoiningPoint(frame);
+			if (!place_on_joining_point(&frame, *point, direction, spaceHorizontal, spaceVertical, bounds)) {
+				continue;
+			}
 			
 			// 2.1.2. check each elder sibling whether conflict
 			conflicts = NO;
@@ -417,7 +451,7 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 		child.frame = frame;
 		
 		// 2.4. add two new joing points
-		SCWaterfallViewAddTwoJoiningPoints(frame);
+		add_two_joining_points(pointPool, frame, direction, spaceVertical, spaceVertical, bounds);
 	}
 	
 	// 3. destroy the pool for joining points
