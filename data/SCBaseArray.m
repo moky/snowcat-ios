@@ -16,16 +16,10 @@ SCBaseArray * SCBaseArrayCreate(unsigned long itemSize, unsigned long capacity)
 {
 	SCBaseArray * array = (SCBaseArray *)malloc(sizeof(SCBaseArray));
 	memset(array, 0, sizeof(SCBaseArray));
-	array->maxCount = capacity;
+	array->capacity = capacity;
 	array->itemSize = itemSize;
 	array->items = (SCBaseType *)calloc(capacity, itemSize);
 	return array;
-}
-
-void SCBaseArrayExpand(SCBaseArray * array)
-{
-	array->maxCount *= 2;
-	array->items = (SCBaseType *)realloc(array->items, array->maxCount);
 }
 
 void SCBaseArrayDestroy(SCBaseArray * array)
@@ -35,6 +29,23 @@ void SCBaseArrayDestroy(SCBaseArray * array)
 	free(array);
 }
 
+static inline void SCBaseArrayExpand(SCBaseArray * array)
+{
+	array->capacity *= 2;
+	array->items = (SCBaseType *)realloc(array->items, array->capacity);
+}
+
+static inline void SCBaseArrayAssign(const SCBaseArray * array, SCBaseType * dest, const SCBaseType * src)
+{
+	if (array->fnAssign) {
+		array->fnAssign(dest, src);
+	} else if (array->bkAssign) {
+		array->bkAssign(dest, src);
+	} else {
+		memcpy(dest, src, array->itemSize);
+	}
+}
+
 SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, unsigned long index)
 {
 	return index < array->count ? array->items + index * array->itemSize : NULL;
@@ -42,20 +53,13 @@ SCBaseType * SCBaseArrayItemAt(const SCBaseArray * array, unsigned long index)
 
 void SCBaseArrayAdd(SCBaseArray * array, const SCBaseType * item)
 {
-	if (array->count >= array->maxCount) {
+	if (array->count >= array->capacity) {
 		SCBaseArrayExpand(array);
 	}
 	SCBaseType * ptr = array->items + array->count * array->itemSize;
 	
 	// append item to tail
-	if (array->fnAssign) {
-		array->fnAssign(ptr, item);
-	} else if (array->bkAssign) {
-		array->bkAssign(ptr, item);
-	} else {
-		//SCLog(@"ERROR: no assign method");
-		return;
-	}
+	SCBaseArrayAssign(array, ptr, item);
 	array->count += 1;
 }
 
@@ -65,7 +69,7 @@ void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, unsigned lo
 		SCBaseArrayAdd(array, item);
 		return;
 	}
-	if (array->count >= array->maxCount) {
+	if (array->count >= array->capacity) {
 		SCBaseArrayExpand(array);
 	}
 	
@@ -76,14 +80,7 @@ void SCBaseArrayInsert(SCBaseArray * array, const SCBaseType * item, unsigned lo
 	memmove(dest, src, len);
 	
 	// insert item at index
-	if (array->fnAssign) {
-		array->fnAssign(src, item);
-	} else if (array->bkAssign) {
-		array->bkAssign(src, item);
-	} else {
-		//SCLog(@"ERROR: no assign method");
-		return;
-	}
+	SCBaseArrayAssign(array, src, item);
 	array->count += 1;
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, UIWaterfallViewDirection) {
-	UIWaterfallViewDirectionTopLeft,     // place each subview as TOP as possible, if reach the TOP, as LEFT as possible
+	UIWaterfallViewDirectionTopLeft,     // TOP first, and then LEFT (place each subview as TOP as possible)
 	UIWaterfallViewDirectionTopRight,    // TOP first, and then RIGHT
 	
 	UIWaterfallViewDirectionBottomLeft,  // BOTTOM first, and then LEFT
@@ -40,13 +40,13 @@ typedef NS_OPTIONS(NSUInteger, UIWaterfallViewDirectionMask) {
 	UIWaterfallViewDirectionMaskRightBottom = 1 << UIWaterfallViewDirectionRightBottom,
 	
 	// virtical
-	UIWaterfallViewDirectionMaskTop    = UIWaterfallViewDirectionMaskTopLeft | UIWaterfallViewDirectionMaskTopRight,
-	UIWaterfallViewDirectionMaskBottom = UIWaterfallViewDirectionMaskBottomLeft | UIWaterfallViewDirectionMaskBottomRight,
-	UIWaterfallViewDirectionMaskVertical   = UIWaterfallViewDirectionMaskTop | UIWaterfallViewDirectionMaskBottom,
+	UIWaterfallViewDirectionMaskTop         = UIWaterfallViewDirectionMaskTopLeft | UIWaterfallViewDirectionMaskTopRight,
+	UIWaterfallViewDirectionMaskBottom      = UIWaterfallViewDirectionMaskBottomLeft | UIWaterfallViewDirectionMaskBottomRight,
+	UIWaterfallViewDirectionMaskVertical    = UIWaterfallViewDirectionMaskTop | UIWaterfallViewDirectionMaskBottom,
 	// horizontal
-	UIWaterfallViewDirectionMaskLeft   = UIWaterfallViewDirectionMaskLeftTop | UIWaterfallViewDirectionMaskLeftBottom,
-	UIWaterfallViewDirectionMaskRight  = UIWaterfallViewDirectionMaskRightTop | UIWaterfallViewDirectionMaskRightBottom,
-	UIWaterfallViewDirectionMaskHorizontal = UIWaterfallViewDirectionMaskLeft | UIWaterfallViewDirectionMaskRight,
+	UIWaterfallViewDirectionMaskLeft        = UIWaterfallViewDirectionMaskLeftTop | UIWaterfallViewDirectionMaskLeftBottom,
+	UIWaterfallViewDirectionMaskRight       = UIWaterfallViewDirectionMaskRightTop | UIWaterfallViewDirectionMaskRightBottom,
+	UIWaterfallViewDirectionMaskHorizontal  = UIWaterfallViewDirectionMaskLeft | UIWaterfallViewDirectionMaskRight,
 };
 
 #define UIWaterfallViewDirectionMatch(mask, direction) ((mask) & (1 << (direction)))

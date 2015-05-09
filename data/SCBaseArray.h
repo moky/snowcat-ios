@@ -9,18 +9,18 @@
 #import "SCBaseType.h"
 
 typedef struct {
-	unsigned long count;
-	unsigned long maxCount;
-	
+	unsigned long capacity; // max length of items
 	unsigned long itemSize;
 	SCBaseType * items;
 	
-	// functions
+	unsigned long count;
+	
+	// assign
 	SCBaseTypeAssignFunction  fnAssign;
+	SCBaseTypeAssignBlock     bkAssign;
+	// compare
 	SCBaseTypeCompareFunction fnCompare;
-	// blocks
-	SCBaseTypeAssignBlock  bkAssign;
-	SCBaseTypeCompareBlock bkCompare;
+	SCBaseTypeCompareBlock    bkCompare;
 } SCBaseArray;
 
 

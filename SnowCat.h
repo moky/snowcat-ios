@@ -34,6 +34,8 @@
 //
 #import "SCBaseType.h"
 #import "SCBaseArray.h"
+#import "SCBaseStack.h"
+#import "SCBaseQueue.h"
 
 //
 //  mof
