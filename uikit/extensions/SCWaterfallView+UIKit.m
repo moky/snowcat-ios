@@ -362,7 +362,10 @@ NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
 - (void) layoutSubviews
 {
 	[super layoutSubviews];
-	[UIWaterfallView layoutSubviewsInView:self towards:_direction];
+	[UIWaterfallView layoutSubviewsInView:self
+								  towards:_direction
+						  spaceHorizontal:_spaceHorizontal
+							spaceVertical:_spaceVertical];
 }
 
 - (void) didAddSubview:(UIView *)subview
@@ -445,6 +448,7 @@ NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
 		} else {
 			NSAssert(false, @"no joining point match?");
 			// FIXME: place it anywhere that has enough space
+			continue;
 		}
 		
 		// 2.3. place it
