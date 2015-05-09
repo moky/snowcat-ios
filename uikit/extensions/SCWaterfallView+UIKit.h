@@ -24,6 +24,40 @@ typedef NS_ENUM(NSUInteger, UIWaterfallViewDirection) {
 
 UIKIT_EXTERN UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string);
 
+// convenient method for checking direction
+typedef NS_OPTIONS(NSUInteger, UIWaterfallViewDirectionMask) {
+	// top
+	UIWaterfallViewDirectionMaskTopLeft     = 1 << UIWaterfallViewDirectionTopLeft,
+	UIWaterfallViewDirectionMaskTopRight    = 1 << UIWaterfallViewDirectionTopRight,
+	// bottom
+	UIWaterfallViewDirectionMaskBottomLeft  = 1 << UIWaterfallViewDirectionBottomLeft,
+	UIWaterfallViewDirectionMaskBottomRight = 1 << UIWaterfallViewDirectionBottomRight,
+	// left
+	UIWaterfallViewDirectionMaskLeftTop     = 1 << UIWaterfallViewDirectionLeftTop,
+	UIWaterfallViewDirectionMaskLeftBottom  = 1 << UIWaterfallViewDirectionLeftBottom,
+	// right
+	UIWaterfallViewDirectionMaskRightTop    = 1 << UIWaterfallViewDirectionRightTop,
+	UIWaterfallViewDirectionMaskRightBottom = 1 << UIWaterfallViewDirectionRightBottom,
+	
+	// virtical
+	UIWaterfallViewDirectionMaskTop    = UIWaterfallViewDirectionMaskTopLeft | UIWaterfallViewDirectionMaskTopRight,
+	UIWaterfallViewDirectionMaskBottom = UIWaterfallViewDirectionMaskBottomLeft | UIWaterfallViewDirectionMaskBottomRight,
+	UIWaterfallViewDirectionMaskVertical   = UIWaterfallViewDirectionMaskTop | UIWaterfallViewDirectionMaskBottom,
+	// horizontal
+	UIWaterfallViewDirectionMaskLeft   = UIWaterfallViewDirectionMaskLeftTop | UIWaterfallViewDirectionMaskLeftBottom,
+	UIWaterfallViewDirectionMaskRight  = UIWaterfallViewDirectionMaskRightTop | UIWaterfallViewDirectionMaskRightBottom,
+	UIWaterfallViewDirectionMaskHorizontal = UIWaterfallViewDirectionMaskLeft | UIWaterfallViewDirectionMaskRight,
+};
+
+#define UIWaterfallViewDirectionMatch(mask, direction) ((mask) & (1 << (direction)))
+
+@protocol UIWaterfallViewDelegate <NSObject>
+
+@required
+- (void) waterfallView:(UIView *)view resize:(CGSize)size;
+
+@end
+
 //
 //  Description:
 //      All subviews in it will layout as waterfall automatically
@@ -35,6 +69,8 @@ UIKIT_EXTERN UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSStrin
 @property(nonatomic, readwrite) CGFloat space; // setting 'space' will effect horizontal & vertical at the same time
 @property(nonatomic, readwrite) CGFloat spaceHorizontal;
 @property(nonatomic, readwrite) CGFloat spaceVertical;
+
+@property(nonatomic, assign) id<UIWaterfallViewDelegate> delegate;
 
 + (CGSize) layoutSubviewsInView:(UIView *)view;
 

@@ -179,6 +179,7 @@ NS_INLINE BOOL place_on_joining_point(CGRect *frame, CGPoint point,
 			if (frame->origin.y - spaceVertical < 0.0f) {
 				return NO;
 			}
+			break;
 			
 		default:
 			return NO; // error
@@ -288,6 +289,116 @@ NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
 	}
 }
 
+NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
+									 UIWaterfallViewDirection direction,
+									 CGFloat spaceHorizontal, CGFloat spaceVertical,
+									 CGRect bounds)
+{
+	CGFloat delta = 0.0f;
+	BOOL expanded = NO;
+	
+	// 1. measuring the minimum size
+	CGSize size = bounds.size;
+	// expand bounds to include all subviews
+	NSEnumerator * enumerator = [view.subviews objectEnumerator];
+	UIView * v;
+	CGRect frame;
+	
+	while (v = [enumerator nextObject]) {
+		frame = v.frame;
+		switch (direction) {
+			/* top */
+			case UIWaterfallViewDirectionTopLeft:
+			case UIWaterfallViewDirectionTopRight:
+				delta = frame.origin.y + frame.size.height + spaceVertical - size.height;
+				if (delta > 0.0f) {
+					size.height += delta;
+					expanded = YES;
+				}
+				break;
+				
+			/* bottom */
+			case UIWaterfallViewDirectionBottomLeft:
+			case UIWaterfallViewDirectionBottomRight:
+				delta = frame.origin.y - spaceVertical + (size.height - bounds.size.height);
+				if (delta < 0.0f) {
+					size.height -= delta;
+					expanded = YES;
+				}
+				break;
+				
+			/* left */
+			case UIWaterfallViewDirectionLeftTop:
+			case UIWaterfallViewDirectionLeftBottom:
+				delta = frame.origin.x + frame.size.width + spaceHorizontal - size.width;
+				if (delta > 0.0f) {
+					size.width += delta;
+					expanded = YES;
+				}
+				break;
+				
+			/* right */
+			case UIWaterfallViewDirectionRightTop:
+			case UIWaterfallViewDirectionRightBottom:
+				delta = frame.origin.x - spaceHorizontal + (size.width - bounds.size.width);
+				if (delta < 0.0f) {
+					size.width -= delta;
+					expanded = YES;
+				}
+				break;
+				
+			default:
+				break;
+		}
+	}
+	
+	if (!expanded) {
+		// no need to resize, return
+		return;
+	}
+	
+	// 2. expand size
+	view.bounds = CGRectMake(bounds.origin.x, bounds.origin.y, size.width, size.height);
+	
+	// move to new position
+	CGFloat dx = size.width - bounds.size.width;
+	CGFloat dy = size.height - bounds.size.height;
+	CGPoint center = view.center;
+	center.x += dx * 0.5f;
+	center.y += dy * 0.5f;
+	view.center = center;
+	
+	// move subviews if needs
+	enumerator = [view.subviews objectEnumerator];
+	if (UIWaterfallViewDirectionMatch(UIWaterfallViewDirectionMaskBottom, direction)) {
+		while (v = [enumerator nextObject]) {
+			center = v.center;
+			center.y += dy;
+			v.center = center;
+		}
+	} else if (UIWaterfallViewDirectionMatch(UIWaterfallViewDirectionMaskRight, direction)) {
+		while (v = [enumerator nextObject]) {
+			center = v.center;
+			center.x += dx;
+			v.center = center;
+		}
+	}
+	
+	// 3. call delegate
+	if (view.delegate) {
+		[view.delegate waterfallView:view resize:size];
+	} else if ([view.superview isKindOfClass:[UIScrollView class]]) {
+		UIScrollView * scrollView = (UIScrollView *)view.superview;
+		// minimum size
+		frame = view.frame;
+		CGSize s1 = CGSizeMake(frame.origin.x + frame.size.width, frame.origin.y + frame.size.height);
+		// current size
+		CGSize s2 = scrollView.contentSize;
+		scrollView.contentSize = CGSizeMake(s1.width < s2.width ? s2.width : s1.width,
+											s1.height < s2.height ? s2.height : s1.height);
+	}
+}
+
 #pragma mark -
 
 @implementation UIWaterfallView
@@ -297,12 +408,16 @@ NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
 @synthesize spaceHorizontal = _spaceHorizontal;
 @synthesize spaceVertical = _spaceVertical;
 
+@synthesize delegate = _delegate;
+
 - (void) _initializeUIWaterfallView
 {
 	_direction = UIWaterfallViewDirectionTopLeft;
 	
 	_spaceHorizontal = 0.0f;
 	_spaceVertical = 0.0f;
+	
+	_delegate = nil;
 }
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
@@ -461,7 +576,12 @@ NS_INLINE void add_two_joining_points(SCBaseArray * pointPool, CGRect frame,
 	// 3. destroy the pool for joining points
 	SCBaseArrayDestroy(pointPool);
 	
-	return bounds.size;
+	// 4. handle frame
+	if ([view isKindOfClass:[UIWaterfallView class]]) {
+		expand_waterfall_view((UIWaterfallView *)view, direction, spaceHorizontal, spaceVertical, bounds);
+	}
+	
+	return view.bounds.size;
 }
 
 @end
