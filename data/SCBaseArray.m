@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#import "SCLog.h"
 #import "SCBaseArray.h"
 
 SCBaseArray * SCBaseArrayCreate(unsigned long itemSize, unsigned long capacity)
@@ -32,7 +31,7 @@ void SCBaseArrayDestroy(SCBaseArray * array)
 static inline void SCBaseArrayExpand(SCBaseArray * array)
 {
 	array->capacity *= 2;
-	array->items = (SCBaseType *)realloc(array->items, array->capacity);
+	array->items = (SCBaseType *)realloc(array->items, array->capacity * array->itemSize);
 }
 
 static inline void SCBaseArrayAssign(const SCBaseArray * array, SCBaseType * dest, const SCBaseType * src)
@@ -91,11 +90,14 @@ void SCBaseArrayRemove(SCBaseArray * array, unsigned long index)
 		return;
 	}
 	
-	// move the rest data forwards to index
-	SCBaseType * dest = array->items + index * array->itemSize;
-	SCBaseType * src = dest + array->itemSize;
-	unsigned long len = (array->count - index - 1) * array->itemSize;
-	memmove(dest, src, len);
+	unsigned long rest = array->count - (index + 1);
+	if (rest > 0) {
+		// move the rest data forwards to index
+		SCBaseType * dest = array->items + index * array->itemSize;
+		SCBaseType * src = dest + array->itemSize;
+		unsigned long len = rest * array->itemSize;
+		memmove(dest, src, len);
+	}
 	
 	array->count -= 1;
 }
@@ -132,7 +134,6 @@ void SCBaseArraySortInsert(SCBaseArray * array, const SCBaseType * item)
 		}
 	} else {
 		//SCLog(@"ERROR: no compare method");
-		return;
 	}
 	
 	// the item at index is smaller(or equals), insert after it

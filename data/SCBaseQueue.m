@@ -32,8 +32,9 @@ static inline void SCBaseQueueExpand(SCBaseQueue * queue)
 {
 	unsigned long middle = queue->capacity;
 	queue->capacity *= 2;
-	queue->items = (SCBaseType *)realloc(queue->items, queue->capacity);
+	queue->items = (SCBaseType *)realloc(queue->items, queue->capacity * queue->itemSize);
 	
+	// move part 2 of items
 	if (queue->tail < queue ->head) {
 		// cycled queue
 		if (queue->tail == 0) {
@@ -83,9 +84,9 @@ void SCBaseQueueEnqueue(SCBaseQueue * queue, const SCBaseType * item)
 	
 	// append item to tail
 	SCBaseQueueAssign(queue, ptr, item);
+	queue->tail += 1;
 	
 	// circularly
-	queue->tail += 1;
 	if (queue->tail >= queue->capacity) {
 		queue->tail = 0;
 	}
@@ -99,8 +100,10 @@ SCBaseType * SCBaseQueueDequeue(SCBaseQueue * queue)
 	}
 	SCBaseType * ptr = queue->items + queue->head * queue->itemSize;
 	
-	// circularly
+	// remove the head item
 	queue->head += 1;
+	
+	// circularly
 	if (queue->head >= queue->capacity) {
 		queue->head = 0;
 	}

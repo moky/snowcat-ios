@@ -31,7 +31,7 @@ void SCBaseStackDestroy(SCBaseStack * stack)
 static inline void SCBaseStackExpand(SCBaseStack * stack)
 {
 	stack->capacity *= 2;
-	stack->items = (SCBaseType *)realloc(stack->items, stack->capacity);
+	stack->items = (SCBaseType *)realloc(stack->items, stack->capacity * stack->itemSize);
 }
 
 static inline void SCBaseStackAssign(const SCBaseStack * stack, SCBaseType * dest, const SCBaseType * src)
@@ -52,7 +52,7 @@ void SCBaseStackPush(SCBaseStack * stack, const SCBaseType * item)
 	}
 	SCBaseType * ptr = stack->items + stack->count * stack->itemSize;
 	
-	// append item to tail
+	// append item to top
 	SCBaseStackAssign(stack, ptr, item);
 	stack->count += 1;
 }
@@ -62,7 +62,11 @@ SCBaseType * SCBaseStackPop(SCBaseStack * stack)
 	if (stack->count == 0) {
 		return NULL;
 	}
+	
+	// remove the top item
 	stack->count -= 1;
+	
+	// return the top item
 	return stack->items + stack->count * stack->itemSize;
 }
 
@@ -71,5 +75,7 @@ SCBaseType * SCBaseStackTop(const SCBaseStack * stack)
 	if (stack->count == 0) {
 		return NULL;
 	}
+	
+	// return the top item
 	return stack->items + (stack->count - 1) * stack->itemSize;
 }

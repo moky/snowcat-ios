@@ -18,7 +18,6 @@ typedef struct {
 	unsigned long itemSize;
 	SCBaseType * items;
 	
-	unsigned long count;
 	unsigned long head, tail; // offsets for head/tail pointer
 	
 	// assign
