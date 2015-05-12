@@ -124,15 +124,21 @@ UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
 - (void) layoutSubviews
 {
 	[super layoutSubviews];
-	[UIWaterfallView layoutSubviewsInView:self
-								  towards:_direction
-						  spaceHorizontal:_spaceHorizontal
-							spaceVertical:_spaceVertical];
+	[[self class] layoutSubviewsInView:self
+							   towards:_direction
+					   spaceHorizontal:_spaceHorizontal
+						 spaceVertical:_spaceVertical];
 }
 
 - (void) didAddSubview:(UIView *)subview
 {
 	[super didAddSubview:subview];
+	[self setNeedsLayout];
+}
+
+- (void) willRemoveSubview:(UIView *)subview
+{
+	[super willRemoveSubview:subview];
 	[self setNeedsLayout];
 }
 

@@ -20,6 +20,7 @@
 //  common
 //
 #import "scMacros.h"
+#import "SCTime.h"
 #import "SCLog.h"
 //#import "SCMath.h"
 #import "SCClient.h"
