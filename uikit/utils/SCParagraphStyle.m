@@ -7,6 +7,7 @@
 //
 
 #import "scMacros.h"
+#import "SCText.h"
 #import "SCParagraphStyle.h"
 
 //typedef NS_ENUM(NSInteger, NSLineBreakMode) {		/* What to do with long lines */
@@ -37,3 +38,82 @@ NSLineBreakMode NSLineBreakModeFromString(NSString * string)
 	
 	return [string integerValue];
 }
+
+@implementation SCParagraphStyle
+
+- (instancetype) initWithDictionary:(NSDictionary *)dict
+{
+	self = [self init];
+	if (self) {
+		[self setAttributes:dict];
+	}
+	return self;
+}
+
+// create:
+SC_IMPLEMENT_CREATE_FUNCTIONS()
+
+// setAttributes:
+SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
+
+//@property(readwrite) CGFloat lineSpacing;
+//@property(readwrite) CGFloat paragraphSpacing;
+//@property(readwrite) NSTextAlignment alignment;
+//@property(readwrite) CGFloat firstLineHeadIndent;
+//@property(readwrite) CGFloat headIndent;
+//@property(readwrite) CGFloat tailIndent;
+//@property(readwrite) NSLineBreakMode lineBreakMode;
+//@property(readwrite) CGFloat minimumLineHeight;
+//@property(readwrite) CGFloat maximumLineHeight;
+//@property(readwrite) NSWritingDirection baseWritingDirection;
+//@property(readwrite) CGFloat lineHeightMultiple;
+//@property(readwrite) CGFloat paragraphSpacingBefore;
+//@property(readwrite) float hyphenationFactor;
+//@property(readwrite,copy,NS_NONATOMIC_IOSONLY) NSArray *tabStops NS_AVAILABLE_IOS(7_0);
+//@property(readwrite,NS_NONATOMIC_IOSONLY) CGFloat defaultTabInterval NS_AVAILABLE_IOS(7_0);
++ (BOOL) setAttributes:(NSDictionary *)dict to:(NSMutableParagraphStyle *)paragraphStyle
+{
+	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
+	
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, lineSpacing);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, paragraphSpacing);
+	
+	// alignment
+	NSString * alignment = [dict objectForKey:@"alignment"];
+	if (alignment) {
+		paragraphStyle.alignment = NSTextAlignmentFromString(alignment);
+	}
+	
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, firstLineHeadIndent);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, headIndent);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, tailIndent);
+	
+	// lineBreakMode
+	NSString * lineBreakMode = [dict objectForKey:@"lineBreakMode"];
+	if (lineBreakMode) {
+		paragraphStyle.lineBreakMode = NSLineBreakModeFromString(lineBreakMode);
+	}
+	
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, minimumLineHeight);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, maximumLineHeight);
+	
+	// baseWritingDirection
+	NSString * baseWritingDirection = [dict objectForKey:@"baseWritingDirection"];
+	if (baseWritingDirection) {
+		paragraphStyle.baseWritingDirection = NSWritingDirectionFromString(baseWritingDirection);
+	}
+	
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, lineHeightMultiple);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, paragraphSpacingBefore);
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, hyphenationFactor);
+	
+	// tabStops
+	
+#ifdef __IPHONE_7_0
+	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, defaultTabInterval);
+#endif
+	
+	return YES;
+}
+
+@end

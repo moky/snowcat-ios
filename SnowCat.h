@@ -71,7 +71,6 @@
 #import "SCUIKit.h"
 #import "SCGeometry.h"
 #import "SCNib.h"
-#import "SCAttributedString+UIKit.h"
 #import "SCColor.h"
 #import "SCFont.h"
 #import "SCImage.h"
@@ -182,6 +181,9 @@
 #import "SCText.h"
 #import "SCParagraphStyle.h"
 #import "SCDataDetectors.h"
+#import "SCAttributedString+UIKit.h"
+#import "SCShadow.h"
+#import "SCTextAttachment.h"
 //
 //  uikit/actions
 //

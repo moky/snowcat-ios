@@ -11,7 +11,6 @@
 #import "SCAttributedString.h"
 
 UIKIT_EXTERN NSString * const NSTextEffectStyleFromString(NSString * string);
-UIKIT_EXTERN NSArray * NSTextWritingDirectionFromString(NSString * string);
 
 UIKIT_EXTERN NSString * const NSAttributeNameFromString(NSString * string);
 UIKIT_EXTERN id NSAttributeFromObject(id obj, NSString * const name);

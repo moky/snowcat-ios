@@ -7,6 +7,9 @@
 //
 
 #import "scMacros.h"
+#import "SCParagraphStyle.h"
+#import "SCShadow.h"
+#import "SCTextAttachment.h"
 #import "SCURL.h"
 #import "SCFont.h"
 #import "SCColor.h"
@@ -15,16 +18,16 @@
 NSString * const NSTextEffectStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-	SC_SWITCH_CASE(string, @"Letterpress")
-	return NSTextEffectLetterpressStyle;
-	SC_SWITCH_DEFAULT
+		SC_SWITCH_CASE(string, @"Letterpress")
+			return NSTextEffectLetterpressStyle;
+		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
 	
 	// only this effect (iOS 7.0)
 	return NSTextEffectLetterpressStyle;
 }
 
-NSArray * NSTextWritingDirectionFromString(NSString * string)
+NSArray * NSTextWritingDirectionsFromString(NSString * string)
 {
 	NSInteger direction = 0;
 	
@@ -141,44 +144,20 @@ id NSAttributeFromObject(id obj, NSString * const name)
 		SC_SWITCH_CASE(name, @"Font")
 			return [SCFont create:obj];
 		SC_SWITCH_CASE(name, @"Paragraph") // ParagraphStyle
-			// TODO: implement SCParagraphStyle
-			return [NSParagraphStyle defaultParagraphStyle];
-		SC_SWITCH_CASE(name, @"Ligature")
-			return [NSNumber numberWithInteger:[obj integerValue]];
-		SC_SWITCH_CASE(name, @"Kern")
-			return [NSNumber numberWithInteger:[obj integerValue]];
-		SC_SWITCH_CASE(name, @"StrokeWidth")
-			return [NSNumber numberWithFloat:[obj floatValue]];
+			return [SCParagraphStyle create:obj];
 		SC_SWITCH_CASE(name, @"Shadow")
-			// TODO: implement SCShadow
-			return [[[NSShadow alloc] init] autorelease];
+			return [SCShadow create:obj];
 		SC_SWITCH_CASE(name, @"TextEffect")
 			return NSTextEffectStyleFromString(obj);
 		SC_SWITCH_CASE(name, @"Attachment")
-			// TODO: implement SCTextAttachment
-			return [[[NSTextAttachment alloc] init] autorelease];
+			return [SCTextAttachment create:obj];
 		SC_SWITCH_CASE(name, @"Link")
 			return [[[SCURL alloc] initWithString:obj isDirectory:NO] autorelease];
-		SC_SWITCH_CASE(name, @"BaselineOffset")
-			return [NSNumber numberWithFloat:[obj floatValue]];
-		SC_SWITCH_CASE(name, @"Obliqueness")
-			return [NSNumber numberWithFloat:[obj floatValue]];
-		SC_SWITCH_CASE(name, @"Expansion")
-			return [NSNumber numberWithFloat:[obj floatValue]];
 		SC_SWITCH_CASE(name, @"WritingDirection")
-			return NSTextWritingDirectionFromString(obj);
-		SC_SWITCH_CASE(name, @"VerticalGlyphForm")
-			return [NSNumber numberWithInteger:[obj integerValue]];
+			return NSTextWritingDirectionsFromString(obj);
 		//----------------------------------------------------------------------
 		SC_SWITCH_CASE(name, @"Color")         // XxxxColor
 			return [SCColor create:obj];
-		//----------------------------------------------------------------------
-		SC_SWITCH_CASE(name, @"VerticalForm")  // VerticalGlyphForm
-			return [NSNumber numberWithInteger:[obj integerValue]];
-		SC_SWITCH_CASE(name, @"Strikethrough") // StrikethroughStyle
-			return [NSNumber numberWithInteger:[obj integerValue]];
-		SC_SWITCH_CASE(name, @"Underline")     // UnderlineStyle
-			return [NSNumber numberWithInteger:[obj integerValue]];
 		//----------------------------------------------------------------------
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -196,19 +175,19 @@ id NSAttributeFromObject(id obj, NSString * const name)
 	
 	NSEnumerator * enumerator = [dict keyEnumerator];
 	id key;
+	id object;
+	
+	id name;
 	id value;
 	
-	id aName;
-	id aValue;
-	
 	while (key = [enumerator nextObject]) {
-		value = [dict objectForKey:key];
+		object = [dict objectForKey:key];
 		
-		aName = NSAttributeNameFromString(key);
-		aValue = NSAttributeFromObject(value, key);
+		name = NSAttributeNameFromString(key);
+		value = NSAttributeFromObject(object, key);
 		
-		if (aName && aValue) {
-			[mDict setObject:aValue forKey:aName];
+		if (name && value) {
+			[mDict setObject:value forKey:name];
 		}
 	}
 	

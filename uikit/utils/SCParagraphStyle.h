@@ -9,3 +9,7 @@
 #import "SCUIKit.h"
 
 UIKIT_EXTERN NSLineBreakMode NSLineBreakModeFromString(NSString * string);
+
+@interface SCParagraphStyle : NSMutableParagraphStyle<SCObject>
+
+@end
