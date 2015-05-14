@@ -21,7 +21,7 @@
 UIDatePickerMode UIDatePickerModeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Timer")
+		SC_SWITCH_CASE(string, @"Timer") // CountDownTimer
 			return UIDatePickerModeCountDownTimer;
 		SC_SWITCH_CASE(string, @"DateAndTime")
 			return UIDatePickerModeDateAndTime;

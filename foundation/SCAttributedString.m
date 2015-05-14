@@ -7,6 +7,7 @@
 //
 
 #import "SCLog.h"
+#import "SCAttributedString+UIKit.h"
 #import "SCAttributedString.h"
 
 @implementation SCAttributedString
@@ -32,6 +33,7 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	} else if ([dict isKindOfClass:[NSDictionary class]]) {
 		string = [dict objectForKey:@"string"];
 		attributes = [dict objectForKey:@"attributes"];
+		attributes = [SCAttributedString attributesWithDictionary:attributes];
 	}
 	NSAssert([string isKindOfClass:[NSString class]], @"error: %@", dict);
 	

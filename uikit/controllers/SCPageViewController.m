@@ -76,7 +76,7 @@ UIPageViewControllerNavigationDirection UIPageViewControllerNavigationDirectionF
 UIPageViewControllerTransitionStyle UIPageViewControllerTransitionStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Page")
+		SC_SWITCH_CASE(string, @"Page") // PageCurl
 			return UIPageViewControllerTransitionStylePageCurl;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

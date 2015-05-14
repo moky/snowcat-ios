@@ -23,11 +23,11 @@
 UITabBarItemPositioning UITabBarItemPositioningFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Auto")
+		SC_SWITCH_CASE(string, @"Auto")   // Automatic
 			return UITabBarItemPositioningAutomatic;
 		SC_SWITCH_CASE(string, @"Fill")
 			return UITabBarItemPositioningFill;
-		SC_SWITCH_CASE(string, @"Center")
+		SC_SWITCH_CASE(string, @"Center") // Centered
 			return UITabBarItemPositioningCentered;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

@@ -24,11 +24,11 @@
 UIActionSheetStyle UIActionSheetStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Auto")
+		SC_SWITCH_CASE(string, @"Auto")        // Automatic
 			return UIActionSheetStyleAutomatic;
-		SC_SWITCH_CASE(string, @"Translucent")
+		SC_SWITCH_CASE(string, @"Translucent") // BlackTranslucent
 			return UIActionSheetStyleBlackTranslucent;
-		SC_SWITCH_CASE(string, @"Opaque")
+		SC_SWITCH_CASE(string, @"Opaque")      // BlackOpaque
 			return UIActionSheetStyleBlackOpaque;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

@@ -24,11 +24,11 @@
 UIAlertViewStyle UIAlertViewStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Secure")
+		SC_SWITCH_CASE(string, @"Secure") // SecureTextInput
 			return UIAlertViewStyleSecureTextInput;
-		SC_SWITCH_CASE(string, @"Plain")
+		SC_SWITCH_CASE(string, @"Plain")  // PlainTextInput
 			return UIAlertViewStylePlainTextInput;
-		SC_SWITCH_CASE(string, @"Login")
+		SC_SWITCH_CASE(string, @"Login")  // LoginAndPasswordInput
 			return UIAlertViewStyleLoginAndPasswordInput;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

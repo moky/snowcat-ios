@@ -43,15 +43,15 @@ CAMediaTimingFunction * CAMediaTimingFunctionFromString(NSString * string)
 NSString * const CAFillModeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Forward")
+		SC_SWITCH_CASE(string, @"Forward")  // Forwards
 			return kCAFillModeForwards;
-		SC_SWITCH_CASE(string, @"Backward")
+		SC_SWITCH_CASE(string, @"Backward") // Backwards
 			return kCAFillModeBackwards;
 		SC_SWITCH_CASE(string, @"Both")
 			return kCAFillModeBoth;
-		SC_SWITCH_CASE(string, @"Remove")
+		SC_SWITCH_CASE(string, @"Remove")   // Removed
 			return kCAFillModeRemoved;
-//		SC_SWITCH_CASE(string, @"Froze")
+//		SC_SWITCH_CASE(string, @"Froze")    // Frozen
 //			return kCAFillModeFrozen;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -73,7 +73,7 @@ NSString * const CATransitionTypeFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Fade")
 			return kCATransitionFade;
-		SC_SWITCH_CASE(string, @"Move")
+		SC_SWITCH_CASE(string, @"Move") // MoveIn
 			return kCATransitionMoveIn;
 		SC_SWITCH_CASE(string, @"Push")
 			return kCATransitionPush;
@@ -146,13 +146,13 @@ NSString * const CATransitionTypeFromString(NSString * string)
 NSString * const CATransitionSubtypeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Right")
+		SC_SWITCH_CASE(string, @"Right")  // FromRight
 			return kCATransitionFromRight;
-		SC_SWITCH_CASE(string, @"Left")
+		SC_SWITCH_CASE(string, @"Left")   // FromLeft
 			return kCATransitionFromLeft;
-		SC_SWITCH_CASE(string, @"Top")
+		SC_SWITCH_CASE(string, @"Top")    // FromTop
 			return kCATransitionFromTop;
-		SC_SWITCH_CASE(string, @"Bottom")
+		SC_SWITCH_CASE(string, @"Bottom") // FromBottom
 			return kCATransitionFromBottom;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

@@ -28,9 +28,9 @@ UISearchBarIcon UISearchBarIconFromString(NSString * string)
 			return UISearchBarIconSearch;
 		SC_SWITCH_CASE(string, @"Clear")
 			return UISearchBarIconClear;
-		SC_SWITCH_CASE(string, @"Book")
+		SC_SWITCH_CASE(string, @"Book")    // Bookmark
 			return UISearchBarIconBookmark;
-		SC_SWITCH_CASE(string, @"Results")
+		SC_SWITCH_CASE(string, @"Results") // ResultsList
 			return UISearchBarIconResultsList;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

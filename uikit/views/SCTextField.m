@@ -30,9 +30,9 @@ UITextBorderStyle UITextBorderStyleFromString(NSString * string)
 			return UITextBorderStyleNone;
 		SC_SWITCH_CASE(string, @"Line")
 			return UITextBorderStyleLine;
-		SC_SWITCH_CASE(string, @"Bez")
+		SC_SWITCH_CASE(string, @"Bez")   // Bezel
 			return UITextBorderStyleBezel;
-		SC_SWITCH_CASE(string, @"Round")
+		SC_SWITCH_CASE(string, @"Round") // RoundedRect
 			return UITextBorderStyleRoundedRect;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

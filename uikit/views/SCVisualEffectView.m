@@ -22,7 +22,7 @@
 UIBlurEffectStyle UIBlurEffectStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Extra")
+		SC_SWITCH_CASE(string, @"Extra") // ExtraLight
 			return UIBlurEffectStyleExtraLight;
 		SC_SWITCH_CASE(string, @"Light")
 			return UIBlurEffectStyleLight;

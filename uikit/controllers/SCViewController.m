@@ -31,14 +31,14 @@
 UIModalTransitionStyle UIModalTransitionStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Vertical")
+		SC_SWITCH_CASE(string, @"Vertical")   // CoverVertical
 			return UIModalTransitionStyleCoverVertical;
-		SC_SWITCH_CASE(string, @"Horizontal")
+		SC_SWITCH_CASE(string, @"Horizontal") // FlipHorizontal
 			return UIModalTransitionStyleFlipHorizontal;
-		SC_SWITCH_CASE(string, @"Cross")
+		SC_SWITCH_CASE(string, @"Cross")      // CrossDissolve
 			return UIModalTransitionStyleCrossDissolve;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-		SC_SWITCH_CASE(string, @"Curl")
+		SC_SWITCH_CASE(string, @"Curl")       // PartialCurl
 			return UIModalTransitionStylePartialCurl;
 #endif
 		SC_SWITCH_DEFAULT
@@ -61,11 +61,11 @@ UIModalPresentationStyle UIModalPresentationStyleFromString(NSString * string)
 		SC_SWITCH_CASE(string, @"FullScreen")
 			return UIModalPresentationFullScreen;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-		SC_SWITCH_CASE(string, @"Page")
+		SC_SWITCH_CASE(string, @"Page")    // PageSheet
 			return UIModalPresentationPageSheet;
-		SC_SWITCH_CASE(string, @"Form")
+		SC_SWITCH_CASE(string, @"Form")    // FormSheet
 			return UIModalPresentationFormSheet;
-		SC_SWITCH_CASE(string, @"Current")
+		SC_SWITCH_CASE(string, @"Context") // CurrentContext
 			return UIModalPresentationCurrentContext;
 #endif
 		SC_SWITCH_DEFAULT

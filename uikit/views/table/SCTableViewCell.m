@@ -30,7 +30,7 @@ UITableViewCellStyle UITableViewCellStyleFromString(NSString * string)
 			return UITableViewCellStyleValue1;
 		SC_SWITCH_CASE(string, @"Value2")
 			return UITableViewCellStyleValue2;
-		SC_SWITCH_CASE(string, @"Sub")
+		SC_SWITCH_CASE(string, @"Sub") // Subtitle
 			return UITableViewCellStyleSubtitle;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -46,9 +46,9 @@ UITableViewCellStyle UITableViewCellStyleFromString(NSString * string)
 UITableViewCellSeparatorStyle UITableViewCellSeparatorStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Etched")
+		SC_SWITCH_CASE(string, @"Etched") // SingleLineEtched
 			return UITableViewCellSeparatorStyleSingleLineEtched;
-		SC_SWITCH_CASE(string, @"Single")
+		SC_SWITCH_CASE(string, @"Single") // SingleLine
 			return UITableViewCellSeparatorStyleSingleLine;
 		SC_SWITCH_CASE(string, @"None")
 			return UITableViewCellSeparatorStyleNone;
@@ -107,11 +107,11 @@ UITableViewCellEditingStyle UITableViewCellEditingStyleFromString(NSString * str
 UITableViewCellAccessoryType UITableViewCellAccessoryTypeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Checkmark")
+		SC_SWITCH_CASE(string, @"Check")     // Checkmark
 			return UITableViewCellAccessoryCheckmark;
-		SC_SWITCH_CASE(string, @"Detail")
+		SC_SWITCH_CASE(string, @"Detail")    // DetailDisclosureButton
 			return UITableViewCellAccessoryDetailDisclosureButton;
-		SC_SWITCH_CASE(string, @"Indicator")
+		SC_SWITCH_CASE(string, @"Indicator") // DisclosureIndicator
 			return UITableViewCellAccessoryDisclosureIndicator;
 		SC_SWITCH_CASE(string, @"None")
 			return UITableViewCellAccessoryNone;
@@ -131,9 +131,9 @@ UITableViewCellStateMask UITableViewCellStateMaskFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Default")
 			return UITableViewCellStateDefaultMask;
-		SC_SWITCH_CASE(string, @"Edit")
+		SC_SWITCH_CASE(string, @"Edit")   // ShowingEditControl
 			return UITableViewCellStateShowingEditControlMask;
-		SC_SWITCH_CASE(string, @"Delete")
+		SC_SWITCH_CASE(string, @"Delete") // ShowingDeleteConfirmation
 			return UITableViewCellStateShowingDeleteConfirmationMask;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

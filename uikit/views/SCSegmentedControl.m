@@ -25,11 +25,11 @@ UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Plain")
 			return UISegmentedControlStylePlain;
-		SC_SWITCH_CASE(string, @"Border")
+		SC_SWITCH_CASE(string, @"Border") // Bordered
 			return UISegmentedControlStyleBordered;
 		SC_SWITCH_CASE(string, @"Bar")
 			return UISegmentedControlStyleBar;
-		SC_SWITCH_CASE(string, @"Bez")
+		SC_SWITCH_CASE(string, @"Bez")    // Bezeled
 			return UISegmentedControlStyleBezeled;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -51,7 +51,7 @@ UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string)
 UISegmentedControlSegment UISegmentedControlSegmentFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"NoSegment")
+		SC_SWITCH_CASE(string, @"No") // NoSegment
 			return UISegmentedControlNoSegment;
 		SC_SWITCH_CASE(string, @"Any")
 			return UISegmentedControlSegmentAny;

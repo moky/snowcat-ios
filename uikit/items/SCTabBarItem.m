@@ -29,27 +29,27 @@ UITabBarSystemItem UITabBarSystemItemFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"More")
 			return UITabBarSystemItemMore;
-		SC_SWITCH_CASE(string, @"Favor")
+		SC_SWITCH_CASE(string, @"Favor")    // Favorites
 			return UITabBarSystemItemFavorites;
-		SC_SWITCH_CASE(string, @"Feature")
+		SC_SWITCH_CASE(string, @"Feature")  // Featured
 			return UITabBarSystemItemFeatured;
-		SC_SWITCH_CASE(string, @"Top")
+		SC_SWITCH_CASE(string, @"Top")      // TopRated
 			return UITabBarSystemItemTopRated;
 		SC_SWITCH_CASE(string, @"MostRecent")
 			return UITabBarSystemItemMostRecent;
-		SC_SWITCH_CASE(string, @"Recent")
+		SC_SWITCH_CASE(string, @"Recent")   // Recents
 			return UITabBarSystemItemRecents;
-		SC_SWITCH_CASE(string, @"Contact")
+		SC_SWITCH_CASE(string, @"Contact")  // Contacts
 			return UITabBarSystemItemContacts;
 		SC_SWITCH_CASE(string, @"History")
 			return UITabBarSystemItemHistory;
-		SC_SWITCH_CASE(string, @"Book")
+		SC_SWITCH_CASE(string, @"Book")     // Bookmarks
 			return UITabBarSystemItemBookmarks;
 		SC_SWITCH_CASE(string, @"Search")
 			return UITabBarSystemItemSearch;
-		SC_SWITCH_CASE(string, @"Download")
+		SC_SWITCH_CASE(string, @"Download") // Downloads
 			return UITabBarSystemItemDownloads;
-		SC_SWITCH_CASE(string, @"View")
+		SC_SWITCH_CASE(string, @"View")     // MostViewed
 			return UITabBarSystemItemMostViewed;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

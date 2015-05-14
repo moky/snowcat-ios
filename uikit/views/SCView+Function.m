@@ -70,11 +70,11 @@ UIViewContentMode UIViewContentModeFromString(NSString * string)
 			return UIViewContentModeCenter;
 		SC_SWITCH_CASE(string, @"Redraw")
 			return UIViewContentModeRedraw;
-		SC_SWITCH_CASE(string, @"AspectFill")
+		SC_SWITCH_CASE(string, @"AspectFill") // ScaleAspectFill
 			return UIViewContentModeScaleAspectFill;
-		SC_SWITCH_CASE(string, @"AspectFit")
+		SC_SWITCH_CASE(string, @"AspectFit")  // ScaleAspectFit
 			return UIViewContentModeScaleAspectFit;
-		SC_SWITCH_CASE(string, @"ToFill")
+		SC_SWITCH_CASE(string, @"ToFill")     // ScaleToFill
 			return UIViewContentModeScaleToFill;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

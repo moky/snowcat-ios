@@ -11,6 +11,7 @@
 #import "SCParagraphStyle.h"
 #import "SCText.h"
 #import "SCStringDrawing.h"
+#import "SCAttributedString.h"
 #import "SCColor.h"
 #import "SCFont.h"
 #import "SCGeometry.h"
@@ -124,6 +125,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	// attributedText
+	NSDictionary * attributedText = [dict objectForKey:@"attributedText"];
+	if (attributedText) {
+		SCAttributedString * as = [SCAttributedString create:attributedText autorelease:NO];
+		NSAssert([as isKindOfClass:[NSAttributedString class]], @"attributedText's definition error: %@", attributedText);
+		label.attributedText = as;
+		[as release];
+	}
 	
 	// highlightedTextColor
 	NSDictionary * highlightedTextColor = [dict objectForKey:@"highlightedTextColor"];

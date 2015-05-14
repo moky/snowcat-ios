@@ -17,7 +17,7 @@
 UIBaselineAdjustment UIBaselineAdjustmentFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Center")
+		SC_SWITCH_CASE(string, @"Center") // AlignCenters
 			return UIBaselineAdjustmentAlignCenters;
 		SC_SWITCH_CASE(string, @"None")
 			return UIBaselineAdjustmentNone;

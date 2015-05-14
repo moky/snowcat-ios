@@ -35,13 +35,13 @@ UICollectionViewScrollPosition UICollectionViewScrollPositionFromString(NSString
 			return UICollectionViewScrollPositionNone;
 		SC_SWITCH_CASE(string, @"Top")
 			return UICollectionViewScrollPositionTop;
-		SC_SWITCH_CASE(string, @"Vertical")
+		SC_SWITCH_CASE(string, @"Vertical")   // CenteredVertically
 			return UICollectionViewScrollPositionCenteredVertically;
 		SC_SWITCH_CASE(string, @"Bottom")
 			return UICollectionViewScrollPositionBottom;
 		SC_SWITCH_CASE(string, @"Left")
 			return UICollectionViewScrollPositionLeft;
-		SC_SWITCH_CASE(string, @"Horizontal")
+		SC_SWITCH_CASE(string, @"Horizontal") // CenteredHorizontally
 			return UICollectionViewScrollPositionCenteredHorizontally;
 		SC_SWITCH_CASE(string, @"Right")
 			return UICollectionViewScrollPositionRight;

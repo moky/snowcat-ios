@@ -66,16 +66,17 @@
 //
 //  uikit
 //
+#import "SCApplication.h"
+#import "SCDevice.h"
 #import "SCUIKit.h"
 #import "SCGeometry.h"
 #import "SCNib.h"
+#import "SCAttributedString+UIKit.h"
 #import "SCColor.h"
 #import "SCFont.h"
 #import "SCImage.h"
 #import "SCResponder.h"
 #import "SCWindow.h"
-#import "SCApplication.h"
-#import "SCDevice.h"
 //
 //  uikit/items
 //

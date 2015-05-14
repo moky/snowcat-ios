@@ -7,6 +7,7 @@
 //
 
 #import "SCLog.h"
+#import "SCAttributedString+UIKit.h"
 #import "SCImage.h"
 #import "SCBarItem.h"
 
@@ -25,6 +26,21 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
+
++ (BOOL) setAttributes:(NSDictionary *)dict to:(UIBarItem *)barItem forState:(UIControlState)state
+{
+	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
+	
+	// titleTextAttributes
+	NSDictionary * titleTextAttributes = [dict objectForKey:@"titleTextAttributes"];
+	if (titleTextAttributes) {
+		NSDictionary * attr = [SCAttributedString attributesWithDictionary:titleTextAttributes];
+		NSAssert([attr isKindOfClass:[NSDictionary class]], @"error: %@", titleTextAttributes);
+		[barItem setTitleTextAttributes:attr forState:state];
+	}
+	
+	return YES;
+}
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIBarItem *)barItem
 {
@@ -75,6 +91,35 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	id tag = [dict objectForKey:@"tag"];
 	if (tag) {
 		barItem.tag = [tag integerValue];
+	}
+	
+	// control states
+	NSDictionary * states = [dict objectForKey:@"states"];
+	{
+		// normal
+		NSDictionary * normal = [states objectForKey:@"normal"];
+		if (!normal) {
+			normal = dict; // default values
+		}
+		[self setAttributes:normal to:barItem forState:UIControlStateNormal];
+		
+		// highlighted
+		NSDictionary * highlighted = [states objectForKey:@"highlighted"];
+		if (highlighted) {
+			[self setAttributes:highlighted to:barItem forState:UIControlStateHighlighted];
+		}
+		
+		// disabled
+		NSDictionary * disabled = [states objectForKey:@"disabled"];
+		if (disabled) {
+			[self setAttributes:disabled to:barItem forState:UIControlStateDisabled];
+		}
+		
+		// selected
+		NSDictionary * selected = [states objectForKey:@"selected"];
+		if (selected) {
+			[self setAttributes:selected to:barItem forState:UIControlStateSelected];
+		}
 	}
 	
 	return YES;

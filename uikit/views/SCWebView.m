@@ -29,15 +29,15 @@
 UIWebViewNavigationType UIWebViewNavigationTypeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"LinkClicked")
+		SC_SWITCH_CASE(string, @"Click")    // LinkClicked
 			return UIWebViewNavigationTypeLinkClicked;
-		SC_SWITCH_CASE(string, @"FormSubmitted")
+		SC_SWITCH_CASE(string, @"Submit")   // FormSubmitted
 			return UIWebViewNavigationTypeFormSubmitted;
 		SC_SWITCH_CASE(string, @"BackForward")
 			return UIWebViewNavigationTypeBackForward;
 		SC_SWITCH_CASE(string, @"Reload")
 			return UIWebViewNavigationTypeReload;
-		SC_SWITCH_CASE(string, @"FormResubmitted")
+		SC_SWITCH_CASE(string, @"Resubmit") // FormResubmitted
 			return UIWebViewNavigationTypeFormResubmitted;
 		SC_SWITCH_CASE(string, @"Other")
 			return UIWebViewNavigationTypeOther;

@@ -22,7 +22,7 @@
 UIAlertControllerStyle UIAlertControllerStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Sheet")
+		SC_SWITCH_CASE(string, @"Sheet") // ActionSheet
 			return UIAlertControllerStyleActionSheet;
 		SC_SWITCH_CASE(string, @"Alert")
 			return UIAlertControllerStyleAlert;

@@ -112,7 +112,7 @@
 		id backgroundColor = [dict objectForKey:@"backgroundColor"];
 		if (!backgroundColor) {
 			SC_SWITCH_BEGIN(style)
-				SC_SWITCH_CASE(style, @"Extra")
+				SC_SWITCH_CASE(style, @"Extra") // ExtraLight
 					self.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.888f];
 					break;
 				SC_SWITCH_CASE(style, @"Light")

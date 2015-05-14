@@ -28,15 +28,15 @@ UIButtonType UIButtonTypeFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Custom")
 			return UIButtonTypeCustom;
-		SC_SWITCH_CASE(string, @"Round")
+		SC_SWITCH_CASE(string, @"Round")   // RoundedRect
 			return UIButtonTypeRoundedRect;
-		SC_SWITCH_CASE(string, @"Detail")
+		SC_SWITCH_CASE(string, @"Detail")  // DetailDisclosure
 			return UIButtonTypeDetailDisclosure;
-		SC_SWITCH_CASE(string, @"Light")
+		SC_SWITCH_CASE(string, @"Light")   // InfoLight
 			return UIButtonTypeInfoLight;
-		SC_SWITCH_CASE(string, @"Dark")
+		SC_SWITCH_CASE(string, @"Dark")    // InfoDark
 			return UIButtonTypeInfoDark;
-		SC_SWITCH_CASE(string, @"Contact")
+		SC_SWITCH_CASE(string, @"Contact") // ContactAdd
 			return UIButtonTypeContactAdd;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

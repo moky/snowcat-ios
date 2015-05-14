@@ -20,7 +20,7 @@ UIBarMetrics UIBarMetricsFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Default")
 			return UIBarMetricsDefault;
-		SC_SWITCH_CASE(string, @"Phone")
+		SC_SWITCH_CASE(string, @"Phone") // LandscapePhone
 			return UIBarMetricsLandscapePhone;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -91,9 +91,9 @@ UIBarButtonSystemItem UIBarButtonSystemItemFromString(NSString * string)
 			return UIBarButtonSystemItemSave;
 		SC_SWITCH_CASE(string, @"Add")
 			return UIBarButtonSystemItemAdd;
-		SC_SWITCH_CASE(string, @"Flexible")
+		SC_SWITCH_CASE(string, @"Flexible") // FlexibleSpace
 			return UIBarButtonSystemItemFlexibleSpace;
-		SC_SWITCH_CASE(string, @"Fixed")
+		SC_SWITCH_CASE(string, @"Fixed")    // FixedSpace
 			return UIBarButtonSystemItemFixedSpace;
 		SC_SWITCH_CASE(string, @"Compose")
 			return UIBarButtonSystemItemCompose;
@@ -103,7 +103,7 @@ UIBarButtonSystemItem UIBarButtonSystemItemFromString(NSString * string)
 			return UIBarButtonSystemItemAction;
 		SC_SWITCH_CASE(string, @"Organize")
 			return UIBarButtonSystemItemOrganize;
-		SC_SWITCH_CASE(string, @"Book")
+		SC_SWITCH_CASE(string, @"Book")     // Bookmarks
 			return UIBarButtonSystemItemBookmarks;
 		SC_SWITCH_CASE(string, @"Search")
 			return UIBarButtonSystemItemSearch;
@@ -130,7 +130,7 @@ UIBarButtonSystemItem UIBarButtonSystemItemFromString(NSString * string)
 			return UIBarButtonSystemItemRedo;
 #endif
 #if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-		SC_SWITCH_CASE(string, @"Page")
+		SC_SWITCH_CASE(string, @"Page")     // PageCurl
 			return UIBarButtonSystemItemPageCurl;
 #endif
 		SC_SWITCH_DEFAULT

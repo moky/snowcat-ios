@@ -18,6 +18,8 @@
 UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"None")
+			return UISegmentedButtonAutoLayoutNone;
 		SC_SWITCH_CASE(string, @"Horizontal")
 			return UISegmentedButtonAutoLayoutDirectionHorizontal;
 		SC_SWITCH_CASE(string, @"Vertical")

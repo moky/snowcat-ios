@@ -20,7 +20,7 @@
 UIActivityIndicatorViewStyle UIActivityIndicatorViewStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Large")
+		SC_SWITCH_CASE(string, @"Large") // WhiteLarge
 			return UIActivityIndicatorViewStyleWhiteLarge;
 		SC_SWITCH_CASE(string, @"White")
 			return UIActivityIndicatorViewStyleWhite;

@@ -35,9 +35,9 @@ NSString * CAEmitterShapeFromString(NSString * string)
 			return kCAEmitterLayerPoint;
 		SC_SWITCH_CASE(string, @"Line");
 			return kCAEmitterLayerLine;
-		SC_SWITCH_CASE(string, @"Rect");
+		SC_SWITCH_CASE(string, @"Rect"); // Rectangle
 			return kCAEmitterLayerRectangle;
-		SC_SWITCH_CASE(string, @"Cub");
+		SC_SWITCH_CASE(string, @"Cub");  // Cuboid
 			return kCAEmitterLayerCuboid;
 		SC_SWITCH_CASE(string, @"Circle");
 			return kCAEmitterLayerCircle;
@@ -62,7 +62,7 @@ NSString * CAEmitterShapeFromString(NSString * string)
 NSString * CAEmitterModeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Point");
+		SC_SWITCH_CASE(string, @"Point"); // Points
 			return kCAEmitterLayerPoints;
 		SC_SWITCH_CASE(string, @"Outline");
 			return kCAEmitterLayerOutline;
@@ -91,15 +91,15 @@ NSString * CAEmitterModeFromString(NSString * string)
 NSString * CARenderModeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Unordered");
+		SC_SWITCH_CASE(string, @"Unorder"); // Unordered
 			return kCAEmitterLayerUnordered;
-		SC_SWITCH_CASE(string, @"First");
+		SC_SWITCH_CASE(string, @"First");   // OldestFirst
 			return kCAEmitterLayerOldestFirst;
-		SC_SWITCH_CASE(string, @"Last");
+		SC_SWITCH_CASE(string, @"Last");    // OldestLast
 			return kCAEmitterLayerOldestLast;
-		SC_SWITCH_CASE(string, @"BackToFront");
+		SC_SWITCH_CASE(string, @"Back");    // BackToFront
 			return kCAEmitterLayerBackToFront;
-		SC_SWITCH_CASE(string, @"Additive");
+		SC_SWITCH_CASE(string, @"Add");     // Additive
 			return kCAEmitterLayerAdditive;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

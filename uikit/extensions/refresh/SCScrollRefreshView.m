@@ -191,7 +191,7 @@
 		_loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 		[trayView addSubview:_loadingIndicator];
 		
-		if (self.direction == UIScrollRefreshControlDirectionTop || UIScrollRefreshControlDirectionBottom) {
+		if (self.direction == UIScrollRefreshControlDirectionTop || self.direction == UIScrollRefreshControlDirectionBottom) {
 			// scroll vertical
 			_loadingIndicator.center = CGPointMake(frame.size.height * 0.5f, frame.size.height * 0.5f);
 		} else {

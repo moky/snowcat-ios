@@ -18,7 +18,7 @@
 UITextAutocapitalizationType UITextAutocapitalizationTypeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"All")
+		SC_SWITCH_CASE(string, @"All") // AllCharacters
 			return UITextAutocapitalizationTypeAllCharacters;
 		SC_SWITCH_CASE(string, @"Sentences")
 			return UITextAutocapitalizationTypeSentences;
@@ -41,7 +41,7 @@ UITextAutocorrectionType UITextAutocorrectionTypeFromString(NSString * string)
 		SC_SWITCH_CASE(string, @"Yes")
 			return UITextAutocorrectionTypeYes;
 		SC_SWITCH_CASE(string, @"No")
-			return UITextAutocorrectionTypeYes;
+			return UITextAutocorrectionTypeNo;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
 	
@@ -88,22 +88,22 @@ UITextSpellCheckingType UITextSpellCheckingTypeFromString(NSString * string)
 UIKeyboardType UIKeyboardTypeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"ASCII")
+		SC_SWITCH_CASE(string, @"ASCII")       // ASCIICapable
 			return UIKeyboardTypeASCIICapable;
-		SC_SWITCH_CASE(string, @"NumbersAndPunctuation")
+		SC_SWITCH_CASE(string, @"Punctuation") // NumbersAndPunctuation
 			return UIKeyboardTypeNumbersAndPunctuation;
 		SC_SWITCH_CASE(string, @"URL")
 			return UIKeyboardTypeURL;
-		SC_SWITCH_CASE(string, @"Number")
-			return UIKeyboardTypeNumberPad;
-		SC_SWITCH_CASE(string, @"NamePhone")
+		SC_SWITCH_CASE(string, @"NamePhone")   // NamePhonePad
 			return UIKeyboardTypeNamePhonePad;
-		SC_SWITCH_CASE(string, @"Phone")
+		SC_SWITCH_CASE(string, @"Number")      // NumberPad
+			return UIKeyboardTypeNumberPad;
+		SC_SWITCH_CASE(string, @"Phone")       // PhonePad
 			return UIKeyboardTypePhonePad;
-		SC_SWITCH_CASE(string, @"Email")
+		SC_SWITCH_CASE(string, @"Email")       // EmailAddress
 			return UIKeyboardTypeEmailAddress;
 #if __IPHONE_4_1 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-		SC_SWITCH_CASE(string, @"Decimal")
+		SC_SWITCH_CASE(string, @"Decimal")     // DecimalPad
 			return UIKeyboardTypeDecimalPad;
 #endif
 #if __IPHONE_5_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
@@ -165,7 +165,7 @@ UIReturnKeyType UIReturnKeyTypeFromString(NSString * string)
 			return UIReturnKeyYahoo;
 		SC_SWITCH_CASE(string, @"Done")
 			return UIReturnKeyDone;
-		SC_SWITCH_CASE(string, @"Emergency")
+		SC_SWITCH_CASE(string, @"Emergency") // EmergencyCall
 			return UIReturnKeyEmergencyCall;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

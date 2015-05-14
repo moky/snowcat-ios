@@ -23,14 +23,14 @@
 UIDataDetectorTypes UIDataDetectorTypesFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Phone")
+		SC_SWITCH_CASE(string, @"Phone")    // PhoneNumber
 			return UIDataDetectorTypePhoneNumber;
 		SC_SWITCH_CASE(string, @"Link")
 			return UIDataDetectorTypeLink;
 #if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-		SC_SWITCH_CASE(string, @"Addr")
+		SC_SWITCH_CASE(string, @"Addr")     // Address
 			return UIDataDetectorTypeAddress;
-		SC_SWITCH_CASE(string, @"Calendar")
+		SC_SWITCH_CASE(string, @"Calendar") // CalendarEvent
 			return UIDataDetectorTypeCalendarEvent;
 #endif
 		SC_SWITCH_CASE(string, @"None")

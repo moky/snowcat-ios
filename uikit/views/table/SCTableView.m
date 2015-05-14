@@ -23,7 +23,7 @@
 UITableViewStyle UITableViewStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"Group")
+		SC_SWITCH_CASE(string, @"Group") // Grouped
 			return UITableViewStyleGrouped;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
@@ -79,7 +79,7 @@ UITableViewRowAnimation UITableViewRowAnimationFromString(NSString * string)
 			return UITableViewRowAnimationNone;
 		SC_SWITCH_CASE(string, @"Middle")
 			return UITableViewRowAnimationMiddle;
-		SC_SWITCH_CASE(string, @"Auto")
+		SC_SWITCH_CASE(string, @"Auto") // Automatic
 			return UITableViewRowAnimationAutomatic;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

@@ -20,17 +20,17 @@
 NSLineBreakMode NSLineBreakModeFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"WordWrap")
+		SC_SWITCH_CASE(string, @"WordWrap") // WordWrapping
 			return NSLineBreakByWordWrapping;
-		SC_SWITCH_CASE(string, @"CharWrap")
+		SC_SWITCH_CASE(string, @"CharWrap") // CharWrapping
 			return NSLineBreakByCharWrapping;
-		SC_SWITCH_CASE(string, @"Clip")
+		SC_SWITCH_CASE(string, @"Clip")     // Clipping
 			return NSLineBreakByClipping;
-		SC_SWITCH_CASE(string, @"Head")
+		SC_SWITCH_CASE(string, @"Head")     // TruncatingHead
 			return NSLineBreakByTruncatingHead;
-		SC_SWITCH_CASE(string, @"Tail")
+		SC_SWITCH_CASE(string, @"Tail")     // TruncatingTail
 			return NSLineBreakByTruncatingTail;
-		SC_SWITCH_CASE(string, @"Mid")
+		SC_SWITCH_CASE(string, @"Mid")      // TruncatingMiddle
 			return NSLineBreakByTruncatingMiddle;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END

@@ -19,9 +19,9 @@ UICollectionElementCategory UICollectionElementCategoryFromString(NSString * str
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Cell")
 			return UICollectionElementCategoryCell;
-		SC_SWITCH_CASE(string, @"Supplementary")
+		SC_SWITCH_CASE(string, @"Supplementary") // SupplementaryView
 			return UICollectionElementCategorySupplementaryView;
-		SC_SWITCH_CASE(string, @"Decoration")
+		SC_SWITCH_CASE(string, @"Decoration")    // DecorationView
 			return UICollectionElementCategoryDecorationView;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
