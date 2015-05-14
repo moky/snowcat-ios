@@ -26,7 +26,7 @@
 	} else if ([dict isKindOfClass:[NSString class]]) {
 		// as a string
 		NSString * string = (NSString *)dict;
-		if ([string isEqualToString:@"clearColor"] || [string isEqualToString:@"clear"]) {
+		if ([string rangeOfString:@"clear"].location != NSNotFound) {
 			alpha = 0.0f;
 		} else {
 			// {r, g, b}
@@ -43,7 +43,7 @@
 					red = [[array objectAtIndex:0] floatValue] / 255;
 					green = [[array objectAtIndex:1] floatValue] / 255;
 					blue = [[array objectAtIndex:2] floatValue] / 255;
-					if ([array count] == 4) {
+					if ([array count] >= 4) {
 						alpha = [[array objectAtIndex:3] floatValue];
 						if (alpha > 1) {
 							alpha /= 255;

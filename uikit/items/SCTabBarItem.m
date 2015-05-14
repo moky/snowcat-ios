@@ -95,6 +95,8 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UITabBarItem *)tabBarItem
 {
 	if (![SCBarItem setAttributes:dict to:tabBarItem]) {
@@ -131,5 +133,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	return YES;
 }
+#pragma clang diagnostic pop
 
 @end

@@ -15,6 +15,8 @@
 //    UIBarMetricsDefault,
 //    UIBarMetricsLandscapePhone,
 //};
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 UIBarMetrics UIBarMetricsFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
@@ -27,12 +29,15 @@ UIBarMetrics UIBarMetricsFromString(NSString * string)
 	
 	return [string integerValue];
 }
+#pragma clang diagnostic pop
 
 //typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
 //    UIBarButtonItemStylePlain,    // shows glow when pressed
 //    UIBarButtonItemStyleBordered,
 //    UIBarButtonItemStyleDone,
 //};
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 UIBarButtonItemStyle UIBarButtonItemStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
@@ -47,6 +52,7 @@ UIBarButtonItemStyle UIBarButtonItemStyleFromString(NSString * string)
 	
 	return [string integerValue];
 }
+#pragma clang diagnostic pop
 
 //typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
 //    UIBarButtonSystemItemDone,

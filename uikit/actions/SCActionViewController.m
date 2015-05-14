@@ -68,6 +68,8 @@
 	return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (BOOL) _presentModalViewController:(NSDictionary *)dict animated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
@@ -78,12 +80,16 @@
 	[child release];
 	return YES;
 }
+#pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (BOOL) _dismissModalViewControllerAnimated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
 	[viewController dismissModalViewControllerAnimated:flag];
 	return YES;
 }
+#pragma clang diagnostic pop
 
 - (BOOL) _transitionWithView:(UIView *)view
 {

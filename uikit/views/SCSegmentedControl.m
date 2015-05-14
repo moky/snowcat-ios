@@ -20,6 +20,8 @@
 //    UISegmentedControlStyleBar,       // small button/nav bar style. tintable
 //    UISegmentedControlStyleBezeled,   // DEPRECATED. Do not use this style.
 //};
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
@@ -36,6 +38,7 @@ UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string)
 	
 	return [string integerValue];
 }
+#pragma clang diagnostic pop
 
 //enum {
 //    UISegmentedControlNoSegment = -1   // segment index for no selected segment
@@ -142,6 +145,8 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UISegmentedControl *)segmentedControl
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"error");
@@ -211,6 +216,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	return YES;
 }
+#pragma clang diagnostic pop
 
 #pragma mark - Value Event Interfaces
 

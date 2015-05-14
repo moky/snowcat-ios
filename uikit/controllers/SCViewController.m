@@ -341,6 +341,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) _setPopoverControllerAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	// contentSizeForViewInPopover
@@ -357,6 +359,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	
 	return YES;
 }
+#pragma clang diagnostic pop
 
 + (BOOL) _setIOS7Attributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
@@ -401,6 +404,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	if (![SCResponder setAttributes:dict to:viewController]) {
@@ -489,6 +494,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	
 	return YES;
 }
+#pragma clang diagnostic pop
 
 // view loading functions
 SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_LOAD_VIEW_FUNCTIONS()

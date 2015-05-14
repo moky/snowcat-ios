@@ -183,6 +183,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UITabBar *)tabBar
 {
 	if (![SCView setAttributes:dict to:tabBar]) {
@@ -251,5 +253,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	return YES;
 }
+#pragma clang diagnostic pop
 
 @end
