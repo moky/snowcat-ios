@@ -95,8 +95,6 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UITabBarItem *)tabBarItem
 {
 	if (![SCBarItem setAttributes:dict to:tabBarItem]) {
@@ -124,15 +122,16 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		unselectedImage = [SCImage create:unselectedImage autorelease:NO];
 	}
 	
-	if (selectedImage && unselectedImage) {
-		[tabBarItem setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
-	}
+	//if (selectedImage && unselectedImage) {
+	//	[tabBarItem setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
+	//}
+	tabBarItem.selectedImage = selectedImage;
+	tabBarItem.image = unselectedImage;
 	
 	[selectedImage release];
 	[unselectedImage release];
 	
 	return YES;
 }
-#pragma clang diagnostic pop
 
 @end

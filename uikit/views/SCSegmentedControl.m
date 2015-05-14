@@ -145,8 +145,6 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UISegmentedControl *)segmentedControl
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"error");
@@ -154,7 +152,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// segmentedControlStyle
 	NSString * segmentedControlStyle = [dict objectForKey:@"segmentedControlStyle"];
 	if (segmentedControlStyle) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 		segmentedControl.segmentedControlStyle = UISegmentedControlStyleFromString(segmentedControlStyle);
+#pragma clang diagnostic pop
 	}
 	
 	// momentary
@@ -216,7 +217,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	return YES;
 }
-#pragma clang diagnostic pop
 
 #pragma mark - Value Event Interfaces
 

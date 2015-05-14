@@ -12,39 +12,47 @@
 #import "SCBarButtonItem.h"
 
 //typedef NS_ENUM(NSInteger, UIBarMetrics) {
-//    UIBarMetricsDefault,
-//    UIBarMetricsLandscapePhone,
+//	UIBarMetricsDefault,
+//	UIBarMetricsCompact,
+//	UIBarMetricsDefaultPrompt = 101, // Applicable only in bars with the prompt property, such as UINavigationBar and UISearchBar
+//	UIBarMetricsCompactPrompt,
+//	
+//	UIBarMetricsLandscapePhone NS_ENUM_DEPRECATED_IOS(5_0, 8_0, "Use UIBarMetricsCompact instead") = UIBarMetricsCompact,
+//	UIBarMetricsLandscapePhonePrompt NS_ENUM_DEPRECATED_IOS(7_0, 8_0, "Use UIBarMetricsCompactPrompt") = UIBarMetricsCompactPrompt,
 //};
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 UIBarMetrics UIBarMetricsFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"CompactPrompt")
+			return UIBarMetricsCompactPrompt;
+		SC_SWITCH_CASE(string, @"DefaultPrompt")
+			return UIBarMetricsDefaultPrompt;
+		SC_SWITCH_CASE(string, @"Compact")
+			return UIBarMetricsCompact;
 		SC_SWITCH_CASE(string, @"Default")
 			return UIBarMetricsDefault;
-		SC_SWITCH_CASE(string, @"Phone") // LandscapePhone
-			return UIBarMetricsLandscapePhone;
+		SC_SWITCH_CASE(string, @"PhonePrompt") // LandscapePhonePrompt
+			return UIBarMetricsCompactPrompt;
+		SC_SWITCH_CASE(string, @"Phone")       // LandscapePhone
+			return UIBarMetricsCompact;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
 	
 	return [string integerValue];
 }
-#pragma clang diagnostic pop
 
 //typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
-//    UIBarButtonItemStylePlain,    // shows glow when pressed
-//    UIBarButtonItemStyleBordered,
-//    UIBarButtonItemStyleDone,
+//	UIBarButtonItemStylePlain, // shows glow when pressed
+//	UIBarButtonItemStyleBordered NS_ENUM_DEPRECATED_IOS(2_0, 8_0, "Use UIBarButtonItemStylePlain when minimum deployment target is iOS7 or later"),
+//	UIBarButtonItemStyleDone,
 //};
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 UIBarButtonItemStyle UIBarButtonItemStyleFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Plain")
 			return UIBarButtonItemStylePlain;
 		SC_SWITCH_CASE(string, @"Border")
-			return UIBarButtonItemStyleBordered;
+			return UIBarButtonItemStylePlain;
 		SC_SWITCH_CASE(string, @"Done")
 			return UIBarButtonItemStyleDone;
 		SC_SWITCH_DEFAULT
@@ -52,7 +60,6 @@ UIBarButtonItemStyle UIBarButtonItemStyleFromString(NSString * string)
 	
 	return [string integerValue];
 }
-#pragma clang diagnostic pop
 
 //typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
 //    UIBarButtonSystemItemDone,

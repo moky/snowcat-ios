@@ -341,14 +341,13 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	return YES;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) _setPopoverControllerAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	// contentSizeForViewInPopover
 	NSString * contentSizeForViewInPopover = [dict objectForKey:@"contentSizeForViewInPopover"];
 	if (contentSizeForViewInPopover) {
-		viewController.contentSizeForViewInPopover = CGSizeFromStringWithNode(contentSizeForViewInPopover, viewController);
+		//viewController.contentSizeForViewInPopover = CGSizeFromStringWithNode(contentSizeForViewInPopover, viewController);
+		viewController.preferredContentSize = CGSizeFromStringWithNode(contentSizeForViewInPopover, viewController);
 	}
 	
 	// modalInPopover
@@ -359,7 +358,6 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	
 	return YES;
 }
-#pragma clang diagnostic pop
 
 + (BOOL) _setIOS7Attributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
@@ -404,8 +402,6 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	return YES;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	if (![SCResponder setAttributes:dict to:viewController]) {
@@ -452,7 +448,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	// wantsFullScreenLayout
 	id wantsFullScreenLayout = [dict objectForKey:@"wantsFullScreenLayout"];
 	if (wantsFullScreenLayout) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 		viewController.wantsFullScreenLayout = [wantsFullScreenLayout boolValue];
+#pragma clang diagnostic pop
 	}
 	
 	// UIViewControllerEditing
@@ -494,7 +493,6 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	
 	return YES;
 }
-#pragma clang diagnostic pop
 
 // view loading functions
 SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_LOAD_VIEW_FUNCTIONS()

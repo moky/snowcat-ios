@@ -70,8 +70,6 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UILabel *)label
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
@@ -172,7 +170,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// adjustsLetterSpacingToFitWidth
 	id adjustsLetterSpacingToFitWidth = [dict objectForKey:@"adjustsLetterSpacingToFitWidth"];
 	if (adjustsLetterSpacingToFitWidth) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 		label.adjustsLetterSpacingToFitWidth = [adjustsLetterSpacingToFitWidth boolValue];
+#pragma clang diagnostic pop
 	}
 	
 	// baselineAdjustment
@@ -217,6 +218,5 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	return YES;
 }
-#pragma clang diagnostic pop
 
 @end

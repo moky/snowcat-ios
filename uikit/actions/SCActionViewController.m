@@ -68,28 +68,24 @@
 	return YES;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (BOOL) _presentModalViewController:(NSDictionary *)dict animated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
 	SCViewController * child = [SCViewController create:dict autorelease:NO];
 	NSAssert([child isKindOfClass:[UIViewController class]], @"view controller's definition error: %@", dict);
-	[viewController presentModalViewController:child animated:flag];
+	//[viewController presentModalViewController:child animated:flag];
+	[viewController presentViewController:child animated:flag completion:NULL];
 	SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, dict);
 	[child release];
 	return YES;
 }
-#pragma clang diagnostic pop
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (BOOL) _dismissModalViewControllerAnimated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
-	[viewController dismissModalViewControllerAnimated:flag];
+	//[viewController dismissModalViewControllerAnimated:flag];
+	[viewController dismissViewControllerAnimated:flag completion:NULL];
 	return YES;
 }
-#pragma clang diagnostic pop
 
 - (BOOL) _transitionWithView:(UIView *)view
 {
