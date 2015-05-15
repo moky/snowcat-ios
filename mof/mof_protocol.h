@@ -10,7 +10,8 @@
 #define __mof_protocol__
 
 /**
- *  Size and alignment of integer data types in OS X and iOS:
+ *
+ *    Size and alignment of integer data types in OS X and iOS:
  *
  *    /============+============+=================+===========+================\
  *    | Data type  | ILP32 size | ILP32 alignment | LP64 size | LP64 alignment |
@@ -19,27 +20,27 @@
  *    +------------+------------+-----------------+-----------+----------------+
  *    | BOOL, bool | 1 byte     | 1 byte          | 1 byte    | 1 byte         |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | short      | 2 byte     | 2 byte          | 2 byte    | 2 byte         |
+ *    | short      | 2 bytes    | 2 bytes         | 2 bytes   | 2 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | int        | 4 byte     | 4 byte          | 4 byte    | 4 byte         |
+ *    | int        | 4 bytes    | 4 bytes         | 4 bytes   | 4 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | long       | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | long       | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | long long  | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | long long  | 8 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | pointer    | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | pointer    | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | size_t     | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | size_t     | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | time_t     | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | time_t     | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | NSInteger  | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | NSInteger  | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | CFIndex    | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | CFIndex    | 4 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | fpos_t     | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | fpos_t     | 8 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    +------------+------------+-----------------+-----------+----------------+
- *    | off_t      | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    | off_t      | 8 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    \============+============+=================+===========+================/
  *
  */
