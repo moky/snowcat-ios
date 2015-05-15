@@ -18,8 +18,8 @@ MOFInteger mof_check (const MOFData * data); // check data format, 0 means corre
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(MOFString filename);
-MOFInteger      mof_save(MOFString filename, const MOFData * data);
+const MOFData * mof_load(MOFCString filename);
+MOFInteger      mof_save(MOFCString filename, const MOFData * data);
 
 #pragma mark - getters
 
@@ -31,8 +31,8 @@ const MOFDataItem * mof_items_end  (const MOFData * data); // get tail of items 
 
 #pragma mark values
 
-MOFString   mof_key  (const MOFDataItem * item, const MOFData * data); // get key with item (for dictionary)
-MOFString   mof_str  (const MOFDataItem * item, const MOFData * data); // get string with item
+MOFCString  mof_key  (const MOFDataItem * item, const MOFData * data); // get key with item (for dictionary)
+MOFCString  mof_str  (const MOFDataItem * item, const MOFData * data); // get string with item
 MOFInteger  mof_int  (const MOFDataItem * item); // get integer with item
 MOFUInteger mof_uint (const MOFDataItem * item); // get unsigned integer with item
 MOFFloat    mof_float(const MOFDataItem * item); // get float with item

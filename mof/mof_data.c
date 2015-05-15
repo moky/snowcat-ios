@@ -126,7 +126,7 @@ MOFInteger mof_check(const MOFData * data)
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(MOFString filename)
+const MOFData * mof_load(MOFCString filename)
 {
 	FILE * fp = fopen(filename, "rb");
 	if (!fp) {
@@ -165,7 +165,7 @@ const MOFData * mof_load(MOFString filename)
 	}
 }
 
-MOFInteger mof_save(MOFString filename, const MOFData * data)
+MOFInteger mof_save(MOFCString filename, const MOFData * data)
 {
 	MOFInteger err = mof_check(data);
 	if (err != MOFCorrect) {
@@ -199,7 +199,7 @@ MOFInteger mof_save(MOFString filename, const MOFData * data)
 #pragma mark - getter
 
 //// get id (index) for string
-//static MOFUInteger _string_id(MOFString string, const MOFData * data)
+//static MOFUInteger _string_id(MOFCString string, const MOFData * data)
 //{
 //	const unsigned char * buffer = (const unsigned char *)data;
 //	const unsigned char * start = buffer + data->body.stringsBuffer.offset;
@@ -220,7 +220,7 @@ MOFInteger mof_save(MOFString filename, const MOFData * data)
 //}
 
 // get string by id (index)
-static MOFString _string_by_id(const MOFUInteger index, const MOFData * data)
+static MOFCString _string_by_id(const MOFUInteger index, const MOFData * data)
 {
 	const unsigned char * buffer = (const unsigned char *)data;
 	const unsigned char * start = buffer + data->body.stringsBuffer.offset;
@@ -278,14 +278,14 @@ const MOFDataItem * mof_item(const MOFUInteger index, const MOFData * data)
 #pragma mark values
 
 // get key with item (for dictionary)
-MOFString mof_key(const MOFDataItem * item, const MOFData * data)
+MOFCString mof_key(const MOFDataItem * item, const MOFData * data)
 {
 	MOF_ASSERT(item->type == MOFDataItemTypeKey, "not key type: %d", item->type);
 	return _string_by_id(item->keyId, data);
 }
 
 // get string with item
-MOFString mof_str(const MOFDataItem * item, const MOFData * data)
+MOFCString mof_str(const MOFDataItem * item, const MOFData * data)
 {
 	MOF_ASSERT(item->type == MOFDataItemTypeString, "not string type: %d", item->type);
 	return _string_by_id(item->stringId, data);

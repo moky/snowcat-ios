@@ -329,7 +329,7 @@
 	
 	// 2. error? try from the origin data
 	const MOFData * data = (const MOFData *)_dataBuffer;
-	MOFString string = mof_str(item, data);
+	MOFCString string = mof_str(item, data);
 	NSAssert(string != NULL, @"error string item");
 	if (string) {
 		return [NSString stringWithUTF8String:string];

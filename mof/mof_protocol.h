@@ -47,7 +47,7 @@
 //
 // data type
 //
-#define MOFString   const char *
+#define MOFCString  const char *
 #define MOFChar     char
 #define MOFUChar    unsigned char
 
