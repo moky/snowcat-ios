@@ -9,6 +9,60 @@
 #ifndef __mof_protocol__
 #define __mof_protocol__
 
+/**
+ *  Size and alignment of integer data types in OS X and iOS:
+ *
+ *    /============+============+=================+===========+================\
+ *    | Data type  | ILP32 size | ILP32 alignment | LP64 size | LP64 alignment |
+ *    +============+============+=================+===========+================+
+ *    | char       | 1 byte     | 1 byte          | 1 byte    | 1 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | BOOL, bool | 1 byte     | 1 byte          | 1 byte    | 1 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | short      | 2 byte     | 2 byte          | 2 byte    | 2 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | int        | 4 byte     | 4 byte          | 4 byte    | 4 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | long       | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | long long  | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | pointer    | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | size_t     | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | time_t     | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | NSInteger  | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | CFIndex    | 4 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | fpos_t     | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    +------------+------------+-----------------+-----------+----------------+
+ *    | off_t      | 8 byte     | 4 byte          | 8 byte    | 8 byte         |
+ *    \============+============+=================+===========+================/
+ *
+ */
+
+//
+// data type
+//
+#define MOFString   const char *
+#define MOFChar     char
+#define MOFUChar    unsigned char
+
+#define MOFByte     char
+#define MOFUByte    unsigned char
+#define MOFShort    short
+#define MOFUShort   unsigned short
+#define MOFInteger  int
+#define MOFUInteger unsigned int
+#define MOFFloat    float
+#define MOFBool     char
+
+#define MOFTrue     1
+#define MOFFalse    0
+
 // items count for dictionary/array
 #define MOFArrayItemsCountMax      0xffff
 #define MOFDictionaryItemsCountMax 0xffff
@@ -23,16 +77,6 @@
 
 #define MOFStringNotFound          MOFStringsCountMax
 #define MOFKeyNotFound             MOFStringsCountMax
-
-// data type
-#define MOFString   const char *
-#define MOFInteger  int
-#define MOFUInteger unsigned int
-#define MOFFloat    float
-#define MOFBool     int
-
-#define MOFTrue     1
-#define MOFFalse    0
 
 //
 // error code
@@ -67,29 +111,29 @@ typedef enum {
 // string item in strings buffer
 //
 typedef struct {
-	unsigned short length;    // entire item length, includes 'sizeof(length)' and the last '\0' of string
-	char           string[0]; // head of string buffer
+	MOFUShort length;    // entire item length, includes 'sizeof(length)' and the last '\0' of string
+	MOFChar   string[0]; // head of string buffer
 } MOFStringItem;
 
 //
 // data item
 //
 typedef struct {
-	unsigned char      type;        // 0 - 255
-	unsigned char      reserved[3]; // reserved for bytes alignment
+	MOFUByte        type;        // 0 - 255
+	MOFUChar        reserved[3]; // reserved for bytes alignment
 	union {
 		// key (for dictionary)
-		unsigned long  keyId;       // 0 - 4,294,967,295 (4G)
+		MOFUInteger keyId;       // 0 - 4,294,967,295 (4G)
 		// string
-		unsigned long  stringId;    // 0 - 4,294,967,295 (4G)
+		MOFUInteger stringId;    // 0 - 4,294,967,295 (4G)
 		// count (for dictionary/array)
-		unsigned short count;       // 0 - 65,535 (64K)
+		MOFUShort   count;       // 0 - 65,535 (64K)
 		// numeric
-		MOFInteger     intValue;
-		MOFUInteger    uintValue;
-		MOFFloat       floatValue;
+		MOFInteger  intValue;
+		MOFUInteger uintValue;
+		MOFFloat    floatValue;
 		// bool
-		MOFBool        boolValue;
+		MOFBool     boolValue;
 	};
 } MOFDataItem;
 
@@ -97,15 +141,15 @@ typedef struct {
 // data body
 //
 typedef struct {
-	unsigned long offset; // offset of memory buffer (from data head)
-	unsigned long length; // length of memory buffer (bytes)
+	MOFUInteger offset; // offset of memory buffer (from data head)
+	MOFUInteger length; // length of memory buffer (bytes)
 } MOFBufferInfo;
 
 typedef struct {
 	MOFBufferInfo itemsBuffer;
 	MOFBufferInfo stringsBuffer;
 	
-	MOFDataItem items[0]; // head of item buffer
+	MOFDataItem   items[0]; // head of item buffer
 } MOFDataBody;
 
 //
@@ -113,15 +157,15 @@ typedef struct {
 //
 typedef struct {
 	// protocol
-	unsigned char format[4];   // "MOF"
-	unsigned char version;
-	unsigned char subVersion;
-	unsigned char reserved[2]; // reserved for bytes alignment
-	unsigned long fileLength;
+	MOFUChar    format[4];   // "MOF"
+	MOFUByte    version;
+	MOFUByte    subVersion;
+	MOFUChar    reserved[2]; // reserved for bytes alignment
+	MOFUInteger fileLength;
 	// info
-	unsigned char description[64];
-	unsigned char copyright[32];
-	unsigned char author[32];
+	MOFUChar    description[64];
+	MOFUChar    copyright[32];
+	MOFUChar    author[32];
 } MOFDataHead;
 
 //

@@ -11,19 +11,19 @@
 
 #include "mof_protocol.h"
 
-MOFData * mof_create(const unsigned long buf_len); // create an initialized buffer
-void mof_destroy(void * data); // destroy a buffer
+MOFData * mof_create (const MOFUInteger buf_len); // create an initialized buffer
+void      mof_destroy(void * data); // destroy a buffer
 
-int mof_check(const MOFData * data); // check data format, 0 means correct
+MOFInteger mof_check (const MOFData * data); // check data format, 0 means correct
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(const char * filename);
-int             mof_save(const char * filename, const MOFData * data);
+const MOFData * mof_load(MOFString filename);
+MOFInteger      mof_save(MOFString filename, const MOFData * data);
 
 #pragma mark - getters
 
-const MOFDataItem * mof_item(const unsigned long index, const MOFData * data); // get item with global index
+const MOFDataItem * mof_item(const MOFUInteger index, const MOFData * data); // get item with global index
 const MOFDataItem * mof_root(const MOFData * data); // get root item (the first item)
 
 const MOFDataItem * mof_items_start(const MOFData * data); // get first item

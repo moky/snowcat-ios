@@ -28,11 +28,11 @@
 	return self;
 }
 
-- (instancetype) initWithLength:(unsigned long)bufferLength
+- (instancetype) initWithLength:(NSUInteger)bufferLength
 {
 	self = [self init];
 	if (self) {
-		const MOFData * data = mof_create(bufferLength);
+		const MOFData * data = mof_create((MOFUInteger)bufferLength);
 		[self setDataBuffer:data];
 	}
 	return self;

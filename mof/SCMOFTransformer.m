@@ -10,9 +10,9 @@
 
 #import "SCMOFTransformer.h"
 
-static unsigned long _indexForString(NSString * string, NSMutableArray * mStringsArray)
+static NSUInteger _indexForString(NSString * string, NSMutableArray * mStringsArray)
 {
-	unsigned long index = 0;
+	NSUInteger index = 0;
 	
 	NSEnumerator * enumerator = [mStringsArray objectEnumerator];
 	NSString * str;
@@ -24,22 +24,22 @@ static unsigned long _indexForString(NSString * string, NSMutableArray * mString
 	}
 	
 	if (index >= [mStringsArray count]) {
-		NSLog(@"[MOF] add new string '%@' to array, index: %ld", string, index);
+		NSLog(@"[MOF] add new string '%@' to array, index: %u", string, (unsigned int)index);
 		[mStringsArray addObject:string];
 	}
 	
 	return index;
 }
 
-static unsigned long _processObject(NSObject * object,
-									MOFDataItem * pItemBuffer,
-									unsigned long iPlaceLeft,
-									NSMutableArray * mStringsArray); // pre-defined
+static NSUInteger _processObject(NSObject * object,
+								 MOFDataItem * pItemBuffer,
+								 NSUInteger iPlaceLeft,
+								 NSMutableArray * mStringsArray); // pre-defined
 
-static unsigned long _processArray(NSArray * array,
-								   MOFDataItem * pItemBuffer,
-								   unsigned long iPlaceLeft,
-								   NSMutableArray * mStringsArray)
+static NSUInteger _processArray(NSArray * array,
+								MOFDataItem * pItemBuffer,
+								NSUInteger iPlaceLeft,
+								NSMutableArray * mStringsArray)
 {
 	if (iPlaceLeft == 0) {
 		NSLog(@"[MOF] not enough space");
@@ -51,7 +51,7 @@ static unsigned long _processArray(NSArray * array,
 	
 	// first child, starts from next item
 	MOFDataItem * pChild;
-	unsigned long iCount = 1;
+	NSUInteger iCount = 1;
 	
 	NSEnumerator * enumerator = [array objectEnumerator];
 	NSObject * object;
@@ -63,10 +63,10 @@ static unsigned long _processArray(NSArray * array,
 	return iCount;
 }
 
-static unsigned long _processDictionary(NSDictionary * dict,
-										MOFDataItem * pItemBuffer,
-										unsigned long iPlaceLeft,
-										NSMutableArray * mStringsArray)
+static NSUInteger _processDictionary(NSDictionary * dict,
+									 MOFDataItem * pItemBuffer,
+									 NSUInteger iPlaceLeft,
+									 NSMutableArray * mStringsArray)
 {
 	if (iPlaceLeft == 0) {
 		NSLog(@"[MOF] not enough space");
@@ -79,7 +79,7 @@ static unsigned long _processDictionary(NSDictionary * dict,
 	// first child, starts from next item
 	MOFDataItem * pKey;
 	MOFDataItem * pObject;
-	unsigned long iCount = 1;
+	NSUInteger iCount = 1;
 	
 	NSEnumerator * enumerator = [dict keyEnumerator];
 	NSString * key;
@@ -87,9 +87,9 @@ static unsigned long _processDictionary(NSDictionary * dict,
 	while (key = [enumerator nextObject]) {
 		// key
 		pKey = pItemBuffer + iCount;
-		unsigned long keyId = _indexForString(key, mStringsArray);
+		NSUInteger keyId = _indexForString(key, mStringsArray);
 		pKey->type = MOFDataItemTypeKey;
-		pKey->keyId = keyId;
+		pKey->keyId = (MOFUInteger)keyId;
 		// value
 		++iCount;
 		pObject = pItemBuffer + iCount;
@@ -100,10 +100,10 @@ static unsigned long _processDictionary(NSDictionary * dict,
 	return iCount;
 }
 
-static unsigned long _processString(NSString * string,
-									MOFDataItem * pItemBuffer,
-									unsigned long iPlaceLeft,
-									NSMutableArray * mStringsArray)
+static NSUInteger _processString(NSString * string,
+								 MOFDataItem * pItemBuffer,
+								 NSUInteger iPlaceLeft,
+								 NSMutableArray * mStringsArray)
 {
 	if (iPlaceLeft == 0) {
 		NSLog(@"[MOF] not enough space");
@@ -111,14 +111,14 @@ static unsigned long _processString(NSString * string,
 	}
 	
 	pItemBuffer->type = MOFDataItemTypeString;
-	pItemBuffer->stringId = _indexForString(string, mStringsArray);
+	pItemBuffer->stringId = (MOFUInteger)_indexForString(string, mStringsArray);
 	
 	return 1;
 }
 
-static unsigned long _processNumber(NSNumber * number,
-									MOFDataItem * pItemBuffer,
-									unsigned long iPlaceLeft)
+static NSUInteger _processNumber(NSNumber * number,
+								 MOFDataItem * pItemBuffer,
+								 NSUInteger iPlaceLeft)
 {
 	if (iPlaceLeft == 0) {
 		NSLog(@"[MOF] not enough space");
@@ -137,17 +137,17 @@ static unsigned long _processNumber(NSNumber * number,
 	return 1;
 }
 
-static unsigned long _processObject(NSObject * object,
-									MOFDataItem * pItemBuffer,
-									unsigned long iPlaceLeft,
-									NSMutableArray * mStringsArray)
+static NSUInteger _processObject(NSObject * object,
+								 MOFDataItem * pItemBuffer,
+								 NSUInteger iPlaceLeft,
+								 NSMutableArray * mStringsArray)
 {
 	if (iPlaceLeft == 0) {
 		NSLog(@"[MOF] not enough space");
 		return 0;
 	}
 	
-	unsigned long iCount = 0;
+	NSUInteger iCount = 0;
 	
 	if ([object isKindOfClass:[NSArray class]])
 	{
@@ -179,11 +179,11 @@ static unsigned long _processObject(NSObject * object,
 }
 
 static unsigned char * _createItemsBuffer(NSObject * root,
-										  unsigned long * pBufferLength,
+										  NSUInteger * pBufferLength,
 										  NSMutableArray * mStringsArray)
 {
-	unsigned long iMaxItems = 65536;
-	unsigned long iBufferLength = sizeof(MOFDataItem) * iMaxItems;
+	NSUInteger iMaxItems = 65536;
+	NSUInteger iBufferLength = sizeof(MOFDataItem) * iMaxItems;
 	
 	MOFDataItem * pItemsBuffer = (MOFDataItem *)malloc(iBufferLength);
 	if (!pItemsBuffer) {
@@ -192,32 +192,32 @@ static unsigned char * _createItemsBuffer(NSObject * root,
 	}
 	memset(pItemsBuffer, 0, iBufferLength);
 	
-	unsigned long iCount = _processObject(root, pItemsBuffer, iMaxItems, mStringsArray);
+	NSUInteger iCount = _processObject(root, pItemsBuffer, iMaxItems, mStringsArray);
 	
 	*pBufferLength = sizeof(MOFDataItem) * iCount;
 	return (unsigned char *)pItemsBuffer;
 }
 
 static unsigned char * _createStringsBuffer(NSArray * stringsArray,
-											unsigned long * pBufferLength)
+											NSUInteger * pBufferLength)
 {
-	unsigned long iCount = [stringsArray count];
-	unsigned long iMaxLength = 65536 * iCount;
+	NSUInteger iCount = [stringsArray count];
+	NSUInteger iMaxLength = 65536 * iCount;
 	
 	unsigned char * pBuffer = (unsigned char *)malloc(iMaxLength);
 	memset(pBuffer, 0, iMaxLength);
 	unsigned char * p = (unsigned char *)pBuffer;
 	
 	// save 'count' first
-	unsigned long * pCount = (unsigned long *)p;
-	p += sizeof(unsigned long);
-	*pCount = iCount;
+	MOFUInteger * pCount = (MOFUInteger *)p;
+	p += sizeof(MOFUInteger);
+	*pCount = (MOFUInteger)iCount;
 	
 	// save each string
 	NSEnumerator * enumerator = [stringsArray objectEnumerator];
 	NSString * string;
 	const char * str;
-	unsigned long len;
+	NSUInteger len;
 	MOFStringItem * item;
 	while (string = [enumerator nextObject]) {
 		//str = [string cStringUsingEncoding:NSUTF8StringEncoding];
@@ -253,20 +253,20 @@ static void _destroyBuffer(void * buffer)
 	NSMutableArray * mStringsArray = [[NSMutableArray alloc] initWithCapacity:65535];
 	
 	// items buffer
-	unsigned long itemsBufferLength = 0;
+	NSUInteger itemsBufferLength = 0;
 	unsigned char * itemsBuffer = _createItemsBuffer(root, &itemsBufferLength, mStringsArray);
 	NSAssert(itemsBuffer && itemsBufferLength > 0, @"failed to create items buffer");
 	
 	// string array buffer
-	unsigned long stringsBufferLength = 0;
+	NSUInteger stringsBufferLength = 0;
 	unsigned char * stringsBuffer = _createStringsBuffer(mStringsArray, &stringsBufferLength);
 	NSAssert(stringsBuffer && stringsBufferLength > 0, @"failed to create strings buffer");
 	
 	// OK!
-	NSLog(@"[MOF] itemsBufferLength: %ld, stringsBufferLength: %ld", itemsBufferLength, stringsBufferLength);
+	NSLog(@"[MOF] itemsBufferLength: %u, stringsBufferLength: %u", (unsigned int)itemsBufferLength, (unsigned int)stringsBufferLength);
 	
-	unsigned long bufferLength = sizeof(MOFData) + itemsBufferLength + stringsBufferLength;
-	NSLog(@"[MOF] bufferLength: %ld", bufferLength);
+	NSUInteger bufferLength = sizeof(MOFData) + itemsBufferLength + stringsBufferLength;
+	NSLog(@"[MOF] bufferLength: %u", (unsigned int)bufferLength);
 	
 	self = [self initWithLength:bufferLength];
 	if (self) {
@@ -275,13 +275,13 @@ static void _destroyBuffer(void * buffer)
 		unsigned char * p = (unsigned char *)body->items;
 		
 		// copy items buffer
-		body->itemsBuffer.length = itemsBufferLength;
+		body->itemsBuffer.length = (MOFUInteger)itemsBufferLength;
 		memcpy(p, itemsBuffer, itemsBufferLength);
 		
 		// copy strings buffer
 		p += itemsBufferLength;
 		body->stringsBuffer.offset = body->itemsBuffer.offset + body->itemsBuffer.length;
-		body->stringsBuffer.length = stringsBufferLength;
+		body->stringsBuffer.length = (MOFUInteger)stringsBufferLength;
 		memcpy(p, stringsBuffer, stringsBufferLength);
 	}
 	

@@ -25,16 +25,16 @@
                                                         /* EOF 'MOF_ASSERT()' */
 
 // create initialized buffer
-MOFData * mof_create(const unsigned long buf_len)
+MOFData * mof_create(const MOFUInteger buf_len)
 {
 	if (buf_len <= sizeof(MOFData)) {
-		MOF_ASSERT(MOFFalse, "buffer length error: %ld", buf_len);
+		MOF_ASSERT(MOFFalse, "buffer length error: %u", buf_len);
 		return NULL;
 	}
 	
 	unsigned char * buffer = (unsigned char *)malloc(buf_len);
 	if (!buffer) {
-		MOF_ASSERT(MOFFalse, "not enough memory: %ld", buf_len);
+		MOF_ASSERT(MOFFalse, "not enough memory: %u", buf_len);
 		return NULL;
 	}
 	memset(buffer, 0, buf_len);
@@ -89,7 +89,7 @@ void mof_destroy(void * data)
 }
 
 // check data format
-int mof_check(const MOFData * data)
+MOFInteger mof_check(const MOFData * data)
 {
 	const MOFDataHead * head = &data->head;
 	
@@ -104,7 +104,7 @@ int mof_check(const MOFData * data)
 	}
 	
 	const MOFDataBody * body = &data->body;
-	unsigned long buf_len = sizeof(MOFData) + body->itemsBuffer.length + body->stringsBuffer.length;
+	MOFUInteger buf_len = sizeof(MOFData) + body->itemsBuffer.length + body->stringsBuffer.length;
 	
 	// 3. file length
 	if (head->fileLength != buf_len) {
@@ -126,7 +126,7 @@ int mof_check(const MOFData * data)
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(const char * filename)
+const MOFData * mof_load(MOFString filename)
 {
 	FILE * fp = fopen(filename, "rb");
 	if (!fp) {
@@ -137,7 +137,7 @@ const MOFData * mof_load(const char * filename)
 	
 	// get file size
 	fseek(fp, 0, SEEK_END);
-	unsigned long size = ftell(fp);
+	long size = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 	
 	// create buffer for reading
@@ -155,7 +155,7 @@ const MOFData * mof_load(const char * filename)
 	
 	MOFData * data = (MOFData *)buffer;
 	
-	int err = mof_check(data);
+	MOFInteger err = mof_check(data);
 	if (err == MOFCorrect) {
 		return data;
 	} else {
@@ -165,15 +165,15 @@ const MOFData * mof_load(const char * filename)
 	}
 }
 
-int mof_save(const char * filename, const MOFData * data)
+MOFInteger mof_save(MOFString filename, const MOFData * data)
 {
-	int err = mof_check(data);
+	MOFInteger err = mof_check(data);
 	if (err != MOFCorrect) {
 		MOF_ASSERT(MOFFalse, "data error: %d", err);
 		return -1;
 	}
 	unsigned char * buffer = (unsigned char *)data;
-	unsigned long buf_len = data->head.fileLength;
+	MOFUInteger buf_len = data->head.fileLength;
 	
 	// open file to write
 	FILE * fp = fopen(filename, "wb");
@@ -183,7 +183,7 @@ int mof_save(const char * filename, const MOFData * data)
 	}
 	
 	// do writing
-	unsigned long written = fwrite(buffer, sizeof(unsigned char), buf_len, fp);
+	size_t written = fwrite(buffer, sizeof(unsigned char), buf_len, fp);
 	
 	// close file
 	fclose(fp);
@@ -191,7 +191,7 @@ int mof_save(const char * filename, const MOFData * data)
 	if (written == buf_len) {
 		return 0; // ok
 	} else {
-		MOF_ASSERT(MOFFalse, "written error: %ld, buffer len: %ld", written, buf_len);
+		MOF_ASSERT(MOFFalse, "written error: %ld, buffer len: %u", written, buf_len);
 		return -3; // error
 	}
 }
@@ -199,15 +199,15 @@ int mof_save(const char * filename, const MOFData * data)
 #pragma mark - getter
 
 //// get id (index) for string
-//static unsigned long _string_id(const char * string, const MOFData * data)
+//static MOFUInteger _string_id(MOFString string, const MOFData * data)
 //{
 //	const unsigned char * buffer = (const unsigned char *)data;
 //	const unsigned char * start = buffer + data->body.stringsBuffer.offset;
 //	const unsigned char * end = start + data->body.stringsBuffer.length;
 //	// head of the strings buffer is the total 'count'
-//	unsigned long * count = (unsigned long *)start;
-//	const unsigned char * p = start + sizeof(unsigned long); // start reading after 'count'
-//	unsigned long i;
+//	MOFUInteger * count = (MOFUInteger *)start;
+//	const unsigned char * p = start + sizeof(MOFUInteger); // start reading after 'count'
+//	MOFUInteger i;
 //	MOFStringItem * item;
 //	for (i = 0; i < *count && p < end; ++i) {
 //		item = (MOFStringItem *)p;
@@ -220,15 +220,15 @@ int mof_save(const char * filename, const MOFData * data)
 //}
 
 // get string by id (index)
-static MOFString _string_by_id(const unsigned long index, const MOFData * data)
+static MOFString _string_by_id(const MOFUInteger index, const MOFData * data)
 {
 	const unsigned char * buffer = (const unsigned char *)data;
 	const unsigned char * start = buffer + data->body.stringsBuffer.offset;
 	const unsigned char * end = start + data->body.stringsBuffer.length;
 	// head of the strings buffer is the total 'count'
-	unsigned long * count = (unsigned long *)start;
-	const unsigned char * p = start + sizeof(unsigned long); // start reading after 'count'
-	unsigned long i;
+	MOFUInteger * count = (MOFUInteger *)start;
+	const unsigned char * p = start + sizeof(MOFUInteger); // start reading after 'count'
+	MOFUInteger i;
 	MOFStringItem * item;
 	for (i = 0; i < *count && p < end; ++i) {
 		item = (MOFStringItem *)p;
@@ -257,19 +257,19 @@ const MOFDataItem * mof_items_end(const MOFData * data)
 {
 	const MOFDataBody * body = &data->body;
 	const MOFBufferInfo * buffer = &body->itemsBuffer;
-	unsigned long count = buffer->length / sizeof(MOFDataItem);
+	MOFUInteger count = buffer->length / sizeof(MOFDataItem);
 	MOF_ASSERT(count > 0, "items count must > 0");
 	return body->items + count;
 }
 
 // get item with global index
-const MOFDataItem * mof_item(const unsigned long index, const MOFData * data)
+const MOFDataItem * mof_item(const MOFUInteger index, const MOFData * data)
 {
 	const MOFDataBody * body = &data->body;
 	const MOFBufferInfo * buffer = &body->itemsBuffer;
-	unsigned long count = buffer->length / sizeof(MOFDataItem);
+	MOFUInteger count = buffer->length / sizeof(MOFDataItem);
 	if (index >= count) {
-		MOF_ASSERT(MOFFalse, "out of range: %ld >= %ld", index, count);
+		MOF_ASSERT(MOFFalse, "out of range: %d >= %d", index, count);
 		return NULL;
 	}
 	return body->items + index;

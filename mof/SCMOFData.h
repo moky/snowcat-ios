@@ -15,7 +15,7 @@
 }
 
 // create an initialized buffer with length
-- (instancetype) initWithLength:(unsigned long)bufferLength;
+- (instancetype) initWithLength:(NSUInteger)bufferLength;
 
 // init and call 'loadFromFile:'
 - (instancetype) initWithFile:(NSString *)filename;

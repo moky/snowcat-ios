@@ -148,7 +148,7 @@
 	
 	// get file size
 	fseek(fp, 0, SEEK_END);
-	unsigned long size = ftell(fp);
+	long size = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 	
 	// create buffer for reading
@@ -175,9 +175,9 @@
 - (NSArray *) _parseStringsBuffer:(const unsigned char *)start end:(const unsigned char *)end
 {
 	// head of the strings buffer is the total 'count'
-	unsigned long * count = (unsigned long *)start;
-	const unsigned char * p = start + sizeof(unsigned long); // start reading after 'count'
-	unsigned long i;
+	MOFUInteger * count = (MOFUInteger *)start;
+	const unsigned char * p = start + sizeof(MOFUInteger); // start reading after 'count'
+	NSUInteger i;
 	MOFStringItem * item;
 	
 	NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:*count];
@@ -186,7 +186,7 @@
 		item = (MOFStringItem *)p;
 		//string = [NSString stringWithCString:item->string encoding:NSUTF8StringEncoding];
 		string = [NSString stringWithUTF8String:item->string];
-		NSAssert(string, @"string error: %s, offset: %ld / %ld", item->string, i, *count);
+		NSAssert(string, @"string error: %s, offset: %u / %u", item->string, (unsigned int)i, *count);
 		if (string) {
 			[mArray addObject:string];
 		}
@@ -329,7 +329,7 @@
 	
 	// 2. error? try from the origin data
 	const MOFData * data = (const MOFData *)_dataBuffer;
-	const char * string = mof_str(item, data);
+	MOFString string = mof_str(item, data);
 	NSAssert(string != NULL, @"error string item");
 	if (string) {
 		return [NSString stringWithUTF8String:string];
