@@ -201,6 +201,18 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 	return _temporaryDirectory;
 }
 
+#pragma mark Checkup
+
+- (BOOL) isPad
+{
+	return [self.deviceModel rangeOfString:@"iPad"].location != NSNotFound;
+}
+
+- (BOOL) isRetina
+{
+	return self.screenScale > 1.5f;
+}
+
 @end
 
 @implementation SCClient (HTTP)

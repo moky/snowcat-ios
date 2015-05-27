@@ -138,8 +138,8 @@
 - (NSString *) appendDeviceSuffix
 {
 	SCClient * client = [SCClient getInstance];
-	BOOL ipad = [client.deviceModel rangeOfString:@"iPad"].location != NSNotFound;
-	BOOL retina = client.screenScale > 1.5f;
+	BOOL ipad = [client isPad];
+	BOOL retina = [client isRetina];
 	BOOL iphone5 = !ipad && retina && client.screenSize.height == 568.0f;
 	
 	NSFileManager * fm = [NSFileManager defaultManager];

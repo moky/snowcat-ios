@@ -34,6 +34,10 @@
 
 + (instancetype) getInstance;
 
+// checkup
+- (BOOL) isPad;
+- (BOOL) isRetina;
+
 @end
 
 @interface SCClient (HTTP)
