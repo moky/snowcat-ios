@@ -43,7 +43,7 @@ MOFData * mof_create(const MOFUInteger buf_len)
 	MOFData * data = (MOFData *)buffer;
 	
 	// data head
-	MOFDataHead * head = &data->head;
+	MOFDataHead * head = &(data->head);
 	
 	//-- protocol
 	head->format[0] = 'M';
@@ -72,7 +72,7 @@ MOFData * mof_create(const MOFUInteger buf_len)
 			 "Author: Moky@Beva, %d-%d-%d", 2014, 12, 10);
 	
 	// data body
-	MOFDataBody * body = &data->body;
+	MOFDataBody * body = &(data->body);
 	
 	body->itemsBuffer.offset = sizeof(MOFData);
 	//body->itemsBuffer.length = sizeof(MOFDataItem) * MOFItemsCountMax;
@@ -91,7 +91,7 @@ void mof_destroy(void * data)
 // check data format
 MOFInteger mof_check(const MOFData * data)
 {
-	const MOFDataHead * head = &data->head;
+	const MOFDataHead * head = &(data->head);
 	
 	// 1. format
 	if (head->format[0] != 'M' || head->format[1] != 'O' || head->format[2] != 'F' || head->format[3] != '\0') {
@@ -103,7 +103,7 @@ MOFInteger mof_check(const MOFData * data)
 		return MOFErrorVersion;
 	}
 	
-	const MOFDataBody * body = &data->body;
+	const MOFDataBody * body = &(data->body);
 	MOFUInteger buf_len = sizeof(MOFData) + body->itemsBuffer.length + body->stringsBuffer.length;
 	
 	// 3. file length
@@ -126,7 +126,7 @@ MOFInteger mof_check(const MOFData * data)
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(MOFCString filename)
+const MOFData * mof_load(const char * __restrict filename)
 {
 	FILE * fp = fopen(filename, "rb");
 	if (!fp) {
@@ -160,12 +160,12 @@ const MOFData * mof_load(MOFCString filename)
 		return data;
 	} else {
 		MOF_ASSERT(MOFFalse, "data file error: %s, code: %d", filename, err);
-		mof_destroy(buffer);
+		free(buffer);
 		return NULL;
 	}
 }
 
-MOFInteger mof_save(MOFCString filename, const MOFData * data)
+MOFInteger mof_save(const char * __restrict filename, const MOFData * data)
 {
 	MOFInteger err = mof_check(data);
 	if (err != MOFCorrect) {
@@ -196,7 +196,7 @@ MOFInteger mof_save(MOFCString filename, const MOFData * data)
 	}
 }
 
-#pragma mark - getter
+#pragma mark - getters
 
 //// get id (index) for string
 //static MOFUInteger _string_id(MOFCString string, const MOFData * data)
@@ -255,8 +255,8 @@ const MOFDataItem * mof_items_start(const MOFData * data)
 // get tail of items (next of the last item)
 const MOFDataItem * mof_items_end(const MOFData * data)
 {
-	const MOFDataBody * body = &data->body;
-	const MOFBufferInfo * buffer = &body->itemsBuffer;
+	const MOFDataBody * body = &(data->body);
+	const MOFBufferInfo * buffer = &(body->itemsBuffer);
 	MOFUInteger count = buffer->length / sizeof(MOFDataItem);
 	MOF_ASSERT(count > 0, "items count must > 0");
 	return body->items + count;
@@ -265,8 +265,8 @@ const MOFDataItem * mof_items_end(const MOFData * data)
 // get item with global index
 const MOFDataItem * mof_item(const MOFUInteger index, const MOFData * data)
 {
-	const MOFDataBody * body = &data->body;
-	const MOFBufferInfo * buffer = &body->itemsBuffer;
+	const MOFDataBody * body = &(data->body);
+	const MOFBufferInfo * buffer = &(body->itemsBuffer);
 	MOFUInteger count = buffer->length / sizeof(MOFDataItem);
 	if (index >= count) {
 		MOF_ASSERT(MOFFalse, "out of range: %d >= %d", index, count);

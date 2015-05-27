@@ -11,7 +11,10 @@
 
 /**
  *
- *    Size and alignment of integer data types in OS X and iOS:
+ *    Major 64-Bit Changes
+ *
+ *
+ *    Table 1-1 Size and alignment of integer data types in OS X and iOS:
  *
  *    /============+============+=================+===========+================\
  *    | Data type  | ILP32 size | ILP32 alignment | LP64 size | LP64 alignment |
@@ -43,41 +46,53 @@
  *    | off_t      | 8 bytes    | 4 bytes         | 8 bytes   | 8 bytes        |
  *    \============+============+=================+===========+================/
  *
+ *    Table 1-2 Size of floating-point data types in OS X and iOS
+ *
+ *    /============+============+===========\
+ *    | Data type  | ILP32 size | LP64 size |
+ *    +============+============+===========+
+ *    | float      | 4 bytes    | 4 bytes   |
+ *    +------------+------------+-----------+
+ *    | double     | 8 bytes    | 8 bytes   |
+ *    +------------+------------+-----------+
+ *    | CGFloat    | 4 bytes    | 8 bytes   |
+ *    \============+============+===========/
+ *
  */
 
 //
 // data type
 //
-#define MOFCString  const char *
-#define MOFChar     char
-#define MOFUChar    unsigned char
+#define MOFCString                 const char *
+#define MOFChar                    char
+#define MOFUChar                   unsigned char
 
-#define MOFByte     char
-#define MOFUByte    unsigned char
-#define MOFShort    short
-#define MOFUShort   unsigned short
-#define MOFInteger  int
-#define MOFUInteger unsigned int
-#define MOFFloat    float
-#define MOFBool     char
+#define MOFByte                    char
+#define MOFUByte                   unsigned char
+#define MOFShort                   short
+#define MOFUShort                  unsigned short
+#define MOFInteger                 int
+#define MOFUInteger                unsigned int
+#define MOFFloat                   float
+#define MOFBool                    char
 
-#define MOFTrue     1
-#define MOFFalse    0
+#define MOFTrue                    1
+#define MOFFalse                   0
 
-// items count for dictionary/array
-#define MOFArrayItemsCountMax      0xffff
-#define MOFDictionaryItemsCountMax 0xffff
+// items count for each dictionary/array
+#define MOFArrayItemsCountMax      0xffff     /* 65,535 (64K) */
+#define MOFDictionaryItemsCountMax 0xffff     /* 65,535 (64K) */
 
-// items count for global
-#define MOFItemsCountMax           0xffffffff
+// items count for global item buffer
+#define MOFItemsCountMax           0xffffffff /* 4,294,967,295 (4G) */
 
 // max string length
-#define MOFStringLengthMax         0xffff
+#define MOFStringLengthMax         0xffff     /* 65,535 (64K) */
 // strings count for global string buffer
-#define MOFStringsCountMax         0xffffffff
+#define MOFStringsCountMax         0xffffffff /* 4,294,967,295 (4G) */
 
 #define MOFStringNotFound          MOFStringsCountMax
-#define MOFKeyNotFound             MOFStringsCountMax
+#define MOFKeyNotFound             MOFStringNotFound
 
 //
 // error code
@@ -117,7 +132,7 @@ typedef struct {
 } MOFStringItem;
 
 //
-// data item
+// data item (8 bytes)
 //
 typedef struct {
 	MOFUByte        type;        // 0 - 255
@@ -139,7 +154,7 @@ typedef struct {
 } MOFDataItem;
 
 //
-// data body
+// data body (8 bytes)
 //
 typedef struct {
 	MOFUInteger offset; // offset of memory buffer (from data head)
@@ -154,7 +169,7 @@ typedef struct {
 } MOFDataBody;
 
 //
-// data head
+// data head (160 bytes)
 //
 typedef struct {
 	// protocol
@@ -163,6 +178,7 @@ typedef struct {
 	MOFUByte    subVersion;
 	MOFUChar    reserved[2]; // reserved for bytes alignment
 	MOFUInteger fileLength;
+	MOFUChar    extra[20];   // reserved for extra info
 	// info
 	MOFUChar    description[64];
 	MOFUChar    copyright[32];

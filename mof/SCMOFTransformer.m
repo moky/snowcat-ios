@@ -271,7 +271,7 @@ static void _destroyBuffer(void * buffer)
 	self = [self initWithLength:bufferLength];
 	if (self) {
 		MOFData * data = (MOFData *)_dataBuffer;
-		MOFDataBody * body = &data->body;
+		MOFDataBody * body = &(data->body);
 		unsigned char * p = (unsigned char *)body->items;
 		
 		// copy items buffer

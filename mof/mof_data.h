@@ -18,8 +18,8 @@ MOFInteger mof_check (const MOFData * data); // check data format, 0 means corre
 
 #pragma mark - Input/Output
 
-const MOFData * mof_load(MOFCString filename);
-MOFInteger      mof_save(MOFCString filename, const MOFData * data);
+const MOFData * mof_load(const char * __restrict filename);
+MOFInteger      mof_save(const char * __restrict filename, const MOFData * data);
 
 #pragma mark - getters
 
