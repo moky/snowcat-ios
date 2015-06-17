@@ -16,6 +16,8 @@
 
 
 //------------------------------------------------------------- file path suffix
+#define SC_PATH_SUFFIX_736H                 @"-736h"
+#define SC_PATH_SUFFIX_667H                 @"-667h"
 #define SC_PATH_SUFFIX_568H                 @"-568h"
 #define SC_PATH_SUFFIX_IPHONE               @"~iphone"
 #define SC_PATH_SUFFIX_IPAD                 @"~ipad"

@@ -9,6 +9,7 @@
 #import "SCLog.h"
 #import "SCString.h"
 #import "SCString+Extension.h"
+#import "SCString+DeviceSuffix.h"
 #import "SCURL.h"
 
 @implementation SCURL

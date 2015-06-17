@@ -23,9 +23,6 @@
 // "/path/to/../something" => "/path/something"
 - (NSString *) simplifyPath;
 
-// append suffix like "@2x", "~ipad", "~iphone", "-568h@2x", ...
-- (NSString *) appendDeviceSuffix;
-
 // replace env vars '${...}', such as '${app}', '${docs}', '${caches}' or '${tmp}' ...
 - (NSString *) fullFilePath;
 - (NSString *) fullFilePath:(NSString *)baseDir;

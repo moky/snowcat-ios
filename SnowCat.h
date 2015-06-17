@@ -54,6 +54,7 @@
 #import "SCObject.h"
 #import "SCString.h"
 #import "SCString+Extension.h"
+#import "SCString+DeviceSuffix.h"
 #import "SCDate+Extension.h"
 #import "SCDictionary.h"
 #import "SCArray.h"
