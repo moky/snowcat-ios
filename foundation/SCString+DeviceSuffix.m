@@ -31,7 +31,7 @@ NS_INLINE NSString * retina3x_path(NSString * filename, NSString * ext) {
 	NSFileManager * fm = [NSFileManager defaultManager];
 	BOOL isDirectory = NO;
 	
-	NSString * path = [filename stringByAppendingString:@"3x"];
+	NSString * path = [filename stringByAppendingString:@"@3x"];
 	
 	// Retina
 	path = [path stringByAppendingPathExtension:ext];
