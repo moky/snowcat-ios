@@ -56,6 +56,7 @@
 #import "SCString+Extension.h"
 #import "SCDate+Extension.h"
 #import "SCDictionary.h"
+#import "SCArray.h"
 #import "SCURL.h"
 #import "SCURLRequest.h"
 #import "SCFileManager.h"

@@ -185,9 +185,12 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	
 	self = [self initWithData:data];
 	
-	[_delegate onDataLoad:data withURL:url];
-	
-	self.downloader = nil; // remove downloader
+	// self might be nil when data is wrong
+	if (self) {
+		[_delegate onDataLoad:data withURL:url];
+		
+		self.downloader = nil; // remove downloader
+	}
 }
 
 - (void) onDataError:(NSData *)data withURL:(NSURL *)url
