@@ -7,6 +7,7 @@
 //
 
 #import "SCDictionary.h"
+#import "SCGeometry.h"
 #import "SCTableViewCell.h"
 #import "SCComplexTableViewDataSource.h"
 
@@ -49,13 +50,16 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 	
 	NSInteger totalCount = [handler numberOfRowsInSection:section];
 	
+	CGFloat rowWidth = tableView.bounds.size.width;
+	CGFloat rowHeight = tableView.rowHeight;
+	CGRect frame = CGRectMake(0.0f, 0.0f, rowWidth, rowHeight);
 	NSString * size = [[template objectForKey:@"contentView"] objectForKey:@"size"];
-	CGSize s = CGSizeFromString(size);
-	if (s.width < 1) {
+	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
+	if (s.width < 1.0f) {
 		return totalCount;
 	}
 	
-	int cpl = floor(tableView.bounds.size.width / s.width); // count per line
+	int cpl = floor(rowWidth / s.width); // count per line
 	NSAssert(cpl > 0, @"error");
 	return ceil((float)totalCount / cpl);
 }
@@ -68,9 +72,12 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 	NSDictionary * template = [handler cellTemplateForSection:indexPath.section];
 	NSAssert(!template || [template isKindOfClass:[NSDictionary class]], @"cell template's definition error: %@", template);
 	
+	CGFloat rowWidth = tableView.bounds.size.width;
+	CGFloat rowHeight = tableView.rowHeight;
+	CGRect frame = CGRectMake(0.0f, 0.0f, rowWidth, rowHeight);
 	NSString * size = [[template objectForKey:@"contentView"] objectForKey:@"size"];
-	CGSize s = CGSizeFromString(size);
-	int cpl = s.width < 1 ? 1 : floor(tableView.bounds.size.width / s.width); // count per line
+	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
+	int cpl = s.width < 1 ? 1 : floor(rowWidth / s.width); // count per line
 	NSAssert(cpl > 0, @"error");
 	
 	if (cpl == 1) {
@@ -105,7 +112,7 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 			end = totalCount;
 		}
 		
-		CGFloat columnWidth = tableView.bounds.size.width / cpl;
+		CGFloat columnWidth = rowWidth / cpl;
 		
 		NSDictionary * item;
 		SCView * view;

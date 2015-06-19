@@ -11,6 +11,10 @@
 UIKIT_EXTERN CGSize CGSizeAspectFit(CGSize fromSize, CGSize toSize);
 UIKIT_EXTERN CGSize CGSizeAspectFill(CGSize fromSize, CGSize toSize);
 
+UIKIT_EXTERN CGRect CGRectFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+UIKIT_EXTERN CGSize CGSizeFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+UIKIT_EXTERN CGPoint CGPointFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+
 UIKIT_EXTERN CGRect CGRectFromStringWithNode(NSString * string, id node);
 UIKIT_EXTERN CGSize CGSizeFromStringWithNode(NSString * string, id node);
 UIKIT_EXTERN CGPoint CGPointFromStringWithNode(NSString * string, id node);
