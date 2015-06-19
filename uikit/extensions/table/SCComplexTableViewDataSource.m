@@ -54,13 +54,18 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 	CGFloat rowHeight = tableView.rowHeight;
 	CGRect frame = CGRectMake(0.0f, 0.0f, rowWidth, rowHeight);
 	NSString * size = [[template objectForKey:@"contentView"] objectForKey:@"size"];
-	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
-	if (s.width < 1.0f) {
+	if (!size) {
 		return totalCount;
 	}
 	
-	int cpl = floor(rowWidth / s.width); // count per line
+	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
+	int cpl = s.width < 1.0f ? 1 : floor(rowWidth / s.width); // count per line
 	NSAssert(cpl > 0, @"error");
+	if (cpl <= 1) {
+		// single cell in each row
+		return totalCount;
+	}
+	
 	return ceil((float)totalCount / cpl);
 }
 
@@ -76,11 +81,11 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 	CGFloat rowHeight = tableView.rowHeight;
 	CGRect frame = CGRectMake(0.0f, 0.0f, rowWidth, rowHeight);
 	NSString * size = [[template objectForKey:@"contentView"] objectForKey:@"size"];
-	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
-	int cpl = s.width < 1 ? 1 : floor(rowWidth / s.width); // count per line
-	NSAssert(cpl > 0, @"error");
 	
-	if (cpl == 1) {
+	CGSize s = CGSizeFromStringWithRects(size, frame, frame);
+	int cpl = s.width < 1.0f ? 1 : floor(rowWidth / s.width); // count per line
+	NSAssert(cpl > 0, @"error");
+	if (cpl <= 1) {
 		// single cell in each row
 		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 	}
