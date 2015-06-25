@@ -7,6 +7,7 @@
 //
 
 #import "scMacros.h"
+#import "SCClient.h"
 #import "SCMemoryCache.h"
 #import "SCURL.h"
 #import "SCImage.h"
@@ -44,6 +45,31 @@ UIImageOrientation UIImageOrientationFromString(NSString * string)
 	SC_SWITCH_END
 	
 	return UIImageOrientationUp;
+}
+
+static UIImage * UIImageFromFile(NSString * filename, BOOL autorelease) {
+	NSData * data = [[NSData alloc] initWithContentsOfFile:filename];
+	if (!data) {
+		return nil;
+	}
+	
+	UIImage * image = nil;
+#ifdef __IPHONE_6_0
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion >= 6.0f) {
+		if ([filename rangeOfString:@"@2x"].location != NSNotFound) {
+			image = [[UIImage alloc] initWithData:data scale:2.0f];
+		} else if ([filename rangeOfString:@"@3x"].location != NSNotFound) {
+			image = [[UIImage alloc] initWithData:data scale:3.0f];
+		}
+	}
+#endif
+	if (!image) {
+		image = [[UIImage alloc] initWithData:data];
+	}
+	[data release];
+	
+	return autorelease ? [image autorelease] : image;
 }
 
 @implementation UIImage (IO)
@@ -152,10 +178,10 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	}
 	
 	// full path
-	SCURL * url = [[SCURL alloc] initWithString:filename isDirectory:NO];
+	SCURL * url = [[SCURL alloc] initWithString:filename isDirectory:NO]; // detect high-resolution image automatically
 	if ([url isFileURL]) {
 		// load image from local file
-		image = [[UIImage alloc] initWithContentsOfFile:[url path]]; // detect high-resolution image automatically
+		image = UIImageFromFile([url path], NO);
 	} else {
 		SCDataLoader * downloader = [[SCDataLoader alloc] initWithContentsOfURL:url delegate:nil];
 		if (downloader.data.length > 0) {

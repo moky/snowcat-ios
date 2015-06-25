@@ -158,7 +158,18 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 - (NSString *) version
 {
 	if (!_version) {
-		self.version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+		NSDictionary * dict = [[NSBundle mainBundle] infoDictionary];
+		NSString * build = [dict objectForKey:@"CFBundleVersion"];
+		NSString * version = [dict objectForKey:@"CFBundleShortVersionString"];
+		if (version) {
+			if (build && ![build isEqualToString:version]) {
+				self.version = [NSString stringWithFormat:@"%@(%@)", version, build];
+			} else {
+				self.version = version;
+			}
+		} else {
+			self.version = build;
+		}
 	}
 	return _version;
 }
