@@ -3,7 +3,7 @@
 //  SnowCat
 //
 //  Created by Moky on 15-1-21.
-//  Copyright (c) 2015 Moky. All rights reserved.
+//  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
 #import "SCFiniteStateMachine.h"

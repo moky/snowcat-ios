@@ -3,7 +3,7 @@
 //  SnowCat
 //
 //  Created by Moky on 14-7-10.
-//  Copyright (c) 2014 Moky. All rights reserved.
+//  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

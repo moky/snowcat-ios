@@ -3,7 +3,7 @@
 //  SnowCat
 //
 //  Created by Moky on 14-4-3.
-//  Copyright (c) 2014 Moky. All rights reserved.
+//  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
 #import "SCTextFieldDelegate.h"
