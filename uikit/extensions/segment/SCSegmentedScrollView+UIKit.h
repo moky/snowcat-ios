@@ -29,4 +29,6 @@ UIKIT_EXTERN UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPo
 @property(nonatomic, readwrite) BOOL animated;
 @property(nonatomic, readwrite) NSUInteger selectedIndex;
 
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView;
+
 @end

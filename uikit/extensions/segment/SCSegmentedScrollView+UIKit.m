@@ -198,17 +198,21 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 
 - (void) setControlView:(UIView *)controlView
 {
-	NSAssert([self.subviews count] == 0, @"unexpected subview(s)");
 	if (_controlView != controlView) {
-		// add new one
-		[super addSubview:controlView];
+		if (controlView) {
+			NSAssert([self.subviews count] == 0, @"unexpected subview(s)");
+			// add new one
+			[super addSubview:controlView];
+		}
 		
-		// remove old one
+		// replace old one
 		[_controlView removeFromSuperview];
-		
 		_controlView = controlView;
-		// position
-		[self _positionControlView];
+		
+		if (controlView) {
+			// position
+			[self _positionControlView];
+		}
 	}
 }
 
@@ -243,7 +247,7 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 		[self _resetScrollView:scrollView];
 		
 		// set delegate for scrolling
-		NSAssert(scrollView.delegate == nil, @"delegate's already been set");
+		//NSAssert(scrollView.delegate == nil, @"delegate's already been set");
 		if (scrollView.delegate == nil) {
 			scrollView.delegate = self;
 		}
@@ -256,7 +260,7 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 		UIScrollView * scrollView = (UIScrollView *)subview;
 		
 		// set delegate for scrolling
-		NSAssert(scrollView.delegate == self, @"delegate error");
+		//NSAssert(scrollView.delegate == self, @"delegate error");
 		if (scrollView.delegate == self) {
 			scrollView.delegate = nil;
 		}
