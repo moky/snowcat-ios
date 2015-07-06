@@ -125,13 +125,33 @@ static NSUInteger _processNumber(NSNumber * number,
 		return 0;
 	}
 	
-	NSString * string = [number stringValue];
-	if ([string rangeOfString:@"."].location != NSNotFound) {
-		pItemBuffer->type = MOFDataItemTypeFloat;
-		pItemBuffer->floatValue = [number floatValue];
-	} else {
+	if (number == (void *)kCFBooleanFalse) {                            // bool
+		pItemBuffer->type = MOFDataItemTypeBool;
+		pItemBuffer->boolValue = MOFFalse;
+	} else if (number == (void *)kCFBooleanTrue) {
+		pItemBuffer->type = MOFDataItemTypeBool;
+		pItemBuffer->boolValue = MOFTrue;
+	} else if (strcmp(number.objCType, @encode(MOFInteger)) == 0) {     // int
 		pItemBuffer->type = MOFDataItemTypeInteger;
 		pItemBuffer->intValue = [number intValue];
+	} else if (strcmp(number.objCType, @encode(long)) == 0) {
+		pItemBuffer->type = MOFDataItemTypeInteger;
+		pItemBuffer->intValue = [number intValue];
+	} else if (strcmp(number.objCType, @encode(MOFFloat)) == 0) {       // float
+		pItemBuffer->type = MOFDataItemTypeFloat;
+		pItemBuffer->floatValue = [number floatValue];
+	} else if (strcmp(number.objCType, @encode(double)) == 0) {
+		pItemBuffer->type = MOFDataItemTypeFloat;
+		pItemBuffer->floatValue = [number doubleValue];
+	} else {
+		NSString * string = [number stringValue];
+		if ([string rangeOfString:@"."].location != NSNotFound) {
+			pItemBuffer->type = MOFDataItemTypeFloat;
+			pItemBuffer->floatValue = [number floatValue];
+		} else {
+			pItemBuffer->type = MOFDataItemTypeInteger;
+			pItemBuffer->intValue = [number intValue];
+		}
 	}
 	
 	return 1;
@@ -230,11 +250,11 @@ static unsigned char * _createStringsBuffer(NSArray * stringsArray,
 		
 		item = (MOFStringItem *)p;
 		// entire item length, includes 'sizeof(length)' and the last '\0' of string
-		item->length = sizeof(MOFStringItem) + len + 1;
+		item->size = sizeof(MOFStringItem) + len + 1;
 		strncpy(item->string, str, len);
 		item->string[len] = '\0';
 		
-		p += item->length;
+		p += item->size;
 	}
 	
 	*pBufferLength = p - pBuffer;

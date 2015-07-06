@@ -235,7 +235,7 @@ static MOFCString _string_by_id(const MOFUInteger index, const MOFData * data)
 		if (i == index) {
 			return item->string;
 		}
-		p += item->length; // move to next string item
+		p += item->size; // move to next string item
 	}
 	return NULL;
 }

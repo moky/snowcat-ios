@@ -190,7 +190,7 @@
 		if (string) {
 			[mArray addObject:string];
 		}
-		p += item->length; // move to next string item
+		p += item->size; // move to next string item
 	}
 	return [mArray autorelease];
 }
@@ -219,18 +219,6 @@
 	return [self _parseItem:item];
 }
 
-//typedef enum {
-//	MOFDataItemTypeKey,         // 0 (key for dictionary)
-//	
-//	MOFDataItemTypeArray,       // 1
-//	MOFDataItemTypeDictionary,  // 2
-//	
-//	MOFDataItemTypeString,      // 3
-//	MOFDataItemTypeInteger,     // 4
-//	MOFDataItemTypeFloat,       // 5
-//	MOFDataItemTypeBool,        // 6
-//	MOFDataItemTypeUnknown      // ?
-//} MOFDataItemType;
 - (NSObject *) _parseItem:(const MOFDataItem *)item
 {
 	NSObject * object = nil;
@@ -350,7 +338,7 @@
 
 - (NSNumber *) _parseBoolItem:(const MOFDataItem *)item
 {
-	return [NSNumber numberWithBool:mof_bool(item)];
+	return [NSNumber numberWithBool:(mof_bool(item) != MOFFalse)];
 }
 
 @end

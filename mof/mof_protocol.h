@@ -110,14 +110,14 @@ enum {
 //
 typedef enum {
 	MOFDataItemTypeKey,         // 0 (key for dictionary)
-	
-	MOFDataItemTypeArray,       // 1
-	MOFDataItemTypeDictionary,  // 2
+	MOFDataItemTypeDictionary,  // 1
+	MOFDataItemTypeArray,       // 2
 	
 	MOFDataItemTypeString,      // 3
 	MOFDataItemTypeInteger,     // 4
 	MOFDataItemTypeFloat,       // 5
 	MOFDataItemTypeBool,        // 6
+	
 	MOFDataItemTypeUnknown      // ?
 } MOFDataItemType;
 
@@ -127,7 +127,11 @@ typedef enum {
 // string item in strings buffer
 //
 typedef struct {
-	MOFUShort length;    // entire item length, includes 'sizeof(length)' and the last '\0' of string
+	// NOTICE:
+	// it's the size of entire item, includes 'sizeof(length)' and the last '\0' of string
+	// NOT only the length of string
+	MOFUShort size;
+	
 	MOFChar   string[0]; // head of string buffer
 } MOFStringItem;
 
@@ -142,14 +146,16 @@ typedef struct {
 		MOFUInteger keyId;       // 0 - 4,294,967,295 (4G)
 		// string
 		MOFUInteger stringId;    // 0 - 4,294,967,295 (4G)
-		// count (for dictionary/array)
-		MOFUShort   count;       // 0 - 65,535 (64K)
+		
 		// numeric
 		MOFInteger  intValue;
 		MOFUInteger uintValue;
 		MOFFloat    floatValue;
 		// bool
 		MOFBool     boolValue;
+		
+		// count (for dictionary/array)
+		MOFUShort   count;       // 0 - 65,535 (64K)
 	};
 } MOFDataItem;
 
