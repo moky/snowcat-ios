@@ -109,16 +109,17 @@ enum {
 // type for data item
 //
 typedef enum {
-	MOFDataItemTypeKey,         // 0 (key for dictionary)
-	MOFDataItemTypeDictionary,  // 1
-	MOFDataItemTypeArray,       // 2
+	MOFDataItemTypeKey,             // 0 (key for dictionary)
+	MOFDataItemTypeDictionary,      // 1
+	MOFDataItemTypeArray,           // 2
 	
-	MOFDataItemTypeString,      // 3
-	MOFDataItemTypeInteger,     // 4
-	MOFDataItemTypeFloat,       // 5
-	MOFDataItemTypeBool,        // 6
+	MOFDataItemTypeString,          // 3
+	MOFDataItemTypeInteger,         // 4
+	MOFDataItemTypeUnsignedInteger, // 5
+	MOFDataItemTypeFloat,           // 6
+	MOFDataItemTypeBool,            // 7
 	
-	MOFDataItemTypeUnknown      // ?
+	MOFDataItemTypeUnknown          // ?
 } MOFDataItemType;
 
 #pragma pack(1)

@@ -125,25 +125,36 @@ static NSUInteger _processNumber(NSNumber * number,
 		return 0;
 	}
 	
-	if (number == (void *)kCFBooleanFalse) {                            // bool
+	const char * type = number.objCType;
+	
+	// bool
+	if ([number isKindOfClass:[[NSNumber numberWithBool:YES] class]])
+	//if (number == (void *)kCFBooleanFalse || number == (void *)kCFBooleanTrue)
+	{
 		pItemBuffer->type = MOFDataItemTypeBool;
-		pItemBuffer->boolValue = MOFFalse;
-	} else if (number == (void *)kCFBooleanTrue) {
-		pItemBuffer->type = MOFDataItemTypeBool;
-		pItemBuffer->boolValue = MOFTrue;
-	} else if (strcmp(number.objCType, @encode(MOFInteger)) == 0) {     // int
+		pItemBuffer->boolValue = [number boolValue] ? MOFTrue : MOFFalse;
+	}
+	// int
+	else if (strcmp(type, @encode(int)) == 0 || strcmp(type, @encode(long)) == 0)
+	{
 		pItemBuffer->type = MOFDataItemTypeInteger;
 		pItemBuffer->intValue = [number intValue];
-	} else if (strcmp(number.objCType, @encode(long)) == 0) {
-		pItemBuffer->type = MOFDataItemTypeInteger;
-		pItemBuffer->intValue = [number intValue];
-	} else if (strcmp(number.objCType, @encode(MOFFloat)) == 0) {       // float
+	}
+	// unsigned
+	else if (strcmp(type, @encode(unsigned int)) == 0 || strcmp(type, @encode(unsigned long)) == 0)
+	{
+		pItemBuffer->type = MOFDataItemTypeUnsignedInteger;
+		pItemBuffer->uintValue = [number unsignedIntValue];
+	}
+	// float
+	else if (strcmp(type, @encode(float)) == 0 || strcmp(type, @encode(double)) == 0)
+	{
 		pItemBuffer->type = MOFDataItemTypeFloat;
 		pItemBuffer->floatValue = [number floatValue];
-	} else if (strcmp(number.objCType, @encode(double)) == 0) {
-		pItemBuffer->type = MOFDataItemTypeFloat;
-		pItemBuffer->floatValue = [number doubleValue];
-	} else {
+	}
+	// unrecognized
+	else
+	{
 		NSString * string = [number stringValue];
 		if ([string rangeOfString:@"."].location != NSNotFound) {
 			pItemBuffer->type = MOFDataItemTypeFloat;
