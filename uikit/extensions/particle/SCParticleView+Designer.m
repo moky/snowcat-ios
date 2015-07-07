@@ -7,6 +7,7 @@
 //
 
 #import "SCUIKit.h"
+#import "SCImage.h"
 #import "SCEmitterCell.h"
 #import "SCEmitterLayer.h"
 #import "SCParticleView.h"
@@ -82,7 +83,7 @@
 	float particleLifespan = [[dict objectForKey:@"particleLifespan"] floatValue];
 	float particleLifespanVariance = [[dict objectForKey:@"particleLifespanVariance"] floatValue];
 	
-	NSString * textureFileName = [dict objectForKey:@"textureFileName"];
+	id textureFileName = [dict objectForKey:@"textureFileName"];
 	
 	//
 	if (particleLifespan <= 0.0f) {
@@ -93,14 +94,6 @@
 	
 	angle *= -M_PI / 180;
 	angleVariance *= -M_PI / 180;
-	
-	startColorRed *= 255.0f;
-	startColorGreen *= 255.0f;
-	startColorBlue *= 255.0f;
-	
-	finishColorRed *= 255.0f;
-	finishColorGreen *= 255.0f;
-	finishColorBlue *= 255.0f;
 	
 	float red = (startColorRed + finishColorRed) * 0.5f;
 	float green = (startColorGreen + finishColorGreen) * 0.5f;
@@ -123,38 +116,40 @@
 	float spin = (rotationEnd + rotationStart) * 0.5f;
 	float spinRange = rotationEnd - spin;
 	
-	//NSMutableDictionary * mDict = [dict mutableCopy];
-	NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithCapacity:[dict count]];
 	//-------------------------------------------- emitter cell attributes begin
 	
 	// name                   : 粒子的名字
-	[mDict setObject:[NSNumber numberWithBool:textureFileName != nil] forKey:@"enabled"];
-	[mDict setObject:[NSNumber numberWithFloat:birthRate] forKey:@"birthRate"];
-	[mDict setObject:[NSNumber numberWithFloat:particleLifespan] forKey:@"lifetime"];
-	[mDict setObject:[NSNumber numberWithFloat:particleLifespanVariance] forKey:@"lifetimeRange"];
+	// enabled                : 粒子是否被渲染
+	cell.birthRate = birthRate;
+	cell.lifetime = particleLifespan;
+	cell.lifetimeRange = particleLifespanVariance;
 	// emissionLatitude       : 发射的z轴方向的角度
-	[mDict setObject:[NSNumber numberWithFloat:angle] forKey:@"emissionLongitude"];
-	[mDict setObject:[NSNumber numberWithFloat:angleVariance] forKey:@"emissionRange"];
-	[mDict setObject:[NSNumber numberWithFloat:speed] forKey:@"velocity"];
-	[mDict setObject:[NSNumber numberWithFloat:speedVariance] forKey:@"velocityRange"];
-	[mDict setObject:[NSNumber numberWithFloat:gravityx] forKey:@"xAcceleration"];
-	[mDict setObject:[NSNumber numberWithFloat:gravityy] forKey:@"yAcceleration"];
+	cell.emissionLongitude = angle;
+	cell.emissionRange = angleVariance;
+	cell.velocity = speed;
+	cell.velocityRange = speedVariance;
+	cell.xAcceleration = gravityx;
+	cell.yAcceleration = gravityy;
 	// zAcceleration          : 粒子z方向的加速度分量
 	// scale                  : 整体缩放比例（0.0~1.0）
 	// scaleRange             : 缩放比例变化范围
 	// scaleSpeed             : 缩放比例变化速度
-	[mDict setObject:[NSNumber numberWithFloat:spin] forKey:@"spin"];
-	[mDict setObject:[NSNumber numberWithFloat:spinRange] forKey:@"spinRange"];
-	[mDict setObject:[NSString stringWithFormat:@"{%.2f,%.2f,%.2f,%.2f}", red, green, blue, alpha] forKey:@"color"];
-	[mDict setObject:[NSNumber numberWithFloat:redRange] forKey:@"redRange"];
-	[mDict setObject:[NSNumber numberWithFloat:greenRange] forKey:@"greenRange"];
-	[mDict setObject:[NSNumber numberWithFloat:blueRange] forKey:@"blueRange"];
-	[mDict setObject:[NSNumber numberWithFloat:alphaRange] forKey:@"alphaRange"];
-	[mDict setObject:[NSNumber numberWithFloat:redSpeed] forKey:@"redSpeed"];
-	[mDict setObject:[NSNumber numberWithFloat:greenSpeed] forKey:@"greenSpeed"];
-	[mDict setObject:[NSNumber numberWithFloat:blueSpeed] forKey:@"blueSpeed"];
-	[mDict setObject:[NSNumber numberWithFloat:alphaSpeed] forKey:@"alphaSpeed"];
-	[mDict setObject:textureFileName forKey:@"contents"];
+	cell.spin = spin;
+	cell.spinRange = spinRange;
+	cell.color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha].CGColor;
+	cell.redRange = redRange;
+	cell.greenRange = greenRange;
+	cell.blueRange = blueRange;
+	cell.alphaRange = alphaRange;
+	cell.redSpeed = redSpeed;
+	cell.greenSpeed = greenSpeed;
+	cell.blueSpeed = blueSpeed;
+	cell.alphaSpeed = alphaSpeed;
+	if (textureFileName) {
+		UIImage * image = [SCImage create:textureFileName autorelease:NO];
+		cell.contents = (id)[image CGImage];
+		[image release];
+	}
 	// contentsRect           : 应该画在contents里的子rectangle
 	// minificationFilter     : 减小自己的大小
 	// magnificationFilter    : 增加自己的大小
@@ -163,8 +158,6 @@
 	// style
 	
 	//---------------------------------------------- emitter cell attributes end
-	SC_UIKIT_SET_ATTRIBUTES(cell, SCEmitterCell, mDict);
-	[mDict release];
 	
 	return YES;
 }
@@ -197,16 +190,27 @@
 	CGPoint emitterPosition = CGPointMake(sourcePositionx, sourcePositiony);
 	CGSize emitterSize = CGSizeMake(sourcePositionVariancex * 2.0f, sourcePositionVariancey * 2.0f);
 	
-	//NSMutableDictionary * mDict = [dict mutableCopy];
-	NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithCapacity:[dict count]];
 	//------------------------------------------- emitter layer attributes begin
+	if (sourcePositionVariancex < 1.0f) {
+		if (sourcePositionVariancey < 1.0f) {
+			layer.emitterShape = kCAEmitterLayerPoint;
+		} else {
+			layer.emitterShape = kCAEmitterLayerLine;
+		}
+	} else {
+		if (sourcePositionVariancey < 1.0f) {
+			layer.emitterShape = kCAEmitterLayerLine;
+		} else {
+			layer.emitterShape = kCAEmitterLayerRectangle;
+		}
+	}
 	
 	// emitterCells
 	// birthRate        : 发射源的个数，默认1.0。当前每秒产生的真实粒子数 = CAEmitterLayer的birthRate * 子粒子的birthRate
 	// lifetime         : 粒子生命周期
-	[mDict setObject:NSStringFromCGPoint(emitterPosition) forKey:@"emitterPosition"];
+	layer.emitterPosition = emitterPosition;
 	// emitterZPosition : 发射源的z坐标位置
-	[mDict setObject:NSStringFromCGSize(emitterSize) forKey:@"emitterSize"];
+	layer.emitterSize = emitterSize;
 	// emitterDepth     : 决定粒子形状的深度联系
 	// emitterShape     : 发射源的形状
 	// emitterMode      : 发射模式
@@ -218,8 +222,6 @@
 	// seed             : 用于初始化随机数产生的种子
 	
 	//--------------------------------------------- emitter layer attributes end
-	SC_UIKIT_SET_ATTRIBUTES(layer, SCEmitterLayer, mDict);
-	[mDict release];
 	
 	// cell attributes
 	CAEmitterCell * cell = [CAEmitterCell emitterCell];
