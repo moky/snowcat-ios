@@ -15,7 +15,7 @@
 
 @end
 
-@interface SCParticleView (Cocos2D)
+@interface SCParticleView (Designer)
 
 // use particle system data file to set attributes
 + (BOOL) setParticleAttributes:(NSDictionary *)dict toEmitterLayer:(CAEmitterLayer *)layer;

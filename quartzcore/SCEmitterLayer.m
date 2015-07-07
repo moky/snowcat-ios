@@ -149,7 +149,7 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSArray * emitterCells = [dict objectForKey:@"emitterCells"];
 	if (emitterCells) {
 		NSAssert([emitterCells isKindOfClass:[NSArray class]], @"emitterCells must be an array: %@", emitterCells);
-		emitterLayer.emitterCells = SCEmitterCellsFromArray(emitterCells);
+		emitterLayer.emitterCells = SCEmitterCellsFromArray(emitterCells, emitterLayer.emitterCells);
 	}
 	
 	// emitterShape

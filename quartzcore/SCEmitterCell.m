@@ -14,16 +14,31 @@
 #import "SCImage.h"
 #import "SCEmitterCell.h"
 
-NSArray * SCEmitterCellsFromArray(NSArray * array)
+NSArray * SCEmitterCellsFromArray(NSArray * array, NSArray * emitterCells)
 {
-	NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:[array count]];
+	if (!emitterCells) {
+		emitterCells = [NSArray array];
+	}
 	
-	NSEnumerator * enumerator = [array objectEnumerator];
+	NSUInteger arrayCount = [array count];
+	NSUInteger cellsCount = [emitterCells count];
+	
+	NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:MAX(arrayCount, cellsCount)];
+	
 	NSDictionary * item;
 	CAEmitterCell * cell;
-	while (item = [enumerator nextObject]) {
-		cell = [CAEmitterCell emitterCell];
-		[SCEmitterCell setAttributes:item to:cell];
+	for (NSUInteger index = 0; index < arrayCount || index < cellsCount; ++index) {
+		// get cell
+		if (index < cellsCount) {
+			cell = [emitterCells objectAtIndex:index];
+		} else {
+			cell = [CAEmitterCell emitterCell];
+		}
+		// get dict
+		if (index < arrayCount) {
+			item = [array objectAtIndex:index];
+			[SCEmitterCell setAttributes:item to:cell];
+		}
 		[mArray addObject:cell];
 	}
 	
@@ -119,7 +134,7 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSArray * emitterCells = [dict objectForKey:@"emitterCells"];
 	if (emitterCells) {
 		NSAssert([emitterCells isKindOfClass:[NSArray class]], @"emitterCells must be an array: %@", emitterCells);
-		emitterCell.emitterCells = SCEmitterCellsFromArray(emitterCells);
+		emitterCell.emitterCells = SCEmitterCellsFromArray(emitterCells, emitterCell.emitterCells);
 	}
 	
 	// style

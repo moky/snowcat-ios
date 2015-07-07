@@ -77,9 +77,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// 1. load from 'File' (ParticleSystem data format)
 	NSString * file = [dict objectForKey:@"File"];
 	if (file) {
-		SCLog(@"loading particle system data from file: %@", file);
+		SCLog(@"loading particle system data from file: %@ (Designer)", file);
 		NSDictionary * data = [SCDictionary dictionaryWithContentsOfFile:file];
 		CAEmitterLayer * emitter = [particleView emitter];
+		NSAssert([emitter isKindOfClass:[CAEmitterLayer class]], @"emitter error: %@", emitter);
 		[self setParticleAttributes:data toEmitterLayer:emitter];
 	}
 	

@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-CA_EXTERN NSArray * SCEmitterCellsFromArray(NSArray * array);
+CA_EXTERN NSArray * SCEmitterCellsFromArray(NSArray * array, NSArray * emitterCells);
 
 @interface SCEmitterCell : CAEmitterCell<SCObject>
 
