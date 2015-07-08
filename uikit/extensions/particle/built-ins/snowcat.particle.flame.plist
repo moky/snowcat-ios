@@ -55,9 +55,9 @@
 	<key>finishParticleSizeVariance</key>
 	<real>5</real>
 	<key>sourcePositionx</key>
-	<integer>100</integer>
+	<integer>120</integer>
 	<key>sourcePositiony</key>
-	<integer>100</integer>
+	<integer>300</integer>
 	<key>sourcePositionVariancex</key>
 	<real>0</real>
 	<key>sourcePositionVariancey</key>

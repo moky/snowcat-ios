@@ -20,6 +20,8 @@
  *
  */
 
+#define DegreeToRadian(degree) ((degree) * M_PI / 180)
+
 @implementation SCParticleView (Designer)
 
 // name                   : 粒子的名字
@@ -85,15 +87,24 @@
 	
 	id textureFileName = [dict objectForKey:@"textureFileName"];
 	
-	//
+	// coordinate system transformation
+	angle = 90 - angle;
+	angleVariance = -angleVariance;
+	
+	rotationStart = 90 - rotationStart;
+	rotationEnd = 90 - rotationEnd;
+	
+	gravityy = -gravityy;
+	
+	//...
 	if (particleLifespan <= 0.0f) {
 		particleLifespan = 1.0f;
 	}
 	
 	float birthRate = maxParticles / particleLifespan;
 	
-	angle *= -M_PI / 180;
-	angleVariance *= -M_PI / 180;
+	float emissionLongitude = DegreeToRadian(angle);
+	float emissionRange = DegreeToRadian(angleVariance);
 	
 	float red = (startColorRed + finishColorRed) * 0.5f;
 	float green = (startColorGreen + finishColorGreen) * 0.5f;
@@ -110,11 +121,8 @@
 	float blueSpeed = blueRange / particleLifespan;
 	float alphaSpeed = alphaRange / particleLifespan;
 	
-	rotationEnd *= M_PI / 180;
-	rotationStart *= M_PI / 180;
-	
-	float spin = (rotationEnd + rotationStart) * 0.5f;
-	float spinRange = rotationEnd - spin;
+	float spin = DegreeToRadian(rotationEnd + rotationStart) * 0.5f;
+	float spinRange = DegreeToRadian(rotationEnd) - spin;
 	
 	//-------------------------------------------- emitter cell attributes begin
 	
@@ -124,8 +132,8 @@
 	cell.lifetime = particleLifespan;
 	cell.lifetimeRange = particleLifespanVariance;
 	// emissionLatitude       : 发射的z轴方向的角度
-	cell.emissionLongitude = angle;
-	cell.emissionRange = angleVariance;
+	cell.emissionLongitude = emissionLongitude;
+	cell.emissionRange = emissionRange;
 	cell.velocity = speed;
 	cell.velocityRange = speedVariance;
 	cell.xAcceleration = gravityx;
@@ -145,11 +153,13 @@
 	cell.greenSpeed = greenSpeed;
 	cell.blueSpeed = blueSpeed;
 	cell.alphaSpeed = alphaSpeed;
+	
 	if (textureFileName) {
 		UIImage * image = [SCImage create:textureFileName autorelease:NO];
 		cell.contents = (id)[image CGImage];
 		[image release];
 	}
+	
 	// contentsRect           : 应该画在contents里的子rectangle
 	// minificationFilter     : 减小自己的大小
 	// magnificationFilter    : 增加自己的大小
@@ -185,25 +195,17 @@
 	float sourcePositionVariancex = [[dict objectForKey:@"sourcePositionVariancex"] floatValue];
 	float sourcePositionVariancey = [[dict objectForKey:@"sourcePositionVariancey"] floatValue];
 	
-	//
+	// coordinate system transformation
+	CGRect bounds = layer.bounds;
 	
+	sourcePositionVariancex = bounds.origin.x + sourcePositionVariancex;
+	sourcePositionVariancey = bounds.origin.y + bounds.size.height - sourcePositionVariancey;
+	
+	//...
 	CGPoint emitterPosition = CGPointMake(sourcePositionx, sourcePositiony);
 	CGSize emitterSize = CGSizeMake(sourcePositionVariancex * 2.0f, sourcePositionVariancey * 2.0f);
 	
 	//------------------------------------------- emitter layer attributes begin
-	if (sourcePositionVariancex < 1.0f) {
-		if (sourcePositionVariancey < 1.0f) {
-			layer.emitterShape = kCAEmitterLayerPoint;
-		} else {
-			layer.emitterShape = kCAEmitterLayerLine;
-		}
-	} else {
-		if (sourcePositionVariancey < 1.0f) {
-			layer.emitterShape = kCAEmitterLayerLine;
-		} else {
-			layer.emitterShape = kCAEmitterLayerRectangle;
-		}
-	}
 	
 	// emitterCells
 	// birthRate        : 发射源的个数，默认1.0。当前每秒产生的真实粒子数 = CAEmitterLayer的birthRate * 子粒子的birthRate
@@ -212,9 +214,9 @@
 	// emitterZPosition : 发射源的z坐标位置
 	layer.emitterSize = emitterSize;
 	// emitterDepth     : 决定粒子形状的深度联系
-	// emitterShape     : 发射源的形状
+	layer.emitterShape = (sourcePositionVariancex > 1.0f) ? (sourcePositionVariancey > 1.0f ? kCAEmitterLayerRectangle : kCAEmitterLayerLine) : (sourcePositionVariancey > 1.0f ? kCAEmitterLayerLine : kCAEmitterLayerPoint);
 	// emitterMode      : 发射模式
-	// renderMode       : 渲染模式
+	layer.renderMode = kCAEmitterLayerAdditive;
 	// preservesDepth   : 粒子是平展在层上
 	// velocity         : 粒子速度
 	// scale            : 粒子的缩放比例
