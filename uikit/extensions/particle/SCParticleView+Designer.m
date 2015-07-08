@@ -20,7 +20,7 @@
  *
  */
 
-#define DegreeToRadian(degree) ((degree) * M_PI / 180)
+#define DegreeToRadian(degree) ((degree) * M_PI / 180.0f)
 
 @implementation SCParticleView (Designer)
 
@@ -88,11 +88,11 @@
 	id textureFileName = [dict objectForKey:@"textureFileName"];
 	
 	// coordinate system transformation
-	angle = 90 - angle;
+	angle = -angle;
 	angleVariance = -angleVariance;
 	
-	rotationStart = 90 - rotationStart;
-	rotationEnd = 90 - rotationEnd;
+	rotationStart = -rotationStart;
+	rotationEnd = -rotationEnd;
 	
 	gravityy = -gravityy;
 	
@@ -198,8 +198,8 @@
 	// coordinate system transformation
 	CGRect bounds = layer.bounds;
 	
-	sourcePositionVariancex = bounds.origin.x + sourcePositionVariancex;
-	sourcePositionVariancey = bounds.origin.y + bounds.size.height - sourcePositionVariancey;
+	sourcePositionx = bounds.origin.x + sourcePositionx;
+	sourcePositiony = bounds.origin.y + bounds.size.height - sourcePositiony;
 	
 	//...
 	CGPoint emitterPosition = CGPointMake(sourcePositionx, sourcePositiony);
@@ -214,14 +214,14 @@
 	// emitterZPosition : 发射源的z坐标位置
 	layer.emitterSize = emitterSize;
 	// emitterDepth     : 决定粒子形状的深度联系
-	layer.emitterShape = (sourcePositionVariancex > 1.0f) ? (sourcePositionVariancey > 1.0f ? kCAEmitterLayerRectangle : kCAEmitterLayerLine) : (sourcePositionVariancey > 1.0f ? kCAEmitterLayerLine : kCAEmitterLayerPoint);
+	layer.emitterShape = (emitterSize.width > 1.0f) ? (emitterSize.height > 1.0f ? kCAEmitterLayerRectangle : kCAEmitterLayerLine) : (emitterSize.height > 1.0f ? kCAEmitterLayerLine : kCAEmitterLayerPoint);
 	// emitterMode      : 发射模式
 	layer.renderMode = kCAEmitterLayerAdditive;
 	// preservesDepth   : 粒子是平展在层上
 	// velocity         : 粒子速度
 	// scale            : 粒子的缩放比例
 	// spin             : 自旋转速度
-	// seed             : 用于初始化随机数产生的种子
+	layer.seed = time(NULL);
 	
 	//--------------------------------------------- emitter layer attributes end
 	
