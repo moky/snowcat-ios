@@ -69,10 +69,19 @@
 	float startColorBlue = [[dict objectForKey:@"startColorBlue"] floatValue];
 	float startColorAlpha = [[dict objectForKey:@"startColorAlpha"] floatValue];
 	
+	float startColorVarianceRed = [[dict objectForKey:@"startColorVarianceRed"] floatValue];
+	float startColorVarianceGreen = [[dict objectForKey:@"startColorVarianceGreen"] floatValue];
+	float startColorVarianceBlue = [[dict objectForKey:@"startColorVarianceBlue"] floatValue];
+	float startColorVarianceAlpha = [[dict objectForKey:@"startColorVarianceAlpha"] floatValue];
+	
 	float finishColorRed = [[dict objectForKey:@"finishColorRed"] floatValue];
 	float finishColorGreen = [[dict objectForKey:@"finishColorGreen"] floatValue];
 	float finishColorBlue = [[dict objectForKey:@"finishColorBlue"] floatValue];
 	float finishColorAlpha = [[dict objectForKey:@"finishColorAlpha"] floatValue];
+	
+	float startParticleSize = [[dict objectForKey:@"startParticleSize"] floatValue];
+	float startParticleSizeVariance = [[dict objectForKey:@"startParticleSizeVariance"] floatValue];
+	float finishParticleSize = [[dict objectForKey:@"finishParticleSize"] floatValue];
 	
 	float rotationStart = [[dict objectForKey:@"rotationStart"] floatValue];
 	float rotationEnd = [[dict objectForKey:@"rotationEnd"] floatValue];
@@ -106,28 +115,32 @@
 	float emissionLongitude = DegreeToRadian(angle);
 	float emissionRange = DegreeToRadian(angleVariance);
 	
-	float red = (startColorRed + finishColorRed) * 0.5f;
-	float green = (startColorGreen + finishColorGreen) * 0.5f;
-	float blue = (startColorBlue + finishColorBlue) * 0.5f;
-	float alpha = (startColorAlpha + finishColorAlpha) * 0.5f;
-	
-	float redRange = finishColorRed - red;
-	float greenRange = finishColorGreen - green;
-	float blueRange = finishColorBlue - blue;
-	float alphaRange = finishColorAlpha - alpha;
-	
-	float redSpeed = redRange / particleLifespan;
-	float greenSpeed = greenRange / particleLifespan;
-	float blueSpeed = blueRange / particleLifespan;
-	float alphaSpeed = alphaRange / particleLifespan;
+	float scale = 1.0f;
+	float scaleRange = startParticleSize < 1.0f ? 0.0f : startParticleSizeVariance / startParticleSize;
+	float scaleSpeed = startParticleSize < 1.0f ? 0.0f : (finishParticleSize - startParticleSize) / startParticleSize / particleLifespan;
 	
 	float spin = DegreeToRadian(rotationEnd + rotationStart) * 0.5f;
 	float spinRange = DegreeToRadian(rotationEnd) - spin;
 	
+	float red = startColorRed;
+	float green = startColorGreen;
+	float blue = startColorBlue;
+	float alpha = startColorAlpha;
+	
+	float redRange = startColorVarianceRed;
+	float greenRange = startColorVarianceGreen;
+	float blueRange = startColorVarianceBlue;
+	float alphaRange = startColorVarianceAlpha;
+	
+	float redSpeed = (finishColorRed - startColorRed) / particleLifespan;
+	float greenSpeed = (finishColorGreen - startColorGreen) / particleLifespan;
+	float blueSpeed = (finishColorBlue - startColorBlue) / particleLifespan;
+	float alphaSpeed = (finishColorAlpha - startColorAlpha) / particleLifespan;
+	
 	//-------------------------------------------- emitter cell attributes begin
 	
-	// name                   : 粒子的名字
-	// enabled                : 粒子是否被渲染
+	cell.name = @"ccp";
+	cell.enabled = textureFileName != nil;
 	cell.birthRate = birthRate;
 	cell.lifetime = particleLifespan;
 	cell.lifetimeRange = particleLifespanVariance;
@@ -139,9 +152,9 @@
 	cell.xAcceleration = gravityx;
 	cell.yAcceleration = gravityy;
 	// zAcceleration          : 粒子z方向的加速度分量
-	// scale                  : 整体缩放比例（0.0~1.0）
-	// scaleRange             : 缩放比例变化范围
-	// scaleSpeed             : 缩放比例变化速度
+	cell.scale = scale;
+	cell.scaleRange = scaleRange;
+	cell.scaleSpeed = scaleSpeed;
 	cell.spin = spin;
 	cell.spinRange = spinRange;
 	cell.color = [UIColor colorWithRed:red green:green blue:blue alpha:alpha].CGColor;
