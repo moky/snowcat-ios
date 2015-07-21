@@ -8,7 +8,13 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
+/**
+ *  Identifier Addition for UIDevice:
+ *      https://github.com/gekitz/UIDevice-with-UniqueIdentifier-for-iOS-5
+ */
+// 'libs/IdentifierAddition'
 #import "NSString+MD5Addition.h"
+
 #import "SCLog.h"
 #import "SCMath.h"
 #import "SCClient.h"
@@ -32,7 +38,11 @@ CGFloat CGFloatFromString(NSString * string)
 
 + (NSString *) MD5String:(NSString *)string
 {
-	return [string stringFromMD5];
+	if ([string respondsToSelector:@selector(stringFromMD5)]) {
+		return [string stringFromMD5];
+	} else {
+		return string;
+	}
 }
 
 @end
