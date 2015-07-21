@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "SCMath.h"
 #import "SCUIKit.h"
 #import "SCImage.h"
 #import "SCEmitterCell.h"
@@ -16,11 +17,11 @@
  *
  *  Particle Designer:
  *
- *      http://onebyonedesign.com/flash/particleeditor/
+ *      https://71squared.com/
+ *
+ *      http://onebyonedesign.com/flash/particleeditor/ (online)
  *
  */
-
-#define DegreeToRadian(degree) ((degree) * M_PI / 180.0f)
 
 @implementation SCParticleView (Designer)
 
@@ -84,6 +85,7 @@
 	float finishParticleSize = [[dict objectForKey:@"finishParticleSize"] floatValue];
 	
 	float rotationStart = [[dict objectForKey:@"rotationStart"] floatValue];
+	float rotationStartVariance = [[dict objectForKey:@"rotationStartVariance"] floatValue];
 	float rotationEnd = [[dict objectForKey:@"rotationEnd"] floatValue];
 	
 	float gravityx = [[dict objectForKey:@"gravityx"] floatValue];
@@ -91,6 +93,9 @@
 	
 	float speed = [[dict objectForKey:@"speed"] floatValue];
 	float speedVariance = [[dict objectForKey:@"speedVariance"] floatValue];
+	float radialAcceleration = [[dict objectForKey:@"radialAcceleration"] floatValue];
+	float radialAccelVariance = [[dict objectForKey:@"radialAccelVariance"] floatValue];
+	
 	float particleLifespan = [[dict objectForKey:@"particleLifespan"] floatValue];
 	float particleLifespanVariance = [[dict objectForKey:@"particleLifespanVariance"] floatValue];
 	
@@ -98,7 +103,6 @@
 	
 	// coordinate system transformation
 	angle = -angle;
-	angleVariance = -angleVariance;
 	
 	rotationStart = -rotationStart;
 	rotationEnd = -rotationEnd;
@@ -115,12 +119,15 @@
 	float emissionLongitude = DegreeToRadian(angle);
 	float emissionRange = DegreeToRadian(angleVariance);
 	
+	float velocity = speed + radialAcceleration * particleLifespan * 0.5f;
+	float velocityRange = speedVariance + radialAccelVariance * particleLifespan * 0.5f;
+	
 	float scale = 1.0f;
 	float scaleRange = startParticleSize < 1.0f ? 0.0f : startParticleSizeVariance / startParticleSize;
 	float scaleSpeed = startParticleSize < 1.0f ? 0.0f : (finishParticleSize - startParticleSize) / startParticleSize / particleLifespan;
 	
-	float spin = DegreeToRadian(rotationEnd + rotationStart) * 0.5f;
-	float spinRange = DegreeToRadian(rotationEnd) - spin;
+	float spin = DegreeToRadian(rotationEnd - rotationStart) / particleLifespan;
+	float spinRange = DegreeToRadian(rotationStartVariance);
 	
 	float red = startColorRed;
 	float green = startColorGreen;
@@ -147,8 +154,8 @@
 	// emissionLatitude       : 发射的z轴方向的角度
 	cell.emissionLongitude = emissionLongitude;
 	cell.emissionRange = emissionRange;
-	cell.velocity = speed;
-	cell.velocityRange = speedVariance;
+	cell.velocity = velocity;
+	cell.velocityRange = velocityRange;
 	cell.xAcceleration = gravityx;
 	cell.yAcceleration = gravityy;
 	// zAcceleration          : 粒子z方向的加速度分量

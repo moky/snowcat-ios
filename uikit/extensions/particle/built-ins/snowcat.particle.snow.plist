@@ -65,7 +65,7 @@
 	<key>rotationStart</key>
 	<real>0</real>
 	<key>rotationStartVariance</key>
-	<real>0</real>
+	<integer>360</integer>
 	<key>sourcePositionVariancex</key>
 	<real>1088</real>
 	<key>sourcePositionVariancey</key>
@@ -97,12 +97,12 @@
 	<key>startParticleSize</key>
 	<real>80</real>
 	<key>startParticleSizeVariance</key>
-	<real>0</real>
+	<integer>40</integer>
 	<key>tangentialAccelVariance</key>
 	<real>0</real>
 	<key>tangentialAcceleration</key>
 	<real>50</real>
 	<key>textureFileName</key>
-	<string>snowcat.particle.spot.png</string>
+	<string>snowcat.particle.snowflake.png</string>
 </dict>
 </plist>
