@@ -127,9 +127,9 @@ CGFloat CGFloatFromString(NSString * string)
 	NSAssert([pairs count] > 0, @"no key-value found");
 	
 	NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithCapacity:[pairs count]];
-	NSEnumerator * enumerator = [pairs objectEnumerator];
+	
 	NSString * pair;
-	while (pair = [enumerator nextObject]) {
+	SC_FOR_EACH(pair, pairs) {
 		NSRange range = [pair rangeOfString:@":"];
 		if (range.location == NSNotFound) {
 			continue;

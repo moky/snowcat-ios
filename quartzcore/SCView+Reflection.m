@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "scMacros.h"
 #import "SCView+Reflection.h"
 
 #define SC_VIEW_REFLECTION_LAYER_NAME          @"ReflectionLayer"
@@ -20,9 +21,8 @@
 
 - (BOOL) hasReflection
 {
-	NSEnumerator * enumerator = [self.layer.sublayers objectEnumerator];
 	CALayer * layer;
-	while (layer = [enumerator nextObject]) {
+	SC_FOR_EACH(layer, self.layer.sublayers) {
 		if ([layer.name isEqualToString:SC_VIEW_REFLECTION_LAYER_NAME]) {
 			return YES;
 		}
@@ -34,8 +34,7 @@
 {
 	NSArray * subLayers = self.layer.sublayers;
 	CALayer * layer;
-	for (NSInteger index = [subLayers count] - 1; index >= 0; --index) {
-		layer = [subLayers objectAtIndex:index];
+	SC_FOR_EACH_REVERSE_SAFE(layer, subLayers) {
 		if ([layer.name isEqualToString:SC_VIEW_REFLECTION_LAYER_NAME]) {
 			[layer removeFromSuperlayer];
 		}

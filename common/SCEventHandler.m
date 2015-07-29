@@ -90,9 +90,8 @@ SC_IMPLEMENT_CREATE_FUNCTIONS()
 	id target;
 	id<SCEventDelegate> delegate;
 	
-	NSEnumerator * enumerator = [tasks objectEnumerator];
 	NSDictionary * task;
-	while (task = [enumerator nextObject]) {
+	SC_FOR_EACH(task, tasks) {
 		NSAssert([task isKindOfClass:[NSDictionary class]], @"task must be a dictionary: %@", task);
 		
 		// task name

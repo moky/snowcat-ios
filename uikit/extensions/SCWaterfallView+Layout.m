@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCBaseArray.h"
 #import "SCWaterfallView+Layout.h"
 
@@ -261,11 +262,10 @@ NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
 	// 1. measuring the minimum size
 	CGSize size = bounds.size;
 	// expand bounds to include all subviews
-	NSEnumerator * enumerator = [view.subviews objectEnumerator];
 	UIView * v;
 	CGRect frame;
 	
-	while (v = [enumerator nextObject]) {
+	SC_FOR_EACH(v, view.subviews) {
 		frame = v.frame;
 		switch (direction) {
 				/* top */
@@ -330,15 +330,14 @@ NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
 	view.center = center;
 	
 	// move subviews if needs
-	enumerator = [view.subviews objectEnumerator];
 	if (UIWaterfallViewDirectionMatch(UIWaterfallViewDirectionMaskBottom, direction)) {
-		while (v = [enumerator nextObject]) {
+		SC_FOR_EACH(v, view.subviews) {
 			center = v.center;
 			center.y += dy;
 			v.center = center;
 		}
 	} else if (UIWaterfallViewDirectionMatch(UIWaterfallViewDirectionMaskRight, direction)) {
-		while (v = [enumerator nextObject]) {
+		SC_FOR_EACH(v, view.subviews) {
 			center = v.center;
 			center.x += dx;
 			v.center = center;
@@ -388,11 +387,10 @@ NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
 	add_first_joining_point(pointPool, direction, spaceHorizontal, spaceVertical, bounds);
 	NSAssert(pointPool->bkCompare, @"init failed");
 	
-	NSEnumerator * enumerator = [subviews objectEnumerator];
 	UIView * child;
 	CGRect frame;
 	
-	NSUInteger index;
+	NSInteger index;
 	NSInteger offset;
 	
 	UIView * v;
@@ -402,7 +400,9 @@ NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
 	CGPoint * point;
 	
 	// 2. layout each subview
-	for (index = 0; child = [enumerator nextObject]; ++index) {
+	index = -1;
+	SC_FOR_EACH(child, subviews) {
+		++index;
 		NSAssert(pointPool->count > 0, @"no available joining point");
 		frame = child.frame;
 		

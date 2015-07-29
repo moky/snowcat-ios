@@ -106,11 +106,9 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 {
 	NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:2];
 	
-	NSEnumerator * keyEnumerator = [_dataPool keyEnumerator];
 	id<NSCopying> key;
 	id object;
-	while (key = [keyEnumerator nextObject]) {
-		object = [_dataPool objectForKey:key];
+	SC_FOR_EACH_KEY_VALUE(key, object, _dataPool) {
 		if (object == anObject) { // compare exactly, and faster
 			[mArray addObject:key];
 		}

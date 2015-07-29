@@ -64,14 +64,13 @@
 	NSString * path = [bundle resourcePath];
 	path = [[path stringByAppendingPathComponent:nibName] stringByDeletingLastPathComponent]; // ...
 	
-	NSEnumerator * enumerator = [array objectEnumerator];
 	id child;
 	NSString * nodeFile;
 	
 	SCNodeFileParser * nfp;
 	NSDictionary * dict;
 	
-	while (child = [enumerator nextObject]) {
+	SC_FOR_EACH(child, array) {
 		if ([child respondsToSelector:@selector(nodeFile)] &&
 			[child respondsToSelector:@selector(buildHandlers:)]) {
 			nodeFile = [child nodeFile];

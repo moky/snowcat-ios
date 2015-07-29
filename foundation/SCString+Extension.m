@@ -74,11 +74,9 @@
 	NSString * string = [self retain]; // retainCount++
 	NSString * newString = nil;
 	
-	NSEnumerator * keyEnumerator = [dict keyEnumerator];
 	NSString * key;
 	NSString * value;
-	while (key = [keyEnumerator nextObject]) {
-		value = [dict objectForKey:key];
+	SC_FOR_EACH_KEY_VALUE(key, value, dict) {
 		NSAssert([key isKindOfClass:[NSString class]], @"key must be a string: %@, dict: %@", key, dict);
 		NSAssert([value isKindOfClass:[NSString class]], @"value must be a string: %@, key: %@, dict: %@", value, key, dict);
 		

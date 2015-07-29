@@ -167,11 +167,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// items
 	NSArray * items = [dict objectForKey:@"items"];
 	if (items) {
-		NSUInteger count = [items count];
 		id seg;
 		UIImage * image;
-		for (NSUInteger i = 0; i < count; ++i) {
-			seg = [items objectAtIndex:i];
+		NSInteger i = -1;
+		SC_FOR_EACH(seg, items) {
+			++i;
 			if ([seg isKindOfClass:[NSDictionary class]]) {
 				image = [SCImage create:seg autorelease:NO];
 				if (i < segmentedControl.numberOfSegments) {

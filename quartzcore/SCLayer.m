@@ -184,10 +184,9 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSArray * sublayers = [dict objectForKey:@"sublayers"];
 	if (sublayers) {
 		NSAssert([sublayers isKindOfClass:[NSArray class]], @"sublayers must be an array: %@", sublayers);
-		NSEnumerator * enumerator = [sublayers objectEnumerator];
 		NSDictionary * item;
 		SCLayer * subLayer;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, sublayers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary: %@", item);
 			subLayer = [SCLayer create:item autorelease:NO];
 			NSAssert([subLayer isKindOfClass:[CALayer class]], @"failed to create sub layer: %@", item);

@@ -97,9 +97,8 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 		}
 		
 		// 2. set content edge inset for all scroll views
-		NSEnumerator * enumerator = [self.subviews objectEnumerator];
 		UIScrollView * scrollView;
-		while (scrollView = [enumerator nextObject]) {
+		SC_FOR_EACH(scrollView, self.subviews) {
 			if ([scrollView isKindOfClass:[UIScrollView class]]) {
 				[self _resetScrollView:scrollView];
 			}
@@ -219,10 +218,9 @@ UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromStr
 - (UIScrollView *) currentScrollView
 {
 	if (!_currentScrollView) {
-		NSEnumerator * enumerator = [self.subviews objectEnumerator];
 		UIScrollView * scrollView;
 		NSUInteger index = 0;
-		while (scrollView = [enumerator nextObject]) {
+		SC_FOR_EACH(scrollView, self.subviews) {
 			if ([scrollView isKindOfClass:[UIScrollView class]]) {
 				if (index == _selectedIndex) {
 					_currentScrollView = scrollView;

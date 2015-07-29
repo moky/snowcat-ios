@@ -46,14 +46,13 @@
 	}
 	
 	NSMutableDictionary * parameters = [NSMutableDictionary dictionaryWithCapacity:count];
-	NSEnumerator * enumerator = [array objectEnumerator];
 	NSString * item;
 	
 	NSRange range;
 	NSString * key;
 	NSString * value;
 	
-	while (item = [enumerator nextObject]) {
+	SC_FOR_EACH(item, array) {
 		range = [item rangeOfString:@"="];
 		if (range.location == NSNotFound) {
 			SCLog(@"invalid item: %@", item);

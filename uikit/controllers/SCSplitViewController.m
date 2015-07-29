@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCDevice.h"
 #import "SCApplication.h"
 #import "SCNib.h"
@@ -107,10 +108,9 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		NSAssert([viewControllers isKindOfClass:[NSArray class]], @"viewControllers must be an array: %@", viewControllers);
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:[viewControllers count]];
 		
-		NSEnumerator * enumerator = [viewControllers objectEnumerator];
 		NSDictionary * item;
 		SCViewController * child;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, viewControllers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"viewControllers's item must be a dictionary: %@", item);
 			SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
 			child = [SCViewController create:item autorelease:NO];

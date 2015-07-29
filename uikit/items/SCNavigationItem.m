@@ -94,10 +94,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSUInteger count = [leftBarButtonItems count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
-		NSEnumerator * enumerator = [leftBarButtonItems objectEnumerator];
 		NSDictionary * item;
 		SCBarButtonItem * bbi;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, leftBarButtonItems) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"leftBarButtonItems's item must be a dictionary: %@", item);
 			item = [self _newDictionary:item withTarget:target withAction:SCNavigationItemDelegate_clickLeftBarButtonItems]; // on leftBarButtonItems clicked
 			bbi = [SCBarButtonItem create:item autorelease:NO];
@@ -121,10 +120,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSUInteger count = [rightBarButtonItems count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
-		NSEnumerator * enumerator = [rightBarButtonItems objectEnumerator];
 		NSDictionary * item;
 		SCBarButtonItem * bbi;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, rightBarButtonItems) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"rightBarButtonItems's item must be a dictionary: %@", item);
 			item = [self _newDictionary:item withTarget:target withAction:SCNavigationItemDelegate_clickRightBarButtonItems]; // on rightBarButtonItems clicked
 			bbi = [SCBarButtonItem create:item autorelease:NO];

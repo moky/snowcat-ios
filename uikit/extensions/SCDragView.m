@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCGeometry.h"
 #import "SCGroundView.h"
@@ -73,9 +74,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 + (void) _checkGestures:(NSArray *)gestures with:(UIDragView *)dragView
 {
 	if (gestures) {
-		NSEnumerator * enumerator = [gestures objectEnumerator];
-		NSString * name = nil;
-		while (name = [enumerator nextObject]) {
+		NSString * name;
+		SC_FOR_EACH(name, gestures) {
 			if ([name isEqualToString:@"Pan"]) {
 				return; // already add
 			}

@@ -116,10 +116,9 @@
 	NSAssert([animationImages isKindOfClass:[NSArray class]], @"animationImages must be an array: %@", animationImages);
 	NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:[animationImages count]];
 	
-	NSEnumerator * enumerator = [animationImages objectEnumerator];
-	NSDictionary * item = nil;
+	NSDictionary * item;
 	UIImage * image;
-	while (item = [enumerator nextObject]) {
+	SC_FOR_EACH(item, animationImages) {
 		image = [SCImage create:item autorelease:NO];
 		NSAssert([image isKindOfClass:[UIImage class]], @"image's definition error: %@", item);
 		if (image) {

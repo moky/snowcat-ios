@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCFSMSequence.h"
 
 @interface SCFSMSequence ()
@@ -55,9 +56,8 @@
 
 - (BOOL) evaluate:(SCFSMMachine *)machine
 {
-	NSEnumerator * enumerator = [_transitions objectEnumerator];
 	SCFSMTransition * trans;
-	while (trans = [enumerator nextObject]) {
+	SC_FOR_EACH(trans, _transitions) {
 		if (![trans evaluate:machine]) {
 			return NO;
 		}

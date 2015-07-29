@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCString.h"
 #import "SCGeometry.h"
 #import "SCView+Geometry.h"
@@ -17,9 +18,8 @@
 	CGSize ss;
 	CGFloat w, h;
 	
-	NSEnumerator * enumerator = [view.subviews objectEnumerator];
 	UIView * sv;
-	while (sv = [enumerator nextObject]) {
+	SC_FOR_EACH(sv, view.subviews) {
 		if ([sv isKindOfClass:[UIScrollView class]]) {
 			ss = sv.frame.size; // don't dig the scroll views
 		} else {

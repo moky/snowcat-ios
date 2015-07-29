@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNodeFileParser.h"
 #import "SCDictionary.h"
 #import "SCView.h"
@@ -118,9 +119,8 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 
 - (UIScrollView *) _scrollViewInPageScrollView:(UIView *)pageScrollView
 {
-	NSEnumerator * enumerator = [pageScrollView.subviews objectEnumerator];
 	UIScrollView * scrollView;
-	while (scrollView = [enumerator nextObject]) {
+	SC_FOR_EACH(scrollView, pageScrollView.subviews) {
 		if ([scrollView isKindOfClass:[UIScrollView class]]) {
 			return scrollView;
 		}

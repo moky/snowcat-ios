@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCView+Transform.h"
 #import "SCCoverFlowView+UIKit.h"
 
@@ -41,18 +42,12 @@
 	CGFloat SCALE_MIN   = self.scale;
 	CGFloat SCALE_RANGE = 1.0f - SCALE_MIN;
 	
-	NSArray * subviews = scrollView.subviews;
 	UIView * subview;
-	NSUInteger count = [subviews count];
-	
 	if (self.direction == UIPageScrollViewDirectionHorizontal) {
 		// distance between each item and the center item
 		distance = - offset.x / size.width;
 		
-		for (NSInteger i = 0; i < count; ++i, distance += 1.0f) {
-			// pick out each subview
-			subview = [subviews objectAtIndex:i];
-			
+		SC_FOR_EACH(subview, scrollView.subviews) {
 			// 0. reset
 			[subview resetTransform];
 			
@@ -67,15 +62,14 @@
 			// 3. position
 			position = rotate / M_PI_2 * subview.bounds.size.width;
 			subview.center = CGPointMake(center.x + position, center.y);
+			
+			distance += 1.0f;
 		}
 	} else {
 		// distance between each item and the center item
 		distance = - offset.y / size.height;
 		
-		for (NSInteger i = 0; i < count; ++i, distance += 1.0f) {
-			// pick out each subview
-			subview = [subviews objectAtIndex:i];
-			
+		SC_FOR_EACH(subview, scrollView.subviews) {
 			// 0. reset
 			[subview resetTransform];
 			
@@ -90,6 +84,8 @@
 			// 3. position
 			position = rotate / M_PI_2 * subview.bounds.size.height;
 			subview.center = CGPointMake(center.x, center.y + position);
+			
+			distance += 1.0f;
 		}
 	}
 }

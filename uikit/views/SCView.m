@@ -78,9 +78,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// subviews
 	NSArray * subviews = [dict objectForKey:@"subviews"];
 	SCView * child;
-	NSEnumerator * enumerator = [subviews objectEnumerator];
 	NSDictionary * item;
-	while (item = [enumerator nextObject]) {
+	SC_FOR_EACH(item, subviews) {
 		NSAssert([item isKindOfClass:[NSDictionary class]], @"subviews's item must be a dictionary: %@", item);
 		SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
 		

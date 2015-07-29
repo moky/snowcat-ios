@@ -189,7 +189,8 @@ UIImage * SCSnapshot(UIView * view)
 void SCRemoveSubviews(UIView * view)
 {
 	NSArray * subviews = view.subviews;
-	for (NSInteger index = [subviews count] - 1; index >= 0; --index) {
-		[[subviews objectAtIndex:index] removeFromSuperview];
+	UIView * sv;
+	SC_FOR_EACH_REVERSE_SAFE(sv, subviews) {
+		[sv removeFromSuperview];
 	}
 }

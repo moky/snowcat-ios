@@ -144,9 +144,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			} else if ([view isKindOfClass:[UISegmentedButton class]]) {
 				ssv.segmentedButton = (UISegmentedButton *)view;
 			} else {
-				NSEnumerator * enumerator = [view.subviews objectEnumerator];
 				UIView * item;
-				while (item = [enumerator nextObject]) {
+				SC_FOR_EACH(item, view.subviews) {
 					if ([item isKindOfClass:[UISegmentedControl class]]) {
 						ssv.segmentedControl = (UISegmentedControl *)item;
 						break;
@@ -165,10 +164,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSArray * scrollViews = [dict objectForKey:@"scrollViews"];
 	if (scrollViews) {
 		NSAssert([scrollViews isKindOfClass:[NSArray class]], @"scrollViews must be an array");
-		NSEnumerator * enumerator = [scrollViews objectEnumerator];
 		NSDictionary * item;
 		SCScrollView * scrollView;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, scrollViews) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary");
 			scrollView = [SCScrollView create:item autorelease:NO];
 			[segmentedScrollView addSubview:scrollView];

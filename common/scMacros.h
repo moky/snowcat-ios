@@ -88,6 +88,33 @@
 #define SC_SWITCH_DEFAULT           }; };
 #define SC_SWITCH_END               } while(0);
 
+//--------------------------------------------------------------------- for each
+#define SC_FOR_EACH(item, array)                                               \
+    for (NSEnumerator * __e = [(array) objectEnumerator];                      \
+         ((item) = [__e nextObject]); )                                        \
+                                                         /* EOF 'SC_FOR_EACH' */
+
+#define SC_FOR_EACH_REVERSE(item, array)                                       \
+    for (NSEnumerator * __e = [(array) reverseObjectEnumerator];               \
+         ((item) = [__e nextObject]); )                                        \
+                                                 /* EOF 'SC_FOR_EACH_REVERSE' */
+
+#define SC_FOR_EACH_SAFE(item, array)                                          \
+    for (NSUInteger __i = 0;                                                   \
+         (__i < [(array) count]) && ((item) = [(array) objectAtIndex:__i]);    \
+         ++__i)                                                                \
+                                                    /* EOF 'SC_FOR_EACH_SAFE' */
+
+#define SC_FOR_EACH_REVERSE_SAFE(item, array)                                  \
+    for (NSInteger __i = [(array) count] - 1;                                  \
+         (__i>=0 && __i<[(array) count])&&((item)=[(array) objectAtIndex:__i]);\
+         --__i)                                                                \
+                                            /* EOF 'SC_FOR_EACH_REVERSE_SAFE' */
+
+#define SC_FOR_EACH_KEY_VALUE(key, value, dict)                                \
+    for (NSEnumerator * __e = [(dict) keyEnumerator];                          \
+         ((key)=[__e nextObject]) && ((value)=[(dict) objectForKey:(key)]); )  \
+                                               /* EOF 'SC_FOR_EACH_KEY_VALUE' */
 
 //--------------------------------------------------------------- set attributes
 #define SC_SET_ATTRIBUTES_AS_STRING(obj, dict, name)                           \

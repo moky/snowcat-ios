@@ -20,9 +20,8 @@
 	}
 	NSAssert([gestures isKindOfClass:[NSArray class]], @"guestures must be an array: %@", gestures);
 	
-	NSEnumerator * enumerator = [gestures objectEnumerator];
-	NSString * name = nil;
-	while (name = [enumerator nextObject]) {
+	NSString * name;
+	SC_FOR_EACH(name, gestures) {
 		[self addGestureRecognizerWithName:name to:view];
 	}
 	

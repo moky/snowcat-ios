@@ -173,16 +173,13 @@ id NSAttributeFromObject(id obj, NSString * const name)
 	
 	NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithCapacity:[dict count]];
 	
-	NSEnumerator * enumerator = [dict keyEnumerator];
 	id key;
 	id object;
 	
 	id name;
 	id value;
 	
-	while (key = [enumerator nextObject]) {
-		object = [dict objectForKey:key];
-		
+	SC_FOR_EACH_KEY_VALUE(key, object, dict) {
 		name = NSAttributeNameFromString(key);
 		value = NSAttributeFromObject(object, key);
 		

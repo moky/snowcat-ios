@@ -174,9 +174,8 @@
 {
 	if (!_loadingIndicator) {
 		// get indicator from subviews of trayView by class
-		NSEnumerator * enumerator = [self.trayView.subviews objectEnumerator];
 		UIActivityIndicatorView * aiv;
-		while (aiv = [enumerator nextObject]) {
+		SC_FOR_EACH(aiv, self.trayView.subviews) {
 			if ([aiv isKindOfClass:[UIActivityIndicatorView class]]) {
 				_loadingIndicator = [aiv retain];
 				break;
@@ -206,9 +205,8 @@
 {
 	if (!_textLabel) {
 		// get first label from subviews of trayView
-		NSEnumerator * enumerator = [self.trayView.subviews objectEnumerator];
-		UILabel * label = nil;
-		while (label = [enumerator nextObject]) {
+		UILabel * label;
+		SC_FOR_EACH(label, self.trayView.subviews) {
 			if ([label isKindOfClass:[UILabel class]]) {
 				_textLabel = [label retain];
 				break;
@@ -257,10 +255,9 @@
 {
 	if (!_timeLabel) {
 		// get second label from subviews of trayView
-		NSEnumerator * enumerator = [self.trayView.subviews objectEnumerator];
-		UILabel * label = nil;
 		UILabel * textLabel = nil;
-		while (label = [enumerator nextObject]) {
+		UILabel * label;
+		SC_FOR_EACH(label, self.trayView.subviews) {
 			if ([label isKindOfClass:[UILabel class]]) {
 				if (textLabel) {
 					_timeLabel = [label retain];

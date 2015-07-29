@@ -215,10 +215,9 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	NSArray * childViewControllers = [dict objectForKey:@"childViewControllers"];
 	if (childViewControllers) {
 		NSAssert([childViewControllers isKindOfClass:[NSArray class]], @"childViewControllers must be an array: %@", childViewControllers);
-		NSEnumerator * enumerator = [childViewControllers objectEnumerator];
 		NSDictionary * item;
 		SCViewController * child;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, childViewControllers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"childViewControllers's item must be a dictionary: %@", item);
 			SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
 			child = [SCViewController create:item autorelease:NO];
@@ -313,11 +312,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
 		NSAssert([toolbarItems isKindOfClass:[NSArray class]], @"toolbarItems must be an array: %@", toolbarItems);
-		NSEnumerator * enumerator = [toolbarItems objectEnumerator];
 		NSDictionary * item;
 		NSMutableDictionary * md;
 		SCBarButtonItem * bbi;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, toolbarItems) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"toolbarItems's item must be a dictionary: %@", item);
 			md = [item mutableCopy];
 			[md setObject:viewController forKey:@"target"];

@@ -221,9 +221,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSArray * scopeButtonTitles = [dict objectForKey:@"scopeButtonTitles"];
 	if (scopeButtonTitles) {
 		NSMutableArray * a = [[NSMutableArray alloc] initWithCapacity:[scopeButtonTitles count]];
-		NSEnumerator * e = [scopeButtonTitles objectEnumerator];
 		NSString * s;
-		while (s = [e nextObject]) {
+		SC_FOR_EACH(s, scopeButtonTitles) {
 			s = SCLocalizedString(s, nil);
 			NSAssert([s isKindOfClass:[NSString class]], @"error: %@ in %@", s, scopeButtonTitles);
 			if (s) {

@@ -158,8 +158,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// otherButtonTitles
 	NSArray * otherButtonTitles = [dict objectForKey:@"otherButtons"];
 	if (otherButtonTitles) {
-		NSEnumerator * enumerator = [otherButtonTitles objectEnumerator];
-		while (title = [enumerator nextObject]) {
+		SC_FOR_EACH(title, otherButtonTitles) {
 			title = SCLocalizedString(title, nil);
 			[alertView addButtonWithTitle:title];
 		}

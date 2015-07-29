@@ -107,10 +107,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	if (items) {
 		NSUInteger count = [items count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
-		NSEnumerator * enumerator = [items objectEnumerator];
+		
 		NSDictionary * item;
 		SCBarButtonItem * bbi;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, items) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary: %@", item);
 			NSMutableDictionary * md = [item mutableCopy];
 			[md setObject:toolbar forKey:@"target"];
@@ -126,6 +126,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			
 			[md release];
 		}
+		
 		toolbar.items = mArray;
 		[mArray release];
 	}

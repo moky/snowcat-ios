@@ -243,9 +243,8 @@
 {
 	NSMutableArray * mArray = [NSMutableArray arrayWithCapacity:[node count]];
 	
-	NSEnumerator * enumerator = [node objectEnumerator];
 	id child;
-	while (child = [enumerator nextObject]) {
+	SC_FOR_EACH(child, node) {
 		child = [self parseNode:child];
 		if (child) {
 			[mArray addObject:child];
@@ -259,11 +258,9 @@
 {
 	NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithCapacity:[node count]];
 	
-	NSEnumerator * keyEnumerator = [node keyEnumerator];
 	NSString * key;
 	id child;
-	while (key = [keyEnumerator nextObject]) {
-		child = [node objectForKey:key];
+	SC_FOR_EACH_KEY_VALUE(key, child, node) {
 		key = [key trim];
 		NSAssert([key length] > 0, @"key cannot be empty: %@", node);
 		if ([key isEqualToString:@"File"]) {

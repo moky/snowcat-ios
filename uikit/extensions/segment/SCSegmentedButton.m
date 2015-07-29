@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCButton.h"
 #import "SCSegmentedButton.h"
@@ -78,11 +79,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// items
 	NSArray * items = [dict objectForKey:@"items"];
 	if (items) {
-		NSUInteger count = [items count];
 		NSDictionary * d;
 		SCButton * btn;
-		for (NSUInteger i = 0; i < count; ++i) {
-			d = [items objectAtIndex:i];
+		NSInteger i = -1;
+		SC_FOR_EACH(d, items) {
+			++i;
 			NSAssert([d isKindOfClass:[NSDictionary class]], @"segmented button's item must be a dictionary: %@", d);
 			SC_UIKIT_DIG_CREATION_INFO(d); // support ObjectFromFile
 			

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCImage.h"
 #import "SCImageView.h"
@@ -132,10 +133,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSUInteger count = [animationImages count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
-		NSEnumerator * enumerator = [animationImages objectEnumerator];
 		NSDictionary * item;
 		SCImage * image;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, animationImages) {
 			image = [SCImage create:item autorelease:NO];
 			NSAssert([image isKindOfClass:[UIImage class]], @"animationImages item's definition error: %@", item);
 			if (image) {
@@ -155,10 +155,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSUInteger count = [highlightedAnimationImages count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
-		NSEnumerator * enumerator = [highlightedAnimationImages objectEnumerator];
 		NSDictionary * item;
 		SCImage * image;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, highlightedAnimationImages) {
 			image = [SCImage create:item autorelease:NO];
 			NSAssert([image isKindOfClass:[UIImage class]], @"highlightedAnimationImages item's definition error: %@", item);
 			if (image) {

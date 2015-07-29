@@ -241,7 +241,7 @@
 	// velocity         : 粒子速度
 	// scale            : 粒子的缩放比例
 	// spin             : 自旋转速度
-	layer.seed = time(NULL);
+	layer.seed = (unsigned int)time(NULL);
 	
 	//--------------------------------------------- emitter layer attributes end
 	

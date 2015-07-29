@@ -106,8 +106,15 @@ CGSize CGSizeAspectFit(CGSize fromSize, CGSize toSize)
 	if (fromSize.width > 0.0f && fromSize.height > 0.0f) {
 		CGFloat dw = toSize.width / fromSize.width;
 		CGFloat dh = toSize.height / fromSize.height;
-		CGFloat delta = MIN(dw, dh);
-		return CGSizeMake(fromSize.width * delta, fromSize.height * delta);
+//		CGFloat delta = MIN(dw, dh);
+//		return CGSizeMake(fromSize.width * delta, fromSize.height * delta);
+		if (dw < dh) {
+			return CGSizeMake(toSize.width, fromSize.height * dw);
+		} else if (dw > dh) {
+			return CGSizeMake(fromSize.width * dh, toSize.height);
+		} else {
+			return toSize;
+		}
 	} else {
 		return fromSize;
 	}
@@ -118,8 +125,15 @@ CGSize CGSizeAspectFill(CGSize fromSize, CGSize toSize)
 	if (fromSize.width > 0.0f && fromSize.height > 0.0f) {
 		CGFloat dw = toSize.width / fromSize.width;
 		CGFloat dh = toSize.height / fromSize.height;
-		CGFloat delta = MAX(dw, dh);
-		return CGSizeMake(fromSize.width * delta, fromSize.height * delta);
+//		CGFloat delta = MAX(dw, dh);
+//		return CGSizeMake(fromSize.width * delta, fromSize.height * delta);
+		if (dw > dh) {
+			return CGSizeMake(toSize.width, fromSize.height * dw);
+		} else if (dw < dh) {
+			return CGSizeMake(fromSize.width * dh, toSize.height);
+		} else {
+			return toSize;
+		}
 	} else {
 		return fromSize;
 	}

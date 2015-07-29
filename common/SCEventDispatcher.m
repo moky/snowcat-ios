@@ -70,9 +70,8 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 			[mArray release];
 		} else {
 			// exists event name, just add responder
-			NSEnumerator * enumerator = [mArray objectEnumerator];
 			SCEventResponder * er;
-			while (er = [enumerator nextObject]) {
+			SC_FOR_EACH(er, mArray) {
 				if (er.responder == responder) {
 					SCLog(@"duplicated responder: %@, event: %@", responder, eventName);
 					return;
@@ -91,9 +90,8 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 {
 	NSAssert(responder, @"responder cannot be nil");
 	NSAssert([events isKindOfClass:[NSArray class]], @"events error: %@", events);
-	NSEnumerator * enumerator = [events objectEnumerator];
 	NSString * name;
-	while (name = [enumerator nextObject]) {
+	SC_FOR_EACH(name, events) {
 		NSAssert([name isKindOfClass:[NSString class]], @"event name error: %@", name);
 		[self addEventResponder:responder withEventName:name];
 	}
@@ -105,18 +103,17 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 	@synchronized(self) {
 		NSMutableArray * eventsToRemove = [[NSMutableArray alloc] initWithCapacity:4];
 		
-		NSEnumerator * keyEnumerator = [_responderPool keyEnumerator];
+		NSMutableArray * respondersToRemove;
+		SCEventResponder * er;
+		
 		NSString * eventName;
 		NSMutableArray * mArray;
-		while (eventName = [keyEnumerator nextObject]) {
-			mArray = [_responderPool objectForKey:eventName];
+		SC_FOR_EACH_KEY_VALUE(eventName, mArray, _responderPool) {
 			NSAssert([mArray isKindOfClass:[NSMutableArray class]], @"event responder list error: %@", mArray);
-			NSMutableArray * respondersToRemove = [[NSMutableArray alloc] initWithCapacity:2];
+			respondersToRemove = [[NSMutableArray alloc] initWithCapacity:2];
 			
 			// get responders
-			NSEnumerator * enumerator = [mArray objectEnumerator];
-			SCEventResponder * er;
-			while (er = [enumerator nextObject]) {
+			SC_FOR_EACH(er, mArray) {
 				if (er.responder == responder) {
 					er.responder = nil;
 					[respondersToRemove addObject:er];
@@ -124,8 +121,7 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 			}
 			
 			// remove responders
-			enumerator = [respondersToRemove objectEnumerator];
-			while (er = [enumerator nextObject]) {
+			SC_FOR_EACH(er, respondersToRemove) {
 				[mArray removeObject:er];
 				if ([mArray count] == 0) {
 					// the array is empty now, remove it
@@ -152,10 +148,9 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 	
 	@synchronized(self) {
 		NSMutableArray * mArray = [_responderPool objectForKey:eventName];
-		NSEnumerator * enumerator = [mArray objectEnumerator];
 		id<SCEventDelegate> delegate;
 		SCEventResponder * er;
-		while (er = [enumerator nextObject]) {
+		SC_FOR_EACH(er, mArray) {
 			delegate = [SCEventHandler delegateForResponder:er.responder];
 			NSAssert(delegate, @"no delegate matches the responder: %@", er.responder);
 			[delegate doEvent:eventName withResponder:er.responder];

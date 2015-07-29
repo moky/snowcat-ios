@@ -157,9 +157,8 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	
 	// check scTag
 	NSInteger tag = [target integerValue];
-	NSEnumerator * enumerator = [children objectEnumerator];
 	id<SCUIKit> kit;
-	while (kit = [enumerator nextObject]) {
+	SC_FOR_EACH(kit, children) {
 		if ([kit conformsToProtocol:@protocol(SCUIKit)]) {
 			if ([kit scTag] == tag) {
 				return kit;

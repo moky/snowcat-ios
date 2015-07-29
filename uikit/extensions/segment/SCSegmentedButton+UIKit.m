@@ -125,9 +125,8 @@ UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromStr
 	}
 	CGPoint center = CGPointMake(bounds.size.width * 0.5f, bounds.size.height * 0.5f);
 	
-	NSEnumerator * enumerator = [self.subviews objectEnumerator];
 	UIButton * btn;
-	while (btn = [enumerator nextObject]) {
+	SC_FOR_EACH(btn, self.subviews) {
 		btn.bounds = bounds;
 		btn.center = center;
 		if (_direction == UISegmentedButtonAutoLayoutDirectionHorizontal) {

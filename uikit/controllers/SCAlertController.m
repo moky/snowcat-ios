@@ -227,10 +227,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		NSInteger buttonIndex = -1;
 		
 		UIAlertAction * aa;
-		NSEnumerator * enumerator = [otherButtonTitles objectEnumerator];
 		NSString * title;
-		
-		while (title = [enumerator nextObject]) {
+		SC_FOR_EACH(title, otherButtonTitles) {
 			NSString * event = [NSString stringWithFormat:@"onClick:%d", (int)++buttonIndex];
 			title = SCLocalizedString(title, nil);
 			aa = [UIAlertAction actionWithTitle:title

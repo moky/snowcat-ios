@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #include "mof_data.h"
 
 #import "SCMOFTransformer.h"
@@ -14,9 +15,8 @@ static NSUInteger _indexForString(NSString * string, NSMutableArray * mStringsAr
 {
 	NSUInteger index = 0;
 	
-	NSEnumerator * enumerator = [mStringsArray objectEnumerator];
 	NSString * str;
-	while (str = [enumerator nextObject]) {
+	SC_FOR_EACH(str, mStringsArray) {
 		if ([str isEqualToString:string]) {
 			break;
 		}
@@ -53,9 +53,8 @@ static NSUInteger _processArray(NSArray * array,
 	MOFDataItem * pChild;
 	NSUInteger iCount = 1;
 	
-	NSEnumerator * enumerator = [array objectEnumerator];
 	NSObject * object;
-	while (object = [enumerator nextObject]) {
+	SC_FOR_EACH(object, array) {
 		pChild = pItemBuffer + iCount;
 		iCount += _processObject(object, pChild, iPlaceLeft - iCount, mStringsArray);
 	}
@@ -81,19 +80,19 @@ static NSUInteger _processDictionary(NSDictionary * dict,
 	MOFDataItem * pObject;
 	NSUInteger iCount = 1;
 	
-	NSEnumerator * enumerator = [dict keyEnumerator];
+	NSUInteger keyId;
+	
 	NSString * key;
 	NSObject * object;
-	while (key = [enumerator nextObject]) {
+	SC_FOR_EACH_KEY_VALUE(key, object, dict) {
 		// key
 		pKey = pItemBuffer + iCount;
-		NSUInteger keyId = _indexForString(key, mStringsArray);
+		keyId = _indexForString(key, mStringsArray);
 		pKey->type = MOFDataItemTypeKey;
 		pKey->keyId = (MOFUInteger)keyId;
 		// value
 		++iCount;
 		pObject = pItemBuffer + iCount;
-		object = [dict objectForKey:key];
 		iCount += _processObject(object, pObject, iPlaceLeft - iCount, mStringsArray);
 	}
 	
@@ -245,12 +244,11 @@ static unsigned char * _createStringsBuffer(NSArray * stringsArray,
 	*pCount = (MOFUInteger)iCount;
 	
 	// save each string
-	NSEnumerator * enumerator = [stringsArray objectEnumerator];
 	NSString * string;
 	const char * str;
 	NSUInteger len;
 	MOFStringItem * item;
-	while (string = [enumerator nextObject]) {
+	SC_FOR_EACH(string, stringsArray) {
 		//str = [string cStringUsingEncoding:NSUTF8StringEncoding];
 		str = [string UTF8String];
 		len = strlen(str);

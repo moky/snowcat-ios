@@ -195,10 +195,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSUInteger count = [items count];
 		NSMutableArray * mArray = [[NSMutableArray alloc] initWithCapacity:count];
 		
-		NSEnumerator * enumerator = [items objectEnumerator];
 		NSDictionary * item;
 		SCTabBarItem * tbi;
-		while (item = [enumerator nextObject]) {
+		SC_FOR_EACH(item, items) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary: %@", item);
 			tbi = [SCTabBarItem create:item autorelease:NO];
 			NSAssert([tbi isKindOfClass:[UITabBarItem class]], @"tab bar item's definition error: %@", item);

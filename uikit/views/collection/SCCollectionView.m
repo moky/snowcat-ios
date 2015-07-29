@@ -207,10 +207,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		reuseIdentifiers = [[NSArray alloc] initWithObjects:@"SCCollectionViewCell", nil];
 	}
 	if (reuseIdentifiers) {
-		NSEnumerator * enumerator = [reuseIdentifiers objectEnumerator];
 		NSString * name;
 		Class class;
-		while (name = [enumerator nextObject]) {
+		SC_FOR_EACH(name, reuseIdentifiers) {
 			class = NSClassFromString(name);
 			if (!class) {
 				name = [[NSString alloc] initWithFormat:@"SC%@", name]; // add prefix 'SC'
