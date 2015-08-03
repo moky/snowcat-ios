@@ -127,7 +127,7 @@ typedef enum {
 //
 // string item in strings buffer
 //
-typedef struct {
+typedef struct _MOFStringItem {
 	// NOTICE:
 	// it's the size of entire item, includes 'sizeof(length)' and the last '\0' of string
 	// NOT only the length of string
@@ -139,7 +139,7 @@ typedef struct {
 //
 // data item (8 bytes)
 //
-typedef struct {
+typedef struct _MOFDataItem {
 	MOFUByte        type;        // 0 - 255
 	MOFUChar        reserved[3]; // reserved for bytes alignment
 	union {
@@ -163,12 +163,12 @@ typedef struct {
 //
 // data body (8 bytes)
 //
-typedef struct {
+typedef struct _MOFBufferInfo {
 	MOFUInteger offset; // offset of memory buffer (from data head)
 	MOFUInteger length; // length of memory buffer (bytes)
 } MOFBufferInfo;
 
-typedef struct {
+typedef struct _MOFDataBody {
 	MOFBufferInfo itemsBuffer;
 	MOFBufferInfo stringsBuffer;
 	
@@ -178,7 +178,7 @@ typedef struct {
 //
 // data head (160 bytes)
 //
-typedef struct {
+typedef struct _MOFDataHead {
 	// protocol
 	MOFUChar    format[4];   // "MOF"
 	MOFUByte    version;
@@ -195,7 +195,7 @@ typedef struct {
 //
 // MOF data
 //
-typedef struct {
+typedef struct _MOFData {
 	MOFDataHead head;
 	MOFDataBody body;
 } MOFData;

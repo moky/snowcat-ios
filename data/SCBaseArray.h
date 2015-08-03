@@ -8,7 +8,7 @@
 
 #import "SCBaseType.h"
 
-typedef struct {
+typedef struct _SCBaseArray {
 	unsigned long capacity; // max length of items
 	unsigned long itemSize;
 	SCBaseType * items;

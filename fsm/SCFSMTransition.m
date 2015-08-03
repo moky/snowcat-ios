@@ -12,7 +12,7 @@
 //#import "SCFSMState.h"
 #import "SCFSMTransition.h"
 
-static FSMBool SCFSMTransitionEvaluate(const struct FSMMachine * m, const struct FSMState * s, const struct FSMTransition * t)
+static FSMBool SCFSMTransitionEvaluate(const FSMMachine * m, const FSMState * s, const FSMTransition * t)
 {
 	SCFSMMachine * machine = m->object;
 	//SCFSMState * state = s->object;

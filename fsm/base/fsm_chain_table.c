@@ -11,11 +11,11 @@
 
 #include "fsm_chain_table.h"
 
-void fsm_chain_destroy(FSMChainTabel * head)
+void fsm_chain_destroy(FSMChainTable * head)
 {
 	// 1. destroy the chain table
-	FSMChainTabel * chain = head;
-	FSMChainTabel * next;
+	FSMChainTable * chain = head;
+	FSMChainTable * next;
 	while (chain) {
 		// 1.1. destroy element (state)
 		// ignore the element, because its owner will destroy it.
@@ -28,27 +28,27 @@ void fsm_chain_destroy(FSMChainTabel * head)
 	}
 }
 
-void fsm_chain_add(FSMChainTabel ** head, void * element)
+void fsm_chain_add(FSMChainTable ** head, void * element)
 {
 	// create a chain node
-	FSMChainTabel * chain = (FSMChainTabel *)malloc(sizeof(FSMChainTabel));
-	memset(chain, 0, sizeof(FSMChainTabel));
+	FSMChainTable * chain = (FSMChainTable *)malloc(sizeof(FSMChainTable));
+	memset(chain, 0, sizeof(FSMChainTable));
 	chain->element = element;
 	
 	// get tail of the chain table
-	FSMChainTabel ** tail = head;
+	FSMChainTable ** tail = head;
 	while (*tail) {
 		tail = &(*tail)->next;
 	}
 	*tail = chain;
 }
 
-void * fsm_chain_get(const FSMChainTabel * head, unsigned int index)
+void * fsm_chain_get(const FSMChainTable * head, unsigned int index)
 {
 	if (index == FSMNotFound) {
 		return NULL;
 	}
-	const FSMChainTabel * chain = head;
+	const FSMChainTable * chain = head;
 	for (; chain && index > 0; --index) {
 		chain = chain->next;
 	}

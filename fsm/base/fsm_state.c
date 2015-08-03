@@ -53,7 +53,7 @@ void fsm_state_add_transition(FSMState * s, const FSMTransition * t)
 
 void fsm_state_tick(FSMMachine * m, const FSMState * s)
 {
-	FSMChainTabel * chain = s->transitions;
+	FSMChainTable * chain = s->transitions;
 	FSMTransition * t;
 	fsm_transition_evaluate fn;
 	while (chain) {

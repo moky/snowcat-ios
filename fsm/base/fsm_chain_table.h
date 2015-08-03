@@ -11,9 +11,9 @@
 
 #include "fsm_protocol.h"
 
-void fsm_chain_destroy(FSMChainTabel * head);
+void fsm_chain_destroy(FSMChainTable * head);
 
-void fsm_chain_add(FSMChainTabel ** head, void * element);
-void * fsm_chain_get(const FSMChainTabel * head, unsigned int index);
+void fsm_chain_add(FSMChainTable ** head, void * element);
+void * fsm_chain_get(const FSMChainTable * head, unsigned int index);
 
 #endif /* defined(__fsm_chain_table__) */

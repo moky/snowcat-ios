@@ -42,7 +42,7 @@ void fsm_machine_add_state(FSMMachine * m, const FSMState * s)
 const FSMState * fsm_machine_get_state(const FSMMachine * m, unsigned int index)
 {
 	const FSMState * s = NULL;
-	const FSMChainTabel * chain = m->states;
+	const FSMChainTable * chain = m->states;
 	unsigned int i;
 	for (i = 0; chain; ++i, chain = chain->next) {
 		if (i == index) {
@@ -58,7 +58,7 @@ const FSMState * fsm_machine_get_state_by_name(const FSMMachine * m, const char 
 	const FSMState * s = NULL;
 	*index = FSMNotFound;
 	if (name) {
-		const FSMChainTabel * chain = m->states;
+		const FSMChainTable * chain = m->states;
 		unsigned int i;
 		for (i = 0; chain; ++i, chain = chain->next) {
 			s = chain->element;

@@ -13,7 +13,7 @@
 //      For improving performance, the data maybe saved circularly,
 //  so please don't access it as an array.
 //
-typedef struct {
+typedef struct _SCBaseQueue {
 	unsigned long capacity; // max length of items
 	unsigned long itemSize;
 	SCBaseType * items;

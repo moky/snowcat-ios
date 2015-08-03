@@ -14,7 +14,7 @@
 
 extern FSMState * FSMStateIn(const SCFSMState * state);
 
-static void SCFSMMachineEnterState(const struct FSMMachine * m, const struct FSMState * s)
+static void SCFSMMachineEnterState(const FSMMachine * m, const FSMState * s)
 {
 	SCFSMMachine * machine = m->object;
 	SCFSMState * state = s->object;
@@ -22,7 +22,7 @@ static void SCFSMMachineEnterState(const struct FSMMachine * m, const struct FSM
 	[state onEnter:machine]; // call 'onEnter:' of state
 }
 
-static void SCFSMMachineExitState(const struct FSMMachine * m, const struct FSMState * s)
+static void SCFSMMachineExitState(const FSMMachine * m, const FSMState * s)
 {
 	SCFSMMachine * machine = m->object;
 	SCFSMState * state = s->object;

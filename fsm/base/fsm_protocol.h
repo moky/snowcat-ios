@@ -18,28 +18,28 @@
 
 #define FSM_MAX_NAME_LENGTH 32
 
-struct FSMMachine;
-struct FSMState;
-struct FSMTransition;
+struct _FSMMachine;
+struct _FSMState;
+struct _FSMTransition;
 
-typedef void    (*fsm_machine_enter_state)(const struct FSMMachine * m, const struct FSMState * s);
-typedef void    (*fsm_machine_exit_state) (const struct FSMMachine * m, const struct FSMState * s);
-typedef FSMBool (*fsm_transition_evaluate)(const struct FSMMachine * m, const struct FSMState * s, const struct FSMTransition * t);
+typedef void    (*fsm_machine_enter_state)(const struct _FSMMachine * m, const struct _FSMState * s);
+typedef void    (*fsm_machine_exit_state) (const struct _FSMMachine * m, const struct _FSMState * s);
+typedef FSMBool (*fsm_transition_evaluate)(const struct _FSMMachine * m, const struct _FSMState * s, const struct _FSMTransition * t);
 
 //
 // chain table
 //
-typedef struct FSMChainTable {
+typedef struct _FSMChainTable {
 	void * element;
-	struct FSMChainTable * next;
-} FSMChainTabel;
+	struct _FSMChainTable * next;
+} FSMChainTable;
 
 //
 // machine
 //
-typedef struct FSMMachine {
+typedef struct _FSMMachine {
 	// states
-	FSMChainTabel * states;             // finite array for states
+	FSMChainTable * states;             // finite array for states
 	unsigned int current;          // index of current state
 	// functions
 	fsm_machine_enter_state enter; // enter a state
@@ -51,9 +51,9 @@ typedef struct FSMMachine {
 //
 // state
 //
-typedef struct FSMState {
+typedef struct _FSMState {
 	char name[FSM_MAX_NAME_LENGTH]; // name of state
-	FSMChainTabel * transitions;    // transitions of state
+	FSMChainTable * transitions;    // transitions of state
 	
 	void * object; // delegate for state
 } FSMState;
@@ -61,7 +61,7 @@ typedef struct FSMState {
 //
 // transition
 //
-typedef struct FSMTransition {
+typedef struct _FSMTransition {
 	char target[FSM_MAX_NAME_LENGTH]; // name of target state
 	fsm_transition_evaluate evaluate; // evaluate function
 	
