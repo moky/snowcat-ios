@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCBaseArray.h"
 #import "SCWaterfallView+Layout.h"
 
 NS_INLINE void add_first_joining_point(SCBaseArray * pointPool,
@@ -69,7 +68,7 @@ NS_INLINE void add_first_joining_point(SCBaseArray * pointPool,
 		default:
 			break; // error
 	}
-	pointPool->bkCompare = compare;
+	pointPool->bk.compare = compare;
 	SCBaseArrayAdd(pointPool, (SCBaseType *)&point);
 }
 
@@ -383,9 +382,9 @@ NS_INLINE void expand_waterfall_view(UIWaterfallView * view,
 	//    each subview may offers two new joining point,
 	//    create a pool to save all available joining point(s)
 	SCBaseArray * pointPool = SCBaseArrayCreate(sizeof(CGPoint), count * 2);
-	pointPool->bkAssign = SCWaterfallViewJoiningPointAssignBlock();
+	pointPool->bk.assign = SCWaterfallViewJoiningPointAssignBlock();
 	add_first_joining_point(pointPool, direction, spaceHorizontal, spaceVertical, bounds);
-	NSAssert(pointPool->bkCompare, @"init failed");
+	NSAssert(pointPool->bk.compare, @"init failed");
 	
 	UIView * child;
 	CGRect frame;

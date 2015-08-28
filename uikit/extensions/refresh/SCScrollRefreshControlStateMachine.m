@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCFSMBlockTransition.h"
 #import "SCScrollRefreshControlState.h"
 #import "SCScrollRefreshControlStateMachine.h"
 

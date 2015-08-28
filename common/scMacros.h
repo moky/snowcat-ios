@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scSlanissueToolkit.h"
 
 #define SC_NODE_FILE_PARSER_USE_OUTPUT_FILE 0
 #define SC_NODE_FILE_PARSER_OUTPUT_FILE_EXT @"output.mof"
@@ -36,85 +37,6 @@
 #define SCTemporaryDirectory()     [[SCClient getInstance] temporaryDirectory]
 
 #define SCSystemVersion()    [[[SCClient getInstance] systemVersion] floatValue]
-
-//-------------------------------------------------------------------- singleton
-#define SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)                          \
-    static id s_singleton_instance = nil;                                      \
-    + (instancetype) getInstance                                               \
-    {                                                                          \
-        @synchronized(self) {                                                  \
-            if (!s_singleton_instance) {                                       \
-                [self new]; /* alloc & init */                                 \
-            }                                                                  \
-        }                                                                      \
-        return s_singleton_instance;                                           \
-    }                                                                          \
-    + (instancetype) allocWithZone:(NSZone *)zone                              \
-    {                                                                          \
-        NSAssert(s_singleton_instance == nil, @"Singleton!");                  \
-        @synchronized(self) {                                                  \
-            if (!s_singleton_instance) {                                       \
-                s_singleton_instance = [super allocWithZone:zone];             \
-            }                                                                  \
-        }                                                                      \
-        return s_singleton_instance;                                           \
-    }                                                                          \
-    - (id) copy { return self; }                                               \
-    - (id) mutableCopy { return self; }                                        \
-    - (instancetype) retain { return self; }                                   \
-    - (oneway void) release { /* do nothing */ }                               \
-    - (instancetype) autorelease { return self; }                              \
-    - (NSUInteger) retainCount { return NSUIntegerMax; }                       \
-                                    /* EOF 'SC_IMPLEMENT_SINGLETON_FUNCTIONS' */
-
-
-//------------------------------------------------------------------ switch case
-//	do {
-//		if (string) {
-//			{
-//			};
-//			if ([string rangeOfString:@"Yes"].location != NSNotFound) {
-//				return YES;
-//			};
-//			if ([string rangeOfString:@"No"].location != NSNotFound) {
-//				return NO;
-//			};
-//		};
-//		return Default;
-//	} while(0);
-
-#define SC_SWITCH_BEGIN(var)        do { if (var) { {
-#define SC_SWITCH_CASE(var, value)  }; if ([(var) rangeOfString:(value)].location != NSNotFound) {
-#define SC_SWITCH_DEFAULT           }; };
-#define SC_SWITCH_END               } while(0);
-
-//--------------------------------------------------------------------- for each
-#define SC_FOR_EACH(item, array)                                               \
-    for (NSEnumerator * __e = [(array) objectEnumerator];                      \
-         ((item) = [__e nextObject]); )                                        \
-                                                         /* EOF 'SC_FOR_EACH' */
-
-#define SC_FOR_EACH_REVERSE(item, array)                                       \
-    for (NSEnumerator * __e = [(array) reverseObjectEnumerator];               \
-         ((item) = [__e nextObject]); )                                        \
-                                                 /* EOF 'SC_FOR_EACH_REVERSE' */
-
-#define SC_FOR_EACH_SAFE(item, array)                                          \
-    for (NSUInteger __i = 0;                                                   \
-         (__i < [(array) count]) && ((item) = [(array) objectAtIndex:__i]);    \
-         ++__i)                                                                \
-                                                    /* EOF 'SC_FOR_EACH_SAFE' */
-
-#define SC_FOR_EACH_REVERSE_SAFE(item, array)                                  \
-    for (NSInteger __i = [(array) count] - 1;                                  \
-         (__i>=0 && __i<[(array) count])&&((item)=[(array) objectAtIndex:__i]);\
-         --__i)                                                                \
-                                            /* EOF 'SC_FOR_EACH_REVERSE_SAFE' */
-
-#define SC_FOR_EACH_KEY_VALUE(key, value, dict)                                \
-    for (NSEnumerator * __e = [(dict) keyEnumerator];                          \
-         ((key)=[__e nextObject]) && ((value)=[(dict) objectForKey:(key)]); )  \
-                                               /* EOF 'SC_FOR_EACH_KEY_VALUE' */
 
 //--------------------------------------------------------------- set attributes
 #define SC_SET_ATTRIBUTES_AS_STRING(obj, dict, name)                           \

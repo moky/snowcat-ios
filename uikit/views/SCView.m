@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCLog.h"
 #import "SCClient.h"
 #import "SCNib.h"
 #import "SCString.h"
@@ -260,19 +259,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 #endif
 	
 	return YES;
-}
-
-@end
-
-@implementation UIView (Snapshot)
-
-- (UIImage *) snapshot:(NSString *)filename
-{
-	UIImage * image = SCSnapshot(self);
-	if (filename) {
-		[image writeToFile:filename atomically:YES];
-	}
-	return image;
 }
 
 @end

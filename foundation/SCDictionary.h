@@ -45,9 +45,3 @@
 + (NSDictionary *) dictionaryWithContentsOfMofURL:(NSURL *)url autorelease:(BOOL)autorelease;
 
 @end
-
-#define SCDictionarySetObjectForKey(dict, object, key)                         \
-        if ((object) && (key)) {                                               \
-            [(dict) setObject:(object) forKey:(key)];                          \
-        }                                                                      \
-                                         /* EOF 'SCDictionarySetObjectForKey' */

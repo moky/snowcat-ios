@@ -11,12 +11,6 @@
 
 UIKIT_EXTERN UIImageOrientation UIImageOrientationFromString(NSString * string);
 
-@interface UIImage (IO)
-
-- (BOOL) writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
-
-@end
-
 @interface SCImage : UIImage<SCUIKit, SCDataDelegate>
 
 @property(nonatomic, assign) id<SCDataDelegate> delegate;

@@ -23,16 +23,16 @@
 @end
 
 #define SCWaterfallViewJoiningPointAssignBlock()                               \
-        ^void(void * ptr, const void * val) {                                  \
-            CGPoint * p = (CGPoint *)ptr;                                      \
-            CGPoint * v = (CGPoint *)val;                                      \
+        ^void(ds_type * dest, const ds_type * src, const size_t size) {        \
+            CGPoint * p = (CGPoint *)dest;                                     \
+            CGPoint * v = (CGPoint *)src;                                      \
             p->x = v->x;                                                       \
             p->y = v->y;                                                       \
         }                                                                      \
                               /* EOF 'SCWaterfallViewJoiningPointAssignBlock' */
 
 #define SCWaterfallViewJoiningPointCompareBlock(cond1, cond2, cond3, cond4)    \
-        ^int(const void * ptr1, const void * ptr2) {                           \
+        ^int(const ds_type * ptr1, const ds_type * ptr2) {                     \
             CGPoint * p1 = (CGPoint *)ptr1;                                    \
             CGPoint * p2 = (CGPoint *)ptr2;                                    \
             if (cond1) {                                                       \

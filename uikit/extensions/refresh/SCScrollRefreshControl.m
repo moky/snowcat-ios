@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCLog.h"
 #import "SCEventHandler.h"
 #import "SCNib.h"
 #import "SCGeometry.h"

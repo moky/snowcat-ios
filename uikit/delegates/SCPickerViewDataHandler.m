@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
-#import "SCMemoryCache.h"
+#import "scMacros.h"
 #import "SCNodeFileParser.h"
 #import "SCPickerViewDataHandler.h"
 

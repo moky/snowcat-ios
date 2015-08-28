@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCFSMTransition.h"
+#import "SCFSMProtocol.h"
 
 typedef NS_ENUM(NSUInteger, SCFSMPropertyTransitionCompareType) {
 	SCFSMPropertyTransitionCompareTypeEqual,

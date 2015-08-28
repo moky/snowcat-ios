@@ -14,34 +14,19 @@
  *      <UIKit.framework>
  *      <QuartzCore.framework>
  *
+ *      "SlanissueToolkit.framework"
+ *
  */
 
 //
 //  common
 //
 #import "scMacros.h"
-#import "SCTime.h"
-#import "SCLog.h"
-//#import "SCMath.h"
 #import "SCClient.h"
-#import "SCMemoryCache.h"
 #import "SCNodeFileParser.h"
 #import "SCEventHandler.h"
 #import "SCEventDispatcher.h"
 #import "SCDataLoader.h"
-
-//
-//  data
-//
-#import "SCBaseType.h"
-#import "SCBaseArray.h"
-#import "SCBaseStack.h"
-#import "SCBaseQueue.h"
-
-//
-//  mof
-//
-#import "SCMemoryObjectFile.h"
 
 //
 //  fsm
@@ -57,7 +42,6 @@
 #import "SCString+DeviceSuffix.h"
 #import "SCDate+Extension.h"
 #import "SCDictionary.h"
-#import "SCArray.h"
 #import "SCURL.h"
 #import "SCURLRequest.h"
 #import "SCFileManager.h"

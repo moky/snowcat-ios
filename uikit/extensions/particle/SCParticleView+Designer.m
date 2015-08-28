@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCMath.h"
+#import "scMacros.h"
 #import "SCUIKit.h"
 #import "SCImage.h"
 #import "SCEmitterCell.h"

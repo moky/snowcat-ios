@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCUIKit.h"
 #import "SCAction.h"
 #import "SCEventHandler.h"

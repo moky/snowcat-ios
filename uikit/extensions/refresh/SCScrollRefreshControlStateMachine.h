@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCFSMMachine.h"
+#import "SCFSMProtocol.h"
 
 @interface SCScrollRefreshControlStateMachine : SCFSMMachine
 

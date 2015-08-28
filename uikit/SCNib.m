@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCString.h"
 #import "SCString+Extension.h"
 #import "SCNodeFileParser.h"

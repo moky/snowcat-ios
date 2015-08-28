@@ -21,13 +21,6 @@ UIKIT_EXTERN UILayoutConstraintAxis UILayoutConstraintAxisFromString(NSString * 
 
 @end
 
-@interface UIView (Snapshot)
-
-- (UIImage *) snapshot:(NSString *)filename;
-
-@end
-
 // Convenient interface
 
-UIKIT_EXTERN UIImage * SCSnapshot(UIView * view);
 UIKIT_EXTERN void SCRemoveSubviews(UIView * view);

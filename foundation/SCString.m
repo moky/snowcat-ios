@@ -15,8 +15,7 @@
 // 'libs/IdentifierAddition'
 #import "NSString+MD5Addition.h"
 
-#import "SCLog.h"
-#import "SCMath.h"
+#import "scMacros.h"
 #import "SCClient.h"
 #import "SCString+Extension.h"
 #import "SCString.h"

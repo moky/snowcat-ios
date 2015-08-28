@@ -8,7 +8,6 @@
 
 #import "scMacros.h"
 #import "SCClient.h"
-#import "SCMemoryCache.h"
 #import "SCURL.h"
 #import "SCImage.h"
 
@@ -25,13 +24,13 @@
 UIImageOrientation UIImageOrientationFromString(NSString * string)
 {
 	SC_SWITCH_BEGIN(string)
-		SC_SWITCH_CASE(string, @"RightMirrored")
+		SC_SWITCH_CASE(string, @"RightMirror")
 			return UIImageOrientationRightMirrored;
-		SC_SWITCH_CASE(string, @"LeftMirrored")
+		SC_SWITCH_CASE(string, @"LeftMirror")
 			return UIImageOrientationLeftMirrored;
-		SC_SWITCH_CASE(string, @"DownMirrored")
+		SC_SWITCH_CASE(string, @"DownMirror")
 			return UIImageOrientationDownMirrored;
-		SC_SWITCH_CASE(string, @"UpMirrored")
+		SC_SWITCH_CASE(string, @"UpMirror")
 			return UIImageOrientationUpMirrored;
 		SC_SWITCH_CASE(string, @"Right")
 			return UIImageOrientationRight;

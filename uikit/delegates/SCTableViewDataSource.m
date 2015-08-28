@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
 #import "SCDictionary.h"
 #import "SCTableViewCell.h"
 #import "SCTableViewDataSource.h"

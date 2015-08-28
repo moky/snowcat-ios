@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SCFSMState.h"
+#import "SCFSMProtocol.h"
 
 typedef NS_ENUM(NSUInteger, UIScrollRefreshControlState) {
 	UIScrollRefreshControlStateDefault,     // default state is hidden

@@ -146,9 +146,19 @@ NS_INLINE NSString * iphone6p_path(NSString * filename, NSString * ext/*, BOOL r
 	SCClient * client = [SCClient getInstance];
 	BOOL retina   = [client isRetina];
 	BOOL ipad     = [client isPad];
-	BOOL iphone5  = retina && !ipad && client.screenSize.height == 568.0f;
-	BOOL iphone6  = retina && !ipad && client.screenSize.height == 667.0f;
-	BOOL iphone6p = retina && !ipad && client.screenSize.height == 736.0f;
+	BOOL iphone5  = NO;
+	BOOL iphone6  = NO;
+	BOOL iphone6p = NO;
+	if (!ipad && retina) {
+		CGSize s = client.screenSize;
+		if (s.width == 568.0f || s.height == 568.0f) {
+			iphone5 = YES;
+		} else if (s.width == 667.0f || s.height == 667.0f) {
+			iphone6 = YES;
+		} else if (s.width == 736.0f || s.height == 736.0f) {
+			iphone6p = YES;
+		}
+	}
 	
 	NSString * ext = [self pathExtension];
 	NSString * filename = [self stringByDeletingPathExtension];

@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
-#import "SCMOFReader.h"
-#import "SCMemoryCache.h"
+#import "scMacros.h"
 #import "SCURL.h"
 #import "SCString.h"
 #import "SCString+Extension.h"

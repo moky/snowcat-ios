@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
-#import "SCMemoryCache.h"
+#import "scMacros.h"
 #import "SCWebView+JSBridge.h"
 
 @implementation SCWebView (JSBridge)

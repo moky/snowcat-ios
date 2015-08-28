@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCLog.h"
 #import "SCPageScrollViewDataSource+UIKit.h"
 #import "SCPageScrollView+UIKit.h"
 

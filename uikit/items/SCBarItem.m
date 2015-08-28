@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCAttributedString+UIKit.h"
 #import "SCImage.h"
 #import "SCBarItem.h"

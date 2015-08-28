@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
-#import "SCMOFTransformer.h"
+#import "scMacros.h"
 #import "SCClient.h"
 #import "SCString.h"
 #import "SCString+Extension.h"

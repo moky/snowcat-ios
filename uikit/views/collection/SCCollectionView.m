@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCLog.h"
 #import "SCNib.h"
 #import "SCCollectionViewLayout.h"
 #import "SCCollectionViewDataSource.h"

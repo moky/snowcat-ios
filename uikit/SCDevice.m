@@ -15,7 +15,7 @@
 // 'libs/IdentifierAddition'
 #import "UIDevice+IdentifierAddition.h"
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCClient.h"
 #import "SCDevice.h"
 

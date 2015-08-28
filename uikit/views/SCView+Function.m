@@ -176,16 +176,6 @@ UILayoutConstraintAxis UILayoutConstraintAxisFromString(NSString * string)
 
 #pragma mark - Convenient interface
 
-UIImage * SCSnapshot(UIView * view)
-{
-	CGRect bounds = view.bounds;
-	UIGraphicsBeginImageContext(bounds.size);
-	[view drawViewHierarchyInRect:bounds afterScreenUpdates:YES];
-	UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	return image;
-}
-
 void SCRemoveSubviews(UIView * view)
 {
 	NSArray * subviews = view.subviews;

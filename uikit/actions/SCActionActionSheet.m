@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Ceezy. All rights reserved.
 //
 
-#import "SCLog.h"
 #import "SCActionSheet.h"
 #import "SCActionActionSheet.h"
 

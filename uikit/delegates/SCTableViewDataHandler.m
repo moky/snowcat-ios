@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCURL.h"
-#import "SCMemoryCache.h"
 #import "SCNodeFileParser.h"
 #import "SCTableViewDataHandler.h"
 

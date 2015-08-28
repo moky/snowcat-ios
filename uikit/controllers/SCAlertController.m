@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCDevice.h"
 #import "SCApplication.h"
 #import "SCNib.h"

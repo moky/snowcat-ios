@@ -39,21 +39,10 @@
  *
  */
 
-// base
-//#import "fsm_protocol.h"
-//#import "fsm_chain_table.h"
-//#import "fsm_machine.h"
-//#import "fsm_state.h"
-//#import "fsm_transition.h"
-
-#import "SCFSMMachine.h"
-#import "SCFSMState.h"
-#import "SCFSMTransition.h"
+#import "SCFSMProtocol.h"
 #import "SCFSMSequence.h"
 #import "SCFSMAutoMachine.h"
 #import "SCFSMPropertyMachine.h"
 #import "SCFSMPropertyTransition.h"
-#import "SCFSMFunctionTransition.h"
-#import "SCFSMBlockTransition.h"
 
 NSString * fsmVersion(void);

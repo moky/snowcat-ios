@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
+#import "scMacros.h"
 #import "SCEventHandler.h"
 #import "SCWebViewDelegate+JSBridge.h"
 #import "SCWebViewDelegate.h"
@@ -55,8 +55,11 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
 	SCLog(@"onFail: %@, error: %@", webView, error);
-	SCDoEvent(@"onFail", webView);
-	SCDoEvent(@"onError", webView);
+    // ignore error code == 999
+    if ([error code] != NSURLErrorCancelled) {
+        SCDoEvent(@"onFail", webView);
+        SCDoEvent(@"onError", webView);
+    }
 }
 
 @end

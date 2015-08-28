@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCLog.h"
 #import "SCClient.h"
 #import "SCDevice.h"
 #import "SCApplication.h"

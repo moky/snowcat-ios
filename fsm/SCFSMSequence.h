@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCFSMTransition.h"
+#import "SCFSMProtocol.h"
 
 //
 //  class for sequence transitions

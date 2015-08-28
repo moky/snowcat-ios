@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCLog.h"
 #import "SCView.h"
 #import "SCScrollRefreshControl.h"
 #import "SCScrollViewDelegate.h"
