@@ -10,14 +10,8 @@
 
 @interface UIDevice (SCExtend)
 
-// get hw.machine
-- (NSString *) machine;
-
 // rotate the current device for supported interface orientations
 // return YES if rotated
 - (BOOL) rotateForSupportedInterfaceOrientationsOfViewController:(UIViewController *)viewController;
-
-// generates a hash from the MAC-address
-- (NSString *) globalIdentifier;
 
 @end

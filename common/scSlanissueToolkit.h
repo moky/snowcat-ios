@@ -27,6 +27,14 @@
 #define SC_FOR_EACH_KEY_VALUE            S9_FOR_EACH_KEY_VALUE
 
 
+#define SCArrayObjectAtIndex             S9ArrayObjectAtIndex
+#define SCArrayAddObject                 S9ArrayAddObject
+#define SCArrayInsertObjectAtIndex       S9ArrayInsertObjectAtIndex
+#define SCArrayRemoveObjectAtIndex       S9ArrayRemoveObjectAtIndex
+#define SCArrayReplaceObjectAtIndex      S9ArrayReplaceObjectAtIndex
+#define SCArrayRemoveObject              S9ArrayRemoveObject
+
+
 //
 //  Memory Cache
 //
