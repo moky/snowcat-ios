@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCDevice.h"
 #import "SCApplication.h"
 #import "SCNib.h"
 #import "SCCollectionViewLayout.h"

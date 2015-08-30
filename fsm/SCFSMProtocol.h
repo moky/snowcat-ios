@@ -17,6 +17,7 @@
 
 #define SCFSMDelegate           FSMDelegate
 #define SCFSMMachine            FSMMachine
+#define SCFSMAutoMachine        FSMAutoMachine
 #define SCFSMState              FSMState
 #define SCFSMTransition         FSMTransition
 #define SCFSMFunctionTransition FSMFunctionTransition

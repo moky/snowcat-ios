@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCDevice.h"
 #import "SCClient.h"
 
 @interface SCClient ()

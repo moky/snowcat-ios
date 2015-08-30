@@ -7,7 +7,8 @@
 //
 
 #import "SCUIKit.h"
-#import "SCSegmentedScrollView+UIKit.h"
+
+UIKIT_EXTERN UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromString(NSString * string);
 
 @interface SCSegmentedScrollView : UISegmentedScrollView<SCUIKit>
 

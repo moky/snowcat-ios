@@ -138,7 +138,7 @@
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
 	// 1. convert the dictionary to a string
-	NSString * stringJSON = [SCString stringBySerializingObject:dict];
+	NSString * stringJSON = [dict JSONStringWithEncoding:NSUTF8StringEncoding options:0];
 	NSAssert(stringJSON, @"invalid dict: %@", dict);
 	
 	// 2. replace as string
@@ -153,7 +153,7 @@
 	}
 	
 	// 3. convert the string to a dictionary
-	dict = (NSDictionary *)[SCString objectFromJsonString:stringJSON]; // references = 1, autorelease
+	dict = (NSDictionary *)[NSObject objectWithJSONString:stringJSON]; // references = 1, autorelease
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"replace failed, string: %@", stringJSON);
 	
 	[dict retain]; // references = 2, autorelease
@@ -177,7 +177,7 @@
 	
 	NSData * data = [[NSData alloc] initWithContentsOfURL:url];
 	if (data) {
-		NSObject * object = [SCString objectFromJsonData:data autorelease:autorelease];
+		NSObject * object = NSObjectFromJSONData(data);
 		if ([object isKindOfClass:[NSDictionary class]]) {
 			dict = (NSDictionary *)object;
 		} else if (!autorelease && object) {

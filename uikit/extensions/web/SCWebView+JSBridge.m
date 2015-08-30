@@ -11,49 +11,6 @@
 
 @implementation SCWebView (JSBridge)
 
-- (NSString *) title
-{
-	return [self stringByEvaluatingJavaScriptFromString:@"document.title"];
-}
-
-- (NSURL *) URL
-{
-	NSString * href = [self stringByEvaluatingJavaScriptFromString:@"document.location.href"];
-	return [NSURL URLWithString:href];
-}
-
-- (void) inject:(NSString *)jsFile
-{
-	SCLog(@"injecting %@", jsFile);
-	
-	SCMemoryCache * cache = [SCMemoryCache getInstance];
-	NSString * javascript = [cache objectForKey:jsFile];
-	if (!javascript) {
-		// 1. load data from file
-		NSData * data = [[NSData alloc] initWithContentsOfFile:jsFile];
-		if (!data) {
-			NSAssert(false, @"data error: %@", jsFile);
-			return;
-		}
-		
-		// 2. decode to string
-		javascript = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		if (!javascript) {
-			NSAssert(false, @"data error: %@", jsFile);
-			[data release];
-			return;
-		}
-		
-		[cache setObject:javascript forKey:jsFile]; // javascript.retainCount++
-		
-		[javascript release];
-		[data release];
-	}
-	
-	// 3. inject
-	[self stringByEvaluatingJavaScriptFromString:javascript];
-}
-
 // fire event for javascript
 - (void) fire:(NSString *)event
 {

@@ -10,18 +10,8 @@
 
 @interface NSString (Replacement)
 
-- (NSString *) trim;
-- (NSString *) trim:(NSString *)chars;
-
-// encode/decode string for URL parameters
-- (NSString *) escape;
-- (NSString *) unescape;
-
 // replace all '${key}' tags with key-values in 'dict'
 - (NSString *) replaceWithDictionary:(NSDictionary *)dict;
-
-// "/path/to/../something" => "/path/something"
-- (NSString *) simplifyPath;
 
 // replace env vars '${...}', such as '${app}', '${docs}', '${caches}' or '${tmp}' ...
 - (NSString *) fullFilePath;

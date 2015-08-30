@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "SlanissueToolkit.h"
+
 #import "SCUIKit.h"
-#import "SCSwipeTableViewCell+UIKit.h"
 
 @interface SCSwipeTableViewCell : UISwipeTableViewCell<SCUIKit>
 

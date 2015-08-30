@@ -7,7 +7,8 @@
 //
 
 #import "SCUIKit.h"
-#import "SCSegmentedButton+UIKit.h"
+
+UIKIT_EXTERN UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromString(NSString * string);
 
 @interface SCSegmentedButton : UISegmentedButton<SCUIKit>
 

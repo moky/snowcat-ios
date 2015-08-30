@@ -20,7 +20,7 @@ static NSString * SCDataLoaderTemporaryFile(NSURL * url)
 	NSString * filename = [path lastPathComponent];
 	NSString * ext = [filename pathExtension]; // get ext from last path component
 	
-	NSString * md5 = [SCString MD5String:absoluteString]; // use the whole url to md5
+	NSString * md5 = [absoluteString MD5String]; // use the whole url to md5
 	
 	filename = [NSString stringWithFormat:@"cache-%@.%@", md5, ext];
 	path = [SCTemporaryDirectory() stringByAppendingPathComponent:filename];

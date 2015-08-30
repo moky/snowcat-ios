@@ -203,15 +203,6 @@ void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView)
 	
 	SCActionSheet * actionSheet = [SCActionSheet create:dict autorelease:NO];
 	SC_UIKIT_SET_ATTRIBUTES(actionSheet, SCActionSheet, dict);
-	SCActionSheetShow(actionSheet);
+	[actionSheet show];
 	[actionSheet release];
-}
-
-void SCActionSheetShow(UIActionSheet * actionSheet)
-{
-	UIApplication * application = [UIApplication sharedApplication];
-	UIWindow * window = [application keyWindow];
-	UIViewController * rootViewController = [window rootViewController];
-	UIView * view = rootViewController.view;
-	[actionSheet showInView:view];
 }

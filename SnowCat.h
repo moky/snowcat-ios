@@ -40,7 +40,6 @@
 #import "SCString.h"
 #import "SCString+Extension.h"
 #import "SCString+DeviceSuffix.h"
-#import "SCDate+Extension.h"
 #import "SCDictionary.h"
 #import "SCURL.h"
 #import "SCURLRequest.h"
@@ -53,7 +52,6 @@
 //  uikit
 //
 #import "SCApplication.h"
-#import "SCDevice.h"
 #import "SCUIKit.h"
 #import "SCGeometry.h"
 #import "SCNib.h"
@@ -217,9 +215,7 @@
 //
 //  uikit/extensions/segment
 //
-#import "SCSegmentedButton+UIKit.h"
 #import "SCSegmentedButton.h"
-#import "SCSegmentedScrollView+UIKit.h"
 #import "SCSegmentedScrollView.h"
 //
 //  uikit/extensions/table
@@ -232,13 +228,10 @@
 #import "SCGridTableView.h"
 #import "SCGridTableViewDataSource.h"
 #import "SCGridTableViewDelegate.h"
-#import "SCSwipeTableViewCell+UIKit.h"
 #import "SCSwipeTableViewCell.h"
 //
 //  uikit/extensions/refresh
 //
-#import "SCScrollRefreshControlState.h"
-#import "SCScrollRefreshControlStateMachine.h"
 #import "SCScrollRefreshControl.h"
 #import "SCScrollRefreshView.h"
 //
@@ -250,12 +243,9 @@
 //
 //  quartz core
 //
-#import "SCAffineTransform.h"
 #import "SCEmitterCell.h"
 #import "SCEmitterLayer.h"
 #import "SCLayer.h"
 #import "SCTransition.h"
-#import "SCView+Reflection.h"
-#import "SCView+Transform.h"
 
 NSString * snowcatVersion(void);

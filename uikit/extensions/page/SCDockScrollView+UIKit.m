@@ -7,8 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCView+Reflection.h"
-#import "SCView+Transform.h"
 #import "SCDockScrollView+UIKit.h"
 
 @implementation UIDockScrollView

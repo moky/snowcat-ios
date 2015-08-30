@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SlanissueToolkit.h"
 
 UIKIT_EXTERN NSUInteger UIInterfaceOrientationMaskFromString(NSString * string);
 
-UIKIT_EXTERN UIBackgroundTaskIdentifier SCApplicationBeginBackgroundTask(UIApplication * application);
-UIKIT_EXTERN void SCApplicationEndBackgroundTask(UIApplication * application);
+#define SCApplicationBeginBackgroundTask(app) [(app) beginBackgroundTask]
+#define SCApplicationEndBackgroundTask(app)   [(app) endBackgroundTask]

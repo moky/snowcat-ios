@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCDevice.h"
 #import "SCNib.h"
 #import "SCNavigationBar.h"
 #import "SCNavigationControllerDelegate.h"

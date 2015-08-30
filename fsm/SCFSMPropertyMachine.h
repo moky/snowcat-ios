@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCFSMAutoMachine.h"
+#import "SCFSMProtocol.h"
 
 @interface SCFSMPropertyMachine : SCFSMAutoMachine
 

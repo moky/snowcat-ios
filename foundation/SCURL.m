@@ -36,40 +36,4 @@
 	return self;
 }
 
-+ (NSDictionary *) parametersFromURL:(NSURL *)URL
-{
-	NSString * queryString = URL.query;
-	NSArray * array = [queryString componentsSeparatedByString:@"&"];
-	NSUInteger count = [array count];
-	if (count == 0) {
-		return nil;
-	}
-	
-	NSMutableDictionary * parameters = [NSMutableDictionary dictionaryWithCapacity:count];
-	NSString * item;
-	
-	NSRange range;
-	NSString * key;
-	NSString * value;
-	
-	SC_FOR_EACH(item, array) {
-		range = [item rangeOfString:@"="];
-		if (range.location == NSNotFound) {
-			SCLog(@"invalid item: %@", item);
-			continue;
-		}
-		key = [item substringToIndex:range.location];
-		value = [item substringFromIndex:range.location + range.length];
-		
-		value = [value stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-		value = [value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSAssert([key isKindOfClass:[NSString class]], @"error key: %@", key);
-		NSAssert([value isKindOfClass:[NSString class]], @"error value: %@", value);
-		
-		[parameters setObject:value forKey:key];
-	}
-	
-	return parameters;
-}
-
 @end

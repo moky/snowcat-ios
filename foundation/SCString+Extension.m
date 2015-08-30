@@ -42,26 +42,6 @@
 
 @implementation NSString (Replacement)
 
-- (NSString *) trim
-{
-	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
-- (NSString *) trim:(NSString *)chars
-{
-	return [self stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:chars]];
-}
-
-- (NSString *) escape
-{
-	return [self stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-}
-
-- (NSString *) unescape
-{
-	return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-}
-
 - (NSString *) replaceWithDictionary:(NSDictionary *)dict
 {
 	if ([self rangeOfString:@"${"].location == NSNotFound) {
@@ -104,33 +84,6 @@
 	}
 	
 	return [string autorelease]; // retainCount--
-}
-
-- (NSString *) simplifyPath
-{
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	
-	NSString * string = self;
-	NSRange range1, range2;
-	
-	while ((range1 = [string rangeOfString:@"/../"]).location != NSNotFound) {
-		if (range1.location < 1 || [string characterAtIndex:range1.location - 1] == '/') {
-			SCLog(@"error: %@", string);
-			break;
-		}
-		range2 = [string rangeOfString:@"/" options:NSBackwardsSearch range:NSMakeRange(0, range1.location)];
-		if (range2.location == NSNotFound) {
-			range2.location = -1;
-		}
-		NSString * str1 = [string substringWithRange:NSMakeRange(0, range2.location + 1)];
-		NSString * str2 = [string substringFromIndex:range1.location + 4];
-		string = [str1 stringByAppendingString:str2];
-	}
-	
-	[string retain];
-	[pool release];
-	
-	return [string autorelease];
 }
 
 - (NSString *) fullFilePath

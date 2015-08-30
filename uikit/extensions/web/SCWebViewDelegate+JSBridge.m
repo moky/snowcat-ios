@@ -32,7 +32,7 @@
 {
 	NSString * object = URL.host;
 	NSString * method = URL.path;
-	NSDictionary * parameters = [SCURL parametersFromURL:URL];
+	NSDictionary * parameters = [URL parameters];
 	
 	// notification
 	if ([object isEqualToString:@"notification"]) {
@@ -41,7 +41,7 @@
 			NSAssert([event isKindOfClass:[NSString class]], @"event error: %@", URL);
 			id userInfo = [parameters objectForKey:@"userInfo"];
 			if (userInfo) {
-				userInfo = [SCString objectFromJsonString:userInfo];
+				userInfo = [NSObject objectWithJSONString:userInfo];
 			}
 			NSAssert(!userInfo || [userInfo isKindOfClass:[NSDictionary class]], @"userInfo error: %@", URL);
 			

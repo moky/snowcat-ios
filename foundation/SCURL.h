@@ -13,6 +13,4 @@
 // auto detect URL, or full file path, or filename in mainBundle
 - (instancetype) initWithString:(NSString *)urlString isDirectory:(BOOL)isDir;
 
-+ (NSDictionary *) parametersFromURL:(NSURL *)URL;
-
 @end

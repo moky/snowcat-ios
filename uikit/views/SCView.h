@@ -20,7 +20,3 @@ UIKIT_EXTERN UILayoutConstraintAxis UILayoutConstraintAxisFromString(NSString * 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIView *)view;
 
 @end
-
-// Convenient interface
-
-UIKIT_EXTERN void SCRemoveSubviews(UIView * view);

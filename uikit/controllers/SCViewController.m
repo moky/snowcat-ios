@@ -8,7 +8,6 @@
 
 #import "scMacros.h"
 #import "SCClient.h"
-#import "SCDevice.h"
 #import "SCApplication.h"
 #import "SCNib.h"
 #import "SCGeometry.h"

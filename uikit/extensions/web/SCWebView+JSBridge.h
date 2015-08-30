@@ -10,11 +10,6 @@
 
 @interface SCWebView (JSBridge)
 
-@property(nonatomic, readonly) NSString * title;
-@property(nonatomic, readonly) NSURL * URL;
-
-- (void) inject:(NSString *)jsFile;
-
 // fire event for javascript
 - (void) fire:(NSString *)event;
 

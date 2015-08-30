@@ -8,9 +8,6 @@
 
 #import "SCUIKit.h"
 
-UIKIT_EXTERN CGSize CGSizeAspectFit(CGSize fromSize, CGSize toSize);
-UIKIT_EXTERN CGSize CGSizeAspectFill(CGSize fromSize, CGSize toSize);
-
 UIKIT_EXTERN CGRect CGRectFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
 UIKIT_EXTERN CGSize CGSizeFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
 UIKIT_EXTERN CGPoint CGPointFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
@@ -18,15 +15,3 @@ UIKIT_EXTERN CGPoint CGPointFromStringWithRects(NSString * string, CGRect selfFr
 UIKIT_EXTERN CGRect CGRectFromStringWithNode(NSString * string, id node);
 UIKIT_EXTERN CGSize CGSizeFromStringWithNode(NSString * string, id node);
 UIKIT_EXTERN CGPoint CGPointFromStringWithNode(NSString * string, id node);
-
-#pragma mark -
-
-UIKIT_EXTERN CGRect CGRectGetFrameFromNode(id node);
-UIKIT_EXTERN CGRect CGRectGetBoundsFromParentOfNode(id node);
-
-#pragma mark - Siblings
-
-UIKIT_EXTERN NSArray * SCSiblingsOfNode(id node);
-
-UIKIT_EXTERN id SCPreviousSiblingOfNode(id node);
-UIKIT_EXTERN id SCNextSiblingOfNode(id node);

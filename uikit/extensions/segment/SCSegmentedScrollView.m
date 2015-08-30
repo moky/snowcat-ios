@@ -14,6 +14,29 @@
 #import "SCScrollView.h"
 #import "SCSegmentedScrollView.h"
 
+//typedef NS_ENUM(NSUInteger, UISegmentedScrollViewControlPosition) {
+//	UISegmentedScrollViewControlPositionTop,
+//	UISegmentedScrollViewControlPositionBottom,
+//	UISegmentedScrollViewControlPositionLeft,
+//	UISegmentedScrollViewControlPositionRight,
+//};
+UISegmentedScrollViewControlPosition UISegmentedScrollViewControlPositionFromString(NSString * string)
+{
+	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"Top")
+			return UISegmentedScrollViewControlPositionTop;
+		SC_SWITCH_CASE(string, @"Bottom")
+			return UISegmentedScrollViewControlPositionBottom;
+		SC_SWITCH_CASE(string, @"Left")
+			return UISegmentedScrollViewControlPositionLeft;
+		SC_SWITCH_CASE(string, @"Right")
+			return UISegmentedScrollViewControlPositionRight;
+		SC_SWITCH_DEFAULT
+	SC_SWITCH_END
+	
+	return [string integerValue];
+}
+
 @interface SCSegmentedScrollView ()
 
 @property(nonatomic, retain) UISegmentedControl * segmentedControl;

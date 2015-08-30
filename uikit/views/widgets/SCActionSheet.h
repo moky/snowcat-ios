@@ -19,4 +19,3 @@ UIKIT_EXTERN UIActionSheetStyle UIActionSheetStyleFromString(NSString * string);
 // Convenient interface
 
 UIKIT_EXTERN void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView);
-UIKIT_EXTERN void SCActionSheetShow(UIActionSheet * actionSheet);

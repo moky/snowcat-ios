@@ -173,14 +173,3 @@ UILayoutConstraintAxis UILayoutConstraintAxisFromString(NSString * string)
 	
 	return [string integerValue];
 }
-
-#pragma mark - Convenient interface
-
-void SCRemoveSubviews(UIView * view)
-{
-	NSArray * subviews = view.subviews;
-	UIView * sv;
-	SC_FOR_EACH_REVERSE_SAFE(sv, subviews) {
-		[sv removeFromSuperview];
-	}
-}

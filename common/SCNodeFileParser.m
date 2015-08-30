@@ -176,14 +176,14 @@
 
 - (NSDictionary *) _dictionaryFromString:(NSString *)string
 {
-	NSObject * object = [SCString objectFromJsonString:string];
+	NSObject * object = [NSObject objectWithJSONString:string];
 	if ([object isKindOfClass:[NSDictionary class]]) {
 		// json object
 		return (NSDictionary *)object;
 	}
 	
 	// key-value (css) format string
-	return [SCString dictionaryFromMapString:string];
+	return [NSDictionary dictionaryWithString:string];
 }
 
 - (NSString *) _prepareString:(NSString *)string

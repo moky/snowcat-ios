@@ -41,7 +41,6 @@
 
 #import "SCFSMProtocol.h"
 #import "SCFSMSequence.h"
-#import "SCFSMAutoMachine.h"
 #import "SCFSMPropertyMachine.h"
 #import "SCFSMPropertyTransition.h"
 

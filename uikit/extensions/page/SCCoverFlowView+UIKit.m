@@ -7,7 +7,6 @@
 //
 
 #import "scMacros.h"
-#import "SCView+Transform.h"
 #import "SCCoverFlowView+UIKit.h"
 
 @implementation UICoverFlowView

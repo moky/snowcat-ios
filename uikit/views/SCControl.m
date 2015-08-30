@@ -148,21 +148,4 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	return YES;
 }
 
-+ (void) performControlEvent:(UIControlEvents)controlEvent on:(UIControl *)control
-{
-	NSObject * target;
-	NSString * action;
-	SEL selector;
-	
-	// get all targets
-	SC_FOR_EACH(target, [control allTargets]) {
-		// get all actions for target
-		SC_FOR_EACH(action, [control actionsForTarget:target forControlEvent:controlEvent]) {
-			// perform selector
-			selector = NSSelectorFromString(action);
-			[target performSelector:selector withObject:control];
-		}
-	}
-}
-
 @end

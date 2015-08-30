@@ -17,6 +17,4 @@ UIKIT_EXTERN UIControlContentHorizontalAlignment UIControlContentHorizontalAlign
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIControl *)control;
 
-+ (void) performControlEvent:(UIControlEvents)controlEvent on:(UIControl *)control;
-
 @end

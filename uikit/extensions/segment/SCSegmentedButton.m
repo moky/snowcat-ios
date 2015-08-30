@@ -11,6 +11,26 @@
 #import "SCButton.h"
 #import "SCSegmentedButton.h"
 
+//typedef NS_ENUM(NSUInteger, UISegmentedButtonAutoLayoutDirection) {
+//	UISegmentedButtonAutoLayoutNone,
+//	UISegmentedButtonAutoLayoutDirectionVertical,
+//	UISegmentedButtonAutoLayoutDirectionHorizontal,
+//};
+UISegmentedButtonAutoLayoutDirection UISegmentedButtonAutoLayoutDirectionFromString(NSString * string)
+{
+	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"None")
+			return UISegmentedButtonAutoLayoutNone;
+		SC_SWITCH_CASE(string, @"Horizontal")
+			return UISegmentedButtonAutoLayoutDirectionHorizontal;
+		SC_SWITCH_CASE(string, @"Vertical")
+			return UISegmentedButtonAutoLayoutDirectionVertical;
+		SC_SWITCH_DEFAULT
+	SC_SWITCH_END
+	
+	return [string integerValue];
+}
+
 @implementation SCSegmentedButton
 
 @synthesize scTag = _scTag;
