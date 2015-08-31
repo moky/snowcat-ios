@@ -6,9 +6,48 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCView.h"
 #import "SCWaterfallView.h"
+
+//typedef NS_ENUM(NSUInteger, UIWaterfallViewDirection) {
+//	UIWaterfallViewDirectionTopLeft,     // place each subview as TOP as possible, if reach the TOP, as LEFT as possible
+//	UIWaterfallViewDirectionTopRight,    // TOP first, and then RIGHT
+//
+//	UIWaterfallViewDirectionBottomLeft,  // BOTTOM first, and then LEFT
+//	UIWaterfallViewDirectionBottomRight, // BOTTOM first, and then RIGHT
+//
+//	UIWaterfallViewDirectionLeftTop,     // LEFT first, and then TOP
+//	UIWaterfallViewDirectionLeftBottom,  // LEFT first, and then BOTTOM
+//
+//	UIWaterfallViewDirectionRightTop,    // RIGHT first, and then TOP
+//	UIWaterfallViewDirectionRightBottom, // RIGHT first, and then BOTTOM
+//};
+UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string)
+{
+	SC_SWITCH_BEGIN(string)
+		SC_SWITCH_CASE(string, @"TopLeft")
+			return UIWaterfallViewDirectionTopLeft;
+		SC_SWITCH_CASE(string, @"TopRight")
+			return UIWaterfallViewDirectionTopRight;
+		SC_SWITCH_CASE(string, @"BottomLeft")
+			return UIWaterfallViewDirectionBottomLeft;
+		SC_SWITCH_CASE(string, @"BottomRight")
+			return UIWaterfallViewDirectionBottomRight;
+		SC_SWITCH_CASE(string, @"LeftTop")
+			return UIWaterfallViewDirectionLeftTop;
+		SC_SWITCH_CASE(string, @"LeftBottom")
+			return UIWaterfallViewDirectionLeftBottom;
+		SC_SWITCH_CASE(string, @"RightTop")
+			return UIWaterfallViewDirectionRightTop;
+		SC_SWITCH_CASE(string, @"RightBottom")
+			return UIWaterfallViewDirectionRightBottom;
+		SC_SWITCH_DEFAULT
+	SC_SWITCH_END
+	
+	return [string integerValue];
+}
 
 @implementation SCWaterfallView
 

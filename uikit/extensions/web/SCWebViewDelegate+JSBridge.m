@@ -41,7 +41,7 @@
 			NSAssert([event isKindOfClass:[NSString class]], @"event error: %@", URL);
 			id userInfo = [parameters objectForKey:@"userInfo"];
 			if (userInfo) {
-				userInfo = [NSObject objectWithJSONString:userInfo];
+				userInfo = NSObjectFromJSONString(userInfo);
 			}
 			NSAssert(!userInfo || [userInfo isKindOfClass:[NSDictionary class]], @"userInfo error: %@", URL);
 			

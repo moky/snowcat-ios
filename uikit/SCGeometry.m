@@ -72,7 +72,7 @@ static NSString * geometry_string_with_node(NSString * string, id node)
 	// sibling
 	if ([string rangeOfString:@"previousSibling."].location != NSNotFound) {
 		// previousSibling
-		id previousSibling = S9PreviousSiblingOfNode(node);
+		id previousSibling = [[node siblings] objectBeforeObject:node];
 		CGRect frame = CGRectGetFrameFromNode(previousSibling);
 		SC_VIEW_CACULATE_REPLACE(@"previousSibling.x", frame.origin.x);
 		SC_VIEW_CACULATE_REPLACE(@"previousSibling.y", frame.origin.y);
@@ -81,7 +81,7 @@ static NSString * geometry_string_with_node(NSString * string, id node)
 	}
 	if ([string rangeOfString:@"nextSibling."].location != NSNotFound) {
 		// nextSibling
-		id nextSibling = S9NextSiblingOfNode(node);
+		id nextSibling = [[node siblings] objectAfterObject:node];
 		CGRect frame = CGRectGetFrameFromNode(nextSibling);
 		SC_VIEW_CACULATE_REPLACE(@"nextSibling.x", frame.origin.x);
 		SC_VIEW_CACULATE_REPLACE(@"nextSibling.y", frame.origin.y);

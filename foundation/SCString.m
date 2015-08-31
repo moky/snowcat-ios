@@ -14,7 +14,7 @@
 
 + (NSObject *) objectFromJsonString:(NSString *)jsonString
 {
-	return [NSObject objectWithJSONString:jsonString];
+	return NSObjectFromJSONString(jsonString);
 }
 
 @end

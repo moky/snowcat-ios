@@ -52,7 +52,7 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 
 + (NSDictionary *) _dictionaryFromString:(NSString *)string
 {
-	NSObject * object = [NSObject objectWithJSONString:string];
+	NSObject * object = NSObjectFromJSONString(string);
 	if ([object isKindOfClass:[NSDictionary class]]) {
 		// json object
 		return (NSDictionary *)object;

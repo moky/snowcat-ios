@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "SlanissueToolkit.h"
+
 #import "SCUIKit.h"
-#import "SCWaterfallView+UIKit.h"
+
+UIKIT_EXTERN UIWaterfallViewDirection UIWaterfallViewDirectionFromString(NSString * string);
 
 @interface SCWaterfallView : UIWaterfallView<SCUIKit>
 
