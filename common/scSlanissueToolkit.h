@@ -11,28 +11,31 @@
 
 #import "SlanissueToolkit.h"
 
-#define SCLog                            S9Log
+#define SCLog(...)                                        S9Log(__VA_ARGS__)
 
-#define SC_IMPLEMENT_SINGLETON_FUNCTIONS S9_IMPLEMENT_SINGLETON_FUNCTIONS
+#define SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)     S9_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 
-#define SC_SWITCH_BEGIN                  S9_SWITCH_BEGIN
-#define SC_SWITCH_CASE                   S9_SWITCH_CASE
-#define SC_SWITCH_DEFAULT                S9_SWITCH_DEFAULT
-#define SC_SWITCH_END                    S9_SWITCH_END
+// switch
+#define SC_SWITCH_BEGIN(var)                              S9_SWITCH_BEGIN(var)
+#define SC_SWITCH_CASE(var, value)                        S9_SWITCH_CASE((var), (value))
+#define SC_SWITCH_DEFAULT                                 S9_SWITCH_DEFAULT
+#define SC_SWITCH_END                                     S9_SWITCH_END
 
-#define SC_FOR_EACH                      S9_FOR_EACH
-#define SC_FOR_EACH_REVERSE              S9_FOR_EACH_REVERSE
-#define SC_FOR_EACH_SAFE                 S9_FOR_EACH_SAFE
-#define SC_FOR_EACH_REVERSE_SAFE         S9_FOR_EACH_REVERSE_SAFE
-#define SC_FOR_EACH_KEY_VALUE            S9_FOR_EACH_KEY_VALUE
+// foreach
+#define SC_FOR_EACH(item, array)                          S9_FOR_EACH((item), (array))
+#define SC_FOR_EACH_REVERSE(item, array)                  S9_FOR_EACH_REVERSE((item), (array))
+#define SC_FOR_EACH_SAFE(item, array)                     S9_FOR_EACH_SAFE((item), (array))
+#define SC_FOR_EACH_REVERSE_SAFE(item, array)             S9_FOR_EACH_REVERSE_SAFE((item), (array))
+#define SC_FOR_EACH_KEY_VALUE(key, value, dict)           S9_FOR_EACH_KEY_VALUE((key), (value), (dict))
 
-
-#define SCArrayObjectAtIndex             S9ArrayObjectAtIndex
-#define SCArrayAddObject                 S9ArrayAddObject
-#define SCArrayInsertObjectAtIndex       S9ArrayInsertObjectAtIndex
-#define SCArrayRemoveObjectAtIndex       S9ArrayRemoveObjectAtIndex
-#define SCArrayReplaceObjectAtIndex      S9ArrayReplaceObjectAtIndex
-#define SCArrayRemoveObject              S9ArrayRemoveObject
+// safe accessing
+#define SCArrayObjectAtIndex(array, index)                S9ArrayObjectAtIndex((array), (index))
+#define SCArrayAddObject(array, object)                   S9ArrayAddObject((array), (object))
+#define SCArrayInsertObjectAtIndex(array, object, index)  S9ArrayInsertObjectAtIndex((array), (object), (index))
+#define SCArrayRemoveObjectAtIndex(array, index)          S9ArrayRemoveObjectAtIndex((array), (index))
+#define SCArrayReplaceObjectAtIndex(array, object, index) S9ArrayReplaceObjectAtIndex((array), (object), (index))
+#define SCArrayRemoveObject(array, object)                S9ArrayRemoveObject((array), (object))
+#define SCDictionarySetObjectForKey(dict, object, key)    S9DictionarySetObjectForKey((dict), (object), (key))
 
 
 //
@@ -64,73 +67,73 @@ typedef ds_compare_block SCBaseTypeCompareBlock;
 //
 //  base array
 //
-typedef ds_array              SCBaseArray;
+typedef ds_array SCBaseArray;
 
-#define SCBaseArrayCreate     ds_array_create
-#define SCBaseArrayDestroy    ds_array_destroy
+#define SCBaseArrayCreate(item_size, capacity) ds_array_create((item_size), (capacity))
+#define SCBaseArrayDestroy(array)              ds_array_destroy(array)
 
-#define SCBaseArrayItemAt     ds_array_at
+#define SCBaseArrayItemAt(array, index)        ds_array_at((array), (index))
 
-#define SCBaseArrayAdd        ds_array_add
-#define SCBaseArrayInsert     ds_array_insert
-#define SCBaseArrayRemove     ds_array_remove
+#define SCBaseArrayAdd(array, item)            ds_array_add((array), (item))
+#define SCBaseArrayInsert(array, item, index)  ds_array_insert((array), (item), (index))
+#define SCBaseArrayRemove(array, index)        ds_array_remove((array), (index))
 
-#define SCBaseArraySort       ds_array_sort
-#define SCBaseArraySortInsert ds_array_sort_insert
+#define SCBaseArraySort(array)                 ds_array_sort(array)
+#define SCBaseArraySortInsert(array, item)     ds_array_sort_insert((array), (item))
 
-#define SCBaseArrayCopy       ds_array_copy
+#define SCBaseArrayCopy(array)                 ds_array_copy(array)
 
 //
 //  base stack
 //
-typedef ds_stack              SCBaseStack;
+typedef ds_stack SCBaseStack;
 
-#define SCBaseStackCreate     ds_stack_create
-#define SCBaseStackDestroy    ds_stack_destroy
+#define SCBaseStackCreate(item_size, capacity) ds_stack_create((item_size), (capacity))
+#define SCBaseStackDestroy(stack)              ds_stack_destroy(stack)
 
-#define SCBaseStackPush       ds_stack_push
+#define SCBaseStackPush(stack, item)           ds_stack_push((stack), (item))
 
-#define SCBaseStackPop        ds_stack_pop
-#define SCBaseStackTop        ds_stack_top
+#define SCBaseStackPop(stack)                  ds_stack_pop(stack)
+#define SCBaseStackTop(stack)                  ds_stack_top(stack)
 
-#define SCBaseStackCopy       ds_stack_copy
+#define SCBaseStackCopy(stack)                 ds_stack_copy(stack)
 
 //
 //  base queue
 //
-typedef ds_queue              SCBaseQueue;
+typedef ds_queue SCBaseQueue;
 
-#define SCBaseQueueCreate     ds_queue_create
-#define SCBaseQueueDestroy    ds_queue_destroy
+#define SCBaseQueueCreate(item_size, capacity) ds_queue_create((item_size), (capacity))
+#define SCBaseQueueDestroy(queue)              ds_queue_destroy(queue)
 
-#define SCBaseQueueLength     ds_queue_length
+#define SCBaseQueueLength(queue)               ds_queue_length(queue)
 
-#define SCBaseQueueEnqueue    ds_queue_enqueue
-#define SCBaseQueueDequeue    ds_queue_dequeue
+#define SCBaseQueueEnqueue(queue, item)        ds_queue_enqueue((queue), (item))
+#define SCBaseQueueDequeue(queue)              ds_queue_dequeue(queue)
 
-#define SCBaseQueueCopy       ds_queue_copy
+#define SCBaseQueueCopy(queue)                 ds_queue_copy(queue)
 
 //
 //  base chain
 //
-typedef ds_chain_node         SCBaseChainNode;
-typedef ds_chain_table        SCBaseChainTable;
+typedef ds_chain_node  SCBaseChainNode;
+typedef ds_chain_table SCBaseChainTable;
 
-#define SCBaseChainCreate     ds_chain_create
-#define SCBaseChainDestroy    ds_chain_destroy
+#define SCBaseChainCreate(data_size)           ds_chain_create(data_size)
+#define SCBaseChainDestroy(chain)              ds_chain_destroy(chain)
 
-#define SCBaseChainInsert     ds_chain_insert
+#define SCBaseChainInsert(chain, data, node)   ds_chain_insert((chain), (data), (node))
 
-#define SCBaseChainLength     ds_chain_length
-#define SCBaseChainItemAt     ds_chain_at
-#define SCBaseChainFind       ds_chain_first
+#define SCBaseChainLength(chain)               ds_chain_length(chain)
+#define SCBaseChainItemAt(chain, index)        ds_chain_at((chain), (index))
+#define SCBaseChainFind(chain, data)           ds_chain_first((chain), (data))
 
-#define SCBaseChainRemove     ds_chain_remove
+#define SCBaseChainRemove(chain, node)         ds_chain_remove((chain), (node))
 
-#define SCBaseChainSort       ds_chain_sort
-#define SCBaseChainSortInsert ds_chain_sort_insert
-#define SCBaseChainReverse    ds_chain_reverse
+#define SCBaseChainSort(chain)                 ds_chain_sort(chain)
+#define SCBaseChainSortInsert(chain, data)     ds_chain_sort_insert((chain), (data))
+#define SCBaseChainReverse(chain)              ds_chain_reverse(chain)
 
-#define SCBaseChainCopy       ds_chain_copy
+#define SCBaseChainCopy(chain)                 ds_chain_copy(chain)
 
 #endif
