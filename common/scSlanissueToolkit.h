@@ -22,11 +22,11 @@
 #define SC_SWITCH_END                                     S9_SWITCH_END
 
 // foreach
-#define SC_FOR_EACH(item, array)                          S9_FOR_EACH((item), (array))
-#define SC_FOR_EACH_REVERSE(item, array)                  S9_FOR_EACH_REVERSE((item), (array))
-#define SC_FOR_EACH_SAFE(item, array)                     S9_FOR_EACH_SAFE((item), (array))
-#define SC_FOR_EACH_REVERSE_SAFE(item, array)             S9_FOR_EACH_REVERSE_SAFE((item), (array))
-#define SC_FOR_EACH_KEY_VALUE(key, value, dict)           S9_FOR_EACH_KEY_VALUE((key), (value), (dict))
+#define SC_FOR_EACH(item, array)                          S9_FOR_EACH((array), (item))
+#define SC_FOR_EACH_REVERSE(item, array)                  S9_FOR_EACH_REVERSE((array), (item))
+#define SC_FOR_EACH_SAFE(item, array)                     S9_FOR_EACH_SAFE((array), (item))
+#define SC_FOR_EACH_REVERSE_SAFE(item, array)             S9_FOR_EACH_REVERSE_SAFE((array), (item))
+#define SC_FOR_EACH_KEY_VALUE(key, value, dict)           S9_FOR_EACH_KEY_VALUE((dict), (key), (value))
 
 // safe accessing
 #define SCArrayObjectAtIndex(array, index)                S9ArrayObjectAtIndex((array), (index))
