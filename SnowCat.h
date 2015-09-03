@@ -49,6 +49,14 @@
 #import "SCAttributedString.h"
 
 //
+//  quartz core
+//
+#import "SCEmitterCell.h"
+#import "SCEmitterLayer.h"
+#import "SCLayer.h"
+#import "SCTransition.h"
+
+//
 //  uikit
 //
 #import "SCApplication.h"
@@ -179,8 +187,9 @@
 #import "SCActionView.h"
 #import "SCActionViewGeometry.h"
 #import "SCActionViewController.h"
+
 //
-//  uikit/extensions
+//  uikit_ext
 //
 #import "SCAnimationView.h"
 #import "SCSwitchButton.h"
@@ -191,12 +200,12 @@
 #import "SCBlurView.h"
 #import "SCWaterfallView.h"
 //
-//  uikit/extensions/particle
+//  uikit_ext/particle
 //
 #import "SCParticleView.h"
 #import "SCTouchParticleView.h"
 //
-//  uikit/extensions/page
+//  uikit_ext/page
 //
 #import "SCPageScrollViewDataSource+UIKit.h"
 #import "SCPageScrollViewDataSource.h"
@@ -209,12 +218,12 @@
 #import "SCCoverFlowView+UIKit.h"
 #import "SCCoverFlowView.h"
 //
-//  uikit/extensions/segment
+//  uikit_ext/segment
 //
 #import "SCSegmentedButton.h"
 #import "SCSegmentedScrollView.h"
 //
-//  uikit/extensions/table
+//  uikit_ext/table
 //
 #import "SCComplexTableView+UIKit.h"
 #import "SCComplexTableView.h"
@@ -226,22 +235,14 @@
 #import "SCGridTableViewDelegate.h"
 #import "SCSwipeTableViewCell.h"
 //
-//  uikit/extensions/refresh
+//  uikit_ext/refresh
 //
 #import "SCScrollRefreshControl.h"
 #import "SCScrollRefreshView.h"
 //
-//  uikit/extensions/web
+//  uikit_ext/web
 //
 #import "SCWebView+JSBridge.h"
 #import "SCWebViewDelegate+JSBridge.h"
-
-//
-//  quartz core
-//
-#import "SCEmitterCell.h"
-#import "SCEmitterLayer.h"
-#import "SCLayer.h"
-#import "SCTransition.h"
 
 NSString * snowcatVersion(void);
