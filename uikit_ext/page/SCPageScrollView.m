@@ -10,7 +10,6 @@
 #import "SCEventHandler.h"
 #import "SCScrollView.h"
 #import "SCPageControl.h"
-#import "SCPageScrollViewDataSource.h"
 #import "SCPageScrollView.h"
 
 @interface SCPageScrollView ()

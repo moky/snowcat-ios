@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SlanissueToolkit.h"
-
-#import "SCUIKit.h"
+#import "SCDockScrollView.h"
 
 @interface SCCoverFlowView : UICoverFlowView<SCUIKit>
 

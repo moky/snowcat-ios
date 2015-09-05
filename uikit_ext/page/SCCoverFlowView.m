@@ -8,8 +8,6 @@
 
 #import "SCNib.h"
 #import "SCResponder.h"
-#import "SCPageScrollView.h"
-#import "SCPageScrollViewDataSource.h"
 #import "SCCoverFlowView.h"
 
 @interface SCCoverFlowView ()
@@ -92,7 +90,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UICoverFlowView *)coverFlowView
 {
-	if (![SCPageScrollView setAttributes:dict to:coverFlowView]) {
+	if (![SCDockScrollView setAttributes:dict to:coverFlowView]) {
 		return NO;
 	}
 	

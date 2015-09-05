@@ -8,7 +8,7 @@
 
 #import "SlanissueToolkit.h"
 
-#import "SCView.h"
+#import "SCUIKit.h"
 
 UIKIT_EXTERN UIScrollRefreshControlDirection UIScrollRefreshControlDirectionFromString(NSString * string);
 

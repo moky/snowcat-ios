@@ -7,10 +7,12 @@
 //
 
 #import "scMacros.h"
+#import "SCFSMProtocol.h"
 #import "SCEventHandler.h"
 #import "SCNib.h"
 #import "SCGeometry.h"
-#import "SCFSMProtocol.h"
+#import "SCResponder.h"
+#import "SCView.h"
 #import "SCScrollRefreshControl.h"
 
 //typedef NS_ENUM(NSUInteger, UIScrollRefreshControlDirection) {

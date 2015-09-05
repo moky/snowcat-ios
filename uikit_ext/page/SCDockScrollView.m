@@ -8,8 +8,6 @@
 
 #import "SCNib.h"
 #import "SCResponder.h"
-#import "SCPageScrollView.h"
-#import "SCPageScrollViewDataSource.h"
 #import "SCDockScrollView.h"
 
 @interface SCDockScrollView ()
