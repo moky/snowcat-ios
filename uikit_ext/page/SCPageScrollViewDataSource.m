@@ -10,7 +10,6 @@
 #import "SCNodeFileParser.h"
 #import "SCDictionary.h"
 #import "SCView.h"
-#import "SCPageScrollView.h"
 #import "SCPageScrollViewDataSource.h"
 
 @interface SCPageScrollViewDataSource ()

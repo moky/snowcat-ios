@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCView.h"
-#import "SCPageScrollView+UIKit.h"
+#import "SlanissueToolkit.h"
+
+#import "SCUIKit.h"
 
 @interface SCPageScrollView : UIPageScrollView<SCUIKit>
 

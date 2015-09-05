@@ -207,15 +207,10 @@
 //
 //  uikit_ext/page
 //
-#import "SCPageScrollViewDataSource+UIKit.h"
 #import "SCPageScrollViewDataSource.h"
-#import "SCPageScrollView+UIKit.h"
 #import "SCPageScrollView.h"
-#import "SCPrismScrollView+UIKit.h"
 #import "SCPrismScrollView.h"
-#import "SCDockScrollView+UIKit.h"
 #import "SCDockScrollView.h"
-#import "SCCoverFlowView+UIKit.h"
 #import "SCCoverFlowView.h"
 //
 //  uikit_ext/segment
