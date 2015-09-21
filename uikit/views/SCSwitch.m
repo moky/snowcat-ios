@@ -122,12 +122,14 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
 - (void) setOn:(BOOL)on
 {
-	if (on != self.on) {
+	if (on == self.on) {
+		[super setOn:on];
+	} else {
+		[super setOn:on];
 		// value changed, fire event
 		NSString * eventName = on ? @"onSwitchOn" : @"onSwitchOff";
 		SCDoEvent(eventName, self);
 	}
-	[super setOn:on];
 }
 
 @end

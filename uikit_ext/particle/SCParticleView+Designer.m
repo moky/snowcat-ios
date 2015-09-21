@@ -116,8 +116,8 @@
 	
 	float birthRate = maxParticles / particleLifespan;
 	
-	float emissionLongitude = DegreeToRadian(angle);
-	float emissionRange = DegreeToRadian(angleVariance);
+	float emissionLongitude = RadianFromDegree(angle);
+	float emissionRange = RadianFromDegree(angleVariance);
 	
 	float velocity = speed + radialAcceleration * particleLifespan * 0.5f;
 	float velocityRange = speedVariance + radialAccelVariance * particleLifespan * 0.5f;
@@ -126,8 +126,8 @@
 	float scaleRange = startParticleSize < 1.0f ? 0.0f : startParticleSizeVariance / startParticleSize;
 	float scaleSpeed = startParticleSize < 1.0f ? 0.0f : (finishParticleSize - startParticleSize) / startParticleSize / particleLifespan;
 	
-	float spin = DegreeToRadian(rotationEnd - rotationStart) / particleLifespan;
-	float spinRange = DegreeToRadian(rotationStartVariance);
+	float spin = RadianFromDegree(rotationEnd - rotationStart) / particleLifespan;
+	float spinRange = RadianFromDegree(rotationStartVariance);
 	
 	float red = startColorRed;
 	float green = startColorGreen;
