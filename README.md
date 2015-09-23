@@ -5,8 +5,14 @@ is a framework for developing apps via creating some '.plist' files simply.
 
 ## Example 1: Hello world
 
-> AppDelegate.m
+Dependences:
+* [https://github.com/moky/slanissue-ios]
+* [https://github.com/moky/snowcat-ios]
 
+> Classes/AppDelegate.m
+
+	#import "SnowCat.h"
+	
 	- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
 		self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -21,9 +27,10 @@ is a framework for developing apps via creating some '.plist' files simply.
 		return YES;
 	}
 
-> main.plist
+> Resources/main.plist
 
 	Root : {
+		version: "1.0",
 		Node : {
 			comment : "here is the main entrance",
 			window : {
@@ -32,20 +39,21 @@ is a framework for developing apps via creating some '.plist' files simply.
 		}
 	}
 
-> page1.plist
+> Resources/page1.plist
 
 	Root : {
 		Node : {
-			Class : "ViewController",
-			view : {
+			Class   : "ViewController",
+			comment : "this is page 1",
+			view    : {
 				subviews : [
-					{
+					{ /* view 1 */
 						Class  : "Label",
 						text   : "Hello world!",
 						color  : "{0, 0, 255}",
 						center : "{center, middle - 50}"
 					},
-					{
+					{ /* view 2 */
 						Class  : "Button",
 						title  : "click me",
 						color  : "{0, 255, 0}",
@@ -54,7 +62,9 @@ is a framework for developing apps via creating some '.plist' files simply.
 							onClick : [
 								{
 									name    : "Alert",
-									message : "Hey girl?"
+									title   : "Hey girl",
+									message : "Should l date you?",
+									ok      : "Of course!"
 								},
 								{
 									name    : "Notification",
