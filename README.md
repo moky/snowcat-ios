@@ -5,9 +5,9 @@ is a framework for developing apps via creating some '.plist' files simply.
 
 ## Example 1: Hello world
 
-Dependences:
-* [https://github.com/moky/slanissue-ios]
-* [https://github.com/moky/snowcat-ios]
+*Downloads*:
+* [SlanissueToolkit](https://github.com/moky/slanissue-ios/archive/master.zip)
+* [SnowCat](https://github.com/moky/snowcat-ios/archive/master.zip)
 
 > Classes/AppDelegate.m
 
@@ -32,7 +32,7 @@ Dependences:
 	Root : {
 		version: "1.0",
 		Node : {
-			comment : "here is the main entrance",
+			comment : "Here is the main entrance",
 			window : {
 				rootViewController : 'include file="page1.plist"'
 			}
@@ -44,7 +44,7 @@ Dependences:
 	Root : {
 		Node : {
 			Class   : "ViewController",
-			comment : "this is page 1",
+			comment : "This is page 1",
 			view    : {
 				subviews : [
 					{ /* view 1 */
