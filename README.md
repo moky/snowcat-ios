@@ -34,7 +34,7 @@ is a framework for developing apps via creating some '.plist' files simply.
 		Node : {
 			comment : "Here is the main entrance",
 			window : {
-				rootViewController : 'include file="page1.plist"'
+				rootViewController : 'include file="page1.plist" replace="name: girl; act: date"'
 			}
 		}
 	}
@@ -60,13 +60,13 @@ is a framework for developing apps via creating some '.plist' files simply.
 						center : "{center, middle + 50}",
 						events : {
 							onClick : [
-								{
+								{ /* action 1 */
 									name    : "Alert",
-									title   : "Hey girl",
-									message : "Should l date you?",
+									title   : "Hey ${name}",
+									message : "Should I ${act} you?",
 									ok      : "Of course!"
 								},
-								{
+								{ /* action 2 */
 									name    : "Notification",
 									event   : "msg.page1.button1.clicked"
 								}
