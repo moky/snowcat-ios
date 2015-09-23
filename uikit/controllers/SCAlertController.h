@@ -12,7 +12,7 @@
 
 UIKIT_EXTERN UIAlertControllerStyle UIAlertControllerStyleFromString(NSString * string);
 
-@interface SCAlertController : UIAlertController<SCUIKit>
+NS_CLASS_AVAILABLE_IOS(8_0) @interface SCAlertController : UIAlertController<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIAlertController *)alertController;
 

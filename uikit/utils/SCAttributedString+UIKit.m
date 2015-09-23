@@ -7,6 +7,7 @@
 //
 
 #import "scMacros.h"
+#import "SCClient.h"
 #import "SCParagraphStyle.h"
 #import "SCShadow.h"
 #import "SCTextAttachment.h"
@@ -17,14 +18,20 @@
 
 NSString * const NSTextEffectStyleFromString(NSString * string)
 {
+#ifdef __IPHONE_7_0
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion < 7.0f) {
+		return string;
+	}
+	
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Letterpress")
 			return NSTextEffectLetterpressStyle;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
+#endif
 	
-	// only this effect (iOS 7.0)
-	return NSTextEffectLetterpressStyle;
+	return string;
 }
 
 NSArray * NSTextWritingDirectionsFromString(NSString * string)
@@ -38,12 +45,17 @@ NSArray * NSTextWritingDirectionsFromString(NSString * string)
 		direction |= NSWritingDirectionRightToLeft;
 	}
 	
-	if ([string rangeOfString:@"Embedding"].location != NSNotFound) {
-		direction |= NSTextWritingDirectionEmbedding;
+#ifdef __IPHONE_7_0
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion >= 7.0f) {
+		if ([string rangeOfString:@"Embedding"].location != NSNotFound) {
+			direction |= NSTextWritingDirectionEmbedding;
+		}
+		if ([string rangeOfString:@"Override"].location != NSNotFound) {
+			direction |= NSTextWritingDirectionOverride;
+		}
 	}
-	if ([string rangeOfString:@"Override"].location != NSNotFound) {
-		direction |= NSTextWritingDirectionOverride;
-	}
+#endif
 	
 	return [NSArray arrayWithObject:[NSNumber numberWithInteger:direction]];
 }
@@ -143,14 +155,18 @@ id NSAttributeFromObject(id obj, NSString * const name)
 		//----------------------------------------------------------------------
 		SC_SWITCH_CASE(name, @"Font")
 			return [SCFont create:obj];
+#ifdef __IPHONE_6_0
 		SC_SWITCH_CASE(name, @"Paragraph") // ParagraphStyle
 			return [SCParagraphStyle create:obj];
 		SC_SWITCH_CASE(name, @"Shadow")
 			return [SCShadow create:obj];
+#endif
 		SC_SWITCH_CASE(name, @"TextEffect")
 			return NSTextEffectStyleFromString(obj);
+#ifdef __IPHONE_7_0
 		SC_SWITCH_CASE(name, @"Attachment")
 			return [SCTextAttachment create:obj];
+#endif
 		SC_SWITCH_CASE(name, @"Link")
 			return [[[SCURL alloc] initWithString:obj isDirectory:NO] autorelease];
 		SC_SWITCH_CASE(name, @"WritingDirection")

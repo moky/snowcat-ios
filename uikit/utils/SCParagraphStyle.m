@@ -7,8 +7,11 @@
 //
 
 #import "scMacros.h"
+#import "SCClient.h"
 #import "SCText.h"
 #import "SCParagraphStyle.h"
+
+#ifdef __IPHONE_6_0
 
 //typedef NS_ENUM(NSInteger, NSLineBreakMode) {		/* What to do with long lines */
 //    NSLineBreakByWordWrapping = 0,     	/* Wrap at word boundaries, default */
@@ -110,10 +113,15 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// tabStops
 	
 #ifdef __IPHONE_7_0
-	SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, defaultTabInterval);
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion >= 7.0f) {
+		SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, defaultTabInterval);
+	}
 #endif
 	
 	return YES;
 }
 
 @end
+
+#endif

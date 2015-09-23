@@ -8,8 +8,12 @@
 
 #import "SCUIKit.h"
 
+#ifdef __IPHONE_6_0
+
 UIKIT_EXTERN NSLineBreakMode NSLineBreakModeFromString(NSString * string);
 
-@interface SCParagraphStyle : NSMutableParagraphStyle<SCObject>
+NS_CLASS_AVAILABLE_IOS(6_0) @interface SCParagraphStyle : NSMutableParagraphStyle<SCObject>
 
 @end
+
+#endif

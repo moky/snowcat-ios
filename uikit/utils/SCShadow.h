@@ -8,6 +8,10 @@
 
 #import "SCUIKit.h"
 
-@interface SCShadow : NSShadow<SCObject>
+#ifdef __IPHONE_6_0
+
+NS_CLASS_AVAILABLE_IOS(6_0) @interface SCShadow : NSShadow<SCObject>
 
 @end
+
+#endif
