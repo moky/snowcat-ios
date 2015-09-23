@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
+#import "SCNodeFileParser.h"
 #import "SCWindow.h"
 #import "SCViewController.h"
 
@@ -25,6 +27,20 @@
 	[viewController release];
 	
 	return YES;
+}
+
++ (BOOL) launch:(NSString *)entrance withWindow:(UIWindow *)window
+{
+	SCNodeFileParser * parser = [SCNodeFileParser parser:entrance];
+	NSDictionary * dict = [parser node];
+	NSAssert([dict isKindOfClass:[NSDictionary class]], @"entrance error: %@", entrance);
+	
+	if ([dict objectForKey:@"window"]) {
+		dict = [dict objectForKey:@"window"];
+	}
+	
+	SCLog(@"**** %@ loaded, entering...", entrance);
+	return [SCWindow apply:dict withWindow:window];
 }
 
 @end
