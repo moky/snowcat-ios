@@ -157,6 +157,18 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	}
 	NSAssert(children, @"error target: %@ for responder: %@", target, responder);
 	
+	// check children
+	if ([target hasPrefix:@"children["]) {
+		NSUInteger len = [target length];
+		NSAssert(len > 10, @"invalid target: %@", target);
+		NSRange range = NSMakeRange(9, len - 10);
+		NSString * str = [target substringWithRange:range];
+		NSUInteger index = [str integerValue];
+		NSUInteger count = [children count];
+		NSAssert(index < count, @"invalid target: %@, children count: %u", (unsigned int)count);
+		return (index < count) ? [children objectAtIndex:index] : nil;
+	}
+	
 	// check scTag
 	NSInteger tag = [target integerValue];
 	id<SCUIKit> kit;
