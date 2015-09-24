@@ -1,13 +1,24 @@
 # SnowCat
 
-SnowCat.framework for iOS application
+**SnowCat.framework for iOS application**
 is a framework for developing apps via creating some '.plist' files simply.
 
-## Example 1: Hello world
+It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015 [Slanissue.com][slanissue.com].
 
-*Downloads*:
-* [SlanissueToolkit](https://github.com/moky/slanissue-ios/archive/master.zip)
-* [SnowCat](https://github.com/moky/snowcat-ios/archive/master.zip)
+[slanissue-ios]: https://github.com/moky/slanissue-ios "Slanissue Toolkit for iOS"
+[slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
+
+---
+
+## Example 1: "Hello world"
+
+*Downloads* :
+
+* [SlanissueToolkit.zip][slanissue-ios.zip]
+* [SnowCat.zip][snowcat-ios.zip]
+
+[slanissue-ios.zip]: https://github.com/moky/slanissue-ios/archive/master.zip "Slanissue Toolkit for iOS"
+[snowcat-ios.zip]: https://github.com/moky/snowcat-ios/archive/master.zip "SnowCat for iOS"
 
 > Classes/AppDelegate.m
 
@@ -30,7 +41,7 @@ is a framework for developing apps via creating some '.plist' files simply.
 > Resources/main.plist
 
 	Root : {
-		version: "1.0",
+		version : "1.0",
 		Node : {
 			comment : "Here is the main entrance",
 			window : {
