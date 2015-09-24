@@ -130,9 +130,11 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	} else if ([responder respondsToSelector:NSSelectorFromString(target)]) {
 		// child getter
 		if ([target isEqualToString:@"view"]) {
-			return [(id)responder view];
+			return [(UIViewController *)responder view];
+		} else if ([target isEqualToString:@"controller"]) {
+			return [(UIView *)responder controller];
 		} else if ([target isEqualToString:@"rootViewController"]) {
-			return [(id)responder rootViewController];
+			return [(UIWindow *)responder rootViewController];
 		}
 		NSAssert(false, @"unsupport target: %@ for responder: %@", target, responder);
 		return nil;
