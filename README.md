@@ -60,7 +60,8 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						color  : "{0, 0, 255}",
 						center : "{center, middle - 100}"
 					},
-					/* view 2 */ 'include file="btn1.plist" attributes="center: {center, middle}"',
+					/* view 2 */
+					'include file="btn1.plist" attributes="center: {center, middle}"',
 					{ /* view 3 */
 						Class  : "ImageView",
 						image  : "Icon.png",
