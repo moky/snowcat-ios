@@ -60,11 +60,12 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						color  : "{0, 0, 255}",
 						center : "{center, middle - 100}"
 					},
-					{ /* view 2 */
+					/* view 2 */ 'include file="button1.plist" replace="module: page1" attributes="center: {center, middle}"',
+					{ /* view 3 */
 						Class  : "ImageView",
 						image  : "Icon.png",
 						size   : "{100, 100}"
-						center : "{center, middle}",
+						center : "{center, middle + 100}",
 						events : {
 							"msg.page1.button1.clicked" : [
 								{ /* action 1 */
@@ -78,8 +79,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 							/* all these notifications will be transfered to events */
 							"msg.page1.button1.clicked"
 						]
-					},
-					/* view 3 */ 'include file="button1.plist" replace="module: page1"'
+					}
 				] /* EOF 'subviews' */
 			} /* EOF 'view' */
 		}
@@ -93,7 +93,6 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 			comment : "This is button 1, reusable",
 			title   : "click me",
 			color   : "{0, 255, 0}",
-			center  : "{center, middle + 100}",
 			events  : {
 				onClick : [
 					{ /* action 1 */
