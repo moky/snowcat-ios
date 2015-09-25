@@ -22,12 +22,13 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 	
 	- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-		self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+		CGRect frame = [[UIScreen mainScreen] bounds]];
+		self.window = [[[UIWindow alloc] initWithFrame:frame autorelease];
 		// Override point for customization after application launch.
 		
 		NSString * entrance = @"main.plist";
-		NSString * path = [SCApplicationDirectory() stringByAppendingPathComponent:entrance];
-		[SCWindow launch:path withWindow:self.window];
+		entrance = [SCApplicationDirectory() stringByAppendingPathComponent:entrance];
+		[SCWindow launch:entrance withWindow:self.window];
 		
 		self.window.backgroundColor = [UIColor whiteColor];
 		[self.window makeKeyAndVisible];
