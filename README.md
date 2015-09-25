@@ -63,8 +63,20 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 					{ /* view 2 */
 						Class  : "ImageView",
 						image  : "Icon.png",
-						size   : "{50, 50}"
-						center : "{center, middle}"
+						size   : "{100, 100}"
+						center : "{center, middle}",
+						events : {
+							msg.page1.button1.clicked : [
+								{ /* action 1 */
+									name    : "ToggleVisibility",
+									target  : "self"
+								}
+							]
+						},
+						notifications : [
+							/* all these notifications will transfer to events */
+							"msg.page1.button1.clicked"
+						]
 					},
 					{ /* view 3 */
 						Class  : "Button",
@@ -83,8 +95,8 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 									name    : "Notification",
 									event   : "msg.page1.button1.clicked"
 								}
-							] /* EOF 'onClick' */
-						} /* EOF 'events' */
+							]
+						}
 					}
 				] /* EOF 'subviews' */
 			} /* EOF 'view' */
@@ -99,11 +111,11 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 * [Beva Kids FM][beva.fm]
 
 > All these [Beva][beva.com] apps are based on this framework,
-> but you know, I cannot offer you these source codes, BAZINGA!~ :P
+> but you know, I cannot offer you these source codes, *BAZINGA!~* :P
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
--- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)
+*-- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)*
 
 
 

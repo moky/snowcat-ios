@@ -16,6 +16,10 @@
 
 @end
 
+@interface SCActionToggleVisibility : SCAction
+
+@end
+
 @interface SCActionMoveBy : SCAction
 
 @end

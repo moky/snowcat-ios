@@ -56,6 +56,24 @@
 
 @end
 
+@implementation SCActionToggleVisibility
+
+- (BOOL) runWithResponder:(id)responder
+{
+	if ([responder isKindOfClass:[UIViewController class]]) {
+		responder = [(UIViewController *)responder view];
+	}
+	NSAssert([responder isKindOfClass:[UIView class]], @"definition error: %@, responder: %@", _dict, responder);
+	
+	UIView * view = (UIView *)responder;
+	
+	view.hidden = !view.hidden;
+	
+	return YES;
+}
+
+@end
+
 @implementation SCActionMoveBy
 
 - (void) view:(UIView *)view moveFrom:(CGPoint)point
