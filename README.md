@@ -60,7 +60,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						color  : "{0, 0, 255}",
 						center : "{center, middle - 100}"
 					},
-					/* view 2 */ 'include file="button1.plist" replace="module: page1" attributes="center: {center, middle}"',
+					/* view 2 */ 'include file="button1.plist" attributes="center: {center, middle}"',
 					{ /* view 3 */
 						Class  : "ImageView",
 						image  : "Icon.png",
@@ -103,7 +103,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 					},
 					{ /* action 2 */
 						name    : "Notification",
-						event   : "msg.${module}.button1.clicked"
+						event   : "msg.page1.button1.clicked"
 					}
 				]
 			}
