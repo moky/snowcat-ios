@@ -126,7 +126,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-*-- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)*
+*-- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival Eve)*
 
 
 
