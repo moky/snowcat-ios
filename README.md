@@ -99,11 +99,12 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 * [Beva Kids FM][beva.fm]
 
 > All these [Beva][beva.com] apps are based on this framework,
-> but I'm sorry that I cannot offer you these source codes, muhaha~ :P
-> 
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-> -- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)
+> but you know, I cannot offer you these source codes, BAZINGA!~ :P
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+-- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)
+
 
 
 [slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
