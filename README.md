@@ -66,15 +66,16 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						size   : "{100, 100}"
 						center : "{center, middle}",
 						events : {
-							msg.page1.button1.clicked : [
+							"msg.page1.button1.clicked" : [
 								{ /* action 1 */
 									name    : "ToggleVisibility",
 									target  : "self"
 								}
+								/* for more actions, see 'snowcat-ios/uikit/actions/' plz */
 							]
 						},
 						notifications : [
-							/* all these notifications will transfer to events */
+							/* all these notifications will be transfered to events */
 							"msg.page1.button1.clicked"
 						]
 					},
