@@ -7,10 +7,6 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 ![Snowcat][snowcat.jpg]
 
-[slanissue-ios]: https://github.com/moky/slanissue-ios "Slanissue Toolkit for iOS"
-[slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
-[snowcat.jpg]: http://img.diytrade.com/cdimg/860989/8004577/0/1234846770.jpg "Snowcat"
-
 ---
 
 ## Example 1: "Hello world"
@@ -19,9 +15,6 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 * [SlanissueToolkit.zip][slanissue-ios.zip]
 * [SnowCat.zip][snowcat-ios.zip]
-
-[slanissue-ios.zip]: https://github.com/moky/slanissue-ios/archive/master.zip "Slanissue Toolkit for iOS"
-[snowcat-ios.zip]: https://github.com/moky/snowcat-ios/archive/master.zip "SnowCat for iOS"
 
 > Classes/AppDelegate.m
 
@@ -65,13 +58,19 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						Class  : "Label",
 						text   : "Hello world!",
 						color  : "{0, 0, 255}",
-						center : "{center, middle - 50}"
+						center : "{center, middle - 100}"
 					},
 					{ /* view 2 */
+						Class  : "ImageView",
+						image  : "Icon.png",
+						size   : "{50, 50}"
+						center : "{center, middle}"
+					},
+					{ /* view 3 */
 						Class  : "Button",
 						title  : "click me",
 						color  : "{0, 255, 0}",
-						center : "{center, middle + 50}",
+						center : "{center, middle + 100}",
 						events : {
 							onClick : [
 								{ /* action 1 */
@@ -91,3 +90,29 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 			} /* EOF 'view' */
 		}
 	}
+
+---
+
+## Example 2: "Beva Kids TV"
+
+*Downloads* :
+
+* [Beva.app][beva.app]
+
+> All [Beva][beva.com]'s apps are based on this framework,
+> but I'm sorry that I cannot offer you these source codes, muhaha~ :P
+
+
+
+
+[slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
+[beva.com]: http://www.beva.com/ "Beva.com"
+
+[slanissue-ios]: https://github.com/moky/slanissue-ios "Slanissue Toolkit for iOS"
+
+[slanissue-ios.zip]: https://github.com/moky/slanissue-ios/archive/master.zip "Slanissue Toolkit for iOS"
+[snowcat-ios.zip]: https://github.com/moky/snowcat-ios/archive/master.zip "SnowCat for iOS"
+
+[beva.app]: https://itunes.apple.com/cn/app/bei-wa-er-ge2015/id716603240?mt=8 "AppStore"
+
+[snowcat.jpg]: http://img.diytrade.com/cdimg/860989/8004577/0/1234846770.jpg "Snowcat"
