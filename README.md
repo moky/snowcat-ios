@@ -22,8 +22,8 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 	
 	- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-		CGRect frame = [[UIScreen mainScreen] bounds]];
-		self.window = [[[UIWindow alloc] initWithFrame:frame autorelease];
+		CGRect frame = [[UIScreen mainScreen] bounds];
+		self.window = [[[UIWindow alloc] initWithFrame:frame] autorelease];
 		// Override point for customization after application launch.
 		
 		NSString * entrance = @"main.plist";
