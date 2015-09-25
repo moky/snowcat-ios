@@ -5,8 +5,11 @@ is a framework for developing apps via creating some '.plist' files simply.
 
 It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015 [Slanissue.com][slanissue.com].
 
+![Snowcat][snowcat.jpg]
+
 [slanissue-ios]: https://github.com/moky/slanissue-ios "Slanissue Toolkit for iOS"
 [slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
+[snowcat.jpg]: http://img.diytrade.com/cdimg/860989/8004577/0/1234846770.jpg "Snowcat"
 
 ---
 
