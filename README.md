@@ -42,7 +42,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 			comment : "Here is the main entrance",
 			window : {
 				/* defined 'page1' in another 'Node' file */
-				rootViewController : 'include file="page1.plist" replace="name: girl; act: date"'
+				rootViewController : 'include file="page1.plist" replace="name: girl"'
 			}
 		}
 	}
@@ -61,7 +61,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 						color  : "{0, 0, 255}",
 						center : "{center, middle - 100}"
 					},
-					/* view 2, defined in another 'Node' file, again */
+					/* view 2, defined in another 'Node' file, in order to reuse */
 					'include file="btn1.plist" attributes="center: {center, middle}"',
 					{ /* view 3 */
 						Class  : "ImageView",
@@ -74,7 +74,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 									name    : "ToggleVisibility",
 									target  : "self"
 								}
-								/* for more actions, see 'snowcat-ios/uikit/actions/' plz */
+								/* more actions, see 'snowcat-ios/uikit/actions/' */
 							]
 						},
 						notifications : [
@@ -92,7 +92,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 	Root: {
 		Node : {
 			Class   : "Button",
-			comment : "This is button 1, reusable",
+			comment : "This is button 1",
 			title   : "click me",
 			color   : "{255, 0, 0}",
 			events  : {
@@ -100,7 +100,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 					{ /* action 1 */
 						name    : "Alert",
 						title   : "Hey ${name}",
-						message : "Should I ${act} you?",
+						message : "Should I date you?",
 						ok      : "Of course!"
 					},
 					{ /* action 2 */
@@ -121,7 +121,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 * [Beva Kids FM][beva.fm]
 
 > All these [Beva][beva.com] apps are based on this framework,
-> but you know, I cannot offer you these source codes, *BAZINGA!~* :P
+> but you know, I cannot offer you these source codes, *BAZINGA!~ :P*
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
