@@ -91,28 +91,32 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 		}
 	}
 
----
-
-## Example 2: "Beva Kids TV"
+## Example 2: "Beva apps"
 
 *Downloads* :
 
-* [Beva.app][beva.app]
+* [Beva Kids TV][beva.tv]
+* [Beva Kids FM][beva.fm]
 
-> All [Beva][beva.com]'s apps are based on this framework,
+> All these [Beva][beva.com] apps are based on this framework,
 > but I'm sorry that I cannot offer you these source codes, muhaha~ :P
-
-
+> 
+> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+> -- by [moKy][moky] @ Sept. 25, 2015 (Mid-Autumn Festival)
 
 
 [slanissue.com]: http://www.slanissue.com/ "Beijing Slanissue Technology Co., Ltd."
 [beva.com]: http://www.beva.com/ "Beva.com"
+
+[moky]: http://moky.github.com/ "About me"
 
 [slanissue-ios]: https://github.com/moky/slanissue-ios "Slanissue Toolkit for iOS"
 
 [slanissue-ios.zip]: https://github.com/moky/slanissue-ios/archive/master.zip "Slanissue Toolkit for iOS"
 [snowcat-ios.zip]: https://github.com/moky/snowcat-ios/archive/master.zip "SnowCat for iOS"
 
-[beva.app]: https://itunes.apple.com/cn/app/bei-wa-er-ge2015/id716603240?mt=8 "AppStore"
+[beva.tv]: https://itunes.apple.com/cn/app/bei-wa-er-ge2015/id716603240?mt=8 "AppStore"
+[beva.fm]: https://itunes.apple.com/cn/app/bei-wa-ting-ting/id989100723?mt=8 "AppStore"
 
 [snowcat.jpg]: http://img.diytrade.com/cdimg/860989/8004577/0/1234846770.jpg "Snowcat"
