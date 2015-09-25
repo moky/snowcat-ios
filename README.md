@@ -79,30 +79,38 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 							"msg.page1.button1.clicked"
 						]
 					},
-					{ /* view 3 */
-						Class  : "Button",
-						title  : "click me",
-						color  : "{0, 255, 0}",
-						center : "{center, middle + 100}",
-						events : {
-							onClick : [
-								{ /* action 1 */
-									name    : "Alert",
-									title   : "Hey ${name}",
-									message : "Should I ${act} you?",
-									ok      : "Of course!"
-								},
-								{ /* action 2 */
-									name    : "Notification",
-									event   : "msg.page1.button1.clicked"
-								}
-							]
-						}
-					}
+					/* view 3 */ 'include file="button1.plist" replace="module: page1"'
 				] /* EOF 'subviews' */
 			} /* EOF 'view' */
 		}
 	}
+
+> Resources/button1.plist
+
+	Root: {
+		Node : {
+			Class   : "Button",
+			comment : "This is button 1, reusable",
+			title   : "click me",
+			color   : "{0, 255, 0}",
+			center  : "{center, middle + 100}",
+			events  : {
+				onClick : [
+					{ /* action 1 */
+						name    : "Alert",
+						title   : "Hey ${name}",
+						message : "Should I ${act} you?",
+						ok      : "Of course!"
+					},
+					{ /* action 2 */
+						name    : "Notification",
+						event   : "msg.${module}.button1.clicked"
+					}
+				]
+			}
+		}
+	}
+
 
 ## Example 2: "Beva apps"
 
