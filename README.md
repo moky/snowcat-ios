@@ -107,6 +107,128 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 					{ /* action 2 */
 						name    : "Notification",
 						event   : "msg.page1.button1.clicked"
+					}										
+				]
+			}
+		}
+	}
+
+## Example 2: "Notifications & Callback"
+
+I suggest controlling the UI via **notifications**, but not codes.
+
+You can do some calculating works in your code (e.g.: a singleton instance),
+and send out a notification to notice all guys that interest in the results.
+As all `SnowCat` *views & controllers* can define a '**notifications**' list and do some **actions** while these '**events**' happen (see example 'Hello world'),
+we can let the framework do the UI works.
+
+Meanwhile, you should send out a notification while some events happen in UI level (e.g.: a button clicked),
+so that guys interest in it will do their works when received this notification.
+
+There are two ways to callback from the UI level:
+
+1. Notification
+2. CallFunc
+
+> Classes/MyController.h
+
+	#import "SnowCat.h"
+	
+	@interface MyController : SCViewController
+	
+	@end
+
+> Classes/MyController.m
+
+	@implementation MyController
+	
+	- (void) dealloc
+	{
+		NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+		[center removeObserver:self
+		                  name:@"msg.page1.button1.clicked"
+		                object:nil];
+		
+		[super dealloc];
+	}
+	
+	- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+	{
+		self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+		if (self) {
+			NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+			[center addObserver:self
+			           selector:@selector(_button1Notification:)
+				           name:@"msg.page1.button1.clicked"
+				         object:nil];
+		}
+		return self;
+	}
+	
+	- (void) _button1Notification:(NSNotification *)notification
+	{
+		// TODO: handle button1 clicked notification here.
+		
+		// the 'userInfo' is a dictionary of the action's definition,
+		// you can get all message you need here
+		NSDictionary * aDict = [notification userInfo];
+	}
+	
+	@end
+
+> Classes/MyButton.h
+
+	#import "SnowCat.h"
+	
+	@interface MyButton : SCButton
+	
+	@end
+
+> Classes/MyButton.m
+
+	@implementation MyButton
+	
+	- (void) onClick:(id)sender
+	{
+		[super onClick:sender];
+		
+		// TODO: handle 'onClick:' event here
+		
+		// sender is the self button
+	}
+	
+	- (void) _click:(NSObject *)info
+	{
+		// TODO: handle 'CallFunc' action here
+		
+		// you can also call a function without parameter, or two parameters
+		NSString * str = (NSString *)info;
+	}
+	
+	@end
+
+> Resources/btn1.plist
+
+	Root: {
+		Node : {
+			Class  : "Button",
+			title  : "click button 1",
+			color  : "{255, 0, 0}",
+			events : {
+				onClick : [
+					{
+						name     : "Notification",
+						event    : "msg.page1.button1.clicked"
+					},
+					{
+						name     : "View",
+						target   : "parent",
+						selector : "addSubview:",
+						view     : 'include file="btn2.plist" attributes="center: {200, 100}"'
+					},
+					{
+						name     : "Hide",
+						target   : "self"
 					}
 				]
 			}
@@ -114,7 +236,26 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 	}
 
 
-## Example 2: "Beva apps"
+> Resources/btn2.plist
+
+	Root: {
+		Node : {
+			Class  : "MyButton",
+			title  : "click button 2",
+			color  : "{0, 255, 0}",
+			events : {
+				onClick : [
+					{
+						name     : "CallFunc",
+						selector : "_click:",
+						object   : "${name}"
+					}
+				]
+			}
+		}
+	}
+
+## Example 3: "Beva apps"
 
 *Downloads* :
 
