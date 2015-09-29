@@ -117,7 +117,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 ## Example 2: "Notifications & Callback"
 
-I suggest you controlling the UI via **notifications**, but **not codes**, the best habit is NOT write any UI codes in your controllers.
+I suggest you controlling the UI via **notifications**, but **not codes**, the best habit is NOT writing any UI codes in your controllers.
 
 You can do some calculating works in your codes (e.g.: a singleton instance),
 and send out a notification to notice all guys that interest in the results.
@@ -218,7 +218,7 @@ There are two ways to callback from the UI level:
 			SCLog(@"definition error: %@", dict);
 			return NO;
 		}
-		// TODO: set extra attributes for your button
+		// TODO: set extra attributes for your button here
 		// the parameters 'dict' is the dictionary defined in plist
 		
 		// NOTICE: this function will be called after added to superview.
@@ -246,7 +246,7 @@ There are two ways to callback from the UI level:
 	
 	@end
 
-> Resources/btn1.plist
+> Resources/theme1.bundle/page1/btn1.plist
 
 	Root: {
 		Node : {
@@ -280,7 +280,7 @@ There are two ways to callback from the UI level:
 	}
 
 
-> Resources/btn2.plist
+> Resources/theme1.bundle/page1/btn2.plist
 
 	Root: {
 		Node : {
