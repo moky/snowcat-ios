@@ -202,6 +202,29 @@ There are two ways to callback from the UI level:
 	
 	@implementation MyButton
 	
+	- (instancetype) initWithDictionary:(NSDictionary *)dict
+	{
+		self = [super initWithDictionary:dict];
+		if (self) {
+			// TODO: initialize your button here
+			// the parameters 'dict' is the dictionary defined in plist
+		}
+		return self;
+	}
+	
+	- (BOOL) setAttributes:(NSDictionary *)dict
+	{
+		if (![super setAttributes:dict]) {
+			SCLog(@"definition error: %@", dict);
+			return NO;
+		}
+		// TODO: set extra attributes for your button
+		// the parameters 'dict' is the dictionary defined in plist
+		
+		// NOTICE: this function will be called after added to superview.
+		return YES;
+	}
+	
 	- (void) onClick:(id)sender
 	{
 		[super onClick:sender];
