@@ -178,7 +178,7 @@ There are two ways to callback from the UI level:
 		// TODO: handle button1 clicked notification here.
 		
 		// the 'userInfo' is a dictionary of the action's definition,
-		// you can get all message you need here
+		// you can get all data you need here
 		NSDictionary * aDict = [notification userInfo];
 		SCLog(@"user info: %@", aDict);
 		
@@ -201,16 +201,6 @@ There are two ways to callback from the UI level:
 	#import "MyButton.h"
 	
 	@implementation MyButton
-	
-	- (instancetype) initWithDictionary:(NSDictionary *)dict
-	{
-		self = [super initWithDictionary:dict];
-		if (self) {
-			// TODO: initialize your button here
-			// the parameters 'dict' is the dictionary defined in plist
-		}
-		return self;
-	}
 	
 	- (BOOL) setAttributes:(NSDictionary *)dict
 	{
