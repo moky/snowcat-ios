@@ -132,6 +132,8 @@ There are two ways to callback from the UI level:
 
 > Classes/LocalStorage.h
 
+	#define MSG_BUTTON1_CLICKED @"msg.page1.button1.clicked"
+	
 	@interface LocalStorage : NSObject
 	
 	+ (instancetype) getInstance;
@@ -142,13 +144,15 @@ There are two ways to callback from the UI level:
 
 	#import "SnowCat.h"
 	
+	#import "LocalStorage.h"
+	
 	@implementation LocalStorage
 	
 	- (void) dealloc
 	{
 		NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
 		[center removeObserver:self
-		                  name:@"msg.page1.button1.clicked"
+		                  name:MSG_BUTTON1_CLICKED
 		                object:nil];
 		
 		[super dealloc];
@@ -164,7 +168,7 @@ There are two ways to callback from the UI level:
 			NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
 			[center addObserver:self
 			           selector:@selector(_button1Notification:)
-				           name:@"msg.page1.button1.clicked"
+				           name:MSG_BUTTON1_CLICKED
 				         object:nil];
 		}
 		return self;
@@ -192,6 +196,8 @@ There are two ways to callback from the UI level:
 
 > Classes/MyButton.m
 
+	#import "MyButton.h"
+	
 	@implementation MyButton
 	
 	- (void) onClick:(id)sender
