@@ -130,17 +130,19 @@ There are two ways to callback from the UI level:
 1. Notification
 2. CallFunc
 
-> Classes/MyController.h
+> Classes/LocalStorage.h
 
-	#import "SnowCat.h"
+	@interface LocalStorage : NSObject
 	
-	@interface MyController : SCViewController
+	+ (instancetype) getInstance;
 	
 	@end
 
-> Classes/MyController.m
+> Classes/LocalStorage.m
 
-	@implementation MyController
+	#import "SnowCat.h"
+	
+	@implementation LocalStorage
 	
 	- (void) dealloc
 	{
@@ -152,9 +154,12 @@ There are two ways to callback from the UI level:
 		[super dealloc];
 	}
 	
-	- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+	// singleton implementations
+	SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
+	
+	- (instancetype) init
 	{
-		self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+		self = [super init];
 		if (self) {
 			NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
 			[center addObserver:self
