@@ -172,6 +172,7 @@ There are two ways to callback from the UI level:
 		// the 'userInfo' is a dictionary of the action's definition,
 		// you can get all message you need here
 		NSDictionary * aDict = [notification userInfo];
+		SCLog(@"user info: %@", aDict);
 	}
 	
 	@end
@@ -195,14 +196,16 @@ There are two ways to callback from the UI level:
 		// TODO: handle 'onClick:' event here
 		
 		// sender is the self button
+		SCLog(@"sender: %@", sender);
 	}
 	
-	- (void) _click:(NSObject *)info
+	- (void) _click:(NSObject *)object
 	{
 		// TODO: handle 'CallFunc' action here
 		
 		// you can also call a function without parameter, or two parameters
-		NSString * str = (NSString *)info;
+		NSString * str = (NSString *)object;
+		SCLog(@"object: %@", str);
 	}
 	
 	@end
