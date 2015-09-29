@@ -117,22 +117,22 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 ## Example 2: "Notifications & Callback"
 
-I suggest controlling the UI via **notifications**, but not codes.
+I strongly recommend you controlling the UI via **notifications**, but **not codes**.
 
-You can do some calculating works in your code (e.g.: a singleton instance),
+You can do some calculating works in your codes (e.g.: a singleton instance),
 and send out a notification to notice all guys that interest in the results.
-As all `SnowCat` *views & controllers* can define a '**notifications**' list and do some **actions** while these '**events**' happen (see example 'Hello world'),
-we can let the framework do the UI works.
+As all `SnowCat` *views & controllers* can define a '**notifications**' list and do some **actions** when these '**events**' happen,
+we can let the framework to do the UI works.
 
-Meanwhile, you should send out a notification while some events happen in UI level (e.g.: a button clicked),
+Meanwhile, you should send out a notification when some events happen in UI level (e.g.: a button clicked),
 so that guys interest in it will do their works when received this notification.
 
-There are two ways to callback from the UI level:
+There are two ways I suggest to callback from the UI level:
 
 1. Notification
 2. CallFunc
 
-> Classes/LocalStorage.h
+> Classes/model/LocalStorage.h
 
 	#import <Foundation/Foundation.h>
 	
@@ -145,7 +145,7 @@ There are two ways to callback from the UI level:
 	
 	@end
 
-> Classes/LocalStorage.m
+> Classes/model/LocalStorage.m
 
 	#import "SnowCat.h"
 	
@@ -194,7 +194,7 @@ There are two ways to callback from the UI level:
 	
 	@end
 
-> Classes/MyButton.h
+> Classes/view/MyButton.h
 
 	#import "SnowCat.h"
 	
@@ -202,7 +202,7 @@ There are two ways to callback from the UI level:
 	
 	@end
 
-> Classes/MyButton.m
+> Classes/view/MyButton.m
 
 	#import "MyButton.h"
 	
