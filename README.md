@@ -20,6 +20,8 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 	#import "SnowCat.h"
 	
+	...
+	
 	- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
 		CGRect frame = [[UIScreen mainScreen] bounds];
@@ -132,7 +134,10 @@ There are two ways to callback from the UI level:
 
 > Classes/LocalStorage.h
 
+	#import <Foundation/Foundation.h>
+	
 	#define MSG_BUTTON1_CLICKED @"msg.page1.button1.clicked"
+	#define MSG_XXX             @"msg.whatever"
 	
 	@interface LocalStorage : NSObject
 	
@@ -182,6 +187,9 @@ There are two ways to callback from the UI level:
 		// you can get all message you need here
 		NSDictionary * aDict = [notification userInfo];
 		SCLog(@"user info: %@", aDict);
+		
+		NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+		[center postNotificationName:MSG_XXX object:nil userInfo:nil];
 	}
 	
 	@end
@@ -233,7 +241,9 @@ There are two ways to callback from the UI level:
 					{
 						name     : "Notification",
 						event    : "msg.page1.button1.clicked"
-					},
+					}
+				],
+				"msg.whatever" : [
 					{
 						name     : "View",
 						target   : "parent",
@@ -245,7 +255,10 @@ There are two ways to callback from the UI level:
 						target   : "self"
 					}
 				]
-			}
+			},
+			notifications : [
+				"msg.whatever"
+			]
 		}
 	}
 
