@@ -117,7 +117,7 @@ It is based on [SlanissueToolkit.framework][slanissue-ios], copyright &copy;2015
 
 ## Example 2: "Notifications & Callback"
 
-I strongly recommend you controlling the UI via **notifications**, but **not codes**.
+I suggest you controlling the UI via **notifications**, but **not codes**, the best habit is NOT write any UI codes in your controllers.
 
 You can do some calculating works in your codes (e.g.: a singleton instance),
 and send out a notification to notice all guys that interest in the results.
@@ -127,31 +127,27 @@ we can let the framework to do the UI works.
 Meanwhile, you should send out a notification when some events happen in UI level (e.g.: a button clicked),
 so that guys interest in it will do their works when received this notification.
 
-There are two ways I suggest to callback from the UI level:
+There are two ways to callback from the UI level:
 
 1. Notification
 2. CallFunc
 
-> Classes/model/LocalStorage.h
+> Classes/controller/MyController.h
 
-	#import <Foundation/Foundation.h>
+	#import "SnowCat.h"
 	
 	#define MSG_BUTTON1_CLICKED @"msg.page1.button1.clicked"
 	#define MSG_XXX             @"msg.whatever"
 	
-	@interface LocalStorage : NSObject
-	
-	+ (instancetype) getInstance;
+	@interface MyController : SCViewController
 	
 	@end
 
-> Classes/model/LocalStorage.m
+> Classes/controller/MyController.m
 
-	#import "SnowCat.h"
+	#import "MyController.h"
 	
-	#import "LocalStorage.h"
-	
-	@implementation LocalStorage
+	@implementation MyController
 	
 	- (void) dealloc
 	{
@@ -163,12 +159,10 @@ There are two ways I suggest to callback from the UI level:
 		[super dealloc];
 	}
 	
-	// singleton implementations
-	SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
-	
-	- (instancetype) init
+	/* the designated initializer */
+	- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 	{
-		self = [super init];
+		self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 		if (self) {
 			NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
 			[center addObserver:self
@@ -189,7 +183,7 @@ There are two ways I suggest to callback from the UI level:
 		SCLog(@"user info: %@", aDict);
 		
 		NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-		[center postNotificationName:MSG_XXX object:nil userInfo:nil];
+		[center postNotificationName:MSG_XXX object:nil userInfo:aDict];
 	}
 	
 	@end
