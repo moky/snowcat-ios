@@ -7,6 +7,8 @@
 //
 
 #import "scMacros.h"
+#import "SCClient.h"
+#import "SCAttributedString.h"
 #import "SCNib.h"
 #import "SCColor.h"
 #import "SCImage.h"
@@ -117,12 +119,26 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[button setTitle:title forState:state];
 	}
 	
-	// color
-	id color = [dict objectForKey:@"color"];
-	if (color) {
-		SCColor * titleColor = [SCColor create:color autorelease:NO];
-		[button setTitleColor:titleColor forState:state];
-		[titleColor release];
+	// titleColor
+	id titleColor = [dict objectForKey:@"titleColor"];
+	if (!titleColor) {
+		titleColor = [dict objectForKey:@"color"];
+	}
+	if (titleColor) {
+		SCColor * color = [SCColor create:titleColor autorelease:NO];
+		[button setTitleColor:color forState:state];
+		[color release];
+	}
+	
+	// titleShadowColor
+	id titleShadowColor = [dict objectForKey:@"titleShadowColor"];
+	if (!titleShadowColor) {
+		titleShadowColor = [dict objectForKey:@"shadowColor"];
+	}
+	if (titleShadowColor) {
+		SCColor * color = [SCColor create:titleShadowColor autorelease:NO];
+		[button setTitleShadowColor:color forState:state];
+		[color release];
 	}
 	
 	// image
@@ -144,12 +160,43 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[bg release];
 	}
 	
+#ifdef __IPHONE_6_0
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion < 6.0f) {
+		return YES;
+	}
+	
+	// attributedTitle
+	id attributedTitle = [dict objectForKey:@"attributedTitle"];
+	if (attributedTitle) {
+		NSAttributedString * as = [SCAttributedString create:attributedTitle autorelease:NO];
+		[button setAttributedTitle:attributedTitle forState:state];
+		[as release];
+	}
+#endif
+	
 	return YES;
 }
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIButton *)button
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
+	
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(button, dict, contentEdgeInsets);
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(button, dict, titleEdgeInsets);
+	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, reversesTitleShadowWhenHighlighted);
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(button, dict, imageEdgeInsets);
+	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenHighlighted);
+	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenDisabled);
+	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, showsTouchWhenHighlighted);
+	
+	// tintColor
+	id tintColor = [dict objectForKey:@"tintColor"];
+	if (tintColor) {
+		UIColor * color = [SCColor create:tintColor autorelease:NO];
+		button.tintColor = color;
+		[color release];
+	}
 	
 	// control states
 	NSDictionary * states = [dict objectForKey:@"states"];
@@ -180,13 +227,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		}
 	}
 	[button sizeToFit];
-	
-	if (![SCControl setAttributes:dict to:button]) {
-		SCLog(@"failed to set attributes: %@", dict);
-		return NO;
-	}
-	
-	return YES;
+	// because we need to call 'sizeToFit',
+	// so must setting the geometry attributes before calling super
+	return [SCControl setAttributes:dict to:button];
 }
 
 #pragma mark - Button Interfaces

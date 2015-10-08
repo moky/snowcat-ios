@@ -99,3 +99,9 @@
         obj.name = CGPointFromStringWithNode(name, obj);                       \
     }                                                                          \
                                         /* EOF 'SC_SET_ATTRIBUTES_AS_CGPOINT' */
+#define SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(obj, dict, name)                     \
+    NSString * name = [dict objectForKey:@#name];                              \
+    if (name) {                                                                \
+	    obj.name = UIEdgeInsetsFromString(name);                               \
+    }                                                                          \
+                                   /* EOF 'SC_SET_ATTRIBUTES_AS_UIEDGEINSETS' */
