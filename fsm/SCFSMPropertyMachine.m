@@ -24,12 +24,12 @@
 	[super dealloc];
 }
 
-- (instancetype) init
+/* designated initializer */
+- (instancetype) initWithDefaultStateName:(NSString *)name capacity:(NSUInteger)capacity interval:(NSTimeInterval)interval
 {
-	self = [super init];
+	self = [super initWithDefaultStateName:name capacity:capacity interval:interval];
 	if (self) {
-		[_properties release];
-		_properties = [[NSMutableDictionary alloc] initWithCapacity:16];
+		self.properties = [[NSMutableDictionary alloc] initWithCapacity:capacity];
 	}
 	return self;
 }

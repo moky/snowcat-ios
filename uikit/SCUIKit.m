@@ -165,7 +165,7 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 		NSString * str = [target substringWithRange:range];
 		NSUInteger index = [str integerValue];
 		NSUInteger count = [children count];
-		NSAssert(index < count, @"invalid target: %@, children count: %u", (unsigned int)count);
+		NSAssert(index < count, @"invalid target: %@, children count: %u", target, (unsigned int)count);
 		return (index < count) ? [children objectAtIndex:index] : nil;
 	}
 	

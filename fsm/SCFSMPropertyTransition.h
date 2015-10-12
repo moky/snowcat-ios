@@ -31,6 +31,6 @@ typedef NS_ENUM(NSUInteger, SCFSMPropertyTransitionCompareType) {
 - (instancetype) initWithTargetStateName:(NSString *)name
 							propertyName:(NSString *)key
 						   propertyValue:(id)value
-							 compareType:(SCFSMPropertyTransitionCompareType)type;
+							 compareType:(SCFSMPropertyTransitionCompareType)type NS_DESIGNATED_INITIALIZER;
 
 @end

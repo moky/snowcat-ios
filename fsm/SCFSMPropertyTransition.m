@@ -22,35 +22,34 @@
 	[super dealloc];
 }
 
-- (instancetype) init
+- (instancetype) initWithTargetStateName:(NSString *)name
 {
-	self = [super init];
-	if (self) {
-		[_propertyName release];
-		_propertyName = nil;
-		
-		[_propertyValue release];
-		_propertyValue = nil;
-		
-		_compareType = SCFSMPropertyTransitionCompareTypeEqual;
-	}
-	return self;
+	return [self initWithTargetStateName:nil
+							propertyName:nil
+						   propertyValue:nil
+							 compareType:SCFSMPropertyTransitionCompareTypeEqual];
 }
 
-- (instancetype) initWithTargetStateName:(NSString *)name propertyName:(NSString *)key propertyValue:(id)value
+- (instancetype) initWithTargetStateName:(NSString *)name
+							propertyName:(NSString *)key
+						   propertyValue:(id)value
 {
-	self = [self initWithTargetStateName:name];
+	return [self initWithTargetStateName:name
+							propertyName:key
+						   propertyValue:value
+							 compareType:SCFSMPropertyTransitionCompareTypeEqual];
+}
+
+/* designated initializer */
+- (instancetype) initWithTargetStateName:(NSString *)name
+							propertyName:(NSString *)key
+						   propertyValue:(id)value
+							 compareType:(SCFSMPropertyTransitionCompareType)type
+{
+	self = [super initWithTargetStateName:name];
 	if (self) {
 		self.propertyName = key;
 		self.propertyValue = value;
-	}
-	return self;
-}
-
-- (instancetype) initWithTargetStateName:(NSString *)name propertyName:(NSString *)key propertyValue:(id)value compareType:(SCFSMPropertyTransitionCompareType)type
-{
-	self = [self initWithTargetStateName:name propertyName:key propertyValue:value];
-	if (self) {
 		self.compareType = type;
 	}
 	return self;
