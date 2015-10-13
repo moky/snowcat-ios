@@ -25,10 +25,23 @@
 #define SC_PATH_SUFFIX_RETINA               @"@2x"
 
 //-------------------------------------------------------------- localize string
-#define SCLocalizedString(key, default)                  ( (key) ?             \
-        NSLocalizedString((key), @"localized for key") : ( (default) ?         \
-        NSLocalizedString((default), @"localized for default") : nil ) )       \
+#define SCTranslatorSetCurrentLanguage(language)                               \
+        S9TranslatorSetCurrentLanguage(language)
+#define SCTranslatorAddLanguagePack(tableName, bundlePath)                     \
+        S9TranslatorAddLanguagePack((tableName), (bundlePath))
+#define SCTranslatorScanLanguagePacks(bundlePath)                              \
+        S9TranslatorScanLanguagePacks(bundlePath)
+
+#define SCLocalizedString(key, comment)                                        \
+        S9LocalizedString((key), (comment))                                    \
                                                    /* EOF 'SCLocalizedString' */
+#define SCLocalizedStringFromTable(key, tbl, comment)                          \
+        S9LocalizedStringFromTable((key), (tbl), (comment))                    \
+                                          /* EOF 'S9LocalizedStringFromTable' */
+//#define SCLocalizedString(key, default)                  ( (key) ?             \
+//        NSLocalizedString((key), @"localized for key") : ( (default) ?         \
+//        NSLocalizedString((default), @"localized for default") : nil ) )       \
+//                                                   /* EOF 'SCLocalizedString' */
 
 //----------------------------------------------------------- system directories
 #define SCApplicationDirectory()   [[SCClient getInstance] applicationDirectory]
