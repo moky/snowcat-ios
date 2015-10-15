@@ -26,11 +26,14 @@
 
 //-------------------------------------------------------------- localize string
 #define SCTranslatorSetCurrentLanguage(language)                               \
-        S9TranslatorSetCurrentLanguage(language)
+        S9TranslatorSetCurrentLanguage(language)                               \
+                                      /* EOF 'SCTranslatorSetCurrentLanguage' */
 #define SCTranslatorAddLanguagePack(tableName, bundlePath)                     \
-        S9TranslatorAddLanguagePack((tableName), (bundlePath))
+        S9TranslatorAddLanguagePack((tableName), (bundlePath))                 \
+                                         /* EOF 'SCTranslatorAddLanguagePack' */
 #define SCTranslatorScanLanguagePacks(bundlePath)                              \
-        S9TranslatorScanLanguagePacks(bundlePath)
+        S9TranslatorScanLanguagePacks(bundlePath)                              \
+                                       /* EOF 'SCTranslatorScanLanguagePacks' */
 
 #define SCLocalizedString(key, comment)                                        \
         S9LocalizedString((key), (comment))                                    \

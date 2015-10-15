@@ -117,20 +117,7 @@
 			NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithDictionary:_root];
 			// if the app was updated, the '[[NSBundle mainBundle] resourcePath]' will be changed
 			[mDict setObject:SCApplicationDirectory() forKey:SC_NODE_FILE_RESOURCE_PATH_KEY];
-			
-			NSString * ext = [[outFile pathExtension] lowercaseString];
-			if ([ext isEqualToString:@"mof"]) {
-				// write as '.mof' file
-				SCMOFTransformer * mof = [[SCMOFTransformer alloc] initWithObject:mDict];
-				[mof saveToFile:outFile];
-				[mof release];
-				SCLog(@"wrote output into MOF file: %@", outFile);
-			} else if ([ext isEqualToString:@"plist"]) {
-				[mDict writeToFile:outFile atomically:YES];
-				SCLog(@"wrote output into plist file: %@", outFile);
-			} else {
-				SCLog(@"cannot write to file: %@", outFile);
-			}
+			[mDict saveToFile:outFile];
 			[mDict release];
 		}
 	}
