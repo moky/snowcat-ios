@@ -98,7 +98,7 @@ UIActionSheetStyle UIActionSheetStyleFromString(NSString * string)
 		cancelButtonTitle = @"Cancel";
 	}
 	cancelButtonTitle = SCLocalizedString(cancelButtonTitle, nil);
-	destructiveButtonTitle = SCLocalizedString(destructiveButtonTitle, nil);
+	destructiveButtonTitle = destructiveButtonTitle ? SCLocalizedString(destructiveButtonTitle, nil) : nil;
 	
 	self = [super initWithTitle:nil
 					   delegate:nil

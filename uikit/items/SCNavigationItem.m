@@ -16,7 +16,9 @@
 - (instancetype) initWithDictionary:(NSDictionary *)dict
 {
 	NSString * title = [dict objectForKey:@"title"];
-	title = SCLocalizedString(title, nil);
+	if (title) {
+		title = SCLocalizedString(title, nil);
+	}
 	self = [self initWithTitle:title];
 	if (self) {
 	}
@@ -47,6 +49,19 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	UIResponder * target = [dict objectForKey:@"target"];
 	
 	// title (init..)
+	NSString * title = [dict objectForKey:@"title"];
+	if (title) {
+		//
+		// because the navigationItem may be readonly,
+		// in this case, the '-[initWithDictionary:]' will not be called,
+		// so we should set title here...
+		//
+		// see '<UINavigationController.h:119> : UIViewController (UINavigationControllerItem)'
+		//     '<SCViewController.m:291>       : +[_setNavigationControllerAttributes:to:]'
+		//
+		title = SCLocalizedString(title, nil);
+		navigationItem.title = title;
+	}
 	
 	// backBarButtonItem
 	NSDictionary * backBarButtonItem = [dict objectForKey:@"backBarButtonItem"];

@@ -101,7 +101,7 @@ UIAlertViewStyle UIAlertViewStyleFromString(NSString * string)
 		}
 	}
 	cancel = SCLocalizedString(cancel, nil);
-	confirm = SCLocalizedString(confirm, nil);
+	confirm = confirm ? SCLocalizedString(confirm, nil) : nil;
 	
 	self = [self initWithTitle:nil message:nil delegate:nil cancelButtonTitle:cancel otherButtonTitles:confirm, nil];
 	if (self) {

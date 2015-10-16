@@ -99,11 +99,15 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	
 	// title
 	NSString * title = [dict objectForKey:@"title"];
-	title = SCLocalizedString(title, nil);
+	if (title) {
+		title = SCLocalizedString(title, nil);
+	}
 	
 	// message
 	NSString * message = [dict objectForKey:@"message"];
-	message = SCLocalizedString(message, nil);
+	if (message) {
+		message = SCLocalizedString(message, nil);
+	}
 	
 	// preferredStyle
 	NSString * preferredStyle = [dict objectForKey:@"preferredStyle"];
@@ -195,11 +199,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 			}
 		}
 	}
-	cancel = SCLocalizedString(cancel, nil);
-	confirm = SCLocalizedString(confirm, nil);
 	
 	// cancel
 	if (cancel) {
+		cancel = SCLocalizedString(cancel, nil);
 		UIAlertAction * aa = [UIAlertAction actionWithTitle:cancel
 													  style:UIAlertActionStyleCancel
 													handler:^(UIAlertAction *action) {
@@ -211,6 +214,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	
 	// confirm
 	if (confirm) {
+		confirm = SCLocalizedString(confirm, nil);
 		UIAlertAction * aa = [UIAlertAction actionWithTitle:confirm
 													  style:UIAlertActionStyleDestructive
 													handler:^(UIAlertAction *action) {
