@@ -14,14 +14,20 @@
 // fire event for javascript
 - (void) fire:(NSString *)event
 {
+	[self fire:event withData:nil];
+}
+
+- (void) fire:(NSString *)event withData:(NSObject *)data
+{
+	NSString * params = data ? JSONStringFromNSObject(data) : @"null";
 	NSString * javascript = [[NSString alloc] initWithFormat:@"(function() {   \
 								try {                                          \
-									snowcat.fire('%@');                        \
+									snowcat.fire('%@', %@);                    \
 								} catch (e) {                                  \
 									return e.description;                      \
 								}                                              \
 								return 'OK';                                   \
-							 })();", event];
+							 })();", event, params];
 	
 	NSString * result = [self stringByEvaluatingJavaScriptFromString:javascript];
 	[javascript release];

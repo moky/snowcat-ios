@@ -19,38 +19,41 @@
 @implementation SCWebViewDelegate (JSBridge)
 
 // inject "snowcat.bridge.js"
-- (void) injectionForWebView:(UIWebView *)webView
+- (NSString *) injectionForWebView:(UIWebView *)webView
 {
-	SCWebView * wv = (SCWebView *)webView;
-	if ([wv isKindOfClass:[SCWebView class]]) {
-		[wv inject:SC_WEBVIEW_JSBRIDGE_PATH];
-	}
+	return [SCWebView inject:SC_WEBVIEW_JSBRIDGE_PATH webview:webView];
 }
 
 // callback via "snowcat.bridge.js"
-- (void) invokeFromWebView:(UIWebView *)webView withURL:(NSURL *)URL
+- (BOOL) invokeFromWebView:(UIWebView *)webView withURL:(NSURL *)URL
 {
 	NSString * object = URL.host;
 	NSString * method = URL.path;
 	NSDictionary * parameters = [URL parameters];
-	
+	return [self invokeFromWebView:webView withHost:object path:method parameters:parameters];
+}
+
+- (BOOL) invokeFromWebView:(UIWebView *)webView withHost:(NSString *)object path:(NSString *)method parameters:(NSDictionary *)parameters
+{
 	// notification
 	if ([object isEqualToString:@"notification"]) {
 		if ([method isEqualToString:@"/post"]) {
 			NSString * event = [parameters objectForKey:@"event"];
-			NSAssert([event isKindOfClass:[NSString class]], @"event error: %@", URL);
+			NSAssert([event isKindOfClass:[NSString class]], @"event error: %@", event);
 			id userInfo = [parameters objectForKey:@"userInfo"];
 			if (userInfo) {
 				userInfo = NSObjectFromJSONString(userInfo);
 			}
-			NSAssert(!userInfo || [userInfo isKindOfClass:[NSDictionary class]], @"userInfo error: %@", URL);
+			NSAssert(!userInfo || [userInfo isKindOfClass:[NSDictionary class]], @"userInfo error: %@", userInfo);
 			
 			NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
 			[center postNotificationName:event object:webView userInfo:userInfo];
+			
+			return YES;
 		}
 	}
 	
-	// ...
+	return NO;
 }
 
 @end

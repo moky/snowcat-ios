@@ -11,9 +11,12 @@
 @interface SCWebViewDelegate (JSBridge)
 
 // inject "snowcat.bridge.js"
-- (void) injectionForWebView:(UIWebView *)webView;
+- (NSString *) injectionForWebView:(UIWebView *)webView;
 
 // callback via "snowcat.bridge.js"
-- (void) invokeFromWebView:(UIWebView *)webView withURL:(NSURL *)URL;
+- (BOOL) invokeFromWebView:(UIWebView *)webView withURL:(NSURL *)URL;
+
+// override this function to handle other message invoke from webview
+- (BOOL) invokeFromWebView:(UIWebView *)webView withHost:(NSString *)object path:(NSString *)method parameters:(NSDictionary *)parameters;
 
 @end

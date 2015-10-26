@@ -146,11 +146,11 @@ if (typeof(window.snowcat) !== "object") {
 	};
 	
 	// trigger all handlers with event name
-	var fire = function(event) {
+	var fire = function(event, data) {
 		var array = _event_handlers[event];
 		var count = array.length;
 		for (var index = 0; index < count; ++index) {
-			array[index](event);
+			array[index](event, data);
 		}
 	};
 	
@@ -158,6 +158,10 @@ if (typeof(window.snowcat) !== "object") {
 	var call = function(object, method, parameters) {
 		var url = "snowcat://" + object + "/" + method;
 		if (parameters) {
+			if (typeof(parameters) !== "string") {
+				var obj = new snowcat.Object(parameters);
+				parameters = obj.json();
+			}
 			url += "?" + parameters;
 		}
 		document.location.href = url;

@@ -12,5 +12,6 @@
 
 // fire event for javascript
 - (void) fire:(NSString *)event;
+- (void) fire:(NSString *)event withData:(NSObject *)data;
 
 @end
