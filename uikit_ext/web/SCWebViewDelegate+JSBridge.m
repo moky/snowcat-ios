@@ -13,15 +13,25 @@
 #import "SCWebView+JSBridge.h"
 #import "SCWebViewDelegate+JSBridge.h"
 
-#define SC_WEBVIEW_JSBRIDGE_FILE    @"snowcat.bridge.js"
-#define SC_WEBVIEW_JSBRIDGE_PATH    [SCApplicationDirectory() stringByAppendingPathComponent:SC_WEBVIEW_JSBRIDGE_FILE]
+#define SC_WEBVIEW_JSBRIDGE_FILES @[                                           \
+                                     @"snowcat.base.js",                       \
+                                     @"snowcat.bridge.js",                     \
+                                     @"snowcat.extension.js",                  \
+                                     @"snowcat.main.js"                        \
+                                   ]                                           \
+                                           /* EOF 'SC_WEBVIEW_JSBRIDGE_FILES' */
 
 @implementation SCWebViewDelegate (JSBridge)
 
 // inject "snowcat.bridge.js"
 - (NSString *) injectionForWebView:(UIWebView *)webView
 {
-	return [SCWebView inject:SC_WEBVIEW_JSBRIDGE_PATH webview:webView];
+	NSString * file;
+	SC_FOR_EACH(file, SC_WEBVIEW_JSBRIDGE_FILES) {
+		file = [SCApplicationDirectory() stringByAppendingPathComponent:file];
+		[SCWebView inject:file webview:webView];
+	}
+	return nil;
 }
 
 // callback via "snowcat.bridge.js"
