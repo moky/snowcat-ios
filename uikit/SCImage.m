@@ -46,31 +46,6 @@ UIImageOrientation UIImageOrientationFromString(NSString * string)
 	return UIImageOrientationUp;
 }
 
-static UIImage * UIImageFromFile(NSString * filename, BOOL autorelease) {
-	NSData * data = [[NSData alloc] initWithContentsOfFile:filename];
-	if (!data) {
-		return nil;
-	}
-	
-	UIImage * image = nil;
-#ifdef __IPHONE_6_0
-	CGFloat systemVersion = SCSystemVersion();
-	if (systemVersion >= 6.0f) {
-		if ([filename rangeOfString:@"@2x"].location != NSNotFound) {
-			image = [[UIImage alloc] initWithData:data scale:2.0f];
-		} else if ([filename rangeOfString:@"@3x"].location != NSNotFound) {
-			image = [[UIImage alloc] initWithData:data scale:3.0f];
-		}
-	}
-#endif
-	if (!image) {
-		image = [[UIImage alloc] initWithData:data];
-	}
-	[data release];
-	
-	return autorelease ? [image autorelease] : image;
-}
-
 @implementation UIImage (IO)
 
 - (BOOL) writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
@@ -180,15 +155,15 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	SCURL * url = [[SCURL alloc] initWithString:filename isDirectory:NO]; // detect high-resolution image automatically
 	if ([url isFileURL]) {
 		// load image from local file
-		image = UIImageFromFile([url path], NO);
+		image = UIImageWithName([url path]);
 	} else {
 		SCDataLoader * downloader = [[SCDataLoader alloc] initWithContentsOfURL:url delegate:nil];
 		if (downloader.data.length > 0) {
 			// load image from cache
-			image = [[UIImage alloc] initWithData:downloader.data];
+			image = [UIImage imageWithData:downloader.data];
 		} else {
 			// download image from remote asynchronously
-			image = [[SCImage alloc] init];
+			image = [[[SCImage alloc] init] autorelease];
 			[(SCImage *)image setDownloader:downloader];
 		}
 		[downloader release];
@@ -197,7 +172,6 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 	
 	//NSAssert([image isKindOfClass:[UIImage class]], @"failed to load image: %@", filename);
 	[cache setObject:image forKey:filename]; // memory cache, image.reference++
-	[image release];
 	
 	return image;
 }
