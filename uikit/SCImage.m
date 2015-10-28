@@ -46,27 +46,6 @@ UIImageOrientation UIImageOrientationFromString(NSString * string)
 	return UIImageOrientationUp;
 }
 
-@implementation UIImage (IO)
-
-- (BOOL) writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
-{
-	NSData * data = nil;
-	NSString * ext = [[path pathExtension] lowercaseString];
-	if ([ext isEqualToString:@"png"]) {
-		data = UIImagePNGRepresentation(self);
-	} else if ([ext isEqualToString:@"jpg"] || [ext isEqualToString:@"jpeg"]) {
-		data = UIImageJPEGRepresentation(self, 1.0f);
-	} else {
-		NSAssert(false, @"unsupportd image format: %@", path);
-		return NO;
-	}
-	return [data writeToFile:path atomically:useAuxiliaryFile];
-}
-
-@end
-
-#pragma mark -
-
 @interface SCImage ()
 
 @property(nonatomic, retain) SCDataLoader * downloader;
