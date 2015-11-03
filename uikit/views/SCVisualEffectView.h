@@ -8,9 +8,7 @@
 
 #import "SCUIKit.h"
 
-#ifdef __IPHONE_8_0
-
-UIKIT_EXTERN UIBlurEffectStyle UIBlurEffectStyleFromString(NSString * string);
+UIKIT_EXTERN UIBlurEffectStyle UIBlurEffectStyleFromString(NSString * string) NS_AVAILABLE_IOS(8_0);
 
 //
 //  Description:
@@ -29,5 +27,3 @@ NS_CLASS_AVAILABLE_IOS(8_0) @interface SCVisualEffectView : UIVisualEffectView<S
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIVisualEffectView *)visualEffectView;
 
 @end
-
-#endif

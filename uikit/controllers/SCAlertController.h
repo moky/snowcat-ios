@@ -8,9 +8,7 @@
 
 #import "SCViewController.h"
 
-#ifdef __IPHONE_8_0
-
-UIKIT_EXTERN UIAlertControllerStyle UIAlertControllerStyleFromString(NSString * string);
+UIKIT_EXTERN UIAlertControllerStyle UIAlertControllerStyleFromString(NSString * string) NS_AVAILABLE_IOS(8_0);
 
 NS_CLASS_AVAILABLE_IOS(8_0) @interface SCAlertController : UIAlertController<SCUIKit>
 
@@ -18,6 +16,4 @@ NS_CLASS_AVAILABLE_IOS(8_0) @interface SCAlertController : UIAlertController<SCU
 
 @end
 
-UIKIT_EXTERN void SCAlertControllerShow(UIAlertController * alertController);
-
-#endif // EOF '__IPHONE_8_0'
+UIKIT_EXTERN void SCAlertControllerShow(UIAlertController * alertController) NS_AVAILABLE_IOS(8_0);

@@ -9,8 +9,6 @@
 #import "SCImage.h"
 #import "SCTextAttachment.h"
 
-#ifdef __IPHONE_7_0
-
 @implementation SCTextAttachment
 
 - (instancetype) initWithDictionary:(NSDictionary *)dict
@@ -60,5 +58,3 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

@@ -12,8 +12,6 @@
 #import "SCView.h"
 #import "SCVisualEffectView.h"
 
-#ifdef __IPHONE_8_0
-
 //typedef NS_ENUM(NSInteger, UIBlurEffectStyle) {
 //	UIBlurEffectStyleExtraLight,
 //	UIBlurEffectStyleLight,
@@ -165,5 +163,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

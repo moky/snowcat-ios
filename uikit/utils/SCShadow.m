@@ -9,8 +9,6 @@
 #import "SCColor.h"
 #import "SCShadow.h"
 
-#ifdef __IPHONE_6_0
-
 @implementation SCShadow
 
 - (instancetype) initWithDictionary:(NSDictionary *)dict
@@ -59,5 +57,3 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

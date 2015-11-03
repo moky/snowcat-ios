@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCUIKit.h"
+#import "SCObject.h"
 
 @protocol SCEventDelegate <NSObject>
 
@@ -27,4 +27,4 @@
 
 // Convenient interface
 
-UIKIT_EXTERN void SCDoEvent(NSString * event, id responder);
+FOUNDATION_EXTERN void SCDoEvent(NSString * event, id responder);

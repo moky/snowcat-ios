@@ -13,11 +13,7 @@
 UIKIT_EXTERN UIModalTransitionStyle UIModalTransitionStyleFromString(NSString * string);
 UIKIT_EXTERN UIModalPresentationStyle UIModalPresentationStyleFromString(NSString * string);
 
-#ifdef __IPHONE_7_0
-
-UIKIT_EXTERN UIRectEdge UIRectEdgeFromString(NSString * string);
-
-#endif
+UIKIT_EXTERN UIRectEdge UIRectEdgeFromString(NSString * string) NS_AVAILABLE_IOS(7_0);
 
 @interface SCViewController : UIViewController<SCUIKit, SCNavigationItemDelegate, SCToolbarItemDelegate>
 

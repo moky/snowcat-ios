@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
-#import "SCUIKit.h"
+#import <CoreGraphics/CoreGraphics.h>
 
-UIKIT_EXTERN CGRect CGRectFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
-UIKIT_EXTERN CGSize CGSizeFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
-UIKIT_EXTERN CGPoint CGPointFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+CG_EXTERN CGRect CGRectFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+CG_EXTERN CGSize CGSizeFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
+CG_EXTERN CGPoint CGPointFromStringWithRects(NSString * string, CGRect selfFrame, CGRect parentBounds);
 
-UIKIT_EXTERN CGRect CGRectFromStringWithNode(NSString * string, id node);
-UIKIT_EXTERN CGSize CGSizeFromStringWithNode(NSString * string, id node);
-UIKIT_EXTERN CGPoint CGPointFromStringWithNode(NSString * string, id node);
+CG_EXTERN CGRect CGRectFromStringWithNode(NSString * string, id node);
+CG_EXTERN CGSize CGSizeFromStringWithNode(NSString * string, id node);
+CG_EXTERN CGPoint CGPointFromStringWithNode(NSString * string, id node);

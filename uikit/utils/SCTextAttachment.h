@@ -8,10 +8,6 @@
 
 #import "SCUIKit.h"
 
-#ifdef __IPHONE_7_0
-
 NS_CLASS_AVAILABLE_IOS(7_0) @interface SCTextAttachment : NSTextAttachment<SCObject>
 
 @end
-
-#endif

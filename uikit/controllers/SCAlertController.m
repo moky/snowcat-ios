@@ -12,8 +12,6 @@
 #import "SCEventHandler.h"
 #import "SCAlertController.h"
 
-#ifdef __IPHONE_8_0
-
 //typedef NS_ENUM(NSInteger, UIAlertControllerStyle) {
 //	UIAlertControllerStyleActionSheet = 0,
 //	UIAlertControllerStyleAlert
@@ -264,5 +262,3 @@ void SCAlertControllerShow(UIAlertController * alertController)
 	UIViewController * rootViewController = [window rootViewController];
 	[rootViewController presentViewController:alertController animated:YES completion:NULL];
 }
-
-#endif // EOF '__IPHONE_8_0'

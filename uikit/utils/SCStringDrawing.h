@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCUIKit.h"
+#import <UIKit/UIKit.h>
 
 UIKIT_EXTERN UIBaselineAdjustment UIBaselineAdjustmentFromString(NSString * string);

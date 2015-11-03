@@ -9,8 +9,6 @@
 #import "scMacros.h"
 #import "SCText.h"
 
-#ifdef __IPHONE_6_0
-
 //typedef NS_ENUM(NSInteger, NSTextAlignment) {
 //    NSTextAlignmentLeft      = 0,    // Visually left aligned
 //#if TARGET_OS_IPHONE
@@ -61,5 +59,3 @@ NSWritingDirection NSWritingDirectionFromString(NSString * string)
 	
 	return [string integerValue];
 }
-
-#endif

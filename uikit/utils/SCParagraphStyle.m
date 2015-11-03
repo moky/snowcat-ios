@@ -11,8 +11,6 @@
 #import "SCText.h"
 #import "SCParagraphStyle.h"
 
-#ifdef __IPHONE_6_0
-
 //typedef NS_ENUM(NSInteger, NSLineBreakMode) {		/* What to do with long lines */
 //    NSLineBreakByWordWrapping = 0,     	/* Wrap at word boundaries, default */
 //    NSLineBreakByCharWrapping,		/* Wrap at character boundaries */
@@ -123,5 +121,3 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

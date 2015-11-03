@@ -6,11 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCUIKit.h"
+#import <UIKit/UIKit.h>
 
-#ifdef __IPHONE_6_0
-
-UIKIT_EXTERN NSTextAlignment NSTextAlignmentFromString(NSString * string);
-UIKIT_EXTERN NSWritingDirection NSWritingDirectionFromString(NSString * string);
-
-#endif
+UIKIT_EXTERN NSTextAlignment NSTextAlignmentFromString(NSString * string) NS_AVAILABLE_IOS(6_0);
+UIKIT_EXTERN NSWritingDirection NSWritingDirectionFromString(NSString * string) NS_AVAILABLE_IOS(6_0);

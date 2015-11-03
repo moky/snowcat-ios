@@ -73,8 +73,6 @@ UIModalPresentationStyle UIModalPresentationStyleFromString(NSString * string)
 	return [string integerValue];
 }
 
-#ifdef __IPHONE_7_0
-
 //typedef NS_OPTIONS(NSUInteger, UIRectEdge) {
 //    UIRectEdgeNone   = 0,
 //    UIRectEdgeTop    = 1 << 0,
@@ -116,8 +114,6 @@ UIRectEdge UIRectEdgeFromString(NSString * string)
 	
 	return edge;
 }
-
-#endif
 
 @interface SCViewController () {
 	
