@@ -203,6 +203,7 @@
 #import "SCDragView.h"
 #import "SCBlurView.h"
 #import "SCWaterfallView.h"
+#import "SCKaraokeLabel.h"
 //
 //  uikit_ext/particle
 //

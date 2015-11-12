@@ -55,7 +55,12 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
 	SCLog(@"onFail: %@, error: %@", webView, error);
-    // ignore error code == 999
+    // ignore error code == 999 and 102
+    if ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102) {
+        // UIWebView dosen't like redirect url, so it will fail
+        return;
+    }
+    
     if ([error code] != NSURLErrorCancelled) {
         SCDoEvent(@"onFail", webView);
         SCDoEvent(@"onError", webView);
