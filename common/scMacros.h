@@ -134,7 +134,7 @@
 #define SC_SET_ATTRIBUTES_AS_UIIMAGE(obj, dict, name)                          \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \
-        SCImage * img = [SCImage create:backgroundImage autorelease:NO];       \
+        SCImage * img = [SCImage create:name autorelease:NO];                  \
         obj.name = img;                                                        \
         [img release];                                                         \
     }                                                                          \
