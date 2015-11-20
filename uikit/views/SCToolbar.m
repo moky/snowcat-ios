@@ -88,6 +88,28 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
++ (BOOL) _setIOS7Attributes:(NSDictionary *)dict to:(UIToolbar *)toolbar
+{
+#ifdef __IPHONE_7_0
+	
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion < 7.0f) {
+		return NO;
+	}
+	
+	// barTintColor
+	id barTintColor = [dict objectForKey:@"barTintColor"];
+	if (barTintColor) {
+		SCColor * color = [SCColor create:barTintColor autorelease:NO];
+		toolbar.barTintColor = color;
+		[color release];
+	}
+	
+#endif
+	
+	return YES;
+}
+
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIToolbar *)toolbar
 {
 	// set general attributes after
@@ -144,22 +166,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[color release];
 	}
 	
-#ifdef __IPHONE_7_0
-	
-	CGFloat systemVersion = SCSystemVersion();
-	if (systemVersion >= 7.0f) {
-		
-		// barTintColor
-		id barTintColor = [dict objectForKey:@"barTintColor"];
-		if (barTintColor) {
-			SCColor * color = [SCColor create:barTintColor autorelease:NO];
-			toolbar.barTintColor = color;
-			[color release];
-		}
-		
-	}
-	
-#endif
+	[self _setIOS7Attributes:dict to:toolbar];
 	
 	return YES;
 }

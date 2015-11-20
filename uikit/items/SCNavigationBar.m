@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
+#import "SCClient.h"
 #import "SCInterface.h"
 #import "SCColor.h"
 #import "SCImage.h"
@@ -68,6 +70,24 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
++ (BOOL) _setIOS7Attributes:(NSDictionary *)dict to:(UINavigationBar *)navigationBar
+{
+#ifdef __IPHONE_7_0
+	
+	CGFloat systemVersion = SCSystemVersion();
+	if (systemVersion < 7.0f) {
+		return NO;
+	}
+	
+	SC_SET_ATTRIBUTES_AS_UICOLOR(navigationBar, dict, barTintColor);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(navigationBar, dict, backIndicatorImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(navigationBar, dict, backIndicatorTransitionMaskImage);
+	
+#endif
+	
+	return YES;
+}
+
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UINavigationBar *)navigationBar
 {
 	if (![SCView setAttributes:dict to:navigationBar]) {
@@ -82,29 +102,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// delegate
 	
-	// translucent
-	id translucent = [dict objectForKey:@"translucent"];
-	if (translucent) {
-		navigationBar.translucent = [translucent boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(navigationBar, dict, translucent);
 	
 	// items
 	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		navigationBar.tintColor = color;
-		[color release];
-	}
-	
-	// shadowImage
-	NSDictionary * shadowImage = [dict objectForKey:@"shadowImage"];
-	if (shadowImage) {
-		SCImage * image = [SCImage create:shadowImage autorelease:NO];
-		navigationBar.shadowImage = image;
-		[image release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(navigationBar, dict, tintColor);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(navigationBar, dict, shadowImage);
 	
 	// titleTextAttributes
 	NSDictionary * titleTextAttributes = [dict objectForKey:@"titleTextAttributes"];

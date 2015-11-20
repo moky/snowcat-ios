@@ -111,27 +111,6 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 // setAttributes:
 SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
-+ (BOOL) _setIOS6Attributes:(NSDictionary *)dict to:(UITabBar *)tabBar
-{
-#ifdef __IPHONE_6_0
-	
-	CGFloat systemVersion = SCSystemVersion();
-	if (systemVersion < 6.0f) {
-		return NO;
-	}
-	
-	// shadowImage
-	NSDictionary * shadowImage = [dict objectForKey:@"shadowImage"];
-	if (shadowImage) {
-		SCImage * image = [SCImage create:shadowImage autorelease:NO];
-		tabBar.shadowImage = image;
-		[image release];
-	}
-	
-#endif
-	return YES;
-}
-
 + (BOOL) _setIOS7Attributes:(NSDictionary *)dict to:(UITabBar *)tabBar
 {
 #ifdef __IPHONE_7_0
@@ -141,13 +120,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// barTintColor
-	NSDictionary * barTintColor = [dict objectForKey:@"barTintColor"];
-	if (barTintColor) {
-		SCColor * color = [SCColor create:barTintColor autorelease:NO];
-		tabBar.barTintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tabBar, dict, barTintColor);
 	
 	// itemPositioning
 	NSString * itemPositioning = [dict objectForKey:@"itemPositioning"];
@@ -155,17 +128,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		tabBar.itemPositioning = UITabBarItemPositioningFromString(itemPositioning);
 	}
 	
-	// itemWidth
-	id itemWidth = [dict objectForKey:@"itemWidth"];
-	if (itemWidth) {
-		tabBar.itemWidth = [itemWidth floatValue];
-	}
-	
-	// itemSpacing
-	id itemSpacing = [dict objectForKey:@"itemSpacing"];
-	if (itemSpacing) {
-		tabBar.itemSpacing = [itemSpacing floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(tabBar, dict, itemWidth);
+	SC_SET_ATTRIBUTES_AS_FLOAT(tabBar, dict, itemSpacing);
 	
 	// barStyle
 	NSString * barStyle = [dict objectForKey:@"barStyle"];
@@ -173,11 +137,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		tabBar.barStyle = UIBarStyleFromString(barStyle);
 	}
 	
-	// translucent
-	id translucent = [dict objectForKey:@"translucent"];
-	if (translucent) {
-		tabBar.translucent = [translucent boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(tabBar, dict, translucent);
 	
 #endif
 	return YES;
@@ -214,14 +174,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// selectedItem (assign)
 	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		tabBar.tintColor = color;
-		[color release];
-	}
-	
 	// selectedImageTintColor
 	NSDictionary * selectedImageTintColor = [dict objectForKey:@"selectedImageTintColor"];
 	if (selectedImageTintColor) {
@@ -231,23 +183,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[color release];
 	}
 	
-	// backgroundImage
-	NSDictionary * backgroundImage = [dict objectForKey:@"backgroundImage"];
-	if (backgroundImage) {
-		SCImage * image = [SCImage create:backgroundImage autorelease:NO];
-		tabBar.backgroundImage = image;
-		[image release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tabBar, dict, tintColor);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(tabBar, dict, backgroundImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(tabBar, dict, selectionIndicatorImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(tabBar, dict, shadowImage);
 	
-	// selectionIndicatorImage
-	NSDictionary * selectionIndicatorImage = [dict objectForKey:@"selectionIndicatorImage"];
-	if (selectionIndicatorImage) {
-		SCImage * image = [SCImage create:selectionIndicatorImage autorelease:NO];
-		tabBar.selectionIndicatorImage = image;
-		[image release];
-	}
-	
-	[self _setIOS6Attributes:dict to:tabBar];
+	[self _setIOS7Attributes:dict to:tabBar];
 	
 	return YES;
 }
