@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCIndexPath.h"
 #import "SCCollectionViewLayoutAttributes.h"
 
@@ -49,23 +50,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// transform3D
 	
-	// alpha
-	id alpha = [dict objectForKey:@"alpha"];
-	if (alpha) {
-		collectionViewLayoutAttributes.alpha = [alpha floatValue];
-	}
-	
-	// zIndex
-	id zIndex = [dict objectForKey:@"zIndex"];
-	if (zIndex) {
-		collectionViewLayoutAttributes.zIndex = [zIndex integerValue];
-	}
-	
-	// hidden
-	id hidden = [dict objectForKey:@"hidden"];
-	if (hidden) {
-		collectionViewLayoutAttributes.hidden = [hidden boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT  (collectionViewLayoutAttributes, dict, alpha);
+	SC_SET_ATTRIBUTES_AS_INTEGER(collectionViewLayoutAttributes, dict, zIndex);
+	SC_SET_ATTRIBUTES_AS_BOOL   (collectionViewLayoutAttributes, dict, hidden);
 	
 	// indexPath
 	NSDictionary * indexPath = [dict objectForKey:@"indexPath"];

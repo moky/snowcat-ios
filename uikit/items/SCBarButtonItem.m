@@ -228,11 +228,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// style (init..)
 	
-	// width
-	id width = [dict objectForKey:@"width"];
-	if (width) {
-		barButtonItem.width = [width floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(barButtonItem, dict, width);
 	
 	// possibleTitles
 	

@@ -205,37 +205,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// estimatedRowHeight
-	id estimatedRowHeight = [dict objectForKey:@"estimatedRowHeight"];
-	if (estimatedRowHeight) {
-		tableView.estimatedRowHeight = [estimatedRowHeight floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, estimatedRowHeight);
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, estimatedSectionHeaderHeight);
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, estimatedSectionFooterHeight);
 	
-	// estimatedSectionHeaderHeight
-	id estimatedSectionHeaderHeight = [dict objectForKey:@"estimatedSectionHeaderHeight"];
-	if (estimatedSectionHeaderHeight) {
-		tableView.estimatedSectionHeaderHeight = [estimatedSectionHeaderHeight floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(tableView, dict, separatorInset);
 	
-	// estimatedSectionFooterHeight
-	id estimatedSectionFooterHeight = [dict objectForKey:@"estimatedSectionFooterHeight"];
-	if (estimatedSectionFooterHeight) {
-		tableView.estimatedSectionFooterHeight = [estimatedSectionFooterHeight floatValue];
-	}
-	
-	// separatorInset
-	NSString * separatorInset = [dict objectForKey:@"separatorInset"];
-	if (separatorInset) {
-		tableView.separatorInset = UIEdgeInsetsFromString(separatorInset);
-	}
-	
-	// sectionIndexBackgroundColor
-	id sectionIndexBackgroundColor = [dict objectForKey:@"sectionIndexBackgroundColor"];
-	if (sectionIndexBackgroundColor) {
-		UIColor * color = [SCColor create:sectionIndexBackgroundColor autorelease:NO];
-		tableView.sectionIndexBackgroundColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, sectionIndexBackgroundColor);
 	
 #endif
 	return YES;
@@ -248,23 +224,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// rowHeight
-	id rowHeight = [dict objectForKey:@"rowHeight"];
-	if (rowHeight) {
-		tableView.rowHeight = [rowHeight floatValue];
-	}
-	
-	// sectionHeaderHeight
-	id sectionHeaderHeight = [dict objectForKey:@"sectionHeaderHeight"];
-	if (sectionHeaderHeight) {
-		tableView.sectionHeaderHeight = [sectionHeaderHeight floatValue];
-	}
-	
-	// sectionFooterHeight
-	id sectionFooterHeight = [dict objectForKey:@"sectionFooterHeight"];
-	if (sectionFooterHeight) {
-		tableView.sectionFooterHeight = [sectionFooterHeight floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, rowHeight);
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, sectionHeaderHeight);
+	SC_SET_ATTRIBUTES_AS_FLOAT(tableView, dict, sectionFooterHeight);
 	
 	// backgroundView
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];
@@ -277,57 +239,16 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// editing
-	id editing = [dict objectForKey:@"editing"];
-	if (editing) {
-		tableView.editing = [editing boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, editing);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, allowsSelection);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, allowsSelectionDuringEditing);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, allowsMultipleSelection);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, allowsMultipleSelectionDuringEditing);
 	
-	// allowsSelection
-	id allowsSelection = [dict objectForKey:@"allowsSelection"];
-	if (allowsSelection) {
-		tableView.allowsSelection = [allowsSelection boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(tableView, dict, sectionIndexMinimumDisplayRowCount);
 	
-	// allowsSelectionDuringEditing
-	id allowsSelectionDuringEditing = [dict objectForKey:@"allowsSelectionDuringEditing"];
-	if (allowsSelectionDuringEditing) {
-		tableView.allowsSelectionDuringEditing = [allowsSelectionDuringEditing boolValue];
-	}
-	
-	// allowsMultipleSelection
-	id allowsMultipleSelection = [dict objectForKey:@"allowsMultipleSelection"];
-	if (allowsMultipleSelection) {
-		tableView.allowsMultipleSelection = [allowsMultipleSelection boolValue];
-	}
-	
-	// allowsMultipleSelectionDuringEditing
-	id allowsMultipleSelectionDuringEditing = [dict objectForKey:@"allowsMultipleSelectionDuringEditing"];
-	if (allowsMultipleSelectionDuringEditing) {
-		tableView.allowsMultipleSelectionDuringEditing = [allowsMultipleSelectionDuringEditing boolValue];
-	}
-	
-	// sectionIndexMinimumDisplayRowCount
-	id sectionIndexMinimumDisplayRowCount = [dict objectForKey:@"sectionIndexMinimumDisplayRowCount"];
-	if (sectionIndexMinimumDisplayRowCount) {
-		tableView.sectionIndexMinimumDisplayRowCount = [sectionIndexMinimumDisplayRowCount integerValue];
-	}
-	
-	// sectionIndexColor
-	NSDictionary * sectionIndexColor = [dict objectForKey:@"sectionIndexColor"];
-	if (sectionIndexColor) {
-		SCColor * color = [SCColor create:sectionIndexColor autorelease:NO];
-		tableView.sectionIndexColor = color;
-		[color release];
-	}
-	
-	// sectionIndexTrackingBackgroundColor
-	NSDictionary * sectionIndexTrackingBackgroundColor = [dict objectForKey:@"sectionIndexTrackingBackgroundColor"];
-	if (sectionIndexTrackingBackgroundColor) {
-		SCColor * color = [SCColor create:sectionIndexTrackingBackgroundColor autorelease:NO];
-		tableView.sectionIndexTrackingBackgroundColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, sectionIndexColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, sectionIndexTrackingBackgroundColor);
 	
 	// separatorStyle
 	NSString * separatorStyle = [dict objectForKey:@"separatorStyle"];
@@ -335,13 +256,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		tableView.separatorStyle = UITableViewCellSeparatorStyleFromString(separatorStyle);
 	}
 	
-	// separatorColor
-	NSDictionary * separatorColor = [dict objectForKey:@"separatorColor"];
-	if (separatorColor) {
-		SCColor * color = [SCColor create:separatorColor autorelease:NO];
-		tableView.separatorColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, separatorColor);
 	
 	// tableHeaderView
 	NSDictionary * tableHeaderView = [dict objectForKey:@"tableHeaderView"];

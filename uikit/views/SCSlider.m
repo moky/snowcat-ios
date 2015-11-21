@@ -113,69 +113,18 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// value
-	id value = [dict objectForKey:@"value"];
-	if (value) {
-		slider.value = [value floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(slider, dict, value);
+	SC_SET_ATTRIBUTES_AS_FLOAT(slider, dict, minimumValue);
+	SC_SET_ATTRIBUTES_AS_FLOAT(slider, dict, maximumValue);
 	
-	// minimumValue
-	id minimumValue = [dict objectForKey:@"minimumValue"];
-	if (minimumValue) {
-		slider.minimumValue = [minimumValue floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(slider, dict, minimumValueImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(slider, dict, maximumValueImage);
 	
-	// maximumValue
-	id maximumValue = [dict objectForKey:@"maximumValue"];
-	if (maximumValue) {
-		slider.maximumValue = [maximumValue floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(slider, dict, continuous);
 	
-	// minimumValueImage
-	NSDictionary * minimumValueImage = [dict objectForKey:@"minimumValueImage"];
-	if (minimumValueImage) {
-		SCImage * image = [SCImage create:minimumValueImage autorelease:NO];
-		slider.minimumValueImage = image;
-		[image release];
-	}
-	
-	// maximumValueImage
-	NSDictionary * maximumValueImage = [dict objectForKey:@"maximumValueImage"];
-	if (maximumValueImage) {
-		SCImage * image = [SCImage create:maximumValueImage autorelease:NO];
-		slider.maximumValueImage = image;
-		[image release];
-	}
-	
-	// continuous
-	id continuous = [dict objectForKey:@"continuous"];
-	if (continuous) {
-		slider.continuous = [continuous boolValue];
-	}
-	
-	// minimumTrackTintColor
-	id minimumTrackTintColor = [dict objectForKey:@"minimumTrackTintColor"];
-	if (minimumTrackTintColor) {
-		SCColor * color = [SCColor create:minimumTrackTintColor autorelease:NO];
-		slider.minimumTrackTintColor = color;
-		[color release];
-	}
-	
-	// maximumTrackTintColor
-	id maximumTrackTintColor = [dict objectForKey:@"maximumTrackTintColor"];
-	if (maximumTrackTintColor) {
-		SCColor * color = [SCColor create:maximumTrackTintColor autorelease:NO];
-		slider.maximumTrackTintColor = color;
-		[color release];
-	}
-	
-	// thumbTintColor
-	id thumbTintColor = [dict objectForKey:@"thumbTintColor"];
-	if (thumbTintColor) {
-		SCColor * color = [SCColor create:thumbTintColor autorelease:NO];
-		slider.thumbTintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(slider, dict, minimumTrackTintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(slider, dict, maximumTrackTintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(slider, dict, thumbTintColor);
 	
 	// slider states
 	NSDictionary * states = [dict objectForKey:@"states"];

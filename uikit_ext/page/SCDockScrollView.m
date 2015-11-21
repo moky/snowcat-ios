@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCResponder.h"
 #import "SCDockScrollView.h"
@@ -96,17 +97,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// reflectionEnabled
-	id reflectionEnabled = [dict objectForKey:@"reflectionEnabled"];
-	if (reflectionEnabled) {
-		dockScrollView.reflectionEnabled = [reflectionEnabled boolValue];
-	}
-	
-	// scale
-	id scale = [dict objectForKey:@"scale"];
-	if (scale) {
-		dockScrollView.scale = [scale floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(dockScrollView, dict, reflectionEnabled);
+	SC_SET_ATTRIBUTES_AS_FLOAT(dockScrollView, dict, scale);
 	
 	return YES;
 }

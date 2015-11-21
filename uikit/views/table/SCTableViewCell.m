@@ -305,29 +305,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		tableViewCell.selectionStyle = UITableViewCellSelectionStyleFromString(selectionStyle);
 	}
 	
-	// selected
-	id selected = [dict objectForKey:@"selected"];
-	if (selected) {
-		tableViewCell.selected = [selected boolValue];
-	}
-	
-	// highlighted
-	id highlighted = [dict objectForKey:@"highlighted"];
-	if (highlighted) {
-		tableViewCell.highlighted = [highlighted boolValue];
-	}
-	
-	// showsReorderControl
-	id showsReorderControl = [dict objectForKey:@"showsReorderControl"];
-	if (showsReorderControl) {
-		tableViewCell.showsReorderControl = [showsReorderControl boolValue];
-	}
-	
-	// shouldIndentWhileEditing
-	id shouldIndentWhileEditing = [dict objectForKey:@"shouldIndentWhileEditing"];
-	if (shouldIndentWhileEditing) {
-		tableViewCell.shouldIndentWhileEditing = [shouldIndentWhileEditing boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(tableViewCell, dict, selected);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableViewCell, dict, highlighted);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableViewCell, dict, showsReorderControl);
+	SC_SET_ATTRIBUTES_AS_BOOL(tableViewCell, dict, shouldIndentWhileEditing);
 	
 	// accessoryType
 	NSString * accessoryType = [dict objectForKey:@"accessoryType"];
@@ -363,34 +344,16 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// indentationLevel
-	id indentationLevel = [dict objectForKey:@"indentationLevel"];
-	if (indentationLevel) {
-		tableViewCell.indentationLevel = [indentationLevel integerValue];
-	}
-	
-	// indentationWidth
-	id indentationWidth = [dict objectForKey:@"indentationWidth"];
-	if (indentationWidth) {
-		tableViewCell.indentationWidth = [indentationWidth floatValue];
-	}
-	
-	// editing
-	id editing = [dict objectForKey:@"editing"];
-	if (editing) {
-		tableViewCell.editing = [editing boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(tableViewCell, dict, indentationLevel);
+	SC_SET_ATTRIBUTES_AS_FLOAT  (tableViewCell, dict, indentationWidth);
+	SC_SET_ATTRIBUTES_AS_BOOL   (tableViewCell, dict, editing);
 	
 #ifdef __IPHONE_7_0
 	// (iOS 7.0)
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
 		
-		// separatorInset
-		NSString * separatorInset = [dict objectForKey:@"separatorInset"];
-		if (separatorInset) {
-			tableViewCell.separatorInset = UIEdgeInsetsFromString(separatorInset);
-		}
+		SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(tableViewCell, dict, separatorInset);
 		
 	}
 #endif // EOF '__IPHONE_7_0'

@@ -151,11 +151,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[url release];
 	}
 	
-	// scalesPageToFit
-	id scalesPageToFit = [dict objectForKey:@"scalesPageToFit"];
-	if (scalesPageToFit) {
-		webView.scalesPageToFit = [scalesPageToFit boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, scalesPageToFit);
 	
 	// detectsPhoneNumbers (deprecated)
 	
@@ -165,35 +161,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		webView.dataDetectorTypes = UIDataDetectorTypesFromString(dataDetectorTypes);
 	}
 	
-	// allowsInlineMediaPlayback
-	id allowsInlineMediaPlayback = [dict objectForKey:@"allowsInlineMediaPlayback"];
-	if (allowsInlineMediaPlayback) {
-		webView.allowsInlineMediaPlayback = [allowsInlineMediaPlayback boolValue];
-	}
-	
-	// mediaPlaybackRequiresUserAction
-	id mediaPlaybackRequiresUserAction = [dict objectForKey:@"mediaPlaybackRequiresUserAction"];
-	if (mediaPlaybackRequiresUserAction) {
-		webView.mediaPlaybackRequiresUserAction = [mediaPlaybackRequiresUserAction boolValue];
-	}
-	
-	// mediaPlaybackAllowsAirPlay
-	id mediaPlaybackAllowsAirPlay = [dict objectForKey:@"mediaPlaybackAllowsAirPlay"];
-	if (mediaPlaybackAllowsAirPlay) {
-		webView.mediaPlaybackAllowsAirPlay = [mediaPlaybackAllowsAirPlay boolValue];
-	}
-	
-	// suppressesIncrementalRendering
-	id suppressesIncrementalRendering = [dict objectForKey:@"suppressesIncrementalRendering"];
-	if (suppressesIncrementalRendering) {
-		webView.suppressesIncrementalRendering = [suppressesIncrementalRendering boolValue];
-	}
-	
-	// keyboardDisplayRequiresUserAction
-	id keyboardDisplayRequiresUserAction = [dict objectForKey:@"keyboardDisplayRequiresUserAction"];
-	if (keyboardDisplayRequiresUserAction) {
-		webView.keyboardDisplayRequiresUserAction = [keyboardDisplayRequiresUserAction boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, allowsInlineMediaPlayback);
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, mediaPlaybackRequiresUserAction);
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, mediaPlaybackAllowsAirPlay);
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, suppressesIncrementalRendering);
+	SC_SET_ATTRIBUTES_AS_BOOL(webView, dict, keyboardDisplayRequiresUserAction);
 	
 	return YES;
 }

@@ -122,17 +122,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// maximumDate
 	
-	// countDownDuration
-	id countDownDuration = [dict objectForKey:@"countDownDuration"];
-	if (countDownDuration) {
-		datePicker.countDownDuration = [countDownDuration doubleValue];
-	}
+	SC_SET_ATTRIBUTES_AS_DOUBLE(datePicker, dict, countDownDuration);
 	
-	// minuteInterval
-	id minuteInterval = [dict objectForKey:@"minuteInterval"];
-	if (minuteInterval) {
-		datePicker.minuteInterval = [minuteInterval integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(datePicker, dict, minuteInterval);
 	
 	return YES;
 }

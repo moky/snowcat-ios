@@ -170,10 +170,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	// navigationBarHidden
-	id navigationBarHidden = [dict objectForKey:@"navigationBarHidden"];
-	if (navigationBarHidden) {
-		navigationController.navigationBarHidden = [navigationBarHidden boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(navigationController, dict, navigationBarHidden);
 	
 	// navigationBar
 	NSDictionary * navigationBar = [dict objectForKey:@"navigationBar"];
@@ -182,10 +179,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	// toolbarHidden
-	id toolbarHidden = [dict objectForKey:@"toolbarHidden"];
-	if (toolbarHidden) {
-		navigationController.toolbarHidden = [toolbarHidden boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(navigationController, dict, toolbarHidden);
 	
 	// toolbar
 	NSDictionary * toolbar = [dict objectForKey:@"toolbar"];

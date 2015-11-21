@@ -107,20 +107,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// text
-	NSString * text = [dict objectForKey:@"text"];
-	if (text) {
-		text = SCLocalizedString(text, nil);
-		textView.text = text;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(textView, dict, text);
 	
-	// font
-	NSDictionary * font = [dict objectForKey:@"font"];
-	if (font) {
-		SCFont * f = [SCFont create:font autorelease:NO];
-		textView.font = f;
-		[f release];
-	}
+	SC_SET_ATTRIBUTES_AS_UIFONT(textView, dict, font);
 	
 	// textColor
 	NSDictionary * textColor = [dict objectForKey:@"textColor"];
@@ -145,11 +134,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textView.selectedRange = NSRangeFromString(selectedRange);
 	}
 	
-	// editable
-	id editable = [dict objectForKey:@"editable"];
-	if (editable) {
-		textView.editable = [editable boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(textView, dict, editable);
 	
 	// dataDetectorTypes
 	NSString * dataDetectorTypes = [dict objectForKey:@"dataDetectorTypes"];
@@ -157,11 +142,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textView.dataDetectorTypes = UIDataDetectorTypesFromString(dataDetectorTypes);
 	}
 	
-	// allowsEditingTextAttributes
-	id allowsEditingTextAttributes = [dict objectForKey:@"allowsEditingTextAttributes"];
-	if (allowsEditingTextAttributes) {
-		textView.allowsEditingTextAttributes = [allowsEditingTextAttributes boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(textView, dict, allowsEditingTextAttributes);
 	
 	// attributedText
 	NSDictionary * attributedText = [dict objectForKey:@"attributedText"];
@@ -200,11 +181,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// clearsOnInsertion
-	id clearsOnInsertion = [dict objectForKey:@"clearsOnInsertion"];
-	if (clearsOnInsertion) {
-		textView.clearsOnInsertion = [clearsOnInsertion boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(textView, dict, clearsOnInsertion);
 	
 	return YES;
 }

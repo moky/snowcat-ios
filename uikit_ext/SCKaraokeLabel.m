@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCView.h"
 #import "SCKaraokeLabel.h"
@@ -75,11 +76,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// progress
-	NSString * progress = [dict objectForKey:@"progress"];
-	if (progress) {
-		karaokeView.progress = [progress floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(karaokeView, dict, progress);
 	
 	return YES;
 }

@@ -126,10 +126,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	}
 	
 	// presentsWithGesture
-	id presentsWithGesture = [dict objectForKey:@"presentsWithGesture"];
-	if (presentsWithGesture) {
-		splitViewController.presentsWithGesture = [presentsWithGesture boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(splitViewController, dict, presentsWithGesture);
 	
 	return YES;
 }

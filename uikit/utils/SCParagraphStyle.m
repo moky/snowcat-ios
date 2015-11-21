@@ -113,7 +113,9 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 #ifdef __IPHONE_7_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
-		SC_SET_ATTRIBUTES_AS_FLOAT   (paragraphStyle, dict, defaultTabInterval);
+		
+		SC_SET_ATTRIBUTES_AS_FLOAT(paragraphStyle, dict, defaultTabInterval);
+		
 	}
 #endif
 	

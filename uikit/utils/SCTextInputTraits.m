@@ -215,17 +215,8 @@ UIReturnKeyType UIReturnKeyTypeFromString(NSString * string)
 		textInputTraits.returnKeyType = UIReturnKeyTypeFromString(returnKeyType);
 	}
 	
-	// enablesReturnKeyAutomatically
-	id enablesReturnKeyAutomatically = [dict objectForKey:@"enablesReturnKeyAutomatically"];
-	if (enablesReturnKeyAutomatically) {
-		textInputTraits.enablesReturnKeyAutomatically = [enablesReturnKeyAutomatically boolValue];
-	}
-	
-	// secureTextEntry
-	id secureTextEntry = [dict objectForKey:@"secureTextEntry"];
-	if (secureTextEntry) {
-		textInputTraits.secureTextEntry = [secureTextEntry boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(textInputTraits, dict, enablesReturnKeyAutomatically);
+	SC_SET_ATTRIBUTES_AS_BOOL(textInputTraits, dict, secureTextEntry);
 	
 	return YES;
 }

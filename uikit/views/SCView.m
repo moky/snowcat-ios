@@ -102,43 +102,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
 + (BOOL) _setRenderingAttributes:(NSDictionary *)dict to:(UIView *)view
 {
-	// clipsToBounds
-	id clipsToBounds = [dict objectForKey:@"clipsToBounds"];
-	if (clipsToBounds) {
-		view.clipsToBounds = [clipsToBounds boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, clipsToBounds);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(view, dict, backgroundColor);
+	SC_SET_ATTRIBUTES_AS_FLOAT(view, dict, alpha);
 	
-	// background color
-	id backgroundColor = [dict objectForKey:@"backgroundColor"];
-	if (backgroundColor) {
-		SCColor * color = [SCColor create:backgroundColor autorelease:NO];
-		view.backgroundColor = color;
-		[color release];
-	}
-	
-	// alpha
-	id alpha = [dict objectForKey:@"alpha"];
-	if (alpha) {
-		view.alpha = [alpha floatValue];
-	}
-	
-	// opaque
-	id opaque = [dict objectForKey:@"opaque"];
-	if (opaque) {
-		view.opaque = [opaque boolValue];
-	}
-	
-	// clearsContextBeforeDrawing
-	id clearsContextBeforeDrawing = [dict objectForKey:@"clearsContextBeforeDrawing"];
-	if (clearsContextBeforeDrawing) {
-		view.clearsContextBeforeDrawing = [clearsContextBeforeDrawing boolValue];
-	}
-	
-	// hidden
-	id hidden = [dict objectForKey:@"hidden"];
-	if (hidden) {
-		view.hidden = [hidden boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, opaque);
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, clearsContextBeforeDrawing);
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, hidden);
 	
 	// contentMode
 	NSString * contentMode = [dict objectForKey:@"contentMode"];
@@ -158,13 +128,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		view.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(view, dict, tintColor);
 	
 //	// tintAdjustmentMode
 //	NSString * tintAdjustmentMode = [dict objectForKey:@"tintAdjustmentMode"];
@@ -185,17 +149,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// layoutMargins
-	NSString * layoutMargins = [dict objectForKey:@"layoutMargins"];
-	if (layoutMargins) {
-		view.layoutMargins = UIEdgeInsetsFromString(layoutMargins);
-	}
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(view, dict, layoutMargins);
 	
-	// preservesSuperviewLayoutMargins
-	id preservesSuperviewLayoutMargins = [dict objectForKey:@"preservesSuperviewLayoutMargins"];
-	if (preservesSuperviewLayoutMargins) {
-		view.preservesSuperviewLayoutMargins = [preservesSuperviewLayoutMargins boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, preservesSuperviewLayoutMargins);
 	
 	// maskView
 	NSDictionary * maskView = [dict objectForKey:@"maskView"];
@@ -224,17 +180,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_UIKIT_SET_ATTRIBUTES(view.layer, SCLayer, layer);
 	}
 	
-	// userInteractionEnabled
-	id userInteractionEnabled = [dict objectForKey:@"userInteractionEnabled"];
-	if (userInteractionEnabled) {
-		view.userInteractionEnabled = [userInteractionEnabled boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(view, dict, userInteractionEnabled);
 	
-	// tag
-	id tag = [dict objectForKey:@"tag"];
-	if (tag) {
-		view.tag = [tag integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(view, dict, tag);
 	
 	// UIViewGeometry
 	[self setGeometryAttributes:dict to:view];

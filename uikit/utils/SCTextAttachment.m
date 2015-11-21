@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCImage.h"
 #import "SCTextAttachment.h"
 
@@ -32,21 +33,11 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// contents
 	
-	// fileType
-	NSString * fileType = [dict objectForKey:@"fileType"];
-	if (fileType) {
-		textAttachment.fileType = fileType;
-	}
+	SC_SET_ATTRIBUTES_AS_STRING(textAttachment, dict, fileType);
 	
 	// fileWrapper
 	
-	// image
-	NSDictionary * image = [dict objectForKey:@"image"];
-	if (image) {
-		SCImage * img = [SCImage create:image autorelease:NO];
-		textAttachment.image = img;
-		[img release];
-	}
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(textAttachment, dict, image);
 	
 	// bounds
 	NSString * bounds = [dict objectForKey:@"bounds"];

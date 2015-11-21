@@ -140,19 +140,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// title
-	NSString * title = [dict objectForKey:@"title"];
-	if (title) {
-		title = SCLocalizedString(title, nil);
-		alertView.title = title;
-	}
-	
-	// message
-	NSString * message = [dict objectForKey:@"message"];
-	if (message) {
-		message = SCLocalizedString(message, nil);
-		alertView.message = message;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(alertView, dict, title);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(alertView, dict, message);
 	
 	// otherButtonTitles
 	NSArray * otherButtonTitles = [dict objectForKey:@"otherButtons"];

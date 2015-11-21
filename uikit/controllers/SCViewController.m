@@ -196,10 +196,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 + (BOOL) _setEditingAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	// editing
-	id editing = [dict objectForKey:@"editing"];
-	if (editing) {
-		viewController.editing = [editing boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, editing);
 	
 	return YES;
 }
@@ -234,11 +231,9 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 + (BOOL) _setStateRestorationAttributes:(NSDictionary *)dict to:(UIViewController *)viewController
 {
 	// restorationIdentifier
-	NSString * restorationIdentifier = [dict objectForKey:@"restorationIdentifier"];
-	if (restorationIdentifier) {
-		viewController.restorationIdentifier = restorationIdentifier;
-	}
+	SC_SET_ATTRIBUTES_AS_STRING(viewController, dict, restorationIdentifier);
 	
+	// restorationClass
 	NSString * restorationClass = [dict objectForKey:@"restorationClass"];
 	if (restorationClass) {
 		Class class = NSClassFromString(restorationClass);
@@ -288,11 +283,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		[md release];
 	}
 	
-	// hidesBottomBarWhenPushed
-	id hidesBottomBarWhenPushed = [dict objectForKey:@"hidesBottomBarWhenPushed"];
-	if (hidesBottomBarWhenPushed) {
-		viewController.hidesBottomBarWhenPushed = [hidesBottomBarWhenPushed boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, hidesBottomBarWhenPushed);
 	
 	// navigationController
 //	NSDictionary * navigationController = [dict objectForKey:@"navigationController"];
@@ -344,10 +335,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	}
 	
 	// modalInPopover
-	id modalInPopover = [dict objectForKey:@"modalInPopover"];
-	if (modalInPopover) {
-		viewController.modalInPopover = [modalInPopover boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, modalInPopover);
 	
 	return YES;
 }
@@ -361,35 +349,11 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		return NO;
 	}
 	
-	// modalPresentationCapturesStatusBarAppearance
-	id modalPresentationCapturesStatusBarAppearance = [dict objectForKey:@"modalPresentationCapturesStatusBarAppearance"];
-	if (modalPresentationCapturesStatusBarAppearance) {
-		viewController.modalPresentationCapturesStatusBarAppearance = [modalPresentationCapturesStatusBarAppearance boolValue];
-	}
-	
-	// edgesForExtendedLayout
-	NSString * edgesForExtendedLayout = [dict objectForKey:@"edgesForExtendedLayout"];
-	if (edgesForExtendedLayout) {
-		viewController.edgesForExtendedLayout = UIRectEdgeFromString(edgesForExtendedLayout);
-	}
-	
-	// extendedLayoutIncludesOpaqueBars
-	id extendedLayoutIncludesOpaqueBars = [dict objectForKey:@"extendedLayoutIncludesOpaqueBars"];
-	if (extendedLayoutIncludesOpaqueBars) {
-		viewController.extendedLayoutIncludesOpaqueBars = [extendedLayoutIncludesOpaqueBars boolValue];
-	}
-	
-	// automaticallyAdjustsScrollViewInsets
-	id automaticallyAdjustsScrollViewInsets = [dict objectForKey:@"automaticallyAdjustsScrollViewInsets"];
-	if (automaticallyAdjustsScrollViewInsets) {
-		viewController.automaticallyAdjustsScrollViewInsets = [automaticallyAdjustsScrollViewInsets boolValue];
-	}
-	
-	// preferredContentSize
-	NSString * preferredContentSize = [dict objectForKey:@"preferredContentSize"];
-	if (preferredContentSize) {
-		viewController.preferredContentSize = CGSizeFromStringWithNode(preferredContentSize, viewController);
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, modalPresentationCapturesStatusBarAppearance);
+	SC_SET_ATTRIBUTES_AS_UIRECTEDGE(viewController, dict, edgesForExtendedLayout);
+	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, extendedLayoutIncludesOpaqueBars);
+	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, automaticallyAdjustsScrollViewInsets);
+	SC_SET_ATTRIBUTES_AS_CGSIZE    (viewController, dict, preferredContentSize);
 	
 #endif
 	return YES;
@@ -407,24 +371,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		SC_UIKIT_SET_ATTRIBUTES(viewController.view, SCView, viewDict);
 	}
 	
-	// title
-	NSString * title = [dict objectForKey:@"title"];
-	if (title) {
-		title = SCLocalizedString(title, nil);
-		viewController.title = title;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(viewController, dict, title);
 	
-	// definesPresentationContext
-	id definesPresentationContext = [dict objectForKey:@"definesPresentationContext"];
-	if (definesPresentationContext) {
-		viewController.definesPresentationContext = [definesPresentationContext boolValue];
-	}
-	
-	// providesPresentationContextTransitionStyle
-	id providesPresentationContextTransitionStyle = [dict objectForKey:@"providesPresentationContextTransitionStyle"];
-	if (providesPresentationContextTransitionStyle) {
-		viewController.providesPresentationContextTransitionStyle = [providesPresentationContextTransitionStyle boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, definesPresentationContext);
+	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, providesPresentationContextTransitionStyle);
 	
 	// modalTransitionStyle
 	NSString * modalTransitionStyle = [dict objectForKey:@"modalTransitionStyle"];

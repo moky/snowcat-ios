@@ -114,11 +114,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		}
 	}
 	
-	// selectedSegmentIndex
-	id selectedSegmentIndex = [dict objectForKey:@"selectedSegmentIndex"];
-	if (selectedSegmentIndex) {
-		segmentedButton.selectedSegmentIndex = [selectedSegmentIndex integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(segmentedButton, dict, selectedSegmentIndex);
 	
 	// direction
 	NSString * direction = [dict objectForKey:@"direction"];

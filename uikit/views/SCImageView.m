@@ -120,11 +120,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// userInteractionEnabled (has already been set by SCView)
 	
-	// highlighted
-	id highlighted = [dict objectForKey:@"highlighted"];
-	if (highlighted) {
-		imageView.highlighted = [highlighted boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(imageView, dict, highlighted);
 	
 	// animationImages (UIImages)
 	NSArray * animationImages = [dict objectForKey:@"animationImages"];
@@ -170,17 +166,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[mArray release];
 	}
 	
-	// animationDuration
-	id animationDuration = [dict objectForKey:@"animationDuration"];
-	if (animationDuration) {
-		imageView.animationDuration = [animationDuration doubleValue];
-	}
-	
-	// animationRepeatCount
-	id animationRepeatCount = [dict objectForKey:@"animationRepeatCount"];
-	if (animationRepeatCount) {
-		imageView.animationRepeatCount = [animationRepeatCount integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_DOUBLE (imageView, dict, animationDuration);
+	SC_SET_ATTRIBUTES_AS_INTEGER(imageView, dict, animationRepeatCount);
 	
 	// auto start animation
 	if (animationImages || highlightedAnimationImages) {

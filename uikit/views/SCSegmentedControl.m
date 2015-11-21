@@ -157,11 +157,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 #pragma clang diagnostic pop
 	}
 	
-	// momentary
-	id momentary = [dict objectForKey:@"momentary"];
-	if (momentary) {
-		segmentedControl.momentary = [momentary boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(segmentedControl, dict, momentary);
 	
 	// items
 	NSArray * items = [dict objectForKey:@"items"];
@@ -189,25 +185,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		}
 	}
 	
-	// apportionsSegmentWidthsByContent
-	id apportionsSegmentWidthsByContent = [dict objectForKey:@"apportionsSegmentWidthsByContent"];
-	if (apportionsSegmentWidthsByContent) {
-		segmentedControl.apportionsSegmentWidthsByContent = [apportionsSegmentWidthsByContent boolValue];
-	}
-	
-	// selectedSegmentIndex
-	id selectedSegmentIndex = [dict objectForKey:@"selectedSegmentIndex"];
-	if (selectedSegmentIndex) {
-		segmentedControl.selectedSegmentIndex = [selectedSegmentIndex integerValue];
-	}
-	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		segmentedControl.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL   (segmentedControl, dict, apportionsSegmentWidthsByContent);
+	SC_SET_ATTRIBUTES_AS_INTEGER(segmentedControl, dict, selectedSegmentIndex);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(segmentedControl, dict, tintColor);
 	
 	if (![SCControl setAttributes:dict to:segmentedControl]) {
 		SCLog(@"failed to set attributes: %@", dict);

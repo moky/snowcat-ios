@@ -48,20 +48,15 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	UIResponder * target = [dict objectForKey:@"target"];
 	
-	// title (init..)
-	NSString * title = [dict objectForKey:@"title"];
-	if (title) {
-		//
-		// because the navigationItem may be readonly,
-		// in this case, the '-[initWithDictionary:]' will not be called,
-		// so we should set title here...
-		//
-		// see '<UINavigationController.h:119> : UIViewController (UINavigationControllerItem)'
-		//     '<SCViewController.m:291>       : +[_setNavigationControllerAttributes:to:]'
-		//
-		title = SCLocalizedString(title, nil);
-		navigationItem.title = title;
-	}
+	//
+	// because the navigationItem may be readonly,
+	// in this case, the '-[initWithDictionary:]' will not be called,
+	// so we should set title here...
+	//
+	// see '<UINavigationController.h:119> : UIViewController (UINavigationControllerItem)'
+	//     '<SCViewController.m:291>       : +[_setNavigationControllerAttributes:to:]'
+	//
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(navigationItem, dict, title);
 	
 	// backBarButtonItem
 	NSDictionary * backBarButtonItem = [dict objectForKey:@"backBarButtonItem"];
@@ -89,18 +84,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// prompt
-	NSString * prompt = [dict objectForKey:@"prompt"];
-	if (prompt) {
-		prompt = SCLocalizedString(prompt, nil);
-		navigationItem.prompt = prompt;
-	}
-	
-	// hidesBackButton
-	id hidesBackButton = [dict objectForKey:@"hidesBackButton"];
-	if (hidesBackButton) {
-		navigationItem.hidesBackButton = [hidesBackButton boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(navigationItem, dict, prompt);
+	SC_SET_ATTRIBUTES_AS_BOOL            (navigationItem, dict, hidesBackButton);
 	
 	// leftBarButtonItems
 	NSArray * leftBarButtonItems = [dict objectForKey:@"leftBarButtonItems"];
@@ -154,11 +139,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[mArray release];
 	}
 	
-	// leftItemsSupplementBackButton
-	id leftItemsSupplementBackButton = [dict objectForKey:@"leftItemsSupplementBackButton"];
-	if (leftItemsSupplementBackButton) {
-		navigationItem.leftItemsSupplementBackButton = [leftItemsSupplementBackButton boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(navigationItem, dict, leftItemsSupplementBackButton);
 	
 	// leftBarButtonItem
 	NSDictionary * leftBarButtonItem = [dict objectForKey:@"leftBarButtonItem"];

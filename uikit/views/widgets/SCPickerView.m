@@ -116,11 +116,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// showsSelectionIndicator
-	id showsSelectionIndicator = [dict objectForKey:@"showsSelectionIndicator"];
-	if (showsSelectionIndicator) {
-		pickerView.showsSelectionIndicator = [showsSelectionIndicator boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(pickerView, dict, showsSelectionIndicator);
 	
 	return YES;
 }

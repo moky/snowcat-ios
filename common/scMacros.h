@@ -61,6 +61,13 @@
         obj.name = name;                                                       \
     }                                                                          \
                                          /* EOF 'SC_SET_ATTRIBUTES_AS_STRING' */
+#define SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(obj, dict, name)                 \
+    NSString * name = [dict objectForKey:@#name];                              \
+    if (name) {                                                                \
+        name = SCLocalizedString(name, nil);                                   \
+        obj.name = name;                                                       \
+    }                                                                          \
+                               /* EOF 'SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING' */
 #define SC_SET_ATTRIBUTES_AS_INTEGER(obj, dict, name)                          \
     id name = [dict objectForKey:@#name];                                      \
     if (name) {                                                                \
@@ -91,6 +98,12 @@
         obj.name = [name floatValue];                                          \
     }                                                                          \
                                           /* EOF 'SC_SET_ATTRIBUTES_AS_FLOAT' */
+#define SC_SET_ATTRIBUTES_AS_DOUBLE(obj, dict, name)                           \
+    id name = [dict objectForKey:@#name];                                      \
+    if (name) {                                                                \
+        obj.name = [name doubleValue];                                         \
+    }                                                                          \
+                                         /* EOF 'SC_SET_ATTRIBUTES_AS_DOUBLE' */
 #define SC_SET_ATTRIBUTES_AS_BOOL(obj, dict, name)                             \
     id name = [dict objectForKey:@#name];                                      \
     if (name) {                                                                \
@@ -121,7 +134,12 @@
 	    obj.name = UIEdgeInsetsFromString(name);                               \
     }                                                                          \
                                    /* EOF 'SC_SET_ATTRIBUTES_AS_UIEDGEINSETS' */
-
+#define SC_SET_ATTRIBUTES_AS_UIRECTEDGE(obj, dict, name)                       \
+    NSString * name = [dict objectForKey:@#name];                              \
+    if (name) {                                                                \
+        obj.name = UIRectEdgeFromString(name);                                 \
+    }                                                                          \
+                                     /* EOF 'SC_SET_ATTRIBUTES_AS_UIRECTEDGE' */
 #define SC_SET_ATTRIBUTES_AS_UICOLOR(obj, dict, name)                          \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \
@@ -130,7 +148,14 @@
         [clr release];                                                         \
     }                                                                          \
                                         /* EOF 'SC_SET_ATTRIBUTES_AS_UICOLOR' */
-
+#define SC_SET_ATTRIBUTES_AS_UIFONT(obj, dict, name)                           \
+    NSDictionary * name = [dict objectForKey:@#name];                          \
+    if (name) {                                                                \
+        SCFont * fnt = [SCFont create:name autorelease:NO];                    \
+        obj.name = fnt;                                                        \
+        [fnt release];                                                         \
+    }                                                                          \
+                                         /* EOF 'SC_SET_ATTRIBUTES_AS_UIFONT' */
 #define SC_SET_ATTRIBUTES_AS_UIIMAGE(obj, dict, name)                          \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \

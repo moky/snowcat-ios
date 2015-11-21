@@ -97,13 +97,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// barTintColor
-	id barTintColor = [dict objectForKey:@"barTintColor"];
-	if (barTintColor) {
-		SCColor * color = [SCColor create:barTintColor autorelease:NO];
-		toolbar.barTintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(toolbar, dict, barTintColor);
 	
 #endif
 	
@@ -152,19 +146,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[mArray release];
 	}
 	
-	// translucent
-	id translucent = [dict objectForKey:@"translucent"];
-	if (translucent) {
-		toolbar.translucent = [translucent boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(toolbar, dict, translucent);
 	
-	// tintColor
-	id tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		toolbar.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(toolbar, dict, tintColor);
 	
 	[self _setIOS7Attributes:dict to:toolbar];
 	

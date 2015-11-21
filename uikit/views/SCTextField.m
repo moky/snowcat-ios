@@ -153,12 +153,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// text
-	NSString * text = [dict objectForKey:@"text"];
-	if (text) {
-		text = SCLocalizedString(text, nil);
-		textField.text = text;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(textField, dict, text);
 	
 	// attributedText
 	NSDictionary * attributedText = [dict objectForKey:@"attributedText"];
@@ -180,13 +175,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[color release];
 	}
 	
-	// font
-	NSDictionary * font = [dict objectForKey:@"font"];
-	if (font) {
-		SCFont * f = [SCFont create:font autorelease:NO];
-		textField.font = f;
-		[f release];
-	}
+	SC_SET_ATTRIBUTES_AS_UIFONT(textField, dict, font);
 	
 	// textAlignment
 	NSString * textAlignment = [dict objectForKey:@"textAlignment"];
@@ -200,12 +189,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textField.borderStyle = UITextBorderStyleFromString(borderStyle);
 	}
 	
-	// placeholder
-	NSString * placeholder = [dict objectForKey:@"placeholder"];
-	if (placeholder) {
-		placeholder = SCLocalizedString(placeholder, nil);
-		textField.placeholder = placeholder;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(textField, dict, placeholder);
 	
 	// attributedPlaceholder
 	NSDictionary * attributedPlaceholder = [dict objectForKey:@"attributedPlaceholder"];
@@ -216,45 +200,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[as release];
 	}
 	
-	// clearsOnBeginEditing
-	id clearsOnBeginEditing = [dict objectForKey:@"clearsOnBeginEditing"];
-	if (clearsOnBeginEditing) {
-		textField.clearsOnBeginEditing = [clearsOnBeginEditing boolValue];
-	}
-	
-	// adjustsFontSizeToFitWidth
-	id adjustsFontSizeToFitWidth = [dict objectForKey:@"adjustsFontSizeToFitWidth"];
-	if (adjustsFontSizeToFitWidth) {
-		textField.adjustsFontSizeToFitWidth = [adjustsFontSizeToFitWidth boolValue];
-	}
-	
-	// minimumFontSize
-	id minimumFontSize = [dict objectForKey:@"minimumFontSize"];
-	if (minimumFontSize) {
-		textField.minimumFontSize = [minimumFontSize floatValue];
-	}
-	
-	// background
-	NSDictionary * background = [dict objectForKey:@"background"];
-	if (background) {
-		SCImage * image = [SCImage create:background autorelease:NO];
-		textField.background = image;
-		[image release];
-	}
-	
-	// disabledBackground
-	NSDictionary * disabledBackground = [dict objectForKey:@"disabledBackground"];
-	if (disabledBackground) {
-		SCImage * image = [SCImage create:disabledBackground autorelease:NO];
-		textField.disabledBackground = image;
-		[image release];
-	}
-	
-	// allowsEditingTextAttributes
-	id allowsEditingTextAttributes = [dict objectForKey:@"allowsEditingTextAttributes"];
-	if (allowsEditingTextAttributes) {
-		textField.allowsEditingTextAttributes = [allowsEditingTextAttributes boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL   (textField, dict, clearsOnBeginEditing);
+	SC_SET_ATTRIBUTES_AS_BOOL   (textField, dict, adjustsFontSizeToFitWidth);
+	SC_SET_ATTRIBUTES_AS_FLOAT  (textField, dict, minimumFontSize);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(textField, dict, background);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(textField, dict, disabledBackground);
+	SC_SET_ATTRIBUTES_AS_BOOL   (textField, dict, allowsEditingTextAttributes);
 	
 	// typingAttributes
 	NSDictionary * typingAttributes = [dict objectForKey:@"typingAttributes"];
@@ -324,11 +275,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// clearsOnInsertion
-	id clearsOnInsertion = [dict objectForKey:@"clearsOnInsertion"];
-	if (clearsOnInsertion) {
-		textField.clearsOnInsertion = [clearsOnInsertion boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(textField, dict, clearsOnInsertion);
 	
 	return YES;
 }

@@ -134,64 +134,18 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// delegate
 	
-	// text
-	NSString * text = [dict objectForKey:@"text"];
-	if (text) {
-		text = SCLocalizedString(text, nil);
-		searchBar.text = text;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(searchBar, dict, text);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(searchBar, dict, prompt);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(searchBar, dict, placeholder);
 	
-	// prompt
-	NSString * prompt = [dict objectForKey:@"prompt"];
-	if (prompt) {
-		prompt = SCLocalizedString(prompt, nil);
-		searchBar.prompt = prompt;
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsBookmarkButton);
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsCancelButton);
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsSearchResultsButton);
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, searchResultsButtonSelected);
 	
-	// placeholder
-	NSString * placeholder = [dict objectForKey:@"placeholder"];
-	if (placeholder) {
-		placeholder = SCLocalizedString(placeholder, nil);
-		searchBar.placeholder = placeholder;
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(searchBar, dict, tintColor);
 	
-	// showsBookmarkButton
-	id showsBookmarkButton = [dict objectForKey:@"showsBookmarkButton"];
-	if (showsBookmarkButton) {
-		searchBar.showsBookmarkButton = [showsBookmarkButton boolValue];
-	}
-	
-	// showsCancelButton
-	id showsCancelButton = [dict objectForKey:@"showsCancelButton"];
-	if (showsCancelButton) {
-		searchBar.showsCancelButton = [showsCancelButton boolValue];
-	}
-	
-	// showsSearchResultsButton
-	id showsSearchResultsButton = [dict objectForKey:@"showsSearchResultsButton"];
-	if (showsSearchResultsButton) {
-		searchBar.showsSearchResultsButton = [showsSearchResultsButton boolValue];
-	}
-	
-	// searchResultsButtonSelected
-	id searchResultsButtonSelected = [dict objectForKey:@"searchResultsButtonSelected"];
-	if (searchResultsButtonSelected) {
-		searchBar.searchResultsButtonSelected = [searchResultsButtonSelected boolValue];
-	}
-	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		searchBar.tintColor = color;
-		[color release];
-	}
-	
-	// translucent
-	id translucent = [dict objectForKey:@"translucent"];
-	if (translucent) {
-		searchBar.translucent = [translucent boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, translucent);
 	
 	// autocapitalizationType
 	NSString * autocapitalizationType = [dict objectForKey:@"autocapitalizationType"];
@@ -233,17 +187,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[a release];
 	}
 	
-	// selectedScopeButtonIndex
-	id selectedScopeButtonIndex = [dict objectForKey:@"selectedScopeButtonIndex"];
-	if (selectedScopeButtonIndex) {
-		searchBar.selectedScopeButtonIndex = [selectedScopeButtonIndex integerValue];
-	}
-	
-	// showsScopeBar
-	id showsScopeBar = [dict objectForKey:@"showsScopeBar"];
-	if (showsScopeBar) {
-		searchBar.showsScopeBar = [showsScopeBar boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_INTEGER(searchBar, dict, selectedScopeButtonIndex);
+	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsScopeBar);
 	
 	// inputAccessoryView
 	NSDictionary * inputAccessoryView = [dict objectForKey:@"inputAccessoryView"];
@@ -256,21 +201,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// backgroundImage
-	NSDictionary * backgroundImage = [dict objectForKey:@"backgroundImage"];
-	if (backgroundImage) {
-		SCImage * image = [SCImage create:backgroundImage autorelease:NO];
-		searchBar.backgroundImage = image;
-		[image release];
-	}
-	
-	// scopeBarBackgroundImage
-	NSDictionary * scopeBarBackgroundImage = [dict objectForKey:@"scopeBarBackgroundImage"];
-	if (scopeBarBackgroundImage) {
-		SCImage * image = [SCImage create:scopeBarBackgroundImage autorelease:NO];
-		searchBar.scopeBarBackgroundImage = image;
-		[image release];
-	}
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(searchBar, dict, backgroundImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(searchBar, dict, scopeBarBackgroundImage);
 	
 	// searchFieldBackgroundPositionAdjustment
 	NSString * searchFieldBackgroundPositionAdjustment = [dict objectForKey:@"searchFieldBackgroundPositionAdjustment"];

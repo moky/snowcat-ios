@@ -104,11 +104,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		scrollRefreshControl.direction = UIScrollRefreshControlDirectionFromString(direction);
 	}
 	
-	// dimension
-	id dimension = [dict objectForKey:@"dimension"];
-	if (dimension) {
-		scrollRefreshControl.dimension = [dimension floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(scrollRefreshControl, dict, dimension);
 	
 	return YES;
 }

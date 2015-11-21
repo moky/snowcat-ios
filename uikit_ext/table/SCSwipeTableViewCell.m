@@ -96,17 +96,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// indentationLeft
-	id indentationLeft = [dict objectForKey:@"indentationLeft"];
-	if (indentationLeft) {
-		swipeTableViewCell.indentationLeft = [indentationLeft floatValue];
-	}
-	
-	// indentationRight
-	id indentationRight = [dict objectForKey:@"indentationRight"];
-	if (indentationRight) {
-		swipeTableViewCell.indentationRight = [indentationRight floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(swipeTableViewCell, dict, indentationLeft);
+	SC_SET_ATTRIBUTES_AS_FLOAT(swipeTableViewCell, dict, indentationRight);
 	
 	return YES;
 }

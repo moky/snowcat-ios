@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCGeometry.h"
 #import "SCView.h"
@@ -76,11 +77,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// ground
-	NSString * ground = [dict objectForKey:@"ground"];
-	if (ground) {
-		groundView.ground = CGRectFromStringWithNode(ground, groundView);
-	}
+	SC_SET_ATTRIBUTES_AS_CGRECT(groundView, dict, ground);
 	
 	return YES;
 }

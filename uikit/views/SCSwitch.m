@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCEventHandler.h"
 #import "SCNib.h"
 #import "SCColor.h"
@@ -71,51 +72,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// onTintColor
-	NSDictionary * onTintColor = [dict objectForKey:@"onTintColor"];
-	if (onTintColor) {
-		SCColor * color = [SCColor create:onTintColor autorelease:NO];
-		uiSwitch.onTintColor = color;
-		[color release];
-	}
-	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		uiSwitch.tintColor = color;
-		[color release];
-	}
-	
-	// thumbTintColor
-	NSDictionary * thumbTintColor = [dict objectForKey:@"thumbTintColor"];
-	if (thumbTintColor) {
-		SCColor * color = [SCColor create:thumbTintColor autorelease:NO];
-		uiSwitch.thumbTintColor = color;
-		[color release];
-	}
-	
-	// onImage
-	NSDictionary * onImage = [dict objectForKey:@"onImage"];
-	if (onImage) {
-		SCImage * image = [SCImage create:onImage autorelease:NO];
-		uiSwitch.onImage = image;
-		[image release];
-	}
-	
-	// offImage
-	NSDictionary * offImage = [dict objectForKey:@"offImage"];
-	if (offImage) {
-		SCImage * image = [SCImage create:offImage autorelease:NO];
-		uiSwitch.offImage = image;
-		[image release];
-	}
-	
-	// on
-	id on = [dict objectForKey:@"on"];
-	if (on) {
-		uiSwitch.on = [on boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(uiSwitch, dict, onTintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(uiSwitch, dict, tintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(uiSwitch, dict, thumbTintColor);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(uiSwitch, dict, onImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(uiSwitch, dict, offImage);
+	SC_SET_ATTRIBUTES_AS_BOOL   (uiSwitch, dict, on);
 	
 	return YES;
 }

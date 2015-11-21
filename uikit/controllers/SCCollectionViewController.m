@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCApplication.h"
 #import "SCNib.h"
 #import "SCCollectionViewLayout.h"
@@ -147,11 +148,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		[collectionView release];
 	}
 	
-	// clearsSelectionOnViewWillAppear
-	id clearsSelectionOnViewWillAppear = [dict objectForKey:@"clearsSelectionOnViewWillAppear"];
-	if (clearsSelectionOnViewWillAppear) {
-		collectionViewController.clearsSelectionOnViewWillAppear = [clearsSelectionOnViewWillAppear boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(collectionViewController, dict, clearsSelectionOnViewWillAppear);
 	
 	return YES;
 }

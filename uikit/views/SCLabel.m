@@ -74,12 +74,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
 	
-	// text
-	NSString * text = [dict objectForKey:@"text"];
-	if (text) {
-		text = SCLocalizedString(text, nil);
-		label.text = text;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(label, dict, text);
 	
 	// textColor
 	NSDictionary * textColor = [dict objectForKey:@"textColor"];
@@ -92,25 +87,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[color release];
 	}
 	
-	// font
-	NSDictionary * font = [dict objectForKey:@"font"];
-	if (font) {
-		label.font = [SCFont create:font];
-	}
-	
-	// shadowColor
-	NSDictionary * shadowColor = [dict objectForKey:@"shadowColor"];
-	if (shadowColor) {
-		SCColor * color = [SCColor create:textColor autorelease:NO];
-		label.shadowColor = color;
-		[color release];
-	}
-	
-	// shadowOffset
-	NSString * shadowOffset = [dict objectForKey:@"shadowOffset"];
-	if (shadowOffset) {
-		label.shadowOffset = CGSizeFromStringWithNode(shadowOffset, label);
-	}
+	SC_SET_ATTRIBUTES_AS_UIFONT (label, dict, font);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(label, dict, shadowColor);
+	SC_SET_ATTRIBUTES_AS_CGSIZE (label, dict, shadowOffset);
 	
 	// textAlignment
 	NSString * textAlignment = [dict objectForKey:@"textAlignment"];
@@ -133,48 +112,19 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[as release];
 	}
 	
-	// highlightedTextColor
-	NSDictionary * highlightedTextColor = [dict objectForKey:@"highlightedTextColor"];
-	if (highlightedTextColor) {
-		SCColor * color = [SCColor create:highlightedTextColor autorelease:NO];
-		label.highlightedTextColor = color;
-		[color release];
-	}
-	
-	// highlighted
-	id highlighted = [dict objectForKey:@"highlighted"];
-	if (highlighted) {
-		label.highlighted = [highlighted boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(label, dict, highlightedTextColor);
+	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, highlighted);
 	
 	// userInteractionEnabled (already set by SCView)
 	
-	// enabled
-	id enabled = [dict objectForKey:@"enabled"];
-	if (enabled) {
-		label.enabled = [enabled boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, enabled);
+	SC_SET_ATTRIBUTES_AS_INTEGER(label, dict, numberOfLines);
+	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsFontSizeToFitWidth);
 	
-	// numberOfLines
-	id numberOfLines = [dict objectForKey:@"numberOfLines"];
-	if (numberOfLines) {
-		label.numberOfLines = [numberOfLines integerValue];
-	}
-	
-	// adjustsFontSizeToFitWidth
-	id adjustsFontSizeToFitWidth = [dict objectForKey:@"adjustsFontSizeToFitWidth"];
-	if (adjustsFontSizeToFitWidth) {
-		label.adjustsFontSizeToFitWidth = [adjustsFontSizeToFitWidth boolValue];
-	}
-	
-	// adjustsLetterSpacingToFitWidth
-	id adjustsLetterSpacingToFitWidth = [dict objectForKey:@"adjustsLetterSpacingToFitWidth"];
-	if (adjustsLetterSpacingToFitWidth) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-		label.adjustsLetterSpacingToFitWidth = [adjustsLetterSpacingToFitWidth boolValue];
+	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsLetterSpacingToFitWidth);
 #pragma clang diagnostic pop
-	}
 	
 	// baselineAdjustment
 	NSString * baselineAdjustment = [dict objectForKey:@"baselineAdjustment"];
@@ -182,17 +132,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		label.baselineAdjustment = UIBaselineAdjustmentFromString(baselineAdjustment);
 	}
 	
-	// minimumScaleFactor
-	id minimumScaleFactor = [dict objectForKey:@"minimumScaleFactor"];
-	if (minimumScaleFactor) {
-		label.minimumScaleFactor = [minimumScaleFactor floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT  (label, dict, minimumScaleFactor);
 	
-	// backgroundColor
-	id backgroundColor = [dict objectForKey:@"backgroundColor"];
-	if (!backgroundColor) {
-		label.backgroundColor = [UIColor clearColor];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(label, dict, backgroundColor);
+//	if (!backgroundColor) {
+//		label.backgroundColor = [UIColor clearColor];
+//	}
 	
 	// size
 	NSString * frame = [dict objectForKey:@"frame"];

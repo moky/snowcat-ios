@@ -87,33 +87,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// numberOfPages
 	// currentPage
 	
-	// hidesForSinglePage
-	id hidesForSinglePage = [dict objectForKey:@"hidesForSinglePage"];
-	if (hidesForSinglePage) {
-		pageControl.hidesForSinglePage = [hidesForSinglePage boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(pageControl, dict, hidesForSinglePage);
+	SC_SET_ATTRIBUTES_AS_BOOL(pageControl, dict, defersCurrentPageDisplay);
 	
-	// defersCurrentPageDisplay
-	id defersCurrentPageDisplay = [dict objectForKey:@"defersCurrentPageDisplay"];
-	if (defersCurrentPageDisplay) {
-		pageControl.defersCurrentPageDisplay = [defersCurrentPageDisplay boolValue];
-	}
-	
-	// pageIndicatorTintColor
-	NSDictionary * pageIndicatorTintColor = [dict objectForKey:@"pageIndicatorTintColor"];
-	if (pageIndicatorTintColor) {
-		SCColor * color = [SCColor create:pageIndicatorTintColor autorelease:NO];
-		pageControl.pageIndicatorTintColor = color;
-		[color release];
-	}
-	
-	// currentPageIndicatorTintColor
-	NSDictionary * currentPageIndicatorTintColor = [dict objectForKey:@"currentPageIndicatorTintColor"];
-	if (currentPageIndicatorTintColor) {
-		SCColor * color = [SCColor create:currentPageIndicatorTintColor autorelease:NO];
-		pageControl.currentPageIndicatorTintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(pageControl, dict, pageIndicatorTintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(pageControl, dict, currentPageIndicatorTintColor);
 	
 	return YES;
 }

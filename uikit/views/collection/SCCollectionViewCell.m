@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCCollectionViewCell.h"
 
@@ -75,17 +76,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_UIKIT_SET_ATTRIBUTES(collectionViewCell.contentView, SCView, contentView);
 	}
 	
-	// selected
-	id selected = [dict objectForKey:@"selected"];
-	if (selected) {
-		collectionViewCell.selected = [selected boolValue];
-	}
-	
-	// highlighted
-	id highlighted = [dict objectForKey:@"highlighted"];
-	if (highlighted) {
-		collectionViewCell.highlighted = [highlighted boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(collectionViewCell, dict, selected);
+	SC_SET_ATTRIBUTES_AS_BOOL(collectionViewCell, dict, highlighted);
 	
 	// backgroundView
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];

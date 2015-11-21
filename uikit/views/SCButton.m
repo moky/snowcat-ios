@@ -189,14 +189,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenHighlighted);
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenDisabled);
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, showsTouchWhenHighlighted);
-	
-	// tintColor
-	id tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		UIColor * color = [SCColor create:tintColor autorelease:NO];
-		button.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR     (button, dict, tintColor);
 	
 	// control states
 	NSDictionary * states = [dict objectForKey:@"states"];

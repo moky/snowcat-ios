@@ -142,12 +142,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// title
-	NSString * title = [dict objectForKey:@"title"];
-	if (title) {
-		title = SCLocalizedString(title, nil);
-		actionSheet.title = title;
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(actionSheet, dict, title);
 	
 	// actionSheetStyle
 	NSString * actionSheetStyle = [dict objectForKey:@"actionSheetStyle"];

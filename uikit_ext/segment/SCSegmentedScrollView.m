@@ -198,11 +198,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		}
 	}
 	
-	// animated
-	id animated = [dict objectForKey:@"animated"];
-	if (animated) {
-		segmentedScrollView.animated = [animated boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(segmentedScrollView, dict, animated);
 	
 	// selectedIndex
 	id selectedIndex = [dict objectForKey:@"selectedIndex"];

@@ -131,11 +131,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		}
 	}
 	
-	// contentInset
-	NSString * contentInset = [dict objectForKey:@"contentInset"];
-	if (contentInset) {
-		scrollView.contentInset = UIEdgeInsetsFromString(contentInset);
-	}
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(scrollView, dict, contentInset);
 	
 	// delegate
 	
@@ -148,11 +144,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, showsVerticalScrollIndicator);
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, showsHorizontalScrollIndicator);
 	
-	// scrollIndicatorInsets
-	NSString * scrollIndicatorInsets = [dict objectForKey:@"scrollIndicatorInsets"];
-	if (scrollIndicatorInsets) {
-		scrollView.scrollIndicatorInsets = UIEdgeInsetsFromString(scrollIndicatorInsets);
-	}
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(scrollView, dict, scrollIndicatorInsets);
 	
 	// indicator style
 	NSString * indicatorStyle = [dict objectForKey:@"indicatorStyle"];

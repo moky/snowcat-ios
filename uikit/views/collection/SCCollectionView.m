@@ -180,17 +180,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
-	// allowsSelection
-	id allowsSelection = [dict objectForKey:@"allowsSelection"];
-	if (allowsSelection) {
-		collectionView.allowsSelection = [allowsSelection boolValue];
-	}
-	
-	// allowsMultipleSelection
-	id allowsMultipleSelection = [dict objectForKey:@"allowsMultipleSelection"];
-	if (allowsMultipleSelection) {
-		collectionView.allowsMultipleSelection = [allowsMultipleSelection boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(collectionView, dict, allowsSelection);
+	SC_SET_ATTRIBUTES_AS_BOOL(collectionView, dict, allowsMultipleSelection);
 	
 	// reuseIdentifiers
 	NSArray * reuseIdentifiers = [dict objectForKey:@"reuseIdentifiers"];

@@ -95,37 +95,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// progress
 	
-	// progressTintColor
-	NSDictionary * progressTintColor = [dict objectForKey:@"progressTintColor"];
-	if (progressTintColor) {
-		SCColor * color = [SCColor create:progressTintColor autorelease:NO];
-		progressView.progressTintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(progressView, dict, progressTintColor);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(progressView, dict, trackTintColor);
 	
-	// trackTintColor
-	NSDictionary * trackTintColor = [dict objectForKey:@"trackTintColor"];
-	if (trackTintColor) {
-		SCColor * color = [SCColor create:trackTintColor autorelease:NO];
-		progressView.trackTintColor = color;
-		[color release];
-	}
-	
-	// progressImage
-	NSDictionary * progressImage = [dict objectForKey:@"progressImage"];
-	if (progressImage) {
-		SCImage * image = [SCImage create:progressImage autorelease:NO];
-		progressView.progressImage = image;
-		[image release];
-	}
-	
-	// trackImage
-	NSDictionary * trackImage = [dict objectForKey:@"trackImage"];
-	if (trackImage) {
-		SCImage * image = [SCImage create:trackImage autorelease:NO];
-		progressView.trackImage = image;
-		[image release];
-	}
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(progressView, dict, progressImage);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE(progressView, dict, trackImage);
 	
 	return YES;
 }

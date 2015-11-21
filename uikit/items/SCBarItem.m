@@ -46,52 +46,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"parameters error: %@", dict);
 	
-	// enabled
-	id enabled = [dict objectForKey:@"enabled"];
-	if (enabled) {
-		barItem.enabled = [enabled boolValue];
-	}
-	
-	// title
-	NSString * title = [dict objectForKey:@"title"];
-	if (title) {
-		title = SCLocalizedString(title, nil);
-		barItem.title = title;
-	}
-	
-	// image
-	NSDictionary * image = [dict objectForKey:@"image"];
-	if (image) {
-		SCImage * img = [SCImage create:image autorelease:NO];
-		barItem.image = img;
-		[img release];
-	}
-	
-	// landscapeImagePhone
-	NSDictionary * landscapeImagePhone = [dict objectForKey:@"landscapeImagePhone"];
-	if (landscapeImagePhone) {
-		SCImage * img = [SCImage create:landscapeImagePhone autorelease:NO];
-		barItem.landscapeImagePhone = img;
-		[img release];
-	}
-	
-	// imageInsets
-	NSString * imageInsets = [dict objectForKey:@"imageInsets"];
-	if (imageInsets) {
-		barItem.imageInsets = UIEdgeInsetsFromString(imageInsets);
-	}
-	
-	// landscapeImagePhoneInsets
-	NSString * landscapeImagePhoneInsets = [dict objectForKey:@"landscapeImagePhoneInsets"];
-	if (landscapeImagePhoneInsets) {
-		barItem.landscapeImagePhoneInsets = UIEdgeInsetsFromString(landscapeImagePhoneInsets);
-	}
-	
-	// tag
-	id tag = [dict objectForKey:@"tag"];
-	if (tag) {
-		barItem.tag = [tag integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL            (barItem, dict, enabled);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(barItem, dict, title);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE         (barItem, dict, image);
+	SC_SET_ATTRIBUTES_AS_UIIMAGE         (barItem, dict, landscapeImagePhone);
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS    (barItem, dict, imageInsets);
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS    (barItem, dict, landscapeImagePhoneInsets);
+	SC_SET_ATTRIBUTES_AS_INTEGER         (barItem, dict, tag);
 	
 	// control states
 	NSDictionary * states = [dict objectForKey:@"states"];

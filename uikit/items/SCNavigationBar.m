@@ -102,7 +102,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	// delegate
 	
-	SC_SET_ATTRIBUTES_AS_BOOL(navigationBar, dict, translucent);
+	SC_SET_ATTRIBUTES_AS_BOOL   (navigationBar, dict, translucent);
 	
 	// items
 	
@@ -112,6 +112,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// titleTextAttributes
 	NSDictionary * titleTextAttributes = [dict objectForKey:@"titleTextAttributes"];
 	if (titleTextAttributes) {
+		// TODO: convert the keys & values
 		navigationBar.titleTextAttributes = titleTextAttributes;
 	}
 	

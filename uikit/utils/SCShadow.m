@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCColor.h"
 #import "SCShadow.h"
 
@@ -39,19 +40,9 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		shadow.shadowOffset = CGSizeFromString(shadowOffset);
 	}
 	
-	// shadowBlurRadius
-	id shadowBlurRadius = [dict objectForKey:@"shadowBlurRadius"];
-	if (shadowBlurRadius) {
-		shadow.shadowBlurRadius = [shadowBlurRadius floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(shadow, dict, shadowBlurRadius);
 	
-	// shadowColor
-	NSDictionary * shadowColor = [dict objectForKey:@"shadowColor"];
-	if (shadowColor) {
-		SCColor * color = [SCColor create:shadowColor autorelease:NO];
-		shadow.shadowColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(shadow, dict, shadowColor);
 	
 	return YES;
 }

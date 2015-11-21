@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
+#import "scMacros.h"
 #import "SCNib.h"
 #import "SCEventHandler.h"
 #import "SCScrollView.h"
@@ -122,17 +123,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		pageScrollView.direction = UIPageScrollViewDirectionFromString(direction);
 	}
 	
-	// animated
-	id animated = [dict objectForKey:@"animated"];
-	if (animated) {
-		pageScrollView.animated = [animated boolValue];
-	}
-	
-	// preloadedPageCount
-	id preloadedPageCount = [dict objectForKey:@"preloadedPageCount"];
-	if (preloadedPageCount) {
-		pageScrollView.preloadedPageCount = [preloadedPageCount integerValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(pageScrollView, dict, animated);
+	SC_SET_ATTRIBUTES_AS_INTEGER(pageScrollView, dict, preloadedPageCount);
 	
 	// load data
 	[pageScrollView reloadData];

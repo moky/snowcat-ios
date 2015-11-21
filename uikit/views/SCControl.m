@@ -115,23 +115,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// enabled
-	id enabled = [dict objectForKey:@"enabled"];
-	if (enabled) {
-		control.enabled = [enabled boolValue];
-	}
-	
-	// selected
-	id selected = [dict objectForKey:@"selected"];
-	if (selected) {
-		control.selected = [selected boolValue];
-	}
-	
-	// highlighted
-	id highlighted = [dict objectForKey:@"highlighted"];
-	if (highlighted) {
-		control.highlighted = [highlighted boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(control, dict, enabled);
+	SC_SET_ATTRIBUTES_AS_BOOL(control, dict, selected);
+	SC_SET_ATTRIBUTES_AS_BOOL(control, dict, highlighted);
 	
 	// contentVerticalAlignment
 	NSString * contentVerticalAlignment = [dict objectForKey:@"contentVerticalAlignment"];

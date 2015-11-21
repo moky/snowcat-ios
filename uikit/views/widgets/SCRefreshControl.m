@@ -61,13 +61,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		refreshControl.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(refreshControl, dict, tintColor);
 	
 	// attributedTitle
 	NSDictionary * attributedTitle = [dict objectForKey:@"attributedTitle"];

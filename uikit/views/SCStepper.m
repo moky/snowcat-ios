@@ -81,55 +81,14 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// continuous
-	id continuous = [dict objectForKey:@"continuous"];
-	if (continuous) {
-		stepper.continuous = [continuous boolValue];
-	}
-	
-	// autorepeat
-	id autorepeat = [dict objectForKey:@"autorepeat"];
-	if (autorepeat) {
-		stepper.autorepeat = [autorepeat boolValue];
-	}
-	
-	// wraps
-	id wraps = [dict objectForKey:@"wraps"];
-	if (wraps) {
-		stepper.wraps = [wraps boolValue];
-	}
-	
-	// value
-	id value = [dict objectForKey:@"value"];
-	if (value) {
-		stepper.value = [value doubleValue];
-	}
-	
-	// minimumValue
-	id minimumValue = [dict objectForKey:@"minimumValue"];
-	if (minimumValue) {
-		stepper.minimumValue = [minimumValue doubleValue];
-	}
-	
-	// maximumValue
-	id maximumValue = [dict objectForKey:@"maximumValue"];
-	if (maximumValue) {
-		stepper.maximumValue = [maximumValue doubleValue];
-	}
-	
-	// stepValue
-	id stepValue = [dict objectForKey:@"stepValue"];
-	if (stepValue) {
-		stepper.stepValue = [stepValue doubleValue];
-	}
-	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		stepper.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL   (stepper, dict, continuous);
+	SC_SET_ATTRIBUTES_AS_BOOL   (stepper, dict, autorepeat);
+	SC_SET_ATTRIBUTES_AS_BOOL   (stepper, dict, wraps);
+	SC_SET_ATTRIBUTES_AS_DOUBLE (stepper, dict, value);
+	SC_SET_ATTRIBUTES_AS_DOUBLE (stepper, dict, minimumValue);
+	SC_SET_ATTRIBUTES_AS_DOUBLE (stepper, dict, maximumValue);
+	SC_SET_ATTRIBUTES_AS_DOUBLE (stepper, dict, stepValue);
+	SC_SET_ATTRIBUTES_AS_UICOLOR(stepper, dict, tintColor);
 	
 	// TODO: set images...
 	

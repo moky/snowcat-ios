@@ -115,19 +115,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleFromString(style);
 	}
 	
-	// hidesWhenStopped
-	id hidesWhenStopped = [dict objectForKey:@"hidesWhenStopped"];
-	if (hidesWhenStopped) {
-		activityIndicatorView.hidesWhenStopped = [hidesWhenStopped boolValue];
-	}
+	SC_SET_ATTRIBUTES_AS_BOOL(activityIndicatorView, dict, hidesWhenStopped);
 	
-	// color
-	id color = [dict objectForKey:@"color"];
-	if (color) {
-		color = [SCColor create:color autorelease:NO];
-		activityIndicatorView.color = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(activityIndicatorView, dict, color);
 	
 	return YES;
 }

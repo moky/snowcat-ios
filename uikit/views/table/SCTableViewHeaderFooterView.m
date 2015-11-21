@@ -72,13 +72,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// tintColor
-	NSDictionary * tintColor = [dict objectForKey:@"tintColor"];
-	if (tintColor) {
-		SCColor * color = [SCColor create:tintColor autorelease:NO];
-		tableViewHeaderFooterView.tintColor = color;
-		[color release];
-	}
+	SC_SET_ATTRIBUTES_AS_UICOLOR(tableViewHeaderFooterView, dict, tintColor);
 	
 	// textLabel
 	NSDictionary * textLabel = [dict objectForKey:@"textLabel"];

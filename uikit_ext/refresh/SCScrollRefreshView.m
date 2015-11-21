@@ -81,29 +81,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		scrollRefreshView.visibleText = SCLocalizedString(visibleText, nil);
 	}
 	
-	// willRefreshText
-	NSString * willRefreshText = [dict objectForKey:@"willRefreshText"];
-	if (willRefreshText) {
-		scrollRefreshView.willRefreshText = SCLocalizedString(willRefreshText, nil);
-	}
-	
-	// refreshingText
-	NSString * refreshingText = [dict objectForKey:@"refreshingText"];
-	if (refreshingText) {
-		scrollRefreshView.refreshingText = SCLocalizedString(refreshingText, nil);
-	}
-	
-	// updatedText
-	NSString * updatedText = [dict objectForKey:@"updatedText"];
-	if (updatedText) {
-		scrollRefreshView.updatedText = SCLocalizedString(updatedText, nil);
-	}
-	
-	// terminatedText
-	NSString * terminatedText = [dict objectForKey:@"terminatedText"];
-	if (terminatedText) {
-		scrollRefreshView.terminatedText = SCLocalizedString(terminatedText, nil);
-	}
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(scrollRefreshView, dict, willRefreshText);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(scrollRefreshView, dict, refreshingText);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(scrollRefreshView, dict, updatedText);
+	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(scrollRefreshView, dict, terminatedText);
 	
 	// updatedTime
 	

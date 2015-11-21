@@ -49,17 +49,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
-	// minimumLineSpacing
-	id minimumLineSpacing = [dict objectForKey:@"minimumLineSpacing"];
-	if (minimumLineSpacing) {
-		collectionViewFlowLayout.minimumLineSpacing = [minimumLineSpacing floatValue];
-	}
-	
-	// minimumInteritemSpacing
-	id minimumInteritemSpacing = [dict objectForKey:@"minimumInteritemSpacing"];
-	if (minimumInteritemSpacing) {
-		collectionViewFlowLayout.minimumInteritemSpacing = [minimumInteritemSpacing floatValue];
-	}
+	SC_SET_ATTRIBUTES_AS_FLOAT(collectionViewFlowLayout, dict, minimumLineSpacing);
+	SC_SET_ATTRIBUTES_AS_FLOAT(collectionViewFlowLayout, dict, minimumInteritemSpacing);
 	
 	// itemSize
 	NSString * itemSize = [dict objectForKey:@"itemSize"];
@@ -85,11 +76,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		collectionViewFlowLayout.footerReferenceSize = CGSizeFromString(footerReferenceSize);
 	}
 	
-	// sectionInset
-	NSString * sectionInset = [dict objectForKey:@"sectionInset"];
-	if (sectionInset) {
-		collectionViewFlowLayout.sectionInset = UIEdgeInsetsFromString(sectionInset);
-	}
+	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(collectionViewFlowLayout, dict, sectionInset);
 	
 	return YES;
 }
