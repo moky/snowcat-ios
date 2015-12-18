@@ -91,6 +91,7 @@
 // event: toolbarItems[x].onClick
 - (void) clickToolbarItems:(id)sender
 {
+#if !TARGET_OS_TV
 	NSArray * array = self.toolbarItems;
 	NSUInteger index = array ? [array indexOfObject:sender] : NSNotFound;
 	NSAssert(index != NSNotFound, @"no such item: %@", sender);
@@ -104,6 +105,7 @@
 	}
 	
 	[event release];
+#endif
 }
 
 @end

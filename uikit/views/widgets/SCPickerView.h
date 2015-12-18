@@ -8,6 +8,8 @@
 
 #import "SCView.h"
 
+#if !TARGET_OS_TV
+
 @interface SCPickerView : UIPickerView<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIPickerView *)pickerView;
@@ -17,3 +19,5 @@
 - (void) didSelectRow:(NSInteger)rowIndex inComponent:(NSInteger)componentIndex;
 
 @end
+
+#endif

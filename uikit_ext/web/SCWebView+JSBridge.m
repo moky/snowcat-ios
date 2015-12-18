@@ -9,6 +9,8 @@
 #import "scMacros.h"
 #import "SCWebView+JSBridge.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCWebView (JSBridge)
 
 // fire event for javascript
@@ -38,3 +40,5 @@
 }
 
 @end
+
+#endif

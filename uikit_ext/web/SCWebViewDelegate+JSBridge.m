@@ -13,6 +13,8 @@
 #import "SCWebView+JSBridge.h"
 #import "SCWebViewDelegate+JSBridge.h"
 
+#if !TARGET_OS_TV
+
 #define SC_WEBVIEW_JSBRIDGE_FILES @[                                           \
                                      @"snowcat.base.js",                       \
                                      @"snowcat.bridge.js",                     \
@@ -67,3 +69,5 @@
 }
 
 @end
+
+#endif

@@ -121,10 +121,14 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_INTEGER(label, dict, numberOfLines);
 	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsFontSizeToFitWidth);
 	
+#if !TARGET_OS_TV
+	
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsLetterSpacingToFitWidth);
 #pragma clang diagnostic pop
+	
+#endif
 	
 	// baselineAdjustment
 	NSString * baselineAdjustment = [dict objectForKey:@"baselineAdjustment"];

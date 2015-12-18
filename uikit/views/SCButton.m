@@ -188,7 +188,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(button, dict, imageEdgeInsets);
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenHighlighted);
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, adjustsImageWhenDisabled);
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL        (button, dict, showsTouchWhenHighlighted);
+#endif
 	SC_SET_ATTRIBUTES_AS_UICOLOR     (button, dict, tintColor);
 	
 	// control states

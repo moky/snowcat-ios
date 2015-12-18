@@ -32,7 +32,10 @@
 #ifdef __IPHONE_7_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
+		
+#if !TARGET_OS_TV
 		self.separatorInset = UIEdgeInsetsZero;
+#endif
 		
 #ifdef __IPHONE_8_0
 		if (systemVersion >= 8.0f) {

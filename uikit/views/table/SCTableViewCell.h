@@ -9,7 +9,11 @@
 #import "SCView.h"
 
 UIKIT_EXTERN UITableViewCellStyle UITableViewCellStyleFromString(NSString * string);
+
+#if !TARGET_OS_TV
 UIKIT_EXTERN UITableViewCellSeparatorStyle UITableViewCellSeparatorStyleFromString(NSString * string);
+#endif
+
 UIKIT_EXTERN UITableViewCellSelectionStyle UITableViewCellSelectionStyleFromString(NSString * string);
 UIKIT_EXTERN UITableViewCellEditingStyle UITableViewCellEditingStyleFromString(NSString * string);
 UIKIT_EXTERN UITableViewCellAccessoryType UITableViewCellAccessoryTypeFromString(NSString * string);

@@ -178,6 +178,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_UIKIT_SET_ATTRIBUTES(navigationController.navigationBar, SCNavigationBar, navigationBar);
 	}
 	
+#if !TARGET_OS_TV
 	// toolbarHidden
 	SC_SET_ATTRIBUTES_AS_BOOL(navigationController, dict, toolbarHidden);
 	
@@ -186,6 +187,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	if (toolbar) {
 		SC_UIKIT_SET_ATTRIBUTES(navigationController.toolbar, SCToolbar, toolbar);
 	}
+#endif
 	
 	// delegate
 	

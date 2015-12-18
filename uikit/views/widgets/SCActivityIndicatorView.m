@@ -23,8 +23,10 @@ UIActivityIndicatorViewStyle UIActivityIndicatorViewStyleFromString(NSString * s
 			return UIActivityIndicatorViewStyleWhiteLarge;
 		SC_SWITCH_CASE(string, @"White")
 			return UIActivityIndicatorViewStyleWhite;
+#if !TARGET_OS_TV
 		SC_SWITCH_CASE(string, @"Gray")
 			return UIActivityIndicatorViewStyleGray;
+#endif
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
 	

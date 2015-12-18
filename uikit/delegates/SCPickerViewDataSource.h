@@ -8,6 +8,8 @@
 
 #import "SCPickerViewDataHandler.h"
 
+#if !TARGET_OS_TV
+
 @protocol SCPickerViewDataSource <UIPickerViewDataSource>
 
 - (void) reloadData:(UIPickerView *)pickerView;
@@ -19,3 +21,5 @@
 @property(nonatomic, retain) SCPickerViewDataHandler * handler;
 
 @end
+
+#endif

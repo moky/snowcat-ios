@@ -129,6 +129,7 @@
 		view.contentScaleFactor = [contentScaleFactor floatValue];
 	}
 	
+#if !TARGET_OS_TV
 	// multipleTouchEnabled
 	id multipleTouchEnabled = [dict objectForKey:@"multipleTouchEnabled"];
 	if (multipleTouchEnabled) {
@@ -140,6 +141,7 @@
 	if (exclusiveTouch) {
 		view.exclusiveTouch = [exclusiveTouch boolValue];
 	}
+#endif
 	
 	// autoresizesSubviews
 	id autoresizesSubviews = [dict objectForKey:@"autoresizesSubviews"];

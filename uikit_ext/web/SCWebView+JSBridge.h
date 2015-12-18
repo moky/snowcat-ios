@@ -8,6 +8,8 @@
 
 #import "SCWebView.h"
 
+#if !TARGET_OS_TV
+
 @interface SCWebView (JSBridge)
 
 // fire event for javascript
@@ -15,3 +17,5 @@
 - (void) fire:(NSString *)event withData:(NSObject *)data;
 
 @end
+
+#endif

@@ -48,12 +48,16 @@ NSArray * NSTextWritingDirectionsFromString(NSString * string)
 #ifdef __IPHONE_7_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
+		
+#if !TARGET_OS_TV
 		if ([string rangeOfString:@"Embedding"].location != NSNotFound) {
 			direction |= NSTextWritingDirectionEmbedding;
 		}
 		if ([string rangeOfString:@"Override"].location != NSNotFound) {
 			direction |= NSTextWritingDirectionOverride;
 		}
+#endif
+		
 	}
 #endif
 	

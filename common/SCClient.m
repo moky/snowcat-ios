@@ -50,15 +50,11 @@ SC_IMPLEMENT_SINGLETON_FUNCTIONS(getInstance)
 		// device
 		NSString * model = self.deviceModel;
 		NSString * hardware = self.hardware;
-		NSString * device = [NSString stringWithFormat:@"%@/%@",
-							 [model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-							 [hardware stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSString * device = [NSString stringWithFormat:@"%@/%@", [model escape], [hardware escape]];
 		// os
 		NSString * systemName = self.systemName;
 		NSString * systemVersion = self.systemVersion;
-		NSString * os = [NSString stringWithFormat:@"%@/%@",
-						 [systemName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-						 [systemVersion stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSString * os = [NSString stringWithFormat:@"%@/%@", [systemName escape], [systemVersion escape]];
 		// screen
 		CGSize size = self.screenSize;
 		CGFloat scale = self.screenScale;

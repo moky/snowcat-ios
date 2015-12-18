@@ -8,6 +8,8 @@
 
 #import "SCPickerViewDataSource.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCPickerViewDataSource
 
 @synthesize handler = _handler;
@@ -82,3 +84,5 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 }
 
 @end
+
+#endif

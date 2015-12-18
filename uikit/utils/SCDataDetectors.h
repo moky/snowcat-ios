@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Slanissue.com. All rights reserved.
 //
 
-#import "SCUIKit.h"
+#import <UIKit/UIKit.h>
+
+#if !TARGET_OS_TV
 
 UIKIT_EXTERN UIDataDetectorTypes UIDataDetectorTypesFromString(NSString * string);
+
+#endif

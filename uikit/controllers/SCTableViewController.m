@@ -35,7 +35,9 @@
 - (void) _initializeSCTableViewController
 {
 	_scTag = 0;
+#if !TARGET_OS_TV
 	_supportedInterfaceOrientations = SC_UIKIT_DEFAULT_SUPPORTED_INTERFACE_ORIENTATIONS;
+#endif
 }
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
@@ -104,6 +106,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 #ifdef __IPHONE_6_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 6.0f) {
+		
+#if !TARGET_OS_TV
 		// refreshControl
 		NSDictionary * refreshControl = [dict objectForKey:@"refreshControl"];
 		if (refreshControl) {
@@ -114,6 +118,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 			SC_UIKIT_SET_ATTRIBUTES(rc, SCRefreshControl, refreshControl);
 			[rc release];
 		}
+#endif
+		
 	}
 #endif // EOF '__IPHONE_6_0'
 	

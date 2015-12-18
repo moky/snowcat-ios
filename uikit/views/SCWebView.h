@@ -8,6 +8,8 @@
 
 #import "SCUIKit.h"
 
+#if !TARGET_OS_TV
+
 UIKIT_EXTERN UIWebViewNavigationType UIWebViewNavigationTypeFromString(NSString * string);
 
 @interface SCWebView : UIWebView<SCUIKit>
@@ -15,3 +17,5 @@ UIKIT_EXTERN UIWebViewNavigationType UIWebViewNavigationTypeFromString(NSString 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIWebView *)webView;
 
 @end
+
+#endif

@@ -14,6 +14,8 @@
 #import "SCActionSheetDelegate.h"
 #import "SCActionSheet.h"
 
+#if !TARGET_OS_TV
+
 //typedef NS_ENUM(NSInteger, UIActionSheetStyle) {
 //    UIActionSheetStyleAutomatic        = -1,       // take appearance from toolbar style otherwise uses 'default'
 //    UIActionSheetStyleDefault          = UIBarStyleDefault,
@@ -164,6 +166,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
 @end
 
+#endif
+
 #pragma mark - Convenient interface
 
 void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView)
@@ -181,12 +185,14 @@ void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView)
 		}
 		
 		SCAlertController * alertController = [SCAlertController create:dict];
+#if !TARGET_OS_TV
 		UIPopoverPresentationController * popover = alertController.popoverPresentationController;
 		if (popover && sourceView) {
 			popover.sourceView = sourceView;
 			popover.sourceRect = sourceView.bounds;
 			popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
 		}
+#endif
 		SC_UIKIT_SET_ATTRIBUTES(alertController, SCAlertController, dict);
 		SCAlertControllerShow(alertController);
 		
@@ -196,8 +202,10 @@ void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView)
 	
 #endif
 	
+#if !TARGET_OS_TV
 	SCActionSheet * actionSheet = [SCActionSheet create:dict autorelease:NO];
 	SC_UIKIT_SET_ATTRIBUTES(actionSheet, SCActionSheet, dict);
 	[actionSheet show];
 	[actionSheet release];
+#endif
 }

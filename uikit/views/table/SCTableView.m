@@ -250,6 +250,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, sectionIndexColor);
 	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, sectionIndexTrackingBackgroundColor);
 	
+#if !TARGET_OS_TV
 	// separatorStyle
 	NSString * separatorStyle = [dict objectForKey:@"separatorStyle"];
 	if (separatorStyle) {
@@ -257,6 +258,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(tableView, dict, separatorColor);
+#endif
 	
 	// tableHeaderView
 	NSDictionary * tableHeaderView = [dict objectForKey:@"tableHeaderView"];

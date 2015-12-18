@@ -64,19 +64,23 @@
 		return recognizer;
 	}
 	
+#if !TARGET_OS_TV
 	if ([name isEqualToString:@"Pinch"]) {
 		// Pinch
 		UIPinchGestureRecognizer * recognizer;
 		recognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePinchGesture:)];
 		return recognizer;
 	}
+#endif
 	
+#if !TARGET_OS_TV
 	if ([name isEqualToString:@"Rotation"]) {
 		// Rotation
 		UIRotationGestureRecognizer * recognizer;
 		recognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(_handleRotationGesture:)];
 		return recognizer;
 	}
+#endif
 	
 	// swipe
 	UISwipeGestureRecognizerDirection direction = 0;
@@ -177,6 +181,8 @@
 	}
 }
 
+#if !TARGET_OS_TV
+
 #pragma mark scale
 
 + (void) _handlePinchGesture:(UIPinchGestureRecognizer *)recognizer
@@ -210,6 +216,10 @@
 	}
 }
 
+#endif
+
+#if !TARGET_OS_TV
+
 #pragma mark rotation
 
 + (void) _handleRotationGesture:(UIRotationGestureRecognizer *)recognizer
@@ -242,6 +252,8 @@
 			break;
 	}
 }
+
+#endif
 
 #pragma mark swipe
 

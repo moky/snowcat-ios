@@ -17,6 +17,8 @@
 #import "SCWebViewDelegate.h"
 #import "SCWebView.h"
 
+#if !TARGET_OS_TV
+
 //typedef NS_ENUM(NSInteger, UIWebViewNavigationType) {
 //    UIWebViewNavigationTypeLinkClicked,
 //    UIWebViewNavigationTypeFormSubmitted,
@@ -171,3 +173,5 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
+
+#endif

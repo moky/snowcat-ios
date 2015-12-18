@@ -8,6 +8,8 @@
 
 #import "SCView.h"
 
+#if !TARGET_OS_TV
+
 UIKIT_EXTERN UIActionSheetStyle UIActionSheetStyleFromString(NSString * string);
 
 @interface SCActionSheet : UIActionSheet<SCUIKit>
@@ -15,6 +17,8 @@ UIKIT_EXTERN UIActionSheetStyle UIActionSheetStyleFromString(NSString * string);
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIActionSheet *)actionSheet;
 
 @end
+
+#endif
 
 // Convenient interface
 

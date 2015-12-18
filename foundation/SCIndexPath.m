@@ -43,7 +43,7 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 		id row = [dict objectForKey:@"row"];
 		id section = [dict objectForKey:@"section"];
 		if (row && section) {
-			indexPath = [NSIndexPath indexPathForRow:[row integerValue] inSection:[section interfaceOrientation]];
+			indexPath = [NSIndexPath indexPathForRow:[row integerValue] inSection:[section integerValue]];
 			[indexPath retain];
 			break;
 		}

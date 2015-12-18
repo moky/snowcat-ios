@@ -8,6 +8,8 @@
 
 #import "SCUIKit.h"
 
+#if !TARGET_OS_TV
+
 @protocol SCActionSheetDelegate <UIActionSheetDelegate>
 
 @end
@@ -15,3 +17,5 @@
 @interface SCActionSheetDelegate : SCObject<SCActionSheetDelegate>
 
 @end
+
+#endif

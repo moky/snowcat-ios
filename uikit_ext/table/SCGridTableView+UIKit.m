@@ -19,7 +19,9 @@
 	self.allowsSelectionDuringEditing = NO;
 	self.allowsMultipleSelection = NO;
 	self.allowsMultipleSelectionDuringEditing = NO;
+#if !TARGET_OS_TV
 	self.separatorStyle = UITableViewCellSeparatorStyleNone;
+#endif
 	
 	_columnWidth = self.bounds.size.width;
 }

@@ -37,6 +37,7 @@ UITableViewCellStyle UITableViewCellStyleFromString(NSString * string)
 	return [string integerValue];
 }
 
+#if !TARGET_OS_TV
 //typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
 //    UITableViewCellSeparatorStyleNone,
 //    UITableViewCellSeparatorStyleSingleLine,
@@ -56,6 +57,7 @@ UITableViewCellSeparatorStyle UITableViewCellSeparatorStyleFromString(NSString *
 	
 	return [string integerValue];
 }
+#endif
 
 //typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
 //    UITableViewCellSelectionStyleNone,
@@ -105,6 +107,7 @@ UITableViewCellEditingStyle UITableViewCellEditingStyleFromString(NSString * str
 //};
 UITableViewCellAccessoryType UITableViewCellAccessoryTypeFromString(NSString * string)
 {
+#if !TARGET_OS_TV
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Check")     // Checkmark
 			return UITableViewCellAccessoryCheckmark;
@@ -116,6 +119,7 @@ UITableViewCellAccessoryType UITableViewCellAccessoryTypeFromString(NSString * s
 			return UITableViewCellAccessoryNone;
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
+#endif
 	
 	return [string integerValue];
 }
@@ -161,7 +165,10 @@ UITableViewCellStateMask UITableViewCellStateMaskFromString(NSString * string)
 #ifdef __IPHONE_7_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
+		
+#if !TARGET_OS_TV
 		self.separatorInset = UIEdgeInsetsZero;
+#endif
 		
 #ifdef __IPHONE_8_0
 		if (systemVersion >= 8.0f) {
@@ -353,7 +360,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
 		
+#if !TARGET_OS_TV
 		SC_SET_ATTRIBUTES_AS_UIEDGEINSETS(tableViewCell, dict, separatorInset);
+#endif
 		
 	}
 #endif // EOF '__IPHONE_7_0'
@@ -382,10 +391,14 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 #ifdef __IPHONE_7_0
 	CGFloat systemVersion = SCSystemVersion();
 	if (systemVersion >= 7.0f) {
+		
+#if !TARGET_OS_TV
 		//
 		// 3. separator
 		//
 		cell.separatorInset = tableView.separatorInset;
+#endif
+		
 	}
 #endif // EOF '__IPHONE_7_0'
 	

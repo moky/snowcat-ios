@@ -9,6 +9,8 @@
 #import "scMacros.h"
 #import "SCInterface.h"
 
+#if !TARGET_OS_TV
+
 //typedef NS_ENUM(NSInteger, UIBarStyle) {
 //    UIBarStyleDefault          = 0,
 //    UIBarStyleBlack            = 1,
@@ -30,3 +32,5 @@ UIBarStyle UIBarStyleFromString(NSString * string)
 	
 	return UIBarStyleDefault;
 }
+
+#endif

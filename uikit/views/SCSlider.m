@@ -13,6 +13,8 @@
 #import "SCEventHandler.h"
 #import "SCSlider.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCSlider
 
 @synthesize scTag = _scTag;
@@ -167,3 +169,5 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
+
+#endif

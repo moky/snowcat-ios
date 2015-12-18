@@ -122,20 +122,24 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(tabBar, dict, barTintColor);
 	
+#if !TARGET_OS_TV
 	// itemPositioning
 	NSString * itemPositioning = [dict objectForKey:@"itemPositioning"];
 	if (itemPositioning) {
 		tabBar.itemPositioning = UITabBarItemPositioningFromString(itemPositioning);
 	}
+#endif
 	
 	SC_SET_ATTRIBUTES_AS_FLOAT(tabBar, dict, itemWidth);
 	SC_SET_ATTRIBUTES_AS_FLOAT(tabBar, dict, itemSpacing);
 	
+#if !TARGET_OS_TV
 	// barStyle
 	NSString * barStyle = [dict objectForKey:@"barStyle"];
 	if (barStyle) {
 		tabBar.barStyle = UIBarStyleFromString(barStyle);
 	}
+#endif
 	
 	SC_SET_ATTRIBUTES_AS_BOOL(tabBar, dict, translucent);
 	

@@ -11,6 +11,8 @@
 #import "SCWebViewDelegate+JSBridge.h"
 #import "SCWebViewDelegate.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCWebViewDelegate
 
 // create:
@@ -68,3 +70,5 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 }
 
 @end
+
+#endif

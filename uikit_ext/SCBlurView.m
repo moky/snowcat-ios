@@ -81,6 +81,9 @@
 		_mask = view;
 	} else
 #endif // EOF '__IPHONE_8_0'
+		
+#if !TARGET_OS_TV
+		
 	if (systemVersion >= 7.0f) {
 		// add tool bar
 		NSDictionary * tb = [dict objectForKey:@"toolbar"];
@@ -105,9 +108,12 @@
 		SC_UIKIT_SET_ATTRIBUTES(view, SCToolbar, tb);
 		_mask = view;
 	} else
+		
+#endif
+		
 #endif // EOF '__IPHONE_7_0'
 	
-	if (!_mask) {
+	{
 		// use half-translucent background color instead the effect
 		id backgroundColor = [dict objectForKey:@"backgroundColor"];
 		if (!backgroundColor) {

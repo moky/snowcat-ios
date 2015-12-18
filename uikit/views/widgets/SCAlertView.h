@@ -8,6 +8,8 @@
 
 #import "SCView.h"
 
+#if !TARGET_OS_TV
+
 UIKIT_EXTERN UIAlertViewStyle UIAlertViewStyleFromString(NSString * string);
 
 @interface SCAlertView : UIAlertView<SCUIKit>
@@ -15,6 +17,8 @@ UIKIT_EXTERN UIAlertViewStyle UIAlertViewStyleFromString(NSString * string);
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIAlertView *)alertView;
 
 @end
+
+#endif
 
 // Convenient interface
 

@@ -8,6 +8,8 @@
 
 #import "SCUIKit.h"
 
+#if !TARGET_OS_TV
+
 @protocol SCPickerViewDataHandler <NSObject>
 
 - (void) reloadData:(UIPickerView *)pickerView;
@@ -27,3 +29,5 @@
 @interface SCPickerViewDataHandler : SCObject<SCPickerViewDataHandler>
 
 @end
+
+#endif

@@ -13,6 +13,8 @@
 #import "SCImage.h"
 #import "SCSwitch.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCSwitch
 
 @synthesize scTag = _scTag;
@@ -95,3 +97,5 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
+
+#endif

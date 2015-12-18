@@ -8,6 +8,8 @@
 
 #import "SCWebViewDelegate.h"
 
+#if !TARGET_OS_TV
+
 @interface SCWebViewDelegate (JSBridge)
 
 // inject "snowcat.bridge.js"
@@ -20,3 +22,5 @@
 - (BOOL) invokeFromWebView:(UIWebView *)webView withHost:(NSString *)object path:(NSString *)method parameters:(NSDictionary *)parameters;
 
 @end
+
+#endif

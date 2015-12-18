@@ -58,6 +58,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	//
 	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(navigationItem, dict, title);
 	
+#if !TARGET_OS_TV
 	// backBarButtonItem
 	NSDictionary * backBarButtonItem = [dict objectForKey:@"backBarButtonItem"];
 	if (backBarButtonItem) {
@@ -72,6 +73,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		
 		[backBarButtonItem release];
 	}
+#endif
 	
 	// titleView
 	NSDictionary * titleView = [dict objectForKey:@"titleView"];
@@ -84,8 +86,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[view release];
 	}
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(navigationItem, dict, prompt);
 	SC_SET_ATTRIBUTES_AS_BOOL            (navigationItem, dict, hidesBackButton);
+#endif
 	
 	// leftBarButtonItems
 	NSArray * leftBarButtonItems = [dict objectForKey:@"leftBarButtonItems"];
@@ -139,7 +143,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		[mArray release];
 	}
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL(navigationItem, dict, leftItemsSupplementBackButton);
+#endif
 	
 	// leftBarButtonItem
 	NSDictionary * leftBarButtonItem = [dict objectForKey:@"leftBarButtonItem"];

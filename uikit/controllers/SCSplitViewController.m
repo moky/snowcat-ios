@@ -38,7 +38,9 @@
 - (void) _initializeSCSplitViewController
 {
 	_scTag = 0;
+#if !TARGET_OS_TV
 	_supportedInterfaceOrientations = SC_UIKIT_DEFAULT_SUPPORTED_INTERFACE_ORIENTATIONS;
+#endif
 	self.splitViewControllerDelegate = nil;
 }
 

@@ -20,6 +20,9 @@
 //};
 NSUInteger UIInterfaceOrientationMaskFromString(NSString * string)
 {
+	NSUInteger mask = 0;
+	
+#if !TARGET_OS_TV
 	// all but upside down
 	if ([string rangeOfString:@"AllButUpsideDown"].location != NSNotFound) {
 		return UIInterfaceOrientationMaskAllButUpsideDown;
@@ -29,8 +32,6 @@ NSUInteger UIInterfaceOrientationMaskFromString(NSString * string)
 	if ([string rangeOfString:@"All"].location != NSNotFound) {
 		return UIInterfaceOrientationMaskAll;
 	}
-	
-	UIInterfaceOrientationMask mask = 0;
 	
 	// portrait
 	if ([string rangeOfString:@"Portrait"].location != NSNotFound) {
@@ -57,6 +58,7 @@ NSUInteger UIInterfaceOrientationMaskFromString(NSString * string)
 	if (mask == 0) {
 		mask = UIInterfaceOrientationMaskPortrait; // default value
 	}
+#endif
 	
 	return mask;
 }

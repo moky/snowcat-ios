@@ -14,6 +14,8 @@
 #import "SCAlertViewDelegate.h"
 #import "SCAlertView.h"
 
+#if !TARGET_OS_TV
+
 //typedef NS_ENUM(NSInteger, UIAlertViewStyle) {
 //    UIAlertViewStyleDefault = 0,
 //    UIAlertViewStyleSecureTextInput,
@@ -163,6 +165,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 
 @end
 
+#endif
+
 #pragma mark - Convenient interface
 
 void SCAlertWithDictionary(NSDictionary * dict)
@@ -189,10 +193,12 @@ void SCAlertWithDictionary(NSDictionary * dict)
 	
 #endif
 	
+#if !TARGET_OS_TV
 	SCAlertView * alertView = [SCAlertView create:dict autorelease:NO];
 	SC_UIKIT_SET_ATTRIBUTES(alertView, SCAlertView, dict);
 	[alertView show];
 	[alertView release];
+#endif
 }
 
 void SCAlert(NSString * title, NSString * message, NSString * ok)

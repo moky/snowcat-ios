@@ -29,6 +29,7 @@
 //};
 UIModalTransitionStyle UIModalTransitionStyleFromString(NSString * string)
 {
+#if !TARGET_OS_TV
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Vertical")   // CoverVertical
 			return UIModalTransitionStyleCoverVertical;
@@ -42,6 +43,7 @@ UIModalTransitionStyle UIModalTransitionStyleFromString(NSString * string)
 #endif
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
+#endif
 	
 	return [string integerValue];
 }
@@ -56,6 +58,7 @@ UIModalTransitionStyle UIModalTransitionStyleFromString(NSString * string)
 //};
 UIModalPresentationStyle UIModalPresentationStyleFromString(NSString * string)
 {
+#if !TARGET_OS_TV
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"FullScreen")
 			return UIModalPresentationFullScreen;
@@ -69,6 +72,7 @@ UIModalPresentationStyle UIModalPresentationStyleFromString(NSString * string)
 #endif
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
+#endif
 	
 	return [string integerValue];
 }
@@ -136,7 +140,9 @@ UIRectEdge UIRectEdgeFromString(NSString * string)
 - (void) _initializeSCViewController
 {
 	_scTag = 0;
+#if !TARGET_OS_TV
 	_supportedInterfaceOrientations = SC_UIKIT_DEFAULT_SUPPORTED_INTERFACE_ORIENTATIONS;
+#endif
 	
 //#ifdef __IPHONE_7_0
 //	
@@ -283,7 +289,9 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		[md release];
 	}
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL(viewController, dict, hidesBottomBarWhenPushed);
+#endif
 	
 	// navigationController
 //	NSDictionary * navigationController = [dict objectForKey:@"navigationController"];
@@ -291,6 +299,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 //		SC_UIKIT_SET_ATTRIBUTES(viewController.navigationController, SCNavigationController, navigationController);
 //	}
 	
+#if !TARGET_OS_TV
 	// toolbarItems
 	NSArray * toolbarItems = [dict objectForKey:@"toolbarItems"];
 	if (toolbarItems) {
@@ -321,6 +330,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		viewController.toolbarItems = mArray;
 		[mArray release];
 	}
+#endif
 	
 	return YES;
 }
@@ -349,7 +359,9 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		return NO;
 	}
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, modalPresentationCapturesStatusBarAppearance);
+#endif
 	SC_SET_ATTRIBUTES_AS_UIRECTEDGE(viewController, dict, edgesForExtendedLayout);
 	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, extendedLayoutIncludesOpaqueBars);
 	SC_SET_ATTRIBUTES_AS_BOOL      (viewController, dict, automaticallyAdjustsScrollViewInsets);
@@ -388,6 +400,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		viewController.modalPresentationStyle = UIModalPresentationStyleFromString(modalPresentationStyle);
 	}
 	
+#if !TARGET_OS_TV
+	
 	// wantsFullScreenLayout
 	id wantsFullScreenLayout = [dict objectForKey:@"wantsFullScreenLayout"];
 	if (wantsFullScreenLayout) {
@@ -396,6 +410,8 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		viewController.wantsFullScreenLayout = [wantsFullScreenLayout boolValue];
 #pragma clang diagnostic pop
 	}
+	
+#endif
 	
 	// UIViewControllerEditing
 	[self _setEditingAttributes:dict to:viewController];

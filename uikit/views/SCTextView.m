@@ -134,6 +134,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textView.selectedRange = NSRangeFromString(selectedRange);
 	}
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL(textView, dict, editable);
 	
 	// dataDetectorTypes
@@ -141,6 +142,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	if (dataDetectorTypes) {
 		textView.dataDetectorTypes = UIDataDetectorTypesFromString(dataDetectorTypes);
 	}
+#endif
 	
 	SC_SET_ATTRIBUTES_AS_BOOL(textView, dict, allowsEditingTextAttributes);
 	

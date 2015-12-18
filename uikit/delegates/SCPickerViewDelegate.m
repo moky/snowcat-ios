@@ -10,6 +10,8 @@
 #import "SCPickerView.h"
 #import "SCPickerViewDelegate.h"
 
+#if !TARGET_OS_TV
+
 @implementation SCPickerViewDelegate
 
 @synthesize handler = _handler;
@@ -115,3 +117,5 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 }
 
 @end
+
+#endif

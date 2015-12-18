@@ -49,9 +49,11 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_BOOL            (barItem, dict, enabled);
 	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(barItem, dict, title);
 	SC_SET_ATTRIBUTES_AS_UIIMAGE         (barItem, dict, image);
-	SC_SET_ATTRIBUTES_AS_UIIMAGE         (barItem, dict, landscapeImagePhone);
 	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS    (barItem, dict, imageInsets);
+#if !TARGET_OS_TV
+	SC_SET_ATTRIBUTES_AS_UIIMAGE         (barItem, dict, landscapeImagePhone);
 	SC_SET_ATTRIBUTES_AS_UIEDGEINSETS    (barItem, dict, landscapeImagePhoneInsets);
+#endif
 	SC_SET_ATTRIBUTES_AS_INTEGER         (barItem, dict, tag);
 	
 	// control states

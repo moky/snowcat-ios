@@ -8,4 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#if !TARGET_OS_TV
+
 UIKIT_EXTERN UIBarStyle UIBarStyleFromString(NSString * string);
+
+#endif

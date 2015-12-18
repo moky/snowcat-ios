@@ -8,7 +8,10 @@
 
 #import "SCControl.h"
 
+#if !TARGET_OS_TV
 UIKIT_EXTERN UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string);
+#endif
+
 UIKIT_EXTERN UISegmentedControlSegment UISegmentedControlSegmentFromString(NSString * string);
 
 @interface SCSegmentedControl : UISegmentedControl<SCUIKit>

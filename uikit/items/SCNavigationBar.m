@@ -80,8 +80,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(navigationBar, dict, barTintColor);
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_UIIMAGE(navigationBar, dict, backIndicatorImage);
 	SC_SET_ATTRIBUTES_AS_UIIMAGE(navigationBar, dict, backIndicatorTransitionMaskImage);
+#endif
 	
 #endif
 	
@@ -94,11 +96,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
+#if !TARGET_OS_TV
 	// barStyle
 	NSString * barStyle = [dict objectForKey:@"barStyle"];
 	if (barStyle) {
 		navigationBar.barStyle = UIBarStyleFromString(barStyle);
 	}
+#endif
 	
 	// delegate
 	

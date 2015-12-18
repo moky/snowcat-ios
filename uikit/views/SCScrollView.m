@@ -139,7 +139,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, bounces);
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, alwaysBounceVertical);
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, alwaysBounceHorizontal);
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, pagingEnabled);
+#endif
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, scrollEnabled);
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, showsVerticalScrollIndicator);
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, showsHorizontalScrollIndicator);
@@ -169,7 +171,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// zooming
 	// zoomBouncing
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL   (scrollView, dict, scrollsToTop);
+#endif
 	
 	// panGestureRecognizer
 	// pinchGestureRecognizer

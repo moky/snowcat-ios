@@ -26,12 +26,14 @@ UISearchBarIcon UISearchBarIconFromString(NSString * string)
 	SC_SWITCH_BEGIN(string)
 		SC_SWITCH_CASE(string, @"Search")
 			return UISearchBarIconSearch;
+#if !TARGET_OS_TV
 		SC_SWITCH_CASE(string, @"Clear")
 			return UISearchBarIconClear;
 		SC_SWITCH_CASE(string, @"Book")    // Bookmark
 			return UISearchBarIconBookmark;
 		SC_SWITCH_CASE(string, @"Results") // ResultsList
 			return UISearchBarIconResultsList;
+#endif
 		SC_SWITCH_DEFAULT
 	SC_SWITCH_END
 	
@@ -87,7 +89,11 @@ UISearchBarIcon UISearchBarIconFromString(NSString * string)
 
 - (instancetype) initWithDictionary:(NSDictionary *)dict
 {
+#if !TARGET_OS_TV
 	self = [self initWithFrame:CGRectZero];
+#else
+	// TODO: init
+#endif
 	if (self) {
 		[self buildHandlers:dict];
 	}
@@ -126,11 +132,13 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		return NO;
 	}
 	
+#if !TARGET_OS_TV
 	// barStyle
 	NSString * barStyle = [dict objectForKey:@"barStyle"];
 	if (barStyle) {
 		searchBar.barStyle = UIBarStyleFromString(barStyle);
 	}
+#endif
 	
 	// delegate
 	
@@ -138,10 +146,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(searchBar, dict, prompt);
 	SC_SET_ATTRIBUTES_AS_LOCALIZED_STRING(searchBar, dict, placeholder);
 	
+#if !TARGET_OS_TV
 	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsBookmarkButton);
 	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsCancelButton);
 	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, showsSearchResultsButton);
 	SC_SET_ATTRIBUTES_AS_BOOL(searchBar, dict, searchResultsButtonSelected);
+#endif
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(searchBar, dict, tintColor);
 	

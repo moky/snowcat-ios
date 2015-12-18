@@ -8,6 +8,8 @@
 
 #import "SCUIKit.h"
 
+#if !TARGET_OS_TV
+
 @protocol SCAlertViewDelegate <UIAlertViewDelegate>
 
 @end
@@ -15,3 +17,5 @@
 @interface SCAlertViewDelegate : SCObject<SCAlertViewDelegate>
 
 @end
+
+#endif

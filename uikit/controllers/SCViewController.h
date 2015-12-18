@@ -72,7 +72,7 @@ UIKIT_EXTERN UIRectEdge UIRectEdgeFromString(NSString * string) NS_AVAILABLE_IOS
     {                                                                                                    \
         return [topViewController shouldAutorotate];                                                     \
     }                                                                                                    \
-    - (NSUInteger) supportedInterfaceOrientations                                                        \
+    - (UIInterfaceOrientationMask) supportedInterfaceOrientations                                        \
     {                                                                                                    \
         return [topViewController supportedInterfaceOrientations];                                       \
     }                                                                                                    \
@@ -96,7 +96,7 @@ UIKIT_EXTERN UIRectEdge UIRectEdgeFromString(NSString * string) NS_AVAILABLE_IOS
         if (_supportedInterfaceOrientations & UIInterfaceOrientationMaskPortraitUpsideDown) ++count;     \
         return count > 1;                                                                                \
     }                                                                                                    \
-    - (NSUInteger) supportedInterfaceOrientations                                                        \
+    - (UIInterfaceOrientationMask) supportedInterfaceOrientations                                        \
     {                                                                                                    \
         return _supportedInterfaceOrientations;                                                          \
     }                                                                                                    \
@@ -137,7 +137,7 @@ UIKIT_EXTERN UIRectEdge UIRectEdgeFromString(NSString * string) NS_AVAILABLE_IOS
         if (_supportedInterfaceOrientations & UIInterfaceOrientationMaskPortraitUpsideDown) ++count;     \
         return count > 1;                                                                                \
     }                                                                                                    \
-    - (NSUInteger) supportedInterfaceOrientations                                                        \
+    - (UIInterfaceOrientationMask) supportedInterfaceOrientations                                        \
     {                                                                                                    \
         UIViewController * child = [self.childViewControllers lastObject];                               \
         if (child) {                                                                                     \

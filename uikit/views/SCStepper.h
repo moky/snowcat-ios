@@ -8,6 +8,8 @@
 
 #import "SCControl.h"
 
+#if !TARGET_OS_TV
+
 @interface SCStepper : UIStepper<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIStepper *)stepper;
@@ -16,3 +18,5 @@
 - (void) onChange:(id)sender;
 
 @end
+
+#endif

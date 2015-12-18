@@ -12,8 +12,13 @@
 #define SC_NODE_FILE_PARSER_OUTPUT_FILE_EXT @"output.mof"
 
 
-#define SC_DEFAULT_FONT_NAME                @"Courier"
-#define SC_DEFAULT_FONT_SIZE                [UIFont systemFontSize]
+#if TARGET_OS_TV
+#	define SC_DEFAULT_FONT_NAME                @"Courier"
+#	define SC_DEFAULT_FONT_SIZE                24 /* ? */
+#else
+#	define SC_DEFAULT_FONT_NAME                @"Courier"
+#	define SC_DEFAULT_FONT_SIZE                [UIFont systemFontSize]
+#endif
 
 
 //------------------------------------------------------------- file path suffix
