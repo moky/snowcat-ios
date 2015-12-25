@@ -13,8 +13,6 @@
 #import "SCPickerViewDelegate.h"
 #import "SCPickerView.h"
 
-#if !TARGET_OS_TV
-
 @interface SCPickerView ()
 
 @property(nonatomic, retain) SCPickerViewDataSource * pickerViewDataSource;
@@ -138,5 +136,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

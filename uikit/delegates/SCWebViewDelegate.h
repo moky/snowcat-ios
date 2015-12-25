@@ -8,14 +8,12 @@
 
 #import "SCUIKit.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol SCWebViewDelegate <UIWebViewDelegate>
 
 @end
 
+__TVOS_PROHIBITED
 @interface SCWebViewDelegate : SCObject<SCWebViewDelegate>
 
 @end
-
-#endif

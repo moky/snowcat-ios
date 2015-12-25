@@ -12,8 +12,6 @@
 #import "SCEventHandler.h"
 #import "SCStepper.h"
 
-#if !TARGET_OS_TV
-
 @implementation SCStepper
 
 @synthesize scTag = _scTag;
@@ -106,5 +104,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

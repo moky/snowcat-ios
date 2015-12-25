@@ -115,7 +115,10 @@ UICollectionViewScrollPosition UICollectionViewScrollPositionFromString(NSString
 		SC_UIKIT_SET_ATTRIBUTES(cvl, SCCollectionViewLayout, layout);
 		[cvl release];
 	} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
 		self = [self initWithFrame:CGRectZero collectionViewLayout:nil];
+#pragma clang diagnostic pop
 	}
 	
 	if (self) {

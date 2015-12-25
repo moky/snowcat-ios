@@ -8,8 +8,7 @@
 
 #import "SCControl.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @interface SCStepper : UIStepper<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIStepper *)stepper;
@@ -18,5 +17,3 @@
 - (void) onChange:(id)sender;
 
 @end
-
-#endif

@@ -8,17 +8,15 @@
 
 #import "SCView.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 UIKIT_EXTERN UIAlertViewStyle UIAlertViewStyleFromString(NSString * string);
 
+__TVOS_PROHIBITED
 @interface SCAlertView : UIAlertView<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIAlertView *)alertView;
 
 @end
-
-#endif
 
 // Convenient interface
 

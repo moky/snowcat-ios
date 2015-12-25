@@ -13,7 +13,6 @@
 #import "SCEventHandler.h"
 #import "SCSegmentedControl.h"
 
-#if !TARGET_OS_TV
 //typedef NS_ENUM(NSInteger, UISegmentedControlStyle) {
 //    UISegmentedControlStylePlain,     // large plain
 //    UISegmentedControlStyleBordered,  // large bordered
@@ -39,7 +38,6 @@ UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string)
 	return [string integerValue];
 }
 #pragma clang diagnostic pop
-#endif
 
 //enum {
 //    UISegmentedControlNoSegment = -1   // segment index for no selected segment

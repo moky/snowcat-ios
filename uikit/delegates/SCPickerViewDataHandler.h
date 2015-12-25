@@ -8,8 +8,7 @@
 
 #import "SCUIKit.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol SCPickerViewDataHandler <NSObject>
 
 - (void) reloadData:(UIPickerView *)pickerView;
@@ -26,8 +25,7 @@
 
 @end
 
+__TVOS_PROHIBITED
 @interface SCPickerViewDataHandler : SCObject<SCPickerViewDataHandler>
 
 @end
-
-#endif

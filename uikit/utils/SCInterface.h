@@ -8,8 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 UIKIT_EXTERN UIBarStyle UIBarStyleFromString(NSString * string);
-
-#endif

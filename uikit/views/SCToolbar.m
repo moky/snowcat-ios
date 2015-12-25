@@ -35,8 +35,6 @@ UIToolbarPosition UIToolbarPositionFromString(NSString * string)
 	return [string integerValue];
 }
 
-#if !TARGET_OS_TV
-
 @implementation SCToolbar
 
 @synthesize scTag = _scTag;
@@ -170,5 +168,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

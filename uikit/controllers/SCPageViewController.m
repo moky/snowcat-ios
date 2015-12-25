@@ -216,7 +216,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	// viewControllers
 	id <UIPageViewControllerDataSource> dataSource = pageViewController.dataSource;
 	if (dataSource) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
 		UIViewController * vc = [dataSource pageViewController:pageViewController viewControllerAfterViewController:nil];
+#pragma clang diagnostic pop
 		UIViewController * vc2 = pageViewController.doubleSided ? [dataSource pageViewController:pageViewController viewControllerAfterViewController:vc] : nil;
 		NSAssert([vc isKindOfClass:[UIViewController class]], @"view controller 1's definition error: %@", vc);
 		NSAssert(!vc2 || [vc2 isKindOfClass:[UIViewController class]], @"view controller 2's definition error: %@", vc2);

@@ -8,10 +8,10 @@
 
 #import "SCControl.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 UIKIT_EXTERN UIDatePickerMode UIDatePickerModeFromString(NSString * string);
 
+__TVOS_PROHIBITED
 @interface SCDatePicker : UIDatePicker<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIDatePicker *)datePicker;
@@ -20,5 +20,3 @@ UIKIT_EXTERN UIDatePickerMode UIDatePickerModeFromString(NSString * string);
 - (void) onChange:(id)sender;
 
 @end
-
-#endif

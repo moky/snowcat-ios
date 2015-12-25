@@ -21,12 +21,9 @@
 
 UIKIT_EXTERN UIToolbarPosition UIToolbarPositionFromString(NSString * string);
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @interface SCToolbar : UIToolbar<SCUIKit, SCToolbarItemDelegate>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIToolbar *)toolbar;
 
 @end
-
-#endif

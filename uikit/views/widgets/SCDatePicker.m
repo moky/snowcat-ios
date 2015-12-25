@@ -11,8 +11,6 @@
 #import "SCEventHandler.h"
 #import "SCDatePicker.h"
 
-#if !TARGET_OS_TV
-
 //typedef NS_ENUM(NSInteger, UIDatePickerMode) {
 //    UIDatePickerModeTime,           // Displays hour, minute, and optionally AM/PM designation depending on the locale setting (e.g. 6 | 53 | PM)
 //    UIDatePickerModeDate,           // Displays month, day, and year depending on the locale setting (e.g. November | 15 | 2007)
@@ -140,5 +138,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

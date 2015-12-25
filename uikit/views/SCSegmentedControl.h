@@ -8,9 +8,8 @@
 
 #import "SCControl.h"
 
-#if !TARGET_OS_TV
+__TVOS_PROHIBITED
 UIKIT_EXTERN UISegmentedControlStyle UISegmentedControlStyleFromString(NSString * string);
-#endif
 
 UIKIT_EXTERN UISegmentedControlSegment UISegmentedControlSegmentFromString(NSString * string);
 

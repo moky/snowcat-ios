@@ -12,8 +12,6 @@
 #import "SCEventHandler.h"
 #import "SCRefreshControl.h"
 
-#if !TARGET_OS_TV
-
 @implementation SCRefreshControl
 
 - (void) dealloc
@@ -86,5 +84,3 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif

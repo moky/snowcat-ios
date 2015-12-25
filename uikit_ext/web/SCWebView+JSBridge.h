@@ -8,8 +8,7 @@
 
 #import "SCWebView.h"
 
-#if !TARGET_OS_TV
-
+//__TVOS_PROHIBITED
 @interface SCWebView (JSBridge)
 
 // fire event for javascript
@@ -17,5 +16,3 @@
 - (void) fire:(NSString *)event withData:(NSObject *)data;
 
 @end
-
-#endif

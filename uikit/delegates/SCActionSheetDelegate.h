@@ -8,14 +8,12 @@
 
 #import "SCUIKit.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol SCActionSheetDelegate <UIActionSheetDelegate>
 
 @end
 
+__TVOS_PROHIBITED
 @interface SCActionSheetDelegate : SCObject<SCActionSheetDelegate>
 
 @end
-
-#endif

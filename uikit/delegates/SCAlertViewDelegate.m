@@ -9,8 +9,6 @@
 #import "SCEventHandler.h"
 #import "SCAlertViewDelegate.h"
 
-#if !TARGET_OS_TV
-
 @implementation SCAlertViewDelegate
 
 // create:
@@ -76,5 +74,3 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 //- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView;
 
 @end
-
-#endif

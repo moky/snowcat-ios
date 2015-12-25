@@ -8,17 +8,15 @@
 
 #import "SCView.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 UIKIT_EXTERN UIActionSheetStyle UIActionSheetStyleFromString(NSString * string);
 
+__TVOS_PROHIBITED
 @interface SCActionSheet : UIActionSheet<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIActionSheet *)actionSheet;
 
 @end
-
-#endif
 
 // Convenient interface
 

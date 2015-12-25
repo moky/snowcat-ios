@@ -10,8 +10,6 @@
 #import "SCNodeFileParser.h"
 #import "SCPickerViewDataHandler.h"
 
-#if !TARGET_OS_TV
-
 @interface SCPickerViewDataHandler ()
 
 @property(nonatomic, retain) NSString * filename;
@@ -142,5 +140,3 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 }
 
 @end
-
-#endif

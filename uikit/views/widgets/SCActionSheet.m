@@ -14,8 +14,6 @@
 #import "SCActionSheetDelegate.h"
 #import "SCActionSheet.h"
 
-#if !TARGET_OS_TV
-
 //typedef NS_ENUM(NSInteger, UIActionSheetStyle) {
 //    UIActionSheetStyleAutomatic        = -1,       // take appearance from toolbar style otherwise uses 'default'
 //    UIActionSheetStyleDefault          = UIBarStyleDefault,
@@ -165,8 +163,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif
 
 #pragma mark - Convenient interface
 

@@ -9,8 +9,6 @@
 #import "scMacros.h"
 #import "SCDataDetectors.h"
 
-#if !TARGET_OS_TV
-
 //typedef NS_OPTIONS(NSUInteger, UIDataDetectorTypes) {
 //    UIDataDetectorTypePhoneNumber   = 1 << 0,          // Phone number detection
 //    UIDataDetectorTypeLink          = 1 << 1,          // URL detection
@@ -44,5 +42,3 @@ UIDataDetectorTypes UIDataDetectorTypesFromString(NSString * string)
 	
 	return [string integerValue];
 }
-
-#endif

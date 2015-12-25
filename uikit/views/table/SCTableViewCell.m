@@ -37,7 +37,6 @@ UITableViewCellStyle UITableViewCellStyleFromString(NSString * string)
 	return [string integerValue];
 }
 
-#if !TARGET_OS_TV
 //typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
 //    UITableViewCellSeparatorStyleNone,
 //    UITableViewCellSeparatorStyleSingleLine,
@@ -57,7 +56,6 @@ UITableViewCellSeparatorStyle UITableViewCellSeparatorStyleFromString(NSString *
 	
 	return [string integerValue];
 }
-#endif
 
 //typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
 //    UITableViewCellSelectionStyleNone,

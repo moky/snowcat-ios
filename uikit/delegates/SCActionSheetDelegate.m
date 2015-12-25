@@ -9,8 +9,6 @@
 #import "SCEventHandler.h"
 #import "SCActionSheetDelegate.h"
 
-#if !TARGET_OS_TV
-
 @implementation SCActionSheetDelegate
 
 // create:
@@ -77,5 +75,3 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 //- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
 
 @end
-
-#endif

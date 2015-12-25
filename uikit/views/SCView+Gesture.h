@@ -25,8 +25,7 @@
 
 @end
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol UIViewScaleGestureDelegate <NSObject>
 
 @required
@@ -36,10 +35,7 @@
 
 @end
 
-#endif
-
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol UIViewRotationGestureDelegate <NSObject>
 
 @required
@@ -48,8 +44,6 @@
 - (void) onRotation:(UIRotationGestureRecognizer *)recogniaer;
 
 @end
-
-#endif
 
 #pragma mark -
 

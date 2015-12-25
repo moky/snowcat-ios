@@ -8,14 +8,12 @@
 
 #import "SCUIKit.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 UIKIT_EXTERN UIWebViewNavigationType UIWebViewNavigationTypeFromString(NSString * string);
 
+__TVOS_PROHIBITED
 @interface SCWebView : UIWebView<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIWebView *)webView;
 
 @end
-
-#endif

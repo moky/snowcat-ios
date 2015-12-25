@@ -14,8 +14,6 @@
 #import "SCAlertViewDelegate.h"
 #import "SCAlertView.h"
 
-#if !TARGET_OS_TV
-
 //typedef NS_ENUM(NSInteger, UIAlertViewStyle) {
 //    UIAlertViewStyleDefault = 0,
 //    UIAlertViewStyleSecureTextInput,
@@ -164,8 +162,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 }
 
 @end
-
-#endif
 
 #pragma mark - Convenient interface
 

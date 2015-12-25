@@ -8,18 +8,16 @@
 
 #import "SCPickerViewDataHandler.h"
 
-#if !TARGET_OS_TV
-
+__TVOS_PROHIBITED
 @protocol SCPickerViewDelegate <UIPickerViewDelegate>
 
 - (void) reloadData:(UIPickerView *)pickerView;
 
 @end
 
+__TVOS_PROHIBITED
 @interface SCPickerViewDelegate : SCObject<SCPickerViewDelegate>
 
 @property(nonatomic, retain) SCPickerViewDataHandler * handler;
 
 @end
-
-#endif
