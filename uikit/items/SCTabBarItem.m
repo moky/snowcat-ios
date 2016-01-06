@@ -78,10 +78,9 @@ UITabBarSystemItem UITabBarSystemItemFromString(NSString * string)
 		title = SCLocalizedString(title, nil);
 		id image = [dict objectForKey:@"image"];
 		if (image) {
-			image = [SCImage create:image autorelease:NO]; // load image
+			image = [SCImage create:image]; // load image
 		}
 		self = [self initWithTitle:title image:image tag:tag];
-		[image release];
 	}
 	
 	if (self) {
@@ -107,7 +106,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		selectedImage = [dict objectForKey:@"selectedImage"];
 	}
 	if (selectedImage) {
-		selectedImage = [SCImage create:selectedImage autorelease:NO];
+		selectedImage = [SCImage create:selectedImage];
 	}
 	
 	// finishedUnselectedImage
@@ -119,7 +118,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		unselectedImage = [dict objectForKey:@"image"];
 	}
 	if (unselectedImage) {
-		unselectedImage = [SCImage create:unselectedImage autorelease:NO];
+		unselectedImage = [SCImage create:unselectedImage];
 	}
 	
 	//if (selectedImage && unselectedImage) {
@@ -127,9 +126,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	//}
 	tabBarItem.selectedImage = selectedImage;
 	tabBarItem.image = unselectedImage;
-	
-	[selectedImage release];
-	[unselectedImage release];
 	
 	return YES;
 }

@@ -20,11 +20,10 @@
 - (BOOL) _addSubview:(NSDictionary *)dict withView:(UIView *)view
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
-	SCView * child = [SCView create:dict autorelease:NO];
+	SCView * child = [SCView create:dict];
 	NSAssert([child isKindOfClass:[UIView class]], @"subview's definition error: %@", dict);
 	[view addSubview:child];
 	SC_UIKIT_SET_ATTRIBUTES(child, SCView, dict);
-	[child release];
 	return YES;
 }
 
@@ -39,11 +38,10 @@
 	// transition
 	NSDictionary * transition = [_dict objectForKey:@"transition"];
 	if (transition) {
-		SCTransition * trans = [SCTransition create:transition autorelease:NO];
+		SCTransition * trans = [SCTransition create:transition];
 		NSAssert([trans isKindOfClass:[SCTransition class]], @"transition's definition error: %@", transition);
 		[trans setAttributes:transition];
 		[trans runWithView:view];
-		[trans release];
 		return YES;
 	}
 	return NO;

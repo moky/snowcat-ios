@@ -108,10 +108,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	}
 	
 	if (eventHandler) {
-		delegate = [SCEventHandler create:eventHandler autorelease:NO];
+		delegate = [SCEventHandler create:eventHandler];
 		NSAssert([delegate conformsToProtocol:@protocol(SCEventDelegate)], @"eventHandler's definition error: %@", eventHandler);
 		[SCEventHandler setDelegate:delegate forResponder:responder]; // set event delegate
-		[delegate release];
 		
 		NSArray * notifications = [eventHandler objectForKey:@"notifications"];
 		if (notifications) {

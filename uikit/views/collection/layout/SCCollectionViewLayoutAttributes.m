@@ -57,10 +57,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// indexPath
 	NSDictionary * indexPath = [dict objectForKey:@"indexPath"];
 	if (indexPath) {
-		NSIndexPath * ip = [SCIndexPath create:indexPath autorelease:NO];
+		NSIndexPath * ip = [SCIndexPath create:indexPath];
 		NSAssert([ip isKindOfClass:[NSIndexPath class]], @"indexPath's definition error: %@", indexPath);
 		collectionViewLayoutAttributes.indexPath = ip;
-		[ip release];
 	}
 	
 	return YES;

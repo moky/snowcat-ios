@@ -78,9 +78,8 @@ UIAlertControllerStyle UIAlertControllerStyleFromString(NSString * string)
 	// initWithNibName:bundle:
 	NSString * nibName = [SCNib nibNameFromDictionary:dict];
 	
-	NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+	NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 	self = [self initWithNibName:nibName bundle:bundle];
-	[bundle release];
 	
 	if (self) {
 		[self buildHandlers:dict];
@@ -143,13 +142,13 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 			[ghostDict setObject:notifications forKey:@"notifications"];
 		}
 		
-		SCView * ghostView = [SCView create:ghostDict autorelease:NO];
+		SCView * ghostView = [SCView create:ghostDict];
 		ghostView.tag = 9527;
 		ghostView.userInteractionEnabled = NO;
 		ghostView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[alertController.view addSubview:ghostView];
 		SC_SET_ATTRIBUTES(ghostView, SCView, ghostDict);
-		[ghostView release];
+		
 		[ghostDict release];
 		
 		// prevent building handlers for the UIAlertController

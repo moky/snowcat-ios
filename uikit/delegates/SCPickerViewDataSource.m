@@ -46,10 +46,9 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 			}
 		}
 		if (handler) {
-			SCPickerViewDataHandler * pvdh = [SCPickerViewDataHandler create:handler autorelease:NO];
+			SCPickerViewDataHandler * pvdh = [SCPickerViewDataHandler create:handler];
 			NSAssert([pvdh isKindOfClass:[SCPickerViewDataHandler class]], @"handler's definition error: %@", handler);
 			self.handler = pvdh;
-			[pvdh release];
 			
 			[handler release];
 		}

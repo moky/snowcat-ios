@@ -67,9 +67,8 @@
 	// initWithNibName:bundle:
 	NSString * nibName = [SCNib nibNameFromDictionary:dict];
 	
-	NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+	NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 	self = [self initWithNibName:nibName bundle:bundle];
-	[bundle release];
 	
 	if (self) {
 		[self buildHandlers:dict];
@@ -114,13 +113,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		SC_FOR_EACH(item, viewControllers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"viewControllers's item must be a dictionary: %@", item);
 			SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
-			child = [SCViewController create:item autorelease:NO];
+			child = [SCViewController create:item];
 			NSAssert([child isKindOfClass:[UIViewController class]], @"viewControllers item's definition error: %@", item);
-			if (child) {
-				SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, item);
-				[mArray addObject:child];
-				[child release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, item);
+			SCArrayAddObject(mArray, child);
 		}
 		
 		splitViewController.viewControllers = mArray;

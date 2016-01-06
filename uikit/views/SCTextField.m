@@ -158,10 +158,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// attributedText
 	NSDictionary * attributedText = [dict objectForKey:@"attributedText"];
 	if (attributedText) {
-		SCAttributedString * as = [SCAttributedString create:attributedText autorelease:NO];
+		SCAttributedString * as = [SCAttributedString create:attributedText];
 		NSAssert([as isKindOfClass:[NSAttributedString class]], @"attributedText's definition error: %@", attributedText);
 		textField.attributedText = as;
-		[as release];
 	}
 	
 	// textColor
@@ -170,9 +169,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textColor = [dict objectForKey:@"color"];
 	}
 	if (textColor) {
-		SCColor * color = [SCColor create:textColor autorelease:NO];
+		SCColor * color = [SCColor create:textColor];
 		textField.textColor = color;
-		[color release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UIFONT(textField, dict, font);
@@ -194,10 +192,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// attributedPlaceholder
 	NSDictionary * attributedPlaceholder = [dict objectForKey:@"attributedPlaceholder"];
 	if (attributedPlaceholder) {
-		SCAttributedString * as = [SCAttributedString create:attributedPlaceholder autorelease:NO];
+		SCAttributedString * as = [SCAttributedString create:attributedPlaceholder];
 		NSAssert([as isKindOfClass:[NSAttributedString class]], @"attributedPlaceholder's definition error: %@", attributedPlaceholder);
 		textField.attributedPlaceholder = as;
-		[as release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_BOOL   (textField, dict, clearsOnBeginEditing);
@@ -223,11 +220,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * leftView = [dict objectForKey:@"leftView"];
 	if (leftView) {
 		SC_UIKIT_DIG_CREATION_INFO(leftView); // support ObjectFromFile
-		SCView * view = [SCView create:leftView autorelease:NO];
+		SCView * view = [SCView create:leftView];
 		NSAssert([view isKindOfClass:[UIView class]], @"leftView's definition error: %@", leftView);
 		textField.leftView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, leftView);
-		[view release];
 	}
 	
 	// leftViewMode
@@ -240,11 +236,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * rightView = [dict objectForKey:@"rightView"];
 	if (rightView) {
 		SC_UIKIT_DIG_CREATION_INFO(rightView); // support ObjectFromFile
-		SCView * view = [SCView create:rightView autorelease:NO];
+		SCView * view = [SCView create:rightView];
 		NSAssert([view isKindOfClass:[UIView class]], @"rightView's definition error: %@", rightView);
 		textField.rightView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, rightView);
-		[view release];
 	}
 	
 	// rightViewMode
@@ -257,22 +252,20 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * inputView = [dict objectForKey:@"inputView"];
 	if (inputView) {
 		SC_UIKIT_DIG_CREATION_INFO(inputView); // support ObjectFromFile
-		SCView * view = [SCView create:inputView autorelease:NO];
+		SCView * view = [SCView create:inputView];
 		NSAssert([view isKindOfClass:[UIView class]], @"inputView's definition error: %@", inputView);
 		textField.inputView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, inputView);
-		[view release];
 	}
 	
 	// inputAccessoryView
 	NSDictionary * inputAccessoryView = [dict objectForKey:@"inputAccessoryView"];
 	if (inputAccessoryView) {
 		SC_UIKIT_DIG_CREATION_INFO(inputAccessoryView); // support ObjectFromFile
-		SCView * view = [SCView create:inputAccessoryView autorelease:NO];
+		SCView * view = [SCView create:inputAccessoryView];
 		NSAssert([view isKindOfClass:[UIView class]], @"inputAccessoryView's definition error: %@", inputAccessoryView);
 		textField.inputAccessoryView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, inputAccessoryView);
-		[view release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_BOOL(textField, dict, clearsOnInsertion);

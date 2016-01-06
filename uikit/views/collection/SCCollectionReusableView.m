@@ -72,10 +72,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// layoutAttributes
 	NSDictionary * layoutAttributes = [dict objectForKey:@"layoutAttributes"];
 	if (layoutAttributes) {
-		SCCollectionViewLayoutAttributes * cvla = [SCCollectionViewLayoutAttributes create:layoutAttributes autorelease:NO];
+		SCCollectionViewLayoutAttributes * cvla = [SCCollectionViewLayoutAttributes create:layoutAttributes];
 		NSAssert([cvla isKindOfClass:[UICollectionViewLayoutAttributes class]], @"layout attributes's definition error: %@", layoutAttributes);
 		[collectionReusableView applyLayoutAttributes:cvla];
-		[cvla release];
 	}
 	
 	return YES;

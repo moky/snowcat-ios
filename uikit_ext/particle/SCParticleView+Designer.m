@@ -175,9 +175,8 @@
 	cell.alphaSpeed = alphaSpeed;
 	
 	if (textureFileName) {
-		UIImage * image = [SCImage create:textureFileName autorelease:NO];
+		UIImage * image = [SCImage create:textureFileName];
 		cell.contents = (id)[image CGImage];
-		[image release];
 	}
 	
 	// contentsRect           : 应该画在contents里的子rectangle

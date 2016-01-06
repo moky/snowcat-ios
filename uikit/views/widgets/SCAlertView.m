@@ -190,10 +190,9 @@ void SCAlertWithDictionary(NSDictionary * dict)
 #endif
 	
 #if !TARGET_OS_TV
-	SCAlertView * alertView = [SCAlertView create:dict autorelease:NO];
+	SCAlertView * alertView = [SCAlertView create:dict];
 	SC_UIKIT_SET_ATTRIBUTES(alertView, SCAlertView, dict);
 	[alertView show];
-	[alertView release];
 #endif
 }
 

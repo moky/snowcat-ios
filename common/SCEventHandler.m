@@ -67,10 +67,9 @@ SC_IMPLEMENT_CREATE_FUNCTIONS()
 {
 	NSAssert([dict isKindOfClass:[NSDictionary class]], @"action must be a dictionary: %@", dict);
 	
-	SCAction * action = [SCAction create:dict autorelease:NO];
+	SCAction * action = [SCAction create:dict];
 	NSAssert([action isKindOfClass:[SCAction class]], @"action's definition error: %@", dict);
 	BOOL flag = [action startWithResponder:responder];
-	[action release];
 	
 	NSAssert(flag, @"invalid action: %@, responder: %@", dict, responder);
 	return flag;

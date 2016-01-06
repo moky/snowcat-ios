@@ -73,9 +73,8 @@
 	NSString * nibName = [SCNib nibNameFromDictionary:dict];
 	
 	if (nibName) {
-		NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+		NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 		self = [self initWithNibName:nibName bundle:bundle];
-		[bundle release];
 	} else {
 		UITableViewStyle style = UITableViewStyleFromString([dict objectForKey:@"style"]);
 		self = [self initWithStyle:style];
@@ -112,11 +111,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		NSDictionary * refreshControl = [dict objectForKey:@"refreshControl"];
 		if (refreshControl) {
 			SC_UIKIT_DIG_CREATION_INFO(refreshControl); // support ObjectFromFile
-			SCRefreshControl * rc = [SCRefreshControl create:refreshControl autorelease:NO];
+			SCRefreshControl * rc = [SCRefreshControl create:refreshControl];
 			NSAssert([rc isKindOfClass:[UIRefreshControl class]], @"refreshControl's definition error: %@", refreshControl);
 			tableViewController.refreshControl = rc;
 			SC_UIKIT_SET_ATTRIBUTES(rc, SCRefreshControl, refreshControl);
-			[rc release];
 		}
 #endif
 		
@@ -141,11 +139,11 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 			[tableView setObject:delegate forKey:@"delegate"];
 		}
 	}
-	SCTableView * tv = [SCTableView create:tableView autorelease:NO];
+	SCTableView * tv = [SCTableView create:tableView];
 	NSAssert([tv isKindOfClass:[UITableView class]], @"tableView's definition error: %@", tableView);
 	tableViewController.tableView = tv; // replace the default tableView
 	SC_UIKIT_SET_ATTRIBUTES(tv, SCTableView, tableView);
-	[tv release];
+	
 	[tableView release];
 	
 	// clearsSelectionOnViewWillAppear

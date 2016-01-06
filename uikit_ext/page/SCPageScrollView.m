@@ -104,7 +104,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * pageControl = [dict objectForKey:@"pageControl"];
 	if (pageControl) {
 		SC_UIKIT_DIG_CREATION_INFO(pageControl); // support ObjectFromFile
-		SCPageControl * pc = [SCPageControl create:pageControl autorelease:NO];
+		SCPageControl * pc = [SCPageControl create:pageControl];
 		NSAssert([pc isKindOfClass:[UIPageControl class]], @"pageControl's definition error: %@", pageControl);
 		if (pc) {
 			//[pageScrollView addSubview:pc];
@@ -113,7 +113,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			pc.userInteractionEnabled = NO;
 			SC_UIKIT_SET_ATTRIBUTES(pc, SCPageControl, pageControl);
 			pageScrollView.pageControl = pc;
-			[pc release];
 		}
 	}
 	

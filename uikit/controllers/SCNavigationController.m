@@ -90,17 +90,15 @@
 	NSDictionary * rootViewController = [dict objectForKey:@"rootViewController"];
 	
 	if (nibName) {
-		NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+		NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 		self = [self initWithNibName:nibName bundle:bundle];
-		[bundle release];
 	} else if (navigationBarClass || toolbarClass) {
 		Class navClass = NSClassFromString(navigationBarClass);
 		Class toolClass = NSClassFromString(toolbarClass);
 		self = [self initWithNavigationBarClass:navClass toolbarClass:toolClass];
 	} else {
-		SCViewController * vc = [SCViewController create:rootViewController autorelease:NO];
+		SCViewController * vc = [SCViewController create:rootViewController];
 		self = [self initWithRootViewController:vc];
-		[vc release];
 	}
 	
 	if (self) {
@@ -156,13 +154,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_FOR_EACH(item, viewControllers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"viewControllers's item must be a dictionary: %@", item);
 			SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
-			child = [SCViewController create:item autorelease:NO];
+			child = [SCViewController create:item];
 			NSAssert([child isKindOfClass:[UIViewController class]], @"viewControllers item's definition error: %@", item);
-			if (child) {
-				SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, item);
-				[mArray addObject:child];
-				[child release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, item);
+			SCArrayAddObject(mArray, child);
 		}
 		
 		navigationController.viewControllers = mArray;

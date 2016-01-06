@@ -157,7 +157,7 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 			}
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item not a dictionary: %@", item);
 			
-			view = [SCView create:item autorelease:NO];
+			view = [SCView create:item];
 			NSAssert([view isKindOfClass:[UIView class]], @"item error: %@", item);
 			[cell.contentView addSubview:view];
 			SC_UIKIT_SET_ATTRIBUTES(view, SCView, item);
@@ -173,7 +173,6 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 			center = view.center;
 			center.x = columnWidth * (i - start + 0.5);
 			view.center = center;
-			[view release];
 		}
 	}
 	

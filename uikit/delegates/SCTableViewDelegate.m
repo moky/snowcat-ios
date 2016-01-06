@@ -50,10 +50,9 @@ SC_UIKIT_IMPLEMENT_CREATE_FUNCTIONS()
 			}
 		}
 		if (handler) {
-			SCTableViewDataHandler * tvdh = [SCTableViewDataHandler create:handler autorelease:NO];
+			SCTableViewDataHandler * tvdh = [SCTableViewDataHandler create:handler];
 			NSAssert([tvdh isKindOfClass:[SCTableViewDataHandler class]], @"handler's definition error: %@", handler);
 			self.handler = tvdh;
-			[tvdh release];
 			
 			[handler release];
 		}

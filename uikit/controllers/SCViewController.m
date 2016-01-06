@@ -180,9 +180,8 @@ UIRectEdge UIRectEdgeFromString(NSString * string)
 	// initWithNibName:bundle:
 	NSString * nibName = [SCNib nibNameFromDictionary:dict];
 	
-	NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+	NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 	self = [self initWithNibName:nibName bundle:bundle];
-	[bundle release];
 	
 	if (self) {
 		[self buildHandlers:dict];
@@ -218,7 +217,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		SC_FOR_EACH(item, childViewControllers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"childViewControllers's item must be a dictionary: %@", item);
 			SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
-			child = [SCViewController create:item autorelease:NO];
+			child = [SCViewController create:item];
 			NSAssert([child isKindOfClass:[UIViewController class]], @"childViewControllers item's definition error: %@", item);
 			if (child) {
 				// add to parent first
@@ -226,7 +225,6 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 				[viewController.view addSubview:child.view]; // add view
 				// and then set attributes
 				SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, item);
-				[child release];
 			}
 		}
 	}
@@ -255,7 +253,7 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 	// tabBarItem
 	NSDictionary * tabBarItem = [dict objectForKey:@"tabBarItem"];
 	if (tabBarItem) {
-		SCTabBarItem * item = [SCTabBarItem create:tabBarItem autorelease:NO];
+		SCTabBarItem * item = [SCTabBarItem create:tabBarItem];
 		NSAssert([item isKindOfClass:[UITabBarItem class]], @"tabBarItem's definition error: %@", tabBarItem);
 		if (viewController.title && !item.title) {
 			// tabBarItem.title is null, use viewController.title instead
@@ -266,7 +264,6 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		}
 		viewController.tabBarItem = item;
 		SC_UIKIT_SET_ATTRIBUTES(item, SCTabBarItem, tabBarItem);
-		[item release];
 	}
 	
 	// tabBarController
@@ -316,13 +313,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 			[md setObject:viewController forKey:@"target"];
 			[md setObject:@"clickToolbarItems:" forKey:@"action"];
 			
-			bbi = [SCBarButtonItem create:md autorelease:NO];
+			bbi = [SCBarButtonItem create:md];
 			NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"toolbarItems item's definition error: %@", md);
-			if (bbi) {
-				SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, md);
-				[mArray addObject:bbi];
-				[bbi release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, md);
+			SCArrayAddObject(mArray, bbi);
 			
 			[md release];
 		}

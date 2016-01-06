@@ -21,7 +21,7 @@
 - (BOOL) _addChildViewController:(NSDictionary *)dict withViewController:(UIViewController *)viewController
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
-	SCViewController * child = [SCViewController create:dict autorelease:NO];
+	SCViewController * child = [SCViewController create:dict];
 	NSAssert([child isKindOfClass:[UIViewController class]], @"child view controller's definition error: %@", dict);
 	if ([viewController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController * nc = (UINavigationController *)viewController;
@@ -37,7 +37,6 @@
 		}
 	}
 	SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, dict);
-	[child release];
 	return YES;
 }
 
@@ -53,11 +52,10 @@
 - (BOOL) _presentViewController:(NSDictionary *)dict animated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
-	SCViewController * child = [SCViewController create:dict autorelease:NO];
+	SCViewController * child = [SCViewController create:dict];
 	NSAssert([child isKindOfClass:[UIViewController class]], @"view controller's definition error: %@", dict);
 	[viewController presentViewController:child animated:flag completion:NULL];
 	SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, dict);
-	[child release];
 	return YES;
 }
 
@@ -70,12 +68,11 @@
 - (BOOL) _presentModalViewController:(NSDictionary *)dict animated:(BOOL)flag withViewController:(UIViewController *)viewController
 {
 	SC_UIKIT_DIG_CREATION_INFO(dict); // support ObjectFromFile
-	SCViewController * child = [SCViewController create:dict autorelease:NO];
+	SCViewController * child = [SCViewController create:dict];
 	NSAssert([child isKindOfClass:[UIViewController class]], @"view controller's definition error: %@", dict);
 	//[viewController presentModalViewController:child animated:flag];
 	[viewController presentViewController:child animated:flag completion:NULL];
 	SC_UIKIT_SET_ATTRIBUTES(child, SCViewController, dict);
-	[child release];
 	return YES;
 }
 
@@ -91,11 +88,10 @@
 	// transition
 	NSDictionary * transition = [_dict objectForKey:@"transition"];
 	if (transition) {
-		SCTransition * trans = [SCTransition create:transition autorelease:NO];
+		SCTransition * trans = [SCTransition create:transition];
 		NSAssert([trans isKindOfClass:[SCTransition class]], @"transition's definition error: %@", transition);
 		[trans setAttributes:transition];
 		[trans runWithView:view];
-		[trans release];
 		return YES;
 	}
 	return NO;

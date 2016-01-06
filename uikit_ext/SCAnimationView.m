@@ -119,12 +119,9 @@
 	NSDictionary * item;
 	UIImage * image;
 	SC_FOR_EACH(item, animationImages) {
-		image = [SCImage create:item autorelease:NO];
+		image = [SCImage create:item];
 		NSAssert([image isKindOfClass:[UIImage class]], @"image's definition error: %@", item);
-		if (image) {
-			[mArray addObject:image];
-			[image release];
-		}
+		SCArrayAddObject(mArray, image);
 	}
 	NSAssert([mArray count] == [animationImages count], @"some image(s) maybe lost");
 	

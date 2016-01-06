@@ -66,10 +66,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// attributedTitle
 	NSDictionary * attributedTitle = [dict objectForKey:@"attributedTitle"];
 	if (attributedTitle) {
-		NSAttributedString * as = [SCAttributedString create:attributedTitle autorelease:NO];
+		NSAttributedString * as = [SCAttributedString create:attributedTitle];
 		NSAssert([as isKindOfClass:[NSAttributedString class]], @"error attributed title: %@", attributedTitle);
 		refreshControl.attributedTitle = as;
-		[as release];
 	}
 	
 	return YES;

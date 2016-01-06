@@ -72,12 +72,12 @@
 	if (!image) {
 		image = [dict objectForKey:@"File"];
 	}
-	SCImage * image1 = [SCImage create:image autorelease:NO];
+	SCImage * image1 = [SCImage create:image];
 	SCImage * image2 = nil;
 	
 	id highlightedImage = [dict objectForKey:@"highlightedImage"];
 	if (highlightedImage) {
-		image2 = [SCImage create:highlightedImage autorelease:NO];
+		image2 = [SCImage create:highlightedImage];
 		self = [self initWithImage:image1 highlightedImage:image2];
 	} else {
 		self = [self initWithImage:image1];
@@ -95,8 +95,6 @@
 		}
 	}
 	
-	[image2 release];
-	[image1 release];
 	return self;
 }
 
@@ -132,12 +130,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSDictionary * item;
 		SCImage * image;
 		SC_FOR_EACH(item, animationImages) {
-			image = [SCImage create:item autorelease:NO];
+			image = [SCImage create:item];
 			NSAssert([image isKindOfClass:[UIImage class]], @"animationImages item's definition error: %@", item);
-			if (image) {
-				[mArray addObject:image];
-				[image release];
-			}
+			SCArrayAddObject(mArray, image);
 		}
 		
 		imageView.animationImages = mArray;
@@ -154,12 +149,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSDictionary * item;
 		SCImage * image;
 		SC_FOR_EACH(item, highlightedAnimationImages) {
-			image = [SCImage create:item autorelease:NO];
+			image = [SCImage create:item];
 			NSAssert([image isKindOfClass:[UIImage class]], @"highlightedAnimationImages item's definition error: %@", item);
-			if (image) {
-				[mArray addObject:image];
-				[image release];
-			}
+			SCArrayAddObject(mArray, image);
 		}
 		
 		imageView.highlightedAnimationImages = mArray;

@@ -18,13 +18,12 @@
 	NSDictionary * rootViewController = [dict objectForKey:@"rootViewController"];
 	NSAssert([rootViewController isKindOfClass:[NSDictionary class]], @"cannot find root view controller: %@", dict);
 	
-	SCViewController * viewController = [SCViewController create:rootViewController autorelease:NO];
+	SCViewController * viewController = [SCViewController create:rootViewController];
 	NSAssert([viewController isKindOfClass:[UIViewController class]], @"rootViewController's definition error: %@", rootViewController);
 	
 	window.rootViewController = viewController;
 	
 	SC_UIKIT_SET_ATTRIBUTES(viewController, SCViewController, rootViewController);
-	[viewController release];
 	
 	return YES;
 }

@@ -204,11 +204,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * inputAccessoryView = [dict objectForKey:@"inputAccessoryView"];
 	if (inputAccessoryView) {
 		SC_UIKIT_DIG_CREATION_INFO(inputAccessoryView); // support ObjectFromFile
-		SCView * view = [SCView create:inputAccessoryView autorelease:NO];
+		SCView * view = [SCView create:inputAccessoryView];
 		NSAssert([view isKindOfClass:[UIView class]], @"inputAccessoryView's definition error: %@", inputAccessoryView);
 		searchBar.inputAccessoryView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, inputAccessoryView);
-		[view release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UIIMAGE(searchBar, dict, backgroundImage);

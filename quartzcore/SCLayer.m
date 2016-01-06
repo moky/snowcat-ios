@@ -188,12 +188,11 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SCLayer * subLayer;
 		SC_FOR_EACH(item, sublayers) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary: %@", item);
-			subLayer = [SCLayer create:item autorelease:NO];
+			subLayer = [SCLayer create:item];
 			NSAssert([subLayer isKindOfClass:[CALayer class]], @"failed to create sub layer: %@", item);
 			if (subLayer) {
 				[layer addSublayer:subLayer];
 				SC_SET_ATTRIBUTES(subLayer, SCLayer, item);
-				[subLayer release];
 			}
 		}
 	}
@@ -207,10 +206,9 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// mask
 	NSDictionary * mask = [dict objectForKey:@"mask"];
 	if (mask) {
-		SCLayer * m = [SCLayer create:mask autorelease:NO];
+		SCLayer * m = [SCLayer create:mask];
 		layer.mask = m;
 		SC_SET_ATTRIBUTES(m, SCLayer, mask);
-		[m release];
 	}
 	
 	// contents
@@ -219,33 +217,29 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		contents = [dict objectForKey:@"image"];
 	}
 	if (contents) {
-		UIImage * image = [SCImage create:contents autorelease:NO];
+		UIImage * image = [SCImage create:contents];
 		layer.contents = (id)[image CGImage];
-		[image release];
 	}
 	
 	// backgroundColor
 	id backgroundColor = [dict objectForKey:@"backgroundColor"];
 	if (backgroundColor) {
-		UIColor * color = [SCColor create:backgroundColor autorelease:NO];
+		UIColor * color = [SCColor create:backgroundColor];
 		layer.backgroundColor = [color CGColor];
-		[color release];
 	}
 	
 	// borderColor
 	id borderColor = [dict objectForKey:@"borderColor"];
 	if (borderColor) {
-		UIColor * color = [SCColor create:borderColor autorelease:NO];
+		UIColor * color = [SCColor create:borderColor];
 		layer.borderColor = [color CGColor];
-		[color release];
 	}
 	
 	// shadowColor
 	id shadowColor = [dict objectForKey:@"shadowColor"];
 	if (shadowColor) {
-		UIColor * color = [SCColor create:shadowColor autorelease:NO];
+		UIColor * color = [SCColor create:shadowColor];
 		layer.shadowColor = [color CGColor];
-		[color release];
 	}
 	
 	// contentsGravity

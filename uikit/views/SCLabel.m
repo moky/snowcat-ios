@@ -7,6 +7,7 @@
 //
 
 #import "scMacros.h"
+#import "SCClient.h"
 #import "SCNib.h"
 #import "SCParagraphStyle.h"
 #import "SCText.h"
@@ -82,9 +83,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		textColor = [dict objectForKey:@"color"];
 	}
 	if (textColor) {
-		SCColor * color = [SCColor create:textColor autorelease:NO];
+		SCColor * color = [SCColor create:textColor];
 		label.textColor = color;
-		[color release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UIFONT (label, dict, font);
@@ -106,10 +106,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// attributedText
 	NSDictionary * attributedText = [dict objectForKey:@"attributedText"];
 	if (attributedText) {
-		SCAttributedString * as = [SCAttributedString create:attributedText autorelease:NO];
+		SCAttributedString * as = [SCAttributedString create:attributedText];
 		NSAssert([as isKindOfClass:[NSAttributedString class]], @"attributedText's definition error: %@", attributedText);
 		label.attributedText = as;
-		[as release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(label, dict, highlightedTextColor);
@@ -123,10 +122,19 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	
 #if !TARGET_OS_TV
 	
+#if __IPHONE_OS_VERSION_MIN_REQUIRED <= __IPHONE_7_0
+	
+	float systemVersion = SCSystemVersion();
+	if (systemVersion <= 7.0f) {
+		
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-	SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsLetterSpacingToFitWidth);
+		SC_SET_ATTRIBUTES_AS_BOOL   (label, dict, adjustsLetterSpacingToFitWidth);
 #pragma clang diagnostic pop
+		
+	}
+	
+#endif
 	
 #endif
 	

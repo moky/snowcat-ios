@@ -109,11 +109,10 @@ UICollectionViewScrollPosition UICollectionViewScrollPositionFromString(NSString
 		layout = [dict objectForKey:@"layout"];
 	}
 	if (layout) {
-		SCCollectionViewLayout * cvl = [SCCollectionViewLayout create:layout autorelease:NO];
+		SCCollectionViewLayout * cvl = [SCCollectionViewLayout create:layout];
 		NSAssert([cvl isKindOfClass:[UICollectionViewLayout class]], @"collection view layout's definition error: %@", layout);
 		self = [self initWithFrame:CGRectZero collectionViewLayout:cvl];
 		SC_UIKIT_SET_ATTRIBUTES(cvl, SCCollectionViewLayout, layout);
-		[cvl release];
 	} else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wnonnull"
@@ -176,11 +175,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];
 	if (backgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(backgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:backgroundView autorelease:NO];
+		SCView * view = [SCView create:backgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"backgroundView's definition error: %@", view);
 		collectionView.backgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, backgroundView);
-		[view release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_BOOL(collectionView, dict, allowsSelection);

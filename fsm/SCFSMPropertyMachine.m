@@ -29,7 +29,9 @@
 {
 	self = [super initWithDefaultStateName:name capacity:capacity interval:interval];
 	if (self) {
-		self.properties = [[NSMutableDictionary alloc] initWithCapacity:capacity];
+		NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithCapacity:capacity];
+		self.properties = mDict;
+		[mDict release];
 	}
 	return self;
 }

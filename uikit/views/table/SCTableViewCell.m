@@ -234,9 +234,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	} else {
 		id image = [dict objectForKey:@"image"];
 		if (image) {
-			SCImage * img = [SCImage create:image autorelease:NO];
+			SCImage * img = [SCImage create:image];
 			tableViewCell.imageView.image = img;
-			[img release];
 		}
 	}
 	
@@ -275,33 +274,30 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];
 	if (backgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(backgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:backgroundView autorelease:NO];
+		SCView * view = [SCView create:backgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"backgroundView's definition error: %@", backgroundView);
 		tableViewCell.backgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, backgroundView);
-		[view release];
 	}
 	
 	// selectedBackgroundView
 	NSDictionary * selectedBackgroundView = [dict objectForKey:@"selectedBackgroundView"];
 	if (selectedBackgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(selectedBackgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:selectedBackgroundView autorelease:NO];
+		SCView * view = [SCView create:selectedBackgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"selectedBackgroundView's definition error: %@", selectedBackgroundView);
 		tableViewCell.selectedBackgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, selectedBackgroundView);
-		[view release];
 	}
 	
 	// multipleSelectionBackgroundView
 	NSDictionary * multipleSelectionBackgroundView = [dict objectForKey:@"multipleSelectionBackgroundView"];
 	if (multipleSelectionBackgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(multipleSelectionBackgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:multipleSelectionBackgroundView autorelease:NO];
+		SCView * view = [SCView create:multipleSelectionBackgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"multipleSelectionBackgroundView's definition error: %@", multipleSelectionBackgroundView);
 		tableViewCell.multipleSelectionBackgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, multipleSelectionBackgroundView);
-		[view release];
 	}
 	
 	// selectionStyle
@@ -325,11 +321,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * accessoryView = [dict objectForKey:@"accessoryView"];
 	if (accessoryView) {
 		SC_UIKIT_DIG_CREATION_INFO(accessoryView); // support ObjectFromFile
-		SCView * view = [SCView create:accessoryView autorelease:NO];
+		SCView * view = [SCView create:accessoryView];
 		NSAssert([view isKindOfClass:[UIView class]], @"accessoryView's definition error: %@", accessoryView);
 		tableViewCell.accessoryView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, accessoryView);
-		[view release];
 	}
 	
 	// editingAccessoryType
@@ -342,11 +337,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * editingAccessoryView = [dict objectForKey:@"editingAccessoryView"];
 	if (editingAccessoryView) {
 		SC_UIKIT_DIG_CREATION_INFO(editingAccessoryView); // support ObjectFromFile
-		SCView * view = [SCView create:editingAccessoryView autorelease:NO];
+		SCView * view = [SCView create:editingAccessoryView];
 		NSAssert([view isKindOfClass:[UIView class]], @"editingAccessoryView's definition error: %@", editingAccessoryView);
 		tableViewCell.editingAccessoryView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, editingAccessoryView);
-		[view release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_INTEGER(tableViewCell, dict, indentationLevel);

@@ -163,13 +163,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SCTabBarItem * tbi;
 		SC_FOR_EACH(item, items) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary: %@", item);
-			tbi = [SCTabBarItem create:item autorelease:NO];
+			tbi = [SCTabBarItem create:item];
 			NSAssert([tbi isKindOfClass:[UITabBarItem class]], @"tab bar item's definition error: %@", item);
-			if (tbi) {
-				SC_UIKIT_SET_ATTRIBUTES(tbi, SCTabBarItem, item);
-				[mArray addObject:tbi];
-				[tbi release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(tbi, SCTabBarItem, item);
+			SCArrayAddObject(mArray, tbi);
 		}
 		tabBar.items = mArray;
 		
@@ -181,10 +178,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// selectedImageTintColor
 	NSDictionary * selectedImageTintColor = [dict objectForKey:@"selectedImageTintColor"];
 	if (selectedImageTintColor) {
-		SCColor * color = [SCColor create:selectedImageTintColor autorelease:NO];
+		SCColor * color = [SCColor create:selectedImageTintColor];
 		//tabBar.selectedImageTintColor = color;
 		tabBar.tintColor = color;
-		[color release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_UICOLOR(tabBar, dict, tintColor);

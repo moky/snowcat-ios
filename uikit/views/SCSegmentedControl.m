@@ -172,13 +172,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_FOR_EACH(seg, items) {
 			++i;
 			if ([seg isKindOfClass:[NSDictionary class]]) {
-				image = [SCImage create:seg autorelease:NO];
+				image = [SCImage create:seg];
 				if (i < segmentedControl.numberOfSegments) {
 					[segmentedControl setImage:image forSegmentAtIndex:i];
 				} else {
 					[segmentedControl insertSegmentWithImage:image atIndex:i animated:NO];
 				}
-				[image release];
 			} else if ([seg isKindOfClass:[NSString class]]) {
 				if (i < segmentedControl.numberOfSegments) {
 					[segmentedControl setTitle:seg forSegmentAtIndex:i];

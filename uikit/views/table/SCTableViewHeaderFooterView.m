@@ -108,11 +108,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];
 	if (backgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(backgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:backgroundView autorelease:NO];
+		SCView * view = [SCView create:backgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"backgroundView's definition error: %@", backgroundView);
 		tableViewHeaderFooterView.backgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, backgroundView);
-		[view release];
 	}
 	
 	return YES;

@@ -131,13 +131,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			[md setObject:toolbar forKey:@"target"];
 			[md setObject:SCToolbarItemDelegate_clickToolbarItems forKey:@"action"];
 			
-			bbi = [SCBarButtonItem create:md autorelease:NO];
+			bbi = [SCBarButtonItem create:md];
 			NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"bar button item's definition error: %@", md);
-			if (bbi) {
-				SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, md);
-				[mArray addObject:bbi];
-				[bbi release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, md);
+			SCArrayAddObject(mArray, bbi);
 			
 			[md release];
 		}

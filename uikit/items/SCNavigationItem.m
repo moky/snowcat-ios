@@ -65,11 +65,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSAssert([backBarButtonItem isKindOfClass:[NSDictionary class]], @"backBarButtonItem must be a dictionary: %@", backBarButtonItem);
 		backBarButtonItem = [self _newDictionary:backBarButtonItem withTarget:target withAction:SCNavigationItemDelegate_clickBackBarButtonItem]; // on backBarButtonItem clicked
 		
-		SCBarButtonItem * bbi = [SCBarButtonItem create:backBarButtonItem autorelease:NO];
+		SCBarButtonItem * bbi = [SCBarButtonItem create:backBarButtonItem];
 		NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"backBarButtonItem's definition error: %@", backBarButtonItem);
 		navigationItem.backBarButtonItem = bbi;
 		SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, backBarButtonItem);
-		[bbi release];
 		
 		[backBarButtonItem release];
 	}
@@ -79,11 +78,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * titleView = [dict objectForKey:@"titleView"];
 	if (titleView) {
 		NSAssert([titleView isKindOfClass:[NSDictionary class]], @"titleView must be a dictionary: %@", titleView);
-		SCView * view = [SCView create:titleView autorelease:NO];
+		SCView * view = [SCView create:titleView];
 		NSAssert([view isKindOfClass:[UIView class]], @"titleView's definition error: %@", titleView);
 		navigationItem.titleView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, titleView);
-		[view release];
 	}
 	
 #if !TARGET_OS_TV
@@ -103,13 +101,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_FOR_EACH(item, leftBarButtonItems) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"leftBarButtonItems's item must be a dictionary: %@", item);
 			item = [self _newDictionary:item withTarget:target withAction:SCNavigationItemDelegate_clickLeftBarButtonItems]; // on leftBarButtonItems clicked
-			bbi = [SCBarButtonItem create:item autorelease:NO];
+			
+			bbi = [SCBarButtonItem create:item];
 			NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"leftBarButtonItems item's definition error: %@", item);
-			if (bbi) {
-				SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, item);
-				[mArray addObject:bbi];
-				[bbi release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, item);
+			SCArrayAddObject(mArray, bbi);
+			
 			[item release];
 		}
 		
@@ -129,13 +126,12 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SC_FOR_EACH(item, rightBarButtonItems) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"rightBarButtonItems's item must be a dictionary: %@", item);
 			item = [self _newDictionary:item withTarget:target withAction:SCNavigationItemDelegate_clickRightBarButtonItems]; // on rightBarButtonItems clicked
-			bbi = [SCBarButtonItem create:item autorelease:NO];
+			
+			bbi = [SCBarButtonItem create:item];
 			NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"rightBarButtonItems item's definition error: %@", item);
-			if (bbi) {
-				SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, item);
-				[mArray addObject:bbi];
-				[bbi release];
-			}
+			SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, item);
+			SCArrayAddObject(mArray, bbi);
+			
 			[item release];
 		}
 		
@@ -153,11 +149,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSAssert([leftBarButtonItem isKindOfClass:[NSDictionary class]], @"leftBarButtonItem must be a dictionary: %@", leftBarButtonItem);
 		leftBarButtonItem = [self _newDictionary:leftBarButtonItem withTarget:target withAction:SCNavigationItemDelegate_clickLeftBarButtonItem]; // on leftBarButtonItem clicked
 		
-		SCBarButtonItem * bbi = [SCBarButtonItem create:leftBarButtonItem autorelease:NO];
+		SCBarButtonItem * bbi = [SCBarButtonItem create:leftBarButtonItem];
 		NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"leftBarButtonItem's definition error: %@", leftBarButtonItem);
 		navigationItem.leftBarButtonItem = bbi;
 		SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, leftBarButtonItem);
-		[bbi release];
 		
 		[leftBarButtonItem release];
 	}
@@ -168,11 +163,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSAssert([rightBarButtonItem isKindOfClass:[NSDictionary class]], @"rightBarButtonItem must be a dictionary: %@", rightBarButtonItem);
 		rightBarButtonItem = [self _newDictionary:rightBarButtonItem withTarget:target withAction:SCNavigationItemDelegate_clickRightBarButtonItem]; // on rightBarButtonItem clicked
 		
-		SCBarButtonItem * bbi = [SCBarButtonItem create:rightBarButtonItem autorelease:NO];
+		SCBarButtonItem * bbi = [SCBarButtonItem create:rightBarButtonItem];
 		NSAssert([bbi isKindOfClass:[UIBarButtonItem class]], @"rightBarButtonItem's definition error: %@", rightBarButtonItem);
 		navigationItem.rightBarButtonItem = bbi;
 		SC_UIKIT_SET_ATTRIBUTES(bbi, SCBarButtonItem, rightBarButtonItem);
-		[bbi release];
 		
 		[rightBarButtonItem release];
 	}

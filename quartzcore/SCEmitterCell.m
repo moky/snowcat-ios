@@ -117,17 +117,15 @@ SC_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		contents = [dict objectForKey:@"image"];
 	}
 	if (contents) {
-		UIImage * image = [SCImage create:contents autorelease:NO];
+		UIImage * image = [SCImage create:contents];
 		emitterCell.contents = (id)[image CGImage];
-		[image release];
 	}
 	
 	// color
 	id color = [dict objectForKey:@"color"];
 	if (color) {
-		UIColor * clr = [SCColor create:color autorelease:NO];
+		UIColor * clr = [SCColor create:color];
 		emitterCell.color = [clr CGColor];
-		[clr release];
 	}
 	
 	// emitterCells

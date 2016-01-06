@@ -161,9 +161,8 @@ UIPageViewControllerTransitionStyle UIPageViewControllerTransitionStyleFromStrin
 	}
 	
 	if (nibName) {
-		NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+		NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 		self = [self initWithNibName:nibName bundle:bundle];
-		[bundle release];
 	} else {
 		UIPageViewControllerTransitionStyle s = UIPageViewControllerTransitionStyleFromString(style);
 		UIPageViewControllerNavigationOrientation o = UIPageViewControllerNavigationOrientationFromString(orientation);

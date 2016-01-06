@@ -153,7 +153,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// controlView
 	NSDictionary * controlView = [dict objectForKey:@"controlView"];
 	if (controlView) {
-		SCView * view = [SCView create:controlView autorelease:NO];
+		SCView * view = [SCView create:controlView];
 		// initialize default properties
 		view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		segmentedScrollView.controlView = view;
@@ -179,8 +179,6 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 				}
 			}
 		}
-		
-		[view release];
 	}
 	
 	// scrollViews
@@ -191,10 +189,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		SCScrollView * scrollView;
 		SC_FOR_EACH(item, scrollViews) {
 			NSAssert([item isKindOfClass:[NSDictionary class]], @"item must be a dictionary");
-			scrollView = [SCScrollView create:item autorelease:NO];
+			scrollView = [SCScrollView create:item];
 			[segmentedScrollView addSubview:scrollView];
 			SC_UIKIT_SET_ATTRIBUTES(scrollView, SCScrollView, item);
-			[scrollView release];
 		}
 	}
 	

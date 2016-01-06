@@ -180,14 +180,11 @@
 		NSObject * object = NSObjectFromJSONData(data);
 		if ([object isKindOfClass:[NSDictionary class]]) {
 			dict = (NSDictionary *)object;
-		} else if (!autorelease && object) {
-			// release the error object
-			[object release];
 		}
 		[data release];
 	}
 	
-	return dict;
+	return autorelease ? dict : [dict retain];
 }
 
 @end

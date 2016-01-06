@@ -199,9 +199,8 @@ void SCActionSheetWithDictionary(NSDictionary * dict, UIView * sourceView)
 #endif
 	
 #if !TARGET_OS_TV
-	SCActionSheet * actionSheet = [SCActionSheet create:dict autorelease:NO];
+	SCActionSheet * actionSheet = [SCActionSheet create:dict];
 	SC_UIKIT_SET_ATTRIBUTES(actionSheet, SCActionSheet, dict);
 	[actionSheet show];
-	[actionSheet release];
 #endif
 }

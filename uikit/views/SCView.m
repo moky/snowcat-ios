@@ -82,11 +82,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		NSAssert([item isKindOfClass:[NSDictionary class]], @"subviews's item must be a dictionary: %@", item);
 		SC_UIKIT_DIG_CREATION_INFO(item); // support ObjectFromFile
 		
-		child = [SCView create:item autorelease:NO];
+		child = [SCView create:item];
 		NSAssert([child isKindOfClass:[UIView class]], @"subviews item's definition error: %@", item);
 		[view addSubview:child];
 		SC_UIKIT_SET_ATTRIBUTES(child, SCView, item);
-		[child release];
 	}
 	
 	// scale size to fit subviews
@@ -156,10 +155,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// maskView
 	NSDictionary * maskView = [dict objectForKey:@"maskView"];
 	if (maskView) {
-		SCView * v = [SCView create:maskView autorelease:NO];
+		SCView * v = [SCView create:maskView];
 		view.maskView = v;
 		SC_UIKIT_SET_ATTRIBUTES(v, SCView, maskView);
-		[v release];
 	}
 	
 #endif

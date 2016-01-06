@@ -122,9 +122,8 @@ SC_IMPLEMENT_CREATE_FUNCTION()
 {
 	NSDictionary * effect = [dict objectForKey:@"effect"];
 	if (effect) {
-		UIVisualEffect * ve = [SCVisualEffect create:effect autorelease:NO];
+		UIVisualEffect * ve = [SCVisualEffect create:effect];
 		self = [self initWithEffect:ve];
-		[ve release];
 	} else {
 		self = [self initWithFrame:CGRectZero];
 	}

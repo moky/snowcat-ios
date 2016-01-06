@@ -75,10 +75,10 @@
 							},
 					};
 		}
-		SCVisualEffectView * view = [SCVisualEffectView create:vev autorelease:NO];
+		SCVisualEffectView * view = [SCVisualEffectView create:vev];
 		[self addSubview:view];
 		SC_UIKIT_SET_ATTRIBUTES(view, SCVisualEffectView, vev);
-		_mask = view;
+		_mask = [view retain];
 	} else
 #endif // EOF '__IPHONE_8_0'
 		
@@ -103,10 +103,10 @@
 					   };
 			}
 		}
-		SCToolbar * view = [SCToolbar create:tb autorelease:NO];
+		SCToolbar * view = [SCToolbar create:tb];
 		[self addSubview:view];
 		SC_UIKIT_SET_ATTRIBUTES(view, SCToolbar, tb);
-		_mask = view;
+		_mask = [view retain];
 	} else
 		
 #endif

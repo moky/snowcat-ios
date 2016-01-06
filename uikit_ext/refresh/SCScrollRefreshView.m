@@ -93,41 +93,37 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// trayView
 	NSDictionary * trayView = [dict objectForKey:@"trayView"];
 	if (trayView) {
-		SCView * tray = [SCView create:trayView autorelease:NO];
+		SCView * tray = [SCView create:trayView];
 		[scrollRefreshView addSubview:tray];
 		SC_UIKIT_SET_ATTRIBUTES(tray, SCView, trayView);
 		scrollRefreshView.trayView = tray;
-		[tray release];
 	}
 	
 	// loadingIndicator
 	NSDictionary * loadingIndicator = [dict objectForKey:@"loadingIndicator"];
 	if (loadingIndicator) {
-		SCActivityIndicatorView * aiv = [SCActivityIndicatorView create:loadingIndicator autorelease:NO];
+		SCActivityIndicatorView * aiv = [SCActivityIndicatorView create:loadingIndicator];
 		[scrollRefreshView.trayView addSubview:aiv];
 		SC_UIKIT_SET_ATTRIBUTES(aiv, SCActivityIndicatorView, loadingIndicator);
 		scrollRefreshView.loadingIndicator = aiv;
-		[aiv release];
 	}
 	
 	// textLabel
 	NSDictionary * textLabel = [dict objectForKey:@"textLabel"];
 	if (textLabel) {
-		SCLabel * label = [SCLabel create:textLabel autorelease:NO];
+		SCLabel * label = [SCLabel create:textLabel];
 		[scrollRefreshView.trayView addSubview:label];
 		SC_UIKIT_SET_ATTRIBUTES(label, SCLabel, textLabel);
 		scrollRefreshView.textLabel = label;
-		[label release];
 	}
 	
 	// timeLabel
 	NSDictionary * timeLabel = [dict objectForKey:@"timeLabel"];
 	if (timeLabel) {
-		SCLabel * label = [SCLabel create:timeLabel autorelease:NO];
+		SCLabel * label = [SCLabel create:timeLabel];
 		[scrollRefreshView.trayView addSubview:label];
 		SC_UIKIT_SET_ATTRIBUTES(label, SCLabel, timeLabel);
 		scrollRefreshView.timeLabel = label;
-		[label release];
 	}
 	
 	return YES;

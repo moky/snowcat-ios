@@ -232,11 +232,10 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * backgroundView = [dict objectForKey:@"backgroundView"];
 	if (backgroundView) {
 		SC_UIKIT_DIG_CREATION_INFO(backgroundView); // support ObjectFromFile
-		SCView * view = [SCView create:backgroundView autorelease:NO];
+		SCView * view = [SCView create:backgroundView];
 		NSAssert([view isKindOfClass:[UIView class]], @"backgroundView's definition error: %@", backgroundView);
 		tableView.backgroundView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, backgroundView);
-		[view release];
 	}
 	
 	SC_SET_ATTRIBUTES_AS_BOOL(tableView, dict, editing);
@@ -264,24 +263,22 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	NSDictionary * tableHeaderView = [dict objectForKey:@"tableHeaderView"];
 	if (tableHeaderView) {
 		SC_UIKIT_DIG_CREATION_INFO(tableHeaderView); // support ObjectFromFile
-		SCView * view = [SCView create:tableHeaderView autorelease:NO];
+		SCView * view = [SCView create:tableHeaderView];
 		NSAssert([view isKindOfClass:[UIView class]], @"tableHeaderView's definition error: %@", tableHeaderView);
 		tableView.tableHeaderView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, tableHeaderView);
 		tableView.tableHeaderView = view; // set it again to occupy the place
-		[view release];
 	}
 	
 	// tableFooterView
 	NSDictionary * tableFooterView = [dict objectForKey:@"tableFooterView"];
 	if (tableFooterView) {
 		SC_UIKIT_DIG_CREATION_INFO(tableFooterView); // support ObjectFromFile
-		SCView * view = [SCView create:tableFooterView autorelease:NO];
+		SCView * view = [SCView create:tableFooterView];
 		NSAssert([view isKindOfClass:[UIView class]], @"tableFooterView's definition error: %@", tableFooterView);
 		tableView.tableFooterView = view;
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, tableFooterView);
 		tableView.tableFooterView = view; // set it again to occupy the place
-		[view release];
 	}
 	
 #ifdef __IPHONE_7_0

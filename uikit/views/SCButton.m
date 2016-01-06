@@ -125,9 +125,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		titleColor = [dict objectForKey:@"color"];
 	}
 	if (titleColor) {
-		SCColor * color = [SCColor create:titleColor autorelease:NO];
+		SCColor * color = [SCColor create:titleColor];
 		[button setTitleColor:color forState:state];
-		[color release];
 	}
 	
 	// titleShadowColor
@@ -136,17 +135,15 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		titleShadowColor = [dict objectForKey:@"shadowColor"];
 	}
 	if (titleShadowColor) {
-		SCColor * color = [SCColor create:titleShadowColor autorelease:NO];
+		SCColor * color = [SCColor create:titleShadowColor];
 		[button setTitleShadowColor:color forState:state];
-		[color release];
 	}
 	
 	// image
 	id image = [dict objectForKey:@"image"];
 	if (image) {
-		SCImage * img = [SCImage create:image autorelease:NO];
+		SCImage * img = [SCImage create:image];
 		[button setImage:img forState:state];
-		[img release];
 	}
 	
 	// background image
@@ -155,9 +152,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 		backgroundImage = [dict objectForKey:@"background"];
 	}
 	if (backgroundImage) {
-		SCImage * bg = [SCImage create:backgroundImage autorelease:NO];
+		SCImage * bg = [SCImage create:backgroundImage];
 		[button setBackgroundImage:bg forState:state];
-		[bg release];
 	}
 	
 #ifdef __IPHONE_6_0
@@ -169,9 +165,8 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// attributedTitle
 	id attributedTitle = [dict objectForKey:@"attributedTitle"];
 	if (attributedTitle) {
-		NSAttributedString * as = [SCAttributedString create:attributedTitle autorelease:NO];
-		[button setAttributedTitle:attributedTitle forState:state];
-		[as release];
+		NSAttributedString * as = [SCAttributedString create:attributedTitle];
+		[button setAttributedTitle:as forState:state];
 	}
 #endif
 	

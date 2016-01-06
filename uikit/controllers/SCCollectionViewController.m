@@ -72,19 +72,17 @@
 	NSString * nibName = [SCNib nibNameFromDictionary:dict];
 	
 	if (nibName) {
-		NSBundle * bundle = [SCNib bundleFromDictionary:dict autorelease:NO];
+		NSBundle * bundle = [SCNib bundleFromDictionary:dict];
 		self = [self initWithNibName:nibName bundle:bundle];
-		[bundle release];
 	} else {
 		NSDictionary * layout = [dict objectForKey:@"layout"];
 		NSAssert([layout isKindOfClass:[NSDictionary class]], @"layout must be a dictionary: %@", dict);
 		
-		SCCollectionViewLayout * cvl = [SCCollectionViewLayout create:layout autorelease:NO];
+		SCCollectionViewLayout * cvl = [SCCollectionViewLayout create:layout];
 		NSAssert([cvl isKindOfClass:[UICollectionViewLayout class]], @"layout's definition error: %@", layout);
 		SC_UIKIT_SET_ATTRIBUTES(cvl, SCCollectionViewLayout, layout);
 		
 		self = [self initWithCollectionViewLayout:cvl];
-		[cvl release];
 	}
 	
 	if (self) {
@@ -141,11 +139,10 @@ SC_UIKIT_VIEW_CONTROLLER_IMPLEMENT_SET_ATTRIBUTES_WITH_ORIENTATIONS(_supportedIn
 		}
 		
 		// create it
-		SCCollectionView * cv = [SCCollectionView create:collectionView autorelease:NO];
+		SCCollectionView * cv = [SCCollectionView create:collectionView];
 		NSAssert([cv isKindOfClass:[UICollectionView class]], @"collectionView's definition error: %@", collectionView);
 		collectionViewController.collectionView = cv; // replace the default collectionView
 		SC_UIKIT_SET_ATTRIBUTES(cv, SCCollectionView, collectionView);
-		[cv release];
 		
 		[collectionView release];
 	}

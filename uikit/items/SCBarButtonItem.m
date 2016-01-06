@@ -172,14 +172,14 @@ UIBarButtonSystemItem UIBarButtonSystemItemFromString(NSString * string)
 	// initWithImage:style:target:action:
 	id image = [dict objectForKey:@"image"];
 	if (image) {
-		image = [SCImage create:image autorelease:NO];
+		image = [SCImage create:image];
 	}
 	UIBarButtonItemStyle style = UIBarButtonItemStyleFromString([dict objectForKey:@"style"]);
 	
 	// initWithImage:landscapeImagePhone:style:target:action:
 	id landscapeImagePhone = [dict objectForKey:@"landscapeImagePhone"];
 	if (landscapeImagePhone) {
-		landscapeImagePhone = [SCImage create:landscapeImagePhone autorelease:NO];
+		landscapeImagePhone = [SCImage create:landscapeImagePhone];
 	}
 	
 	// initWithTitle:style:target:action:
@@ -196,21 +196,15 @@ UIBarButtonSystemItem UIBarButtonSystemItemFromString(NSString * string)
 		title = SCLocalizedString(title, nil);
 		self = [self initWithTitle:title style:style target:target action:selector];
 	} else if (customView) {
-		SCView * view = [SCView create:customView autorelease:NO];
+		SCView * view = [SCView create:customView];
 		self = [self initWithCustomView:view];
 		SC_UIKIT_SET_ATTRIBUTES(view, SCView, customView);
-		[view release];
 	} else {
 		NSString * barButtonSystemItem = [dict objectForKey:@"barButtonSystemItem"];
 		UIBarButtonSystemItem item = UIBarButtonSystemItemFromString(barButtonSystemItem);
 		self = [self initWithBarButtonSystemItem:item target:target action:selector];
 	}
 	
-	[image release];
-	[landscapeImagePhone release];
-	
-	if (self) {
-	}
 	return self;
 }
 

@@ -83,25 +83,22 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	// thumbImage
 	id thumbImage = [dict objectForKey:@"thumbImage"];
 	if (thumbImage) {
-		SCImage * image = [SCImage create:thumbImage autorelease:NO];
+		SCImage * image = [SCImage create:thumbImage];
 		[slider setThumbImage:image forState:state];
-		[image release];
 	}
 	
 	// minimumTrackImage
 	id minimumTrackImage = [dict objectForKey:@"minimumTrackImage"];
 	if (minimumTrackImage) {
-		SCImage * image = [SCImage create:minimumTrackImage autorelease:NO];
+		SCImage * image = [SCImage create:minimumTrackImage];
 		[slider setMinimumTrackImage:image forState:state];
-		[image release];
 	}
 	
 	// maximumTrackImage
 	id maximumTrackImage = [dict objectForKey:@"maximumTrackImage"];
 	if (maximumTrackImage) {
-		SCImage * image = [SCImage create:maximumTrackImage autorelease:NO];
+		SCImage * image = [SCImage create:maximumTrackImage];
 		[slider setMaximumTrackImage:image forState:state];
-		[image release];
 	}
 	
 	return YES;

@@ -148,24 +148,18 @@
 #define SC_SET_ATTRIBUTES_AS_UICOLOR(obj, dict, name)                          \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \
-        SCColor * clr = [SCColor create:name autorelease:NO];                  \
-        obj.name = clr;                                                        \
-        [clr release];                                                         \
+        obj.name = [SCColor create:name];                                      \
     }                                                                          \
                                         /* EOF 'SC_SET_ATTRIBUTES_AS_UICOLOR' */
 #define SC_SET_ATTRIBUTES_AS_UIFONT(obj, dict, name)                           \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \
-        SCFont * fnt = [SCFont create:name autorelease:NO];                    \
-        obj.name = fnt;                                                        \
-        [fnt release];                                                         \
+        obj.name = [SCFont create:name];                                       \
     }                                                                          \
                                          /* EOF 'SC_SET_ATTRIBUTES_AS_UIFONT' */
 #define SC_SET_ATTRIBUTES_AS_UIIMAGE(obj, dict, name)                          \
     NSDictionary * name = [dict objectForKey:@#name];                          \
     if (name) {                                                                \
-        SCImage * img = [SCImage create:name autorelease:NO];                  \
-        obj.name = img;                                                        \
-        [img release];                                                         \
+        obj.name = [SCImage create:name];                                      \
     }                                                                          \
                                         /* EOF 'SC_SET_ATTRIBUTES_AS_UIIMAGE' */

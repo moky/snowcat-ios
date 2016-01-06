@@ -107,10 +107,9 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 			NSAssert([d isKindOfClass:[NSDictionary class]], @"segmented button's item must be a dictionary: %@", d);
 			SC_UIKIT_DIG_CREATION_INFO(d); // support ObjectFromFile
 			
-			btn = [SCButton create:d autorelease:NO];
+			btn = [SCButton create:d];
 			[segmentedButton insertSegmentWithButton:btn atIndex:i animated:NO];
 			SC_UIKIT_SET_ATTRIBUTES(btn, SCButton, d);
-			[btn release];
 		}
 	}
 	
