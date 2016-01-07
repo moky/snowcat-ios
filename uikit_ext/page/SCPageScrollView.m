@@ -13,6 +13,21 @@
 #import "SCPageControl.h"
 #import "SCPageScrollView.h"
 
+//typedef NS_ENUM(NSInteger, SCPageScrollViewScrollDirection) {
+//	UIPageScrollViewDirectionVertical,
+//	UIPageScrollViewDirectionHorizontal,
+//};
+UIPageScrollViewDirection UIPageScrollViewDirectionFromString(NSString * string)
+{
+	S9_SWITCH_BEGIN(string)
+	S9_SWITCH_CASE(string, @"Vertical")
+	return UIPageScrollViewDirectionVertical;
+	S9_SWITCH_DEFAULT
+	S9_SWITCH_END
+	
+	return UIPageScrollViewDirectionHorizontal;
+}
+
 @interface SCPageScrollView ()
 
 @property(nonatomic, retain) id<UIPageScrollViewDataSource> pageScrollViewDataSource;
@@ -154,7 +169,7 @@ SC_UIKIT_IMPLEMENT_SET_ATTRIBUTES_FUNCTION()
 	//SCLog(@"%@: %@", event, view);
 	delegate = [SCEventHandler delegateForResponder:view];
 	if (delegate) {
-		[delegate doEvent:@"onFocus" withResponder:view];
+		[delegate doEvent:event withResponder:view];
 	}
 }
 

@@ -8,6 +8,8 @@
 
 #import "SCPageScrollViewDataSource.h"
 
+UIKIT_EXTERN UIPageScrollViewDirection UIPageScrollViewDirectionFromString(NSString * string);
+
 @interface SCPageScrollView : UIPageScrollView<SCUIKit>
 
 + (BOOL) setAttributes:(NSDictionary *)dict to:(UIPageScrollView *)pageScrollView;
